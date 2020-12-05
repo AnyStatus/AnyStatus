@@ -9,3 +9,9 @@ AnyStatus is a powerful tool that brings together Metrics, Events, and Critical 
 ### Microsoft Store
 
 Install [AnyStatus](https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb) from the Microsoft Store. This allows you to always be on the latest version when we release new builds with automatic upgrades.
+
+## Build Status
+
+|Branch|Status|
+|------|------|
+|Main|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?branchName=master)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&branchName=master)|
