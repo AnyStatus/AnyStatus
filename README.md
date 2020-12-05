@@ -1,5 +1,8 @@
 # AnyStatus
+
 A remote control for your CI/CD pipelines and more.
+
+![AnyStatus](https://www.anystat.us/assets/images/screenshots/anystatus-3.0.293-preview.png)
 
 ## About
 
