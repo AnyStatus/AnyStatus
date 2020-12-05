@@ -2,8 +2,6 @@
 
 Remote control for your CI/CD pipelines and more.
 
-![AnyStatus](https://www.anystat.us/assets/images/screenshots/anystatus-3.0.293-preview.png)
-
 ## About
 
 AnyStatus is a powerful tool that brings together Metrics, Events, and Critical Information from various sources to your desktop. Designed for extensibility, AnyStatus enables you to monitor and remote control your entire stack. Including CI/CD Pipelines, Cloud and On-Premise Resources, Deployment Environments, Networks, Containers, Pull Requests, Work Items, and more!
@@ -28,9 +26,9 @@ Some plugins come pre-installed, and are a great starting points for creating yo
   
 ## Build Status
 
-|Branch|Status|
-|------|------|
-|Main|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?branchName=master)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&branchName=master)|
+|Project|Status|
+|-------|------|
+|AnyStatus|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?branchName=master)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&branchName=master)|
 
 ## License
 
