@@ -12,8 +12,6 @@ AnyStatus is a powerful tool that brings together Metrics, Events, and Critical 
 
 Install AnyStatus from the [Microsoft Store](https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb). This allows you to always be on the latest version when we release new builds with automatic upgrades.
 
-<a href='//www.microsoft.com/store/apps/9p044vpk62sb?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' width='284px' height='104px' alt='English badge' style='width: 284px; height: 104px;'/></a>
-
 ## Plugins
 
 Some plugins come pre-installed, and are a great starting points for creating your own.
