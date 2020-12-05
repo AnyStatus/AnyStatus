@@ -14,6 +14,18 @@ AnyStatus is a powerful tool that brings together Metrics, Events, and Critical 
 
 Install [AnyStatus](https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb) from the Microsoft Store. This allows you to always be on the latest version when we release new builds with automatic upgrades.
 
+## Plugins
+
+Some plugins come pre-installed, and are a great starting points for creating your own.
+
+- CPU Usage
+- RAM Usage
+- Azure DevOps Pipeline Status
+- Azure DevOps Release Status
+- Jenkins Job Status
+- Docker Containers
+- Docker Images
+  
 ## Build Status
 
 |Branch|Status|
