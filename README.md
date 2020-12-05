@@ -34,4 +34,4 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 
 AnyStatus is licensed under the [GNU General Public License v3.0](LICENSE) license.
 
-Copyright © 2017-2021 Alon Amsalem.
+Copyright © 2017-2021 Alon Amsalem and contributors.
