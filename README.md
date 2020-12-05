@@ -4,7 +4,7 @@ Remote control for your CI/CD pipelines and more.
 
 ## About
 
-AnyStatus is a powerful tool that brings together Metrics, Events, and Critical Information from various sources to your desktop. Designed for extensibility, AnyStatus enables you to monitor and remote control your entire stack. Including CI/CD Pipelines, Cloud and On-Premise Resources, Deployment Environments, Networks, Containers, Pull Requests, Work Items, and more!
+[AnyStatus](https://www.anystat.us) is a powerful tool that brings together Metrics, Events, and Critical Information from various sources. Designed for extensibility, AnyStatus enables you to control and monitor your stack remotely. Including your CI/CD pipelines, cloud and on-premise resources, deployment environments, networks, containers, pull requests, work items, and more.
 
 ## Installing and running AnyStatus
 
