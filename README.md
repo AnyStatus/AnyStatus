@@ -32,7 +32,7 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 
 ## Contributing
 
-All contributions are welcome. Including pull requests, feature requests, bug reports, and documentation.
+All contributions are welcome and greatly appreciated. Including pull requests, feature requests, bug reports, and documentation.
 
 ## License
 
