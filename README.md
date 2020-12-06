@@ -23,15 +23,19 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 - Jenkins Job Status
 - Docker Containers
 - Docker Images
-  
+
 ## Build Status
 
 |Project|Status|
 |-------|------|
 |AnyStatus|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?branchName=master)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&branchName=master)|
 
+## Contributing
+
+All contributions are welcome. Including pull requests, feature requests, bug reports, and documentation.
+
 ## License
 
 AnyStatus is licensed under the [GNU General Public License v3.0](LICENSE) license.
 
-Copyright © 2017-2021 Alon Amsalem and contributors.
+Copyright © 2017-2021 Alon Amsalem and contributors. All rights reserved.
