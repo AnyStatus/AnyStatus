@@ -2,7 +2,7 @@
 
 # AnyStatus
 
-Remote control for your CI/CD pipelines and more.
+A remote control for your CI/CD pipelines and more.
 
 ## About
 
