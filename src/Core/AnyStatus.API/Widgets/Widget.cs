@@ -1,5 +1,5 @@
 ﻿using AnyStatus.API.Attributes;
-using AnyStatus.API.Widgets.Events;
+using AnyStatus.API.Events;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

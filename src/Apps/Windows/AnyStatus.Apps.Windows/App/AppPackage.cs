@@ -25,11 +25,12 @@ namespace AnyStatus.Apps.Windows
         {
             container.RegisterSingleton<IApplication, App>();
             container.RegisterSingleton<IAppContext, AppContext>();
-            container.Register<IDialogService, DialogService>();
             container.RegisterSingleton<IDispatcher, Dispatcher>();
             container.RegisterSingleton<ISystemTray, SystemTray>();
             container.RegisterSingleton<INotificationService, SystemTray>();
             container.RegisterSingleton<INamedPipeClient, NamedPipeClient>();
+            
+            container.Register<IDialogService, DialogService>();
             container.Register<IPropertyGridViewModel, PropertyGridViewModel>();
             container.Register<IEndpointViewModel, EndpointViewModel>();
             container.Register<IEndpointViewModelFactory, EndpointViewModelFactory>();

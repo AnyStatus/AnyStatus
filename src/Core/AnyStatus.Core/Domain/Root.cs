@@ -1,6 +1,6 @@
 ﻿using AnyStatus.API.Attributes;
+using AnyStatus.API.Events;
 using AnyStatus.API.Widgets;
-using AnyStatus.API.Widgets.Events;
 using System.ComponentModel;
 
 namespace AnyStatus.Core.Domain

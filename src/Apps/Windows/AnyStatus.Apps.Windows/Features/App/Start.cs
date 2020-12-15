@@ -1,4 +1,4 @@
-﻿using AnyStatus.API.Widgets.Events;
+﻿using AnyStatus.API.Events;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;

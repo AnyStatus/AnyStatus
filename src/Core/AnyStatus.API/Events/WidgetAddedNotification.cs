@@ -1,7 +1,8 @@
-﻿using MediatR;
+﻿using AnyStatus.API.Widgets;
+using MediatR;
 using System;
 
-namespace AnyStatus.API.Widgets.Events
+namespace AnyStatus.API.Events
 {
     public class WidgetAddedNotification : INotification
     {

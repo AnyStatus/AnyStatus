@@ -2,6 +2,6 @@
 {
     internal interface IApplication
     {
-        public int Run();
+        int Run();
     }
 }

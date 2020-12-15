@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.Threading.Tasks;
 
-namespace AnyStatus.API.Widgets.Events
+namespace AnyStatus.API.Events
 {
     public static class WidgetNotifications
     {

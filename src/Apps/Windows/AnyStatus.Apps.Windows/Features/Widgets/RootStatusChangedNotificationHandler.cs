@@ -1,4 +1,4 @@
-﻿using AnyStatus.API.Widgets.Events;
+﻿using AnyStatus.API.Events;
 using AnyStatus.Apps.Windows.Features.SystemTray;
 using AnyStatus.Core.Domain;
 using MediatR;

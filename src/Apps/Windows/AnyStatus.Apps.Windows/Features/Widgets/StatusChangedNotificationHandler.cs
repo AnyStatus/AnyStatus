@@ -1,5 +1,5 @@
 ﻿using AnyStatus.API.Widgets;
-using AnyStatus.API.Widgets.Events;
+using AnyStatus.API.Events;
 using AnyStatus.Apps.Windows.Features.Notifications;
 using MediatR;
 using Microsoft.Extensions.Logging;

@@ -1,4 +1,4 @@
-﻿using AnyStatus.API.Widgets.Events;
+﻿using AnyStatus.API.Events;
 using AnyStatus.Core.Jobs;
 using MediatR;
 using System;

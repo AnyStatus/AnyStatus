@@ -1,4 +1,4 @@
-﻿using AnyStatus.API.Widgets.Events;
+﻿using AnyStatus.API.Events;
 using AnyStatus.Core.Services;
 using MediatR;
 using System;
