@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages.PagesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:pages="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages">
+    <ItemsControl ItemsSource="{Binding Pages}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Grid/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <pages:PageView DataContext="{Binding}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

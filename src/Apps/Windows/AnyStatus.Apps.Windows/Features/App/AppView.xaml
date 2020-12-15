@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.App.AppView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:toolBar="clr-namespace:AnyStatus.Apps.Windows.Features.ToolBar"
+             xmlns:dashboard="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard"
+             xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Features.App"
+             xmlns:pages="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=local:AppViewModel, IsDesignTimeCreatable=False}">
+    <Grid>
+        <DockPanel>
+            <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" DockPanel.Dock="Top"/>
+            <Grid>
+                <dashboard:DashboardView DataContext="{Binding DashboardViewModel}"/>
+                <dashboard:MenuView DataContext="{Binding MenuViewModel}"/>
+            </Grid>
+        </DockPanel>
+        <pages:PagesView DataContext="{Binding PagesViewModel}"/>
+    </Grid>
+</UserControl>

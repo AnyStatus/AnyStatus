@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.Dashboard.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:menu="clr-namespace:AnyStatus.Apps.Windows.Features.Menu"
+             d:DataContext="{d:DesignInstance Type=menu:MenuViewModel, IsDesignTimeCreatable=False}"
+             AutomationProperties.AutomationId="Menu"
+             mc:Ignorable="d"
+             IsEnabled="{Binding IsVisible}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+            <Button Command="{Binding Commands[New]}" ToolTip="New session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="NewSessionButton">New</Button>
+            <Button Command="{Binding Commands[Open]}" ToolTip="Open session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OpenSessionButton">Open...</Button>
+            <Button Command="{Binding Commands[Save]}" ToolTip="Save session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionButton">Save</Button>
+            <Button Command="{Binding Commands[SaveAs]}" ToolTip="Save session as.." Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionAsButton">Save As...</Button>
+            <Button Command="{Binding Commands[Endpoints]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ConnectionsButton">Endpoints</Button>
+            <Button Command="{Binding Commands[Options]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OptionsButton">Options</Button>
+            <Button Command="{Binding Commands[Feedback]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="FeedbackButton">Feedback</Button>
+            <Button Command="{Binding Commands[Help]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="HelpButton">Help</Button>
+            <Button Command="{Binding Commands[Exit]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ExitButton">Exit</Button>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

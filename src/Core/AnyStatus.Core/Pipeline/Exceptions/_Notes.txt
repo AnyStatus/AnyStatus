@@ -1,0 +1,3 @@
+﻿NOTES
+1. The order of classes affects execution order
+2. SetHandled prevent exceptions from bubbling up outside mediator and/or other exception handlers

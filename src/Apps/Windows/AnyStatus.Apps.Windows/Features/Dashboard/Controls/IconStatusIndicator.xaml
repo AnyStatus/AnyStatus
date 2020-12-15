@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.Dashboard.Controls.IconStatusIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:IconConverter x:Key="IconConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Rectangle Opacity="0.05" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Rectangle Width="24" Height="24" Opacity="1" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Fill" Visual="{Binding Status.Metadata.Icon, Converter={StaticResource IconConverter}}" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.Activity.ActivityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:activity="clr-namespace:AnyStatus.Apps.Windows.Features.Activity"
+             xmlns:entities="clr-namespace:AnyStatus.Core.Domain;assembly=AnyStatus.Core"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=activity:ActivityViewModel, IsDesignTimeCreatable=False}">
+
+    <UserControl.Resources>
+
+        <CollectionViewSource x:Key="ActivityMessage" Source="{Binding Messages, Mode=OneTime}">
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="Time" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="0,0,0,10"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource {x:Type DataGridRow}}">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <DataGrid ItemsSource="{Binding Source={StaticResource ActivityMessage}}"
+              AutoGenerateColumns="False"
+              IsReadOnly="True"
+              SelectionMode="Single"
+              EnableRowVirtualization="True"
+              HorizontalScrollBarVisibility="Hidden"
+              Margin="10,0,10,10">
+
+        <DataGrid.Resources>
+
+            <activity:ClipboardContentConverter x:Key="ClipboardContentConverter"/>
+
+            <Style TargetType="DataGridCell">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=LogLevel}" Value="Trace">
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=LogLevel}" Value="Debug">
+                        <Setter Property="Foreground" Value="Silver"/>
+                    </DataTrigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="MessageTemplate" DataType="{x:Type entities:ActivityMessage}">
+                <TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MessageWithExceptionTemplate" DataType="{x:Type entities:ActivityMessage}">
+                <Expander>
+                    <Expander.Header>
+                        <TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
+                    </Expander.Header>
+                    <TextBlock Text="{Binding Exception}" TextWrapping="Wrap"/>
+                </Expander>
+            </DataTemplate>
+
+        </DataGrid.Resources>
+
+        <DataGrid.Columns>
+
+            <DataGridTextColumn Header="Time" Binding="{Binding Time, StringFormat='hh:mm:ss'}" SortDirection="Descending">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0,0,10,0" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Level" Binding="{Binding LogLevel}">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0,0,10,0" />
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="Information">
+                                <Setter Property="Foreground" Value="Aqua"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="Warning">
+                                <Setter Property="Foreground" Value="DarkOrange"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="Error">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Thread" Binding="{Binding ThreadId}" Width="58">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="0,0,10,0" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTemplateColumn Header="Message" Width="*" ClipboardContentBinding="{Binding Converter={StaticResource ClipboardContentConverter}}">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type entities:ActivityMessage}">
+                        <ContentControl Content="{Binding}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource MessageTemplate}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasException}" Value="True">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource MessageWithExceptionTemplate}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+        </DataGrid.Columns>
+
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="Copy" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Clear" Command="{Binding Commands[Clear]}"/>
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+
+    </DataGrid>
+</UserControl>

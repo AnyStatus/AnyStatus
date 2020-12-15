@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.Endpoints.EndpointView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:propertygrid="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid" xmlns:ui="http://schemas.modernwpf.com/2019">
+    <ui:SimpleStackPanel Margin="10">
+        <propertygrid:PropertyGridControl DataContext="{Binding PropertyGridViewModel}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding Commands[Save]}" Style="{DynamicResource AccentButtonStyle}" Margin="7">Save</Button>
+            <Button Command="{Binding Commands[Cancel]}" Margin="7">Cancel</Button>
+        </StackPanel>
+    </ui:SimpleStackPanel>
+</UserControl>

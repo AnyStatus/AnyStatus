@@ -1,0 +1,75 @@
+name: '3.0$(Rev:.r).0'
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\'
+
+steps:
+
+- powershell: |
+      [xml]$manifest= get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
+      $manifest.Package.Identity.Version = $Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+
+- task: DownloadSecureFile@1
+  name: signingCert
+  displayName: 'Download CA certificate'
+  inputs:
+    secureFile: 'AnyStatus.Apps.Windows.Package_TemporaryKey.pfx'
+
+- task: NuGetToolInstaller@1
+
+- task: DotNetCoreInstaller@1
+  inputs:
+    version: '3.1.402'
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    platform: '$(buildPlatform)'
+    solution: '$(solution)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:AppxBundlePlatforms="x64" 
+                  /p:AppxPackageDir="$(appxPackageDir)" 
+                  /p:AppxBundle=Always 
+                  /p:UapAppxPackageBuildMode=StoreUpload 
+                  /p:AppxPackageSigningEnabled=true
+                  /p:PackageCertificateThumbprint="" 
+                  /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: AnyStatus
+
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Start'
+    AgentResolution: '1080p'
+
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\AnyStatus*.Tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    uiTests: true
+    otherConsoleOptions: '/Framework:FrameworkCore10'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Stop'
+  condition: always()

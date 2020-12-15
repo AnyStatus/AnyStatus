@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid.PropertyGridControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid">
+    <ItemsControl ItemsSource="{Binding Properties}">
+        <ItemsControl.Resources>
+            <!--text-->
+            <DataTemplate DataType="{x:Type local:TextProperty}">
+                <TextBox Text="{Binding Value}" ui:ControlHelper.Header="{Binding Header}" IsReadOnly="{Binding IsReadOnly}" Margin="7,0,7,12"/>
+            </DataTemplate>
+            <!--boolean-->
+            <DataTemplate DataType="{x:Type local:BooleanProperty}">
+                <CheckBox Content="{Binding Header}" IsChecked="{Binding Value}" Margin="7,0,7,12"/><!-- TODO: ADD IsReadOnly support -->
+            </DataTemplate>
+            <!--numeric-->
+            <DataTemplate DataType="{x:Type local:NumericProperty}">
+                <TextBox Text="{Binding Value}" ui:ControlHelper.Header="{Binding Header}" IsReadOnly="{Binding IsReadOnly}" Margin="7,0,7,12"/>
+            </DataTemplate>
+            <!--drop down-->
+            <DataTemplate DataType="{x:Type local:DropDownProperty}">
+                <ComboBox VirtualizingPanel.IsVirtualizing="True" 
+                          Margin="7,0,7,12"
+                          ItemsSource="{Binding Items}" 
+                          SelectedValue="{Binding Value}" 
+                          DisplayMemberPath="Name" 
+                          SelectedValuePath="Value"
+                          ui:ControlHelper.Header="{Binding Header}">
+                        <behaviors:Interaction.Triggers>
+                            <behaviors:EventTrigger EventName="SelectionChanged">
+                                <behaviors:InvokeCommandAction Command="{Binding SelectionChanged}"/>
+                            </behaviors:EventTrigger>
+                        </behaviors:Interaction.Triggers>
+                        <ComboBox.Style>
+                            <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBoxStyle}">
+                                <Setter Property="IsEnabled" Value="True"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Items}" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ComboBox.Style>
+                    </ComboBox>
+            </DataTemplate>
+        </ItemsControl.Resources>
+        <!--template-->
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

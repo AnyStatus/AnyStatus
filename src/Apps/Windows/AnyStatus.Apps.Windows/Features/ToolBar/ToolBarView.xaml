@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.ToolBar.ToolBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:toolBar="clr-namespace:AnyStatus.Apps.Windows.Features.ToolBar"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=toolBar:ToolBarViewModel, IsDesignTimeCreatable=False}">
+
+    <StackPanel Orientation="Horizontal" Margin="0,-44,40,0">
+        <Button Command="{Binding Commands[ToggleMenu]}" 
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="ToggleMenuButton"
+                ToolTip="Options">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource MenuIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[Refresh]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="RefreshAllButton"
+                ToolTip="Refresh">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource RefreshIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[ExpandAll]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="ExpandAllButton"
+                ToolTip="Expand">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource ExpandIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[CollapseAll]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="CollapseAllButton"
+                ToolTip="Collapse">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource CollapseIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[Activity]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="ShowActivityButton"
+                ToolTip="Activity">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource ActivityIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[AddWidget]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="AddWidgetButton"
+                ToolTip="Add Widget">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource AddWidgetIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[AddFolder]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="AddFolderButton"
+                ToolTip="Add Folder">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource AddFolderIcon}}"/>
+            </Button.Content>
+        </Button>
+        <!--
+        <Button Command="{Binding Commands[Dock]}"
+                Style="{StaticResource FlatButtonStyle}"
+                AutomationProperties.AutomationId="DockButton"
+                ToolTip="Dock">
+            <Button.Content>
+                <ContentControl Height="24" Width="24">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="Content" Value="{StaticResource DockIcon}" />
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+            </Button.Content>
+        </Button>
+        -->
+    </StackPanel>
+</UserControl>
