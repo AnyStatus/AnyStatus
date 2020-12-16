@@ -30,7 +30,7 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 
 |Project|Status|
 |-------|------|
-|AnyStatus|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?branchName=master)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&branchName=master)|
+|AnyStatus|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?repoName=AnyStatus%2FAnyStatus&branchName=main)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&repoName=AnyStatus%2FAnyStatus&branchName=main)|
 
 ## Contributing
 
