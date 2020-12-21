@@ -26,15 +26,29 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 - Docker Containers
 - Docker Images
 
+## Contributing
+
+All contributions are welcome and greatly appreciated. Including pull requests, feature requests, bug reports, and documentation.
+
+## Current state of the code
+
+In version 3 of AnyStatus, I have re-written most the code from the ground up the fix some of the core issues that exist in version 2.
+Examples include, how and where the settings are saved, the API, MVVM framework and more. The core monitoring and plugins mechanism has greatly improved but other parts of the code, such as the application and user interface, still requires refactorings and improvements.
+
+## Architecture
+
+> TBD
+
+## MVVM Framework
+
+In this project I have developed an experimental MVVM framework based on MediatR. The main usage of this framework is for showing Windows, Pages, and Context Menus.
+The context menus are fully pluggable and contextual. Future releases of AnySsatus may use a different MVVM framework, or the current framework will grow into a seperate repository. I'd love to hear your opinion about it.
+
 ## Build Status
 
 |Project|Status|
 |-------|------|
 |AnyStatus|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?repoName=AnyStatus%2FAnyStatus&branchName=main)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&repoName=AnyStatus%2FAnyStatus&branchName=main)|
-
-## Contributing
-
-All contributions are welcome and greatly appreciated. Including pull requests, feature requests, bug reports, and documentation.
 
 ## License
 
