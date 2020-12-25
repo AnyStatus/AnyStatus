@@ -39,7 +39,15 @@ Examples include, how and where the settings are saved, the API, MVVM framework 
 
 > TBD
 
-## MVVM Framework
+- Vertical architecture
+- Feature based folder structure
+- Application commands pipeline
+- UI and MVVM framework
+- Pluggable widgets framework
+- Pluggable context menues framework
+- Job scheduler
+
+#### MVVM Framework
 
 In this project I have developed an experimental MVVM framework based on MediatR. The main usage of this framework is for showing Windows, Pages, and Context Menus.
 The context menus are fully pluggable and contextual. Future releases of AnyStatus may use a different MVVM framework, or the current framework will grow into a seperate repository. I'd love to hear your opinion about it.
