@@ -1,5 +1,4 @@
-﻿using AnyStatus.API.Events;
-using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
+﻿using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Services;
@@ -74,13 +73,13 @@ namespace AnyStatus.Apps.Windows.Features.App
             {
                 const string message = "An unexpected error occurred. See inner exception.";
 
-                AppDomain.CurrentDomain.UnhandledException += (s, e) => _logger.LogCritical(e.ExceptionObject as Exception, message);
+                AppDomain.CurrentDomain.UnhandledException += (s, e) => _logger.LogError(e.ExceptionObject as Exception, message);
 
                 Dispatcher.CurrentDispatcher.UnhandledException += (s, e) =>
                 {
                     e.Handled = true;
 
-                    _logger.LogCritical(e.Exception, message);
+                    _logger.LogError(e.Exception, message);
                 };
             }
         }
