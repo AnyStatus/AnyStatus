@@ -195,10 +195,7 @@ namespace AnyStatus.API.Widgets
 
         public void Reassessment() => Status = Count > 0 ? this.Aggregate((a, b) => a.Status?.Metadata?.Priority < b.Status?.Metadata?.Priority ? a : b)?.Status : Status.None;
 
-        public void Expand()
-        {
-            IsExpanded = true;
-        }
+        public void Expand() => IsExpanded = true;
 
         public virtual object Clone()
         {
