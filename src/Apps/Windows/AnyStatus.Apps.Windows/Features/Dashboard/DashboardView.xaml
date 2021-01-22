@@ -95,7 +95,7 @@
                             <Setter Property="Template" Value="{StaticResource SeparatorTemplate}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Opacity" Value="0.4"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
