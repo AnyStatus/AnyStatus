@@ -32,6 +32,11 @@ steps:
   inputs:
     secureFile: 'AnyStatus.Apps.Windows.Package_TemporaryKey.pfx'
 
+- task: FileTransform@2
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    jsonTargetFiles: src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json
+
 - task: NuGetToolInstaller@1
 
 - task: DotNetCoreInstaller@1
