@@ -22,8 +22,9 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
                     {
                         await mediator.Send(StartRequestFactory.Create(Context)).ConfigureAwait(false);
                     }
-                },
-                _ => Context.CanStart);
+                });
         }
+
+        public override bool IsEnabled => Context.CanStart;
     }
 }

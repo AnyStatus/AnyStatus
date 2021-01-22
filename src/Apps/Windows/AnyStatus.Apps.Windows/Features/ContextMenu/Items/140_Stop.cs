@@ -19,10 +19,11 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 
                 if (dialogService.ShowDialog(dialog) is DialogResult.Yes)
                 {
-                    await mediator.Send(StopRequestFactory.Create(Context));
+                    await mediator.Send(StopRequestFactory.Create(Context)).ConfigureAwait(false);
                 }
-            },
-            _ => Context.CanStop);
+            });
         }
+
+        public override bool IsEnabled => Context.CanStop;
     }
 }

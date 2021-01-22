@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features
 {
-    public class StartServer
+    public class StartNamedPipeServer
     {
         public class Request : IRequest
         {

@@ -5,14 +5,15 @@ using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 {
-    public class OpenInBrowser<TWidget> : ContextMenu<TWidget>
-        where TWidget : IWebPage
+    public class OpenInBrowser<TWidget> : ContextMenu<TWidget> where TWidget : IWebPage
     {
         public OpenInBrowser(IMediator mediator)
         {
             Order = 100;
             Name = "Open in Browser";
-            Command = new Command(_ => mediator.Send(new LaunchURL.Request(Context.URL)), _ => !string.IsNullOrEmpty(Context.URL));
+            Command = new Command(async _ => await mediator.Send(new LaunchURL.Request(Context.URL)));
         }
+
+        public override bool IsEnabled => !string.IsNullOrEmpty(Context.URL);
     }
 }

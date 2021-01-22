@@ -1,4 +1,5 @@
-﻿using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
+﻿using AnyStatus.API.Events;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Services;
@@ -35,21 +36,18 @@ namespace AnyStatus.Apps.Windows.Features.App
             {
                 LogUnhandledExceptions();
 
-                var response = await _mediator.Send(new LoadContext.Request(), cancellationToken).ConfigureAwait(false);
+                WidgetNotifications.Mediator = _mediator;
+
+                var response = await _mediator.Send(new LoadContext.Request(), cancellationToken);
 
                 if (!StartupActivation() || !response.Context.UserSettings.StartMinimized)
                 {
                     await _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418));
                 }
 
-                _ = Task.Run(async () =>
-                {
-                    await _mediator.Send(new StartScheduler.Request()).ConfigureAwait(false);
-
-                    await _mediator.Send(new StartServer.Request()).ConfigureAwait(false);
-                });
-
-                _telemetry.TrackEvent("Startup");
+                _ = Task.Run(() => _mediator.Send(new StartScheduler.Request()));
+                _ = Task.Run(() => _mediator.Send(new StartNamedPipeServer.Request()));
+                _ = Task.Run(() => _telemetry.TrackEvent("Startup"));
             }
 
             private static bool StartupActivation()

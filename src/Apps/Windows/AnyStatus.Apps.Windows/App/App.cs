@@ -1,5 +1,4 @@
-﻿using AnyStatus.API.Events;
-using AnyStatus.Apps.Windows.Features.App;
+﻿using AnyStatus.Apps.Windows.Features.App;
 using MediatR;
 using System.Windows;
 
@@ -16,11 +15,6 @@ namespace AnyStatus.Apps.Windows
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
         }
 
-        protected override async void OnStartup(StartupEventArgs e)
-        {
-            WidgetNotifications.Mediator = _mediator; // experimental domain events
-
-            await _mediator.Send(new Start.Request()).ConfigureAwait(false);
-        }
+        protected override async void OnStartup(StartupEventArgs e) => await _mediator.Send(new Start.Request()).ConfigureAwait(false);
     }
 }
