@@ -5,6 +5,7 @@ namespace AnyStatus.Core.ContextMenu
     public abstract class ContextMenu<TContext> : IContextMenu
     {
         public virtual bool IsVisible => true;
+        public virtual bool IsEnabled => true;
         public int Order { get; protected set; }
         public string Icon { get; protected set; }
         public string Name { get; protected set; }
