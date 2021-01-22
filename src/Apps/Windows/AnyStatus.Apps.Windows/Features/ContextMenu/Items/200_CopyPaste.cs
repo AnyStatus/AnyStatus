@@ -14,7 +14,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             {
                 Order = 200;
                 Name = "Copy";
-                Command = new Command(_ => _clone = Context.Clone() as IWidget);
+                Command = new Command(_ => _clone = (IWidget)Context.Clone());
             }
         }
 
@@ -32,7 +32,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
                 });
             }
 
-            public override bool IsVisible => _clone is IWidget;
+            public override bool IsEnabled => _clone != null;
         }
     }
 }

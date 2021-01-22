@@ -12,7 +12,9 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 240;
             Name = "Move Up";
             InputGestureText = "Alt+Up";
-            Command = new Command(_ => Context.MoveUp(), _ => Context.CanMoveUp());
+            Command = new Command(_ => Context.MoveUp());
         }
+
+        public override bool IsEnabled => Context.CanMoveUp();
     }
 }

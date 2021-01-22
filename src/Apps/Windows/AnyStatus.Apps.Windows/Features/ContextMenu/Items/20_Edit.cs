@@ -7,15 +7,13 @@ using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 {
-    public class Configure<T> : ContextMenu<T> where T : class, IConfigurable
+    public class Edit<T> : ContextMenu<T> where T : class, IConfigurable
     {
-        public Configure(IMediator mediator)
+        public Edit(IMediator mediator)
         {
             Order = 20;
-            Name = "Configure";
-            Command = new Command(
-                p => mediator.Send(Page.Show<WidgetViewModel>("Configure Widget")),
-                _ => Context is object);
+            Name = "Edit";
+            Command = new Command(_ => mediator.Send(Page.Show<WidgetViewModel>("Edit")));
         }
     }
 }

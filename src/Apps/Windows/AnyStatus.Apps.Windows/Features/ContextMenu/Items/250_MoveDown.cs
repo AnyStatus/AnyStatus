@@ -12,7 +12,9 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 250;
             Name = "Move Down";
             InputGestureText = "Alt+Down";
-            Command = new Command(_ => Context.MoveDown(), _ => Context.CanMoveDown());
+            Command = new Command(_ => Context.MoveDown());
         }
+
+        public override bool IsEnabled => Context.CanMoveDown();
     }
 }

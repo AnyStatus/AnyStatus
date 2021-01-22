@@ -82,6 +82,7 @@
             </ContextMenu.Resources>
             <ContextMenu.ItemContainerStyle>
                 <Style TargetType="{x:Type MenuItem}">
+                    <Setter Property="Margin" Value="0"/>
                     <Setter Property="Padding" Value="5,5,15,5"/>
                     <Setter Property="Header" Value="{Binding Name}"/>
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
