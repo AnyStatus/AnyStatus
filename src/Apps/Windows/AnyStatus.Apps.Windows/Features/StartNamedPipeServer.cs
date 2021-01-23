@@ -11,9 +11,7 @@ namespace AnyStatus.Apps.Windows.Features
 {
     public class StartNamedPipeServer
     {
-        public class Request : IRequest
-        {
-        }
+        public class Request : IRequest { }
 
         public class Handler : IRequestHandler<Request>
         {
@@ -40,7 +38,7 @@ namespace AnyStatus.Apps.Windows.Features
 
                     if (command == "show")
                     {
-                        _dispatcher.Invoke(() => _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418)));
+                        _dispatcher.Invoke(() => _mediator.Send(MaterialWindow.Show<AppViewModel>()));
                     }
                 }
             }

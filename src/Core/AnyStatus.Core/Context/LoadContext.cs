@@ -4,7 +4,6 @@ using AnyStatus.Core.Domain;
 using AnyStatus.Core.Settings;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ namespace AnyStatus.Core.App
 
         public class Response
         {
-            public Response(IAppContext context) => Context = context ?? throw new ArgumentNullException(nameof(context));
+            public Response(IAppContext context) => Context = context;
 
             public IAppContext Context { get; }
         }
@@ -27,8 +26,8 @@ namespace AnyStatus.Core.App
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly ILogger _logger;
-            private readonly IAppContext _context;
             private readonly IMediator _mediator;
+            private readonly IAppContext _context;
 
             public Handler(IMediator mediator, ILogger logger, IAppContext context)
             {
@@ -41,22 +40,18 @@ namespace AnyStatus.Core.App
             {
                 _logger.LogInformation("Loading session...");
 
-                await Task.WhenAll(
-                        LoadUserSettingsAsync(cancellationToken),
-                        LoadSessionAsync(cancellationToken),
-                        LoadEndpointsAsync(cancellationToken))
-                            .ConfigureAwait(false);
+                await Task.WhenAll(LoadUserSettingsAsync(), LoadSessionAsync(), LoadEndpointsAsync());
 
                 _logger.LogInformation("Session loaded.");
 
-                await _mediator.Publish(new ContextLoaded(_context), cancellationToken).ConfigureAwait(false);
+                _ = Task.Run(() => _mediator.Publish(new ContextLoaded(_context)));
 
                 return new Response(_context);
             }
 
-            private async Task LoadEndpointsAsync(CancellationToken cancellationToken)
+            private async Task LoadEndpointsAsync()
             {
-                var response = await _mediator.Send(new GetEndpoints.Request(), cancellationToken).ConfigureAwait(false);
+                var response = await _mediator.Send(new GetEndpoints.Request());
 
                 if (response.Success)
                 {
@@ -72,12 +67,12 @@ namespace AnyStatus.Core.App
 
                 _context.Endpoints = new ObservableCollection<IEndpoint>();
 
-                await _mediator.Send(new SaveEndpoints.Request(), cancellationToken).ConfigureAwait(false);
+                await _mediator.Send(new SaveEndpoints.Request());
             }
 
-            private async Task LoadSessionAsync(CancellationToken cancellationToken)
+            private async Task LoadSessionAsync()
             {
-                var response = await _mediator.Send(new GetSession.Request(), cancellationToken).ConfigureAwait(false);
+                var response = await _mediator.Send(new GetSession.Request());
 
                 if (response.Success)
                 {
@@ -96,12 +91,12 @@ namespace AnyStatus.Core.App
                     }
                 };
 
-                await _mediator.Send(new SaveSession.Request(), cancellationToken).ConfigureAwait(false);
+                await _mediator.Send(new SaveSession.Request());
             }
 
-            private async Task LoadUserSettingsAsync(CancellationToken cancellationToken)
+            private async Task LoadUserSettingsAsync()
             {
-                var response = await _mediator.Send(new GetUserSettings.Request(), cancellationToken).ConfigureAwait(false);
+                var response = await _mediator.Send(new GetUserSettings.Request());
 
                 if (response.Success)
                 {
@@ -114,7 +109,7 @@ namespace AnyStatus.Core.App
 
                 _context.UserSettings = new UserSettings();
 
-                await _mediator.Send(new SaveUserSettings.Request(), cancellationToken).ConfigureAwait(false);
+                await _mediator.Send(new SaveUserSettings.Request());
             }
         }
     }
