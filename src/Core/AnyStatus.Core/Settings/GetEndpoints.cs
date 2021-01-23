@@ -54,7 +54,10 @@ namespace AnyStatus.Core.Settings
                     Converters = new[] { new EndpointConverter() }
                 });
 
-                response.Success = true;
+                if (response.Endpoints != null)
+                {
+                    response.Success = true;
+                }
 
                 return response;
             }

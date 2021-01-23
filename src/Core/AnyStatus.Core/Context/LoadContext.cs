@@ -55,12 +55,9 @@ namespace AnyStatus.Core.App
 
                 if (response.Success)
                 {
-                    if (response.Endpoints != null)
-                    {
-                        _context.Endpoints = new ObservableCollection<IEndpoint>(response.Endpoints);
+                    _context.Endpoints = new ObservableCollection<IEndpoint>(response.Endpoints);
 
-                        return;
-                    }
+                    return;
                 }
 
                 _logger.LogInformation("Initializing endpoints...");
