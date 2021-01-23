@@ -1,6 +1,6 @@
 ﻿namespace AnyStatus.Apps.Windows
 {
-    internal interface INamedPipeClient
+    public interface INamedPipeClient
     {
         void Show();
     }

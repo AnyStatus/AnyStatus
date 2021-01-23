@@ -45,9 +45,12 @@ namespace AnyStatus.Apps.Windows.Features.App
                     await _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418));
                 }
 
-                _ = Task.Run(() => _mediator.Send(new StartScheduler.Request()));
-                _ = Task.Run(() => _mediator.Send(new StartNamedPipeServer.Request()));
-                _ = Task.Run(() => _telemetry.TrackEvent("Startup"));
+                _ = Task.Run(() =>
+                {
+                    _mediator.Send(new StartScheduler.Request());
+                    _mediator.Send(new StartNamedPipeServer.Request());
+                    _telemetry.TrackEvent("Startup");
+                });
             }
 
             private static bool StartupActivation()
