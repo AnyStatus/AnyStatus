@@ -3,38 +3,35 @@ using AnyStatus.Apps.Windows.Features.Themes;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Domain;
 using MediatR;
-using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features.App
 {
-    public class ContextLoadedHandler : NotificationHandler<ContextLoaded>
+    public class ContextLoadedHandler : INotificationHandler<ContextLoaded>
     {
         private readonly IMediator _mediator;
 
-        public ContextLoadedHandler(IMediator mediator)
+        public ContextLoadedHandler(IMediator mediator) => _mediator = mediator;
+
+        public async Task Handle(ContextLoaded notification, CancellationToken cancellationToken)
         {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            await _mediator.Send(new SwitchTheme.Request(notification.Context.UserSettings.Theme));
+
+            await OpenSessionAsync(notification.Context.Session);
         }
 
-        protected override void Handle(ContextLoaded notification)
-        {
-            _mediator.Send(new SwitchTheme.Request(notification.Context.UserSettings.Theme));
-
-            LoadSession(notification.Context.Session);
-        }
-
-        private void LoadSession(Session session)
+        private async Task OpenSessionAsync(Session session)
         {
             if (string.IsNullOrEmpty(session.FileName) || !File.Exists(session.FileName))
             {
                 session.FileName = null;
-
                 session.Widget = new Root();
             }
             else
             {
-                _mediator.Send(new OpenSessionCommand.Request(session.FileName)).ConfigureAwait(false);
+                await _mediator.Send(new OpenSessionCommand.Request(session.FileName));
             }
         }
     }

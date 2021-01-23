@@ -44,7 +44,7 @@ namespace AnyStatus.Core.App
 
                 _logger.LogInformation("Session loaded.");
 
-                _ = Task.Run(() => _mediator.Publish(new ContextLoaded(_context)));
+                await _mediator.Publish(new ContextLoaded(_context));
 
                 return new Response(_context);
             }
