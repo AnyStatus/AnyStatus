@@ -2,6 +2,6 @@
 {
     public interface INamedPipeClient
     {
-        void Show();
+        void Send(string message);
     }
 }

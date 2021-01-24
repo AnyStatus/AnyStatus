@@ -13,11 +13,11 @@ namespace AnyStatus.Apps.Windows
             {
                 var container = Bootstrapper.Bootstrap();
 
-                container.GetInstance<IApplication>().RunOrShow();
+                container.GetInstance<IApplication>().RunOrActivate();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Oops! an error occurred while running AnyStatus.\n{ex}.", "AnyStatus", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Oops! An error occurred while running AnyStatus.\n{ex}", "AnyStatus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

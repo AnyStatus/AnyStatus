@@ -23,7 +23,7 @@ namespace AnyStatus.Apps.Windows
 
         protected override void OnStartup(StartupEventArgs e) => _mediator.Send(new Start.Request());
 
-        public void RunOrShow()
+        public void RunOrActivate()
         {
             if (_mutex.WaitOne(millisecondsTimeout: 200, true))
             {
@@ -33,7 +33,7 @@ namespace AnyStatus.Apps.Windows
             }
             else
             {
-                _pipeClient.Show();
+                _pipeClient.Send("activate");
             }
         }
     }

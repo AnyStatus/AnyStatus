@@ -2,6 +2,6 @@
 {
     internal interface IApplication
     {
-        void RunOrShow();
+        void RunOrActivate();
     }
 }

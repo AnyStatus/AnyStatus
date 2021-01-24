@@ -7,7 +7,7 @@ namespace AnyStatus.Apps.Windows
     {
         private const string _pipeName = "{89790288-AE14-4BE1-A2D2-501EBC3F9C9E}"; //move to app.config
 
-        public void Show()
+        public void Send(string message)
         {
             using var client = new NamedPipeClientStream(_pipeName);
 
@@ -15,7 +15,7 @@ namespace AnyStatus.Apps.Windows
 
             using var writer = new StreamWriter(client);
 
-            writer.WriteLine("show");
+            writer.WriteLine(message);
 
             writer.Flush();
         }

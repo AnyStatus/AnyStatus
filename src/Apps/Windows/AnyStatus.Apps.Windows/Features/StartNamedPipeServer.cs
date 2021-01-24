@@ -30,13 +30,13 @@ namespace AnyStatus.Apps.Windows.Features
                 {
                     using var server = new NamedPipeServerStream("{89790288-AE14-4BE1-A2D2-501EBC3F9C9E}");
 
-                    await server.WaitForConnectionAsync().ConfigureAwait(false);
+                    await server.WaitForConnectionAsync();
 
                     using var reader = new StreamReader(server);
+                    
+                    var command = await reader.ReadLineAsync();
 
-                    var command = await reader.ReadLineAsync().ConfigureAwait(false);
-
-                    if (command == "show")
+                    if (command == "activate")
                     {
                         _dispatcher.Invoke(() => _mediator.Send(MaterialWindow.Show<AppViewModel>()));
                     }
