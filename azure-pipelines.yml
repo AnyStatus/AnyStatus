@@ -52,13 +52,7 @@ steps:
     platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="x64" 
-                  /p:AppxPackageDir="$(appxPackageDir)" 
-                  /p:AppxBundle=Always 
-                  /p:UapAppxPackageBuildMode=StoreUpload 
-                  /p:AppxPackageSigningEnabled=false
-                  /p:PackageCertificateThumbprint="" 
-                  /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+    msbuildArgs: '/p:AppxBundlePlatforms="x64" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:AppxPackageSigningEnabled=false /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
 
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: AnyStatus
