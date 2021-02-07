@@ -17,7 +17,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\'
+  appxPackageDir: '$(Build.ArtifactStagingDirectory)\AppxPackages\'
 
 steps:
 
