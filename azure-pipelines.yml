@@ -56,7 +56,7 @@ steps:
                   /p:AppxPackageDir="$(appxPackageDir)" 
                   /p:AppxBundle=Always 
                   /p:UapAppxPackageBuildMode=StoreUpload 
-                  /p:AppxPackageSigningEnabled=true
+                  /p:AppxPackageSigningEnabled=false
                   /p:PackageCertificateThumbprint="" 
                   /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
 
