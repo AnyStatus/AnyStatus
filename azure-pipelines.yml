@@ -47,7 +47,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: MSBuild@1
+- task: VSBuild@1
   inputs:
     platform: '$(buildPlatform)'
     solution: '$(solution)'
