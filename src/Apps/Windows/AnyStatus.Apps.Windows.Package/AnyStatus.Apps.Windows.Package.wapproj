@@ -56,7 +56,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\AnyStatus.Apps.Windows\AnyStatus.Apps.Windows.csproj</EntryPointProjectUniqueName>
-    <PackageCertificateThumbprint>A3BC46992B2878957AE3EABA0E10E65709963D84</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>D2FCE56777D351240F145FF4EB542D251963287A</PackageCertificateThumbprint>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
