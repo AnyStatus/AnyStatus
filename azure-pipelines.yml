@@ -17,7 +17,7 @@ steps:
 - powershell: |
       [xml]$manifest= get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
       $manifest.Package.Identity.Version = $Env:BUILD_BUILDNUMBER
-      $manifest.save(".\src\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
 
 - task: DownloadSecureFile@1
   name: signingCert
