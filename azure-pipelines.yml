@@ -38,7 +38,7 @@ steps:
 - task: FileTransform@2
   inputs:
     folderPath: '$(System.DefaultWorkingDirectory)'
-    jsonTargetFiles: '.src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
+    jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
 
 - task: VSBuild@1
   inputs:
