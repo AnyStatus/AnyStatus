@@ -1,7 +1,14 @@
 name: '3.0$(Rev:.r).0'
 
 trigger:
-- master
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/
+    exclude:
+      - /**/*.md
 
 pool:
   vmImage: 'windows-latest'
@@ -10,20 +17,25 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
+  appxPackageDir: '$(Build.ArtifactStagingDirectory)\AppxPackages\'
 
 steps:
 
 - powershell: |
-      [xml]$manifest= get-content ".\src\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
+      [xml]$manifest= get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
       $manifest.Package.Identity.Version = $Env:BUILD_BUILDNUMBER
-      $manifest.save(".\src\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
 
 - task: DownloadSecureFile@1
   name: signingCert
   displayName: 'Download CA certificate'
   inputs:
     secureFile: 'AnyStatus.Apps.Windows.Package_TemporaryKey.pfx'
+
+- task: FileTransform@2
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    jsonTargetFiles: src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json
 
 - task: NuGetToolInstaller@1
 
@@ -40,13 +52,9 @@ steps:
     platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="x64" 
-                  /p:AppxPackageDir="$(appxPackageDir)" 
-                  /p:AppxBundle=Always 
-                  /p:UapAppxPackageBuildMode=StoreUpload 
-                  /p:AppxPackageSigningEnabled=true
-                  /p:PackageCertificateThumbprint="" 
-                  /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+    msbuildArgs: >-
+      /p:AppxBundlePlatforms="x64" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always
+      /p:UapAppxPackageBuildMode=StoreUpload /p:AppxPackageSigningEnabled=false
 
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: AnyStatus
