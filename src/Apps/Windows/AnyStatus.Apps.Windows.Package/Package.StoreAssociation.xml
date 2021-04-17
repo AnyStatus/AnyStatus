@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
+  <!--
   <Publisher>CN=2374DAEA-FA03-44F5-8064-4D6443D4DBB4</Publisher>
   <PublisherDisplayName>Alon Amsalem</PublisherDisplayName>
+  -->
+  <Publisher>CN=2374DAEA-FA03-44F5-8064-4D6443D4DBB4</Publisher>
+  <PublisherDisplayName>AnyStatus</PublisherDisplayName>
   <DeveloperAccountType>MSA</DeveloperAccountType>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
