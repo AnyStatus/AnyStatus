@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.402
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/AnyStatus.sln
     - name: Build
-      run: dotnet build sec/AnyStatus.sln --no-restore
+      run: dotnet build src/AnyStatus.sln --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
