@@ -10,12 +10,12 @@
 
   <Identity
     Name="12790AnyStatus.AnyStatus"
-    Publisher="CN=AnyStatus"
+    Publisher="CN=Alon Amsalem"
     Version="3.0.0.0" />
 
   <Properties>
     <DisplayName>AnyStatus</DisplayName>
-    <PublisherDisplayName>AnyStatus</PublisherDisplayName>
+    <PublisherDisplayName>Alon Amsalem</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
