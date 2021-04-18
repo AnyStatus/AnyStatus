@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Services;
+﻿using AnyStatus.API.Dialogs;
+using AnyStatus.API.Services;
 using AnyStatus.Core.Domain;
 using AnyStatus.Core.Services;
 using NSubstitute;
