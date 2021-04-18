@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API.Common;
+using AnyStatus.API.Notifications;
 using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace AnyStatus.Apps.Windows.Features.SystemTray
 {
-    public sealed class SystemTray : NotifyPropertyChanged, ISystemTray, INotificationService
+    public sealed class SystemTray : NotifyPropertyChanged, ISystemTray
     {
         private bool _disposed;
         private Status _status = Status.None;
@@ -55,7 +56,25 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
             SystemEvents.DisplaySettingsChanged -= SetIcon;
         }
 
-        public void SendNotification(string title, string message) => _notifier.ShowBalloonTip(1000, title, message, ToolTipIcon.None);
+        public void ShowNotification(Notification notification)
+        {
+            const string DefaultTitle = "AnyStatus";
+
+            if (notification is null)
+            {
+                throw new ArgumentNullException(nameof(notification));
+            }
+
+            var icon = notification.Icon switch
+            {
+                NotificationIcon.Info => ToolTipIcon.Info,
+                NotificationIcon.Error => ToolTipIcon.Error,
+                NotificationIcon.Warning => ToolTipIcon.Warning,
+                _ => ToolTipIcon.None,
+            };
+
+            _notifier.ShowBalloonTip(1000, string.IsNullOrEmpty(notification.Title) ? DefaultTitle : notification.Title, notification.Message, icon);
+        }
 
         private void OnMouseClick(object sender, MouseEventArgs e)
         {

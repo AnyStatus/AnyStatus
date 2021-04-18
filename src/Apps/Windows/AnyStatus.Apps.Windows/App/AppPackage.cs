@@ -1,6 +1,9 @@
-﻿using AnyStatus.API.Services;
+﻿using AnyStatus.API.Dialogs;
+using AnyStatus.API.Notifications;
+using AnyStatus.API.Services;
 using AnyStatus.Apps.Windows.Features.Activity;
 using AnyStatus.Apps.Windows.Features.Endpoints;
+using AnyStatus.Apps.Windows.Features.Notifications;
 using AnyStatus.Apps.Windows.Features.SystemTray;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
@@ -27,8 +30,8 @@ namespace AnyStatus.Apps.Windows
             container.RegisterSingleton<IAppContext, AppContext>();
             container.RegisterSingleton<IDispatcher, Dispatcher>();
             container.RegisterSingleton<ISystemTray, SystemTray>();
-            container.RegisterSingleton<INotificationService, SystemTray>();
             container.RegisterSingleton<INamedPipeClient, NamedPipeClient>();
+            container.RegisterSingleton<INotificationService, NotificationService>();
             
             container.Register<IDialogService, DialogService>();
             container.Register<IPropertyGridViewModel, PropertyGridViewModel>();
