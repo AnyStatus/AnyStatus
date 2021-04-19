@@ -22,10 +22,7 @@ namespace AnyStatus.Plugins.Demo
     {
         private readonly ILogger _logger;
 
-        public TestHealthChecker(ILogger logger)
-        {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
+        public TestHealthChecker(ILogger logger) => _logger = logger;
 
         protected override Task Handle(StatusRequest<DemoHealthCheckWidget> request, CancellationToken cancellationToken)
         {

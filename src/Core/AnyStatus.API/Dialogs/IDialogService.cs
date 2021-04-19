@@ -1,6 +1,4 @@
-﻿using AnyStatus.API.Dialogs;
-
-namespace AnyStatus.API.Services
+﻿namespace AnyStatus.API.Dialogs
 {
     public interface IDialogService
     {

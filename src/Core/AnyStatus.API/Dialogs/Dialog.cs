@@ -2,7 +2,13 @@
 {
     public abstract class Dialog : IDialog
     {
-        protected Dialog(string message, string title = "AnyStatus")
+        protected Dialog(string message)
+        {
+            Title = "AnyStatus";
+            Message = message;
+        }
+
+        protected Dialog(string message, string title)
         {
             Title = title;
             Message = message;

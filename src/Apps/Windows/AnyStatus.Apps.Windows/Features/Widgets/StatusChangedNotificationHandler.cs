@@ -1,9 +1,9 @@
-﻿using AnyStatus.API.Widgets;
-using AnyStatus.API.Events;
-using AnyStatus.Apps.Windows.Features.Notifications;
+﻿using AnyStatus.API.Events;
+using AnyStatus.API.Notifications;
+using AnyStatus.API.Services;
+using AnyStatus.API.Widgets;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets
 {
@@ -11,12 +11,12 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
         where TWidget : class, IWidget
     {
         private readonly ILogger _logger;
-        private readonly IMediator _mediator;
+        private readonly INotificationService _notificationService;
 
-        public StatusChangedNotificationHandler(IMediator mediator, ILogger logger)
+        public StatusChangedNotificationHandler(INotificationService notificationService, ILogger logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _logger = logger;
+            _notificationService = notificationService;
         }
 
         protected override void Handle(StatusChangedNotification<TWidget> notification)
@@ -27,7 +27,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
             if (notification.Widget.NotificationsSettings?.IsEnabled == true && notification.Widget.PreviousStatus != Status.None)
             {
-                _mediator.Send(new Notification.Request(notification.Widget.Name, message));
+                _notificationService.Send(new Notification(message, notification.Widget.Name));
             }
         }
     }
