@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API.Dialogs;
+using AnyStatus.API.Notifications;
 using AnyStatus.API.Services;
 using AnyStatus.Core.Domain;
 using AnyStatus.Core.Services;
@@ -11,33 +12,31 @@ namespace AnyStatus.Core.Tests.Integration
 {
     public sealed class ContainerFixture : IDisposable
     {
-        private readonly Container _container;
-
-        public Container Container { get; }
+        public Container Container { get; private set;}
 
         public ContainerFixture()
         {
-            _container = new Container();
+            Container = new Container();
 
-            _container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+            Container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
-            _container.RegisterPackages(Scanner.GetAssemblies());
+            Container.RegisterPackages(Scanner.GetAssemblies());
 
-            _container.RegisterSingleton<IAppContext, Domain.AppContext>();
+            Container.RegisterSingleton<IAppContext, Domain.AppContext>();
 
-            _container.RegisterInstance(Substitute.For<IDialogService>());
+            Container.RegisterInstance(Substitute.For<IDialogService>());
 
-            _container.RegisterInstance<IDispatcher>(new Dispatcher());
+            Container.RegisterInstance(Substitute.For<INotificationService>());
 
-            _container.AddDebugLogger();
+            Container.RegisterInstance<IDispatcher>(new Dispatcher());
 
-            _container.Options.ResolveUnregisteredConcreteTypes = true;
+            Container.AddDebugLogger();
 
-            _container.Verify();
+            Container.Options.ResolveUnregisteredConcreteTypes = true;
 
-            Container = _container;
+            Container.Verify();
         }
 
-        public void Dispose() => _container.Dispose();
+        public void Dispose() => Container.Dispose();
     }
 }

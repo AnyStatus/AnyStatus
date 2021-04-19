@@ -31,4 +31,10 @@ namespace AnyStatus.API.Widgets
     {
         protected abstract override Task Handle(StatusRequest<TStatusWidget> request, CancellationToken cancellationToken);
     }
+
+    public abstract class StatusCheck<TStatusWidget> : RequestHandler<StatusRequest<TStatusWidget>>, ICheckStatusOf<TStatusWidget>
+        where TStatusWidget : IStatusWidget
+    {
+        protected abstract override void Handle(StatusRequest<TStatusWidget> request);
+    }
 }
