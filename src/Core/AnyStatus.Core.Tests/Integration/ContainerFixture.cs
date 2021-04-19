@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API.Dialogs;
+using AnyStatus.API.Notifications;
 using AnyStatus.API.Services;
 using AnyStatus.Core.Domain;
 using AnyStatus.Core.Services;
@@ -26,6 +27,8 @@ namespace AnyStatus.Core.Tests.Integration
             _container.RegisterSingleton<IAppContext, Domain.AppContext>();
 
             _container.RegisterInstance(Substitute.For<IDialogService>());
+            
+            _container.RegisterInstance(Substitute.For<INotificationService>());
 
             _container.RegisterInstance<IDispatcher>(new Dispatcher());
 
