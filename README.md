@@ -65,5 +65,3 @@ The context menus are fully pluggable and contextual. Future releases of AnyStat
 ## License
 
 AnyStatus is licensed under the [GNU General Public License v3.0](LICENSE) license.
-
-Copyright © 2017-2021 Alon Amsalem and contributors. All rights reserved.
