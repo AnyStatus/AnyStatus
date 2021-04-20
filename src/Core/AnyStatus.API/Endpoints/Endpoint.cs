@@ -27,6 +27,7 @@ namespace AnyStatus.API.Endpoints
         }
 
         [Required]
+        [Order(20)]
         public string Address
         {
             get => _address;

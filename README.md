@@ -50,16 +50,17 @@ Examples include, how and where the settings are saved, the API, MVVM framework 
 In this project I have developed an experimental MVVM framework based on MediatR. The main usage of this framework is for showing Windows, Pages, and Context Menus.
 The context menus are fully pluggable and contextual. Future releases of AnyStatus may use a different MVVM framework, or the current framework will grow into a seperate repository. I'd love to hear your opinion about it.
 
-## Build Status
+## Status
 
-|Project|Status|
+|Build|Status|
 |-------|------|
-|GitHub Actions Build|![example workflow](https://github.com/anystatus/anystatus/actions/workflows/dotnet.yml/badge.svg)|
-|Azure DevOps Build|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?repoName=AnyStatus%2FAnyStatus&branchName=main)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&repoName=AnyStatus%2FAnyStatus&branchName=main)|
-|Azure DevOps Release - Microsoft Store|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/1/5)|
+|GitHub Actions|![example workflow](https://github.com/anystatus/anystatus/actions/workflows/dotnet.yml/badge.svg)|
+|Azure DevOps|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?repoName=AnyStatus%2FAnyStatus&branchName=main)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&repoName=AnyStatus%2FAnyStatus&branchName=main)|
+
+|Release|Status|
+|-------|------|
+|Microsoft Store|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/1/5)|
 
 ## License
 
 AnyStatus is licensed under the [GNU General Public License v3.0](LICENSE) license.
-
-Copyright © 2017-2021 Alon Amsalem and contributors. All rights reserved.
