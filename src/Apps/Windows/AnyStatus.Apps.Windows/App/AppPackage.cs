@@ -35,6 +35,8 @@ namespace AnyStatus.Apps.Windows
             
             container.Register<IDialogService, DialogService>();
             container.Register<IPropertyGridViewModel, PropertyGridViewModel>();
+            container.Register<IPropertyBuilder, PropertyBuilder>();
+
             container.Register<IEndpointViewModel, EndpointViewModel>();
             container.Register<IEndpointViewModelFactory, EndpointViewModelFactory>();
             container.Register(typeof(IRequestHandler<,>), typeof(PageHandler<>));
