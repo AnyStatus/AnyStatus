@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API.Attributes;
-using AnyStatus.API.Common;
 using AnyStatus.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -51,15 +50,10 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
                 throw new ArgumentNullException(nameof(source));
             }
 
-            var properties = source.GetType().GetProperties().Where(p => p.CanWrite).OrderBy(p => p.Order()).ToList();
+            var properties = source.GetType().GetProperties().Where(p => p.CanWrite && p.IsBrowsable()).OrderBy(p => p.Order()).ToList();
 
             foreach (var propertyInfo in properties)
             {
-                if (propertyInfo.GetCustomAttribute<BrowsableAttribute>()?.Browsable == false)
-                {
-                    continue;
-                }
-
                 yield return BuildProperty(source, propertyInfo);
             }
         }
