@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,26 +8,24 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
     internal class PropertyGridViewModel : BaseViewModel, IPropertyGridViewModel
     {
         private object _target;
+        private readonly ILogger _logger;
         private IEnumerable<IProperty> _properties;
         private readonly IPropertyBuilder _propertyBuilder;
 
-        public PropertyGridViewModel(IPropertyBuilder propertyBuilder)
+        public PropertyGridViewModel(ILogger logger, IPropertyBuilder propertyBuilder)
         {
+            _logger = logger;
             _propertyBuilder = propertyBuilder;
-
-            PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName.Equals(nameof(Target)))
-                {
-                    Properties = Target is object ? BuildProperties(Target).ToList() : null;
-                }
-            };
         }
 
         public object Target
         {
             get => _target;
-            set => Set(ref _target, value);
+            set
+            {
+                Set(ref _target, value);
+                TryReloadTargetProperties();
+            }
         }
 
         public IEnumerable<IProperty> Properties
@@ -35,13 +34,20 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
             set => Set(ref _properties, value);
         }
 
-        private IEnumerable<IProperty> BuildProperties(object source)
+        private void TryReloadTargetProperties()
         {
-            if (source is null)
+            try
             {
-                throw new ArgumentNullException(nameof(source));
+                Properties = Target is object ? GetProperties(Target) : null;
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "A error occurred in property grid. Failed to get target properties.");
+            }
+        }
 
+        private IEnumerable<IProperty> GetProperties(object source)
+        {
             var properties = source.GetType().GetProperties().Where(p => p.CanWrite).OrderBy(p => p.Order()).ToList();
 
             foreach (var property in properties.Where(property => property.IsBrowsable()))
