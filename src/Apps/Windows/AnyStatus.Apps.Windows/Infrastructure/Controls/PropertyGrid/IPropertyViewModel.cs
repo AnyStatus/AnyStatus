@@ -1,6 +1,6 @@
 ﻿namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 {
-    public interface IProperty
+    public interface IPropertyViewModel
     {
         string Header { get; set; }
 

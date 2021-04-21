@@ -35,7 +35,7 @@ namespace AnyStatus.Apps.Windows
             container.RegisterSingleton<INotificationService, NotificationService>();
 
             container.Register<IDialogService, DialogService>();
-            container.Register<IPropertyBuilder, PropertyBuilder>();
+            container.Register<IPropertyViewModelBuilder, PropertyViewModelBuilder>();
             container.Register<IPropertyGridViewModel, PropertyGridViewModel>();
             container.Register<IEndpointViewModel, EndpointViewModel>();
             container.Register<IEndpointViewModelFactory, EndpointViewModelFactory>();

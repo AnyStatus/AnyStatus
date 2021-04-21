@@ -6,15 +6,15 @@ using System.Windows.Input;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 {
-    public class DropDownProperty : BaseProperty
+    public class DropDownPropertyViewModel : PropertyViewModelBase
     {
         private IEnumerable<NameValueItem> _items;
 
-        public DropDownProperty(PropertyInfo propertyInfo, object source) : base(propertyInfo, source)
+        public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source) : base(propertyInfo, source)
         {
         }
 
-        public DropDownProperty(PropertyInfo propertyInfo, object source, IEnumerable<NameValueItem> items) : base(propertyInfo, source)
+        public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source, IEnumerable<NameValueItem> items) : base(propertyInfo, source)
         {
             Items = items;
         }

@@ -7,19 +7,19 @@
     <ItemsControl ItemsSource="{Binding Properties}">
         <ItemsControl.Resources>
             <!--text-->
-            <DataTemplate DataType="{x:Type local:TextProperty}">
+            <DataTemplate DataType="{x:Type local:TextPropertyViewModel}">
                 <TextBox Text="{Binding Value}" ui:ControlHelper.Header="{Binding Header}" IsReadOnly="{Binding IsReadOnly}" Margin="7,0,7,12"/>
             </DataTemplate>
             <!--boolean-->
-            <DataTemplate DataType="{x:Type local:BooleanProperty}">
+            <DataTemplate DataType="{x:Type local:BooleanPropertyViewModel}">
                 <CheckBox Content="{Binding Header}" IsChecked="{Binding Value}" Margin="7,0,7,12"/><!-- TODO: ADD IsReadOnly support -->
             </DataTemplate>
             <!--numeric-->
-            <DataTemplate DataType="{x:Type local:NumericProperty}">
+            <DataTemplate DataType="{x:Type local:NumericPropertyViewModel}">
                 <TextBox Text="{Binding Value}" ui:ControlHelper.Header="{Binding Header}" IsReadOnly="{Binding IsReadOnly}" Margin="7,0,7,12"/>
             </DataTemplate>
             <!--drop down-->
-            <DataTemplate DataType="{x:Type local:DropDownProperty}">
+            <DataTemplate DataType="{x:Type local:DropDownPropertyViewModel}">
                 <ComboBox VirtualizingPanel.IsVirtualizing="True" 
                           Margin="7,0,7,12"
                           ItemsSource="{Binding Items}" 

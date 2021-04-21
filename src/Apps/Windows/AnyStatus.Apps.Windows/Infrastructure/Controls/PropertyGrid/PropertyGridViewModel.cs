@@ -6,9 +6,9 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
     internal class PropertyGridViewModel : BaseViewModel, IPropertyGridViewModel
     {
         private object _target;
-        private IEnumerable<IProperty> _properties;
+        private IEnumerable<IPropertyViewModel> _properties;
 
-        public PropertyGridViewModel(IPropertyBuilder propertyBuilder)
+        public PropertyGridViewModel(IPropertyViewModelBuilder propertyBuilder)
         {
             PropertyChanged += (_, e) =>
             {
@@ -25,10 +25,10 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
             set => Set(ref _target, value);
         }
 
-        public IEnumerable<IProperty> Properties
+        public IEnumerable<IPropertyViewModel> Properties
         {
             get => _properties;
-            set => Set(ref _properties, value);
+            private set => Set(ref _properties, value);
         }
     }
 }

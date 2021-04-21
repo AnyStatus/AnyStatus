@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
 {
-    internal interface IPropertyBuilder
+    internal interface IPropertyViewModelBuilder
     {
-        IEnumerable<IProperty> Build(object source);
+        IEnumerable<IPropertyViewModel> Build(object source);
     }
 }
