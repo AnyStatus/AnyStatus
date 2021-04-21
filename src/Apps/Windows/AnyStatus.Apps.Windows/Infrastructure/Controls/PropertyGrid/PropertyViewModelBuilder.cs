@@ -1,25 +1,20 @@
 ﻿using AnyStatus.API.Attributes;
-using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Core.Extensions;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
 {
     internal class PropertyViewModelBuilder : IPropertyViewModelBuilder
     {
-        private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
 
-        public PropertyViewModelBuilder(IServiceProvider serviceProvider, ILogger logger)
+        public PropertyViewModelBuilder(IServiceProvider serviceProvider)
         {
-            _logger = logger;
             _serviceProvider = serviceProvider;
         }
 
@@ -71,7 +66,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
             }
             else if (propertyInfo.PropertyType.IsEnum)
             {
-                return new DropDownPropertyViewModel(propertyInfo, source) { Items = Enum.GetNames(propertyInfo.PropertyType).Select(i => new NameValueItem(i, i)) };
+                return new DropDownPropertyViewModel(propertyInfo, source, Enum.GetNames(propertyInfo.PropertyType).Select(i => new NameValueItem(i, i)));
             }
             else if (propertyInfo.PropertyType == typeof(string))
             {
@@ -95,106 +90,18 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
         {
             var attribute = propertyInfo.GetCustomAttribute<ItemsSourceAttribute>();
 
-            if (!(_serviceProvider.GetService(attribute.Type) is IItemsSource itemsSource))
-            {
-                return null; //throw exception?
-            }
-
-            var dropDown = new DropDownPropertyViewModel(propertyInfo, source)
-            {
-                Name = propertyInfo.Name
-            };
-
-            dropDown.Refresh = () =>
-            {
-                dropDown.Items = null;
-
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        dropDown.Items = itemsSource.GetItems(source);
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "An error occurred while creating items source '{type}' for property '{property}'.", attribute.Type.Name, propertyInfo.Name); //throw exception?
-                    }
-                });
-            };
-
-            if (propertyInfo.GetCustomAttribute<RefreshAttribute>() is RefreshAttribute refreshAttribute)
-            {
-                dropDown.SelectionChanged = new Command(_ =>
-                {
-                    foreach (var property in properties)
-                    {
-                        if (property is DropDownPropertyViewModel dropDownProperty && dropDownProperty.Name.Equals(refreshAttribute.Name))
-                        {
-                            dropDownProperty.Refresh();
-                        }
-                    }
-                });
-            }
-
-            if (attribute.Autoload)
-            {
-                dropDown.Refresh();
-            }
-
-            return dropDown;
+            return _serviceProvider.GetService(attribute.Type) is IItemsSource itemsSource ?
+                new DropDownPropertyViewModel(propertyInfo, source, itemsSource, properties, attribute.Autoload) :
+                null;
         }
 
         private IPropertyViewModel CreateAsyncDropDown(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
         {
             var attribute = propertyInfo.GetCustomAttribute<AsyncItemsSourceAttribute>();
 
-            if (!(_serviceProvider.GetService(attribute.Type) is IAsyncItemsSource asyncItemsSource))
-            {
-                return null; //throw exception?
-            }
-
-            var dropDown = new DropDownPropertyViewModel(propertyInfo, source)
-            {
-                Name = propertyInfo.Name
-            };
-
-            dropDown.Refresh = () =>
-            {
-                dropDown.Items = null;
-
-                Task.Run(async () =>
-                {
-                    try
-                    {
-                        dropDown.Items = await asyncItemsSource.GetItemsAsync(source);
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex.GetBaseException(), "An error occurred while executing items-source '{type}' for property '{property}'.", attribute.Type.Name, propertyInfo.Name);
-                    }
-                });
-            };
-
-            if (propertyInfo.GetCustomAttribute<RefreshAttribute>() is RefreshAttribute refreshAttribute)
-            {
-                dropDown.SelectionChanged = new Command(_ =>
-                {
-                    foreach (var property in properties)
-                    {
-                        if (property is DropDownPropertyViewModel dropDownProperty && dropDownProperty.Name.Equals(refreshAttribute.Name))
-                        {
-                            dropDownProperty.Refresh();
-                        }
-                    }
-                });
-            }
-
-            if (attribute.Autoload)
-            {
-                dropDown.Refresh();
-            }
-
-            return dropDown;
+            return _serviceProvider.GetService(attribute.Type) is IAsyncItemsSource asyncItemsSource ?
+                new DropDownPropertyViewModel(propertyInfo, source, asyncItemsSource, properties, attribute.Autoload) :
+                null;
         }
 
         private static IEnumerable<PropertyInfo> GetProperties(object source)
