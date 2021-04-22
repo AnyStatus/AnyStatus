@@ -4,14 +4,14 @@ using System.Reflection;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 {
-    public class BaseProperty : NotifyPropertyChanged, IProperty
+    public class PropertyViewModelBase : NotifyPropertyChanged, IPropertyViewModel
     {
         private object _value;
 
         private readonly object _source;
         private readonly PropertyInfo _propertyInfo;
 
-        public BaseProperty(PropertyInfo propertyInfo, object source)
+        public PropertyViewModelBase(PropertyInfo propertyInfo, object source)
         {
             _source = source ?? throw new ArgumentNullException(nameof(source));
             _propertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));

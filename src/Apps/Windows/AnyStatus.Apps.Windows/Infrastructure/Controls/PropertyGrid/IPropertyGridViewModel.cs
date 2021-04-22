@@ -6,6 +6,6 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
     {
         object Target { get; set; }
 
-        IEnumerable<IProperty> Properties { get; set; }
+        IEnumerable<IPropertyViewModel> Properties { get; }
     }
 }
