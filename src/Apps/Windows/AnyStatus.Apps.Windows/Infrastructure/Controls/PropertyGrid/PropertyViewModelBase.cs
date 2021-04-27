@@ -1,10 +1,9 @@
-﻿using AnyStatus.API.Common;
-using System;
+﻿using System;
 using System.Reflection;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 {
-    public class PropertyViewModelBase : NotifyPropertyChanged, IPropertyViewModel
+    public class PropertyViewModelBase : BaseViewModel, IPropertyViewModel
     {
         private object _value;
 

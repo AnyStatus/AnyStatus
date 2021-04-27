@@ -25,8 +25,9 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 
             _pagesViewModel.Add(new PageViewModel(_pagesViewModel)
             {
+                Content = viewModel,
                 Title = request.Title,
-                Content = viewModel
+                OnClose = request.OnClose
             });
         }
     }
@@ -46,18 +47,21 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
         {
             var viewModel = request.ViewModel ?? _serviceProvider.GetService(request.Type);
 
-            request.Initializer((T)viewModel);
+            request.Initializer?.Invoke((T)viewModel);
 
             if (viewModel is null)
             {
                 throw new Exception($"View model '{request.Type}' was not found.");
             }
 
-            _pagesViewModel.Add(new PageViewModel(_pagesViewModel)
+            var pageViewMode = new PageViewModel(_pagesViewModel)
             {
                 Title = request.Title,
-                Content = viewModel
-            });
+                Content = viewModel,
+                OnClose = request.OnClose
+            };
+
+            _pagesViewModel.Add(pageViewMode);
         }
     }
 }

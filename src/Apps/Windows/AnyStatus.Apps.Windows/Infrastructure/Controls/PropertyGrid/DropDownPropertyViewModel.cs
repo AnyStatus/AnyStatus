@@ -22,31 +22,31 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 
         public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source, IItemsSource itemsSource, IEnumerable<IPropertyViewModel> properties, bool autoload) : this(propertyInfo, source)
         {
-            Refresh = () => Items = itemsSource.GetItems(source);
+            Load = () => Items = itemsSource.GetItems(source);
 
             Cascade(propertyInfo, properties);
 
             if (autoload)
             {
-                Refresh();
+                Load();
             }
         }
 
         public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source, IAsyncItemsSource asyncItemsSource, IEnumerable<IPropertyViewModel> properties, bool autoload) : this(propertyInfo, source)
         {
-            Refresh = async () => Items = await asyncItemsSource.GetItemsAsync(source);
+            Load = async () => Items = await asyncItemsSource.GetItemsAsync(source);
 
             Cascade(propertyInfo, properties);
 
             if (autoload)
             {
-                Refresh();
+                Load();
             }
         }
 
         public string Name { get; set; }
 
-        public Action Refresh { get; set; }
+        public Action Load { get; set; }
 
         public ICommand SelectionChanged { get; set; }
 
@@ -56,7 +56,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
             set => Set(ref _items, value);
         }
 
-        private void Cascade(PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
+        protected void Cascade(PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
         {
             if (propertyInfo.GetCustomAttribute<RefreshAttribute>() is RefreshAttribute refreshAttribute)
             {
@@ -64,9 +64,9 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
                 {
                     foreach (var property in properties)
                     {
-                        if (property is DropDownPropertyViewModel dropDownProperty && dropDownProperty.Name.Equals(refreshAttribute.Name))
+                        if (property is DropDownPropertyViewModel dropDown && dropDown.Name.Equals(refreshAttribute.Name))
                         {
-                            dropDownProperty.Refresh();
+                            dropDown.Load();
                         }
                     }
                 });

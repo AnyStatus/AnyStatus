@@ -19,7 +19,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 
             protected override void Handle(Request request)
             {
-                _pagesViewModel.Close();
+                _pagesViewModel.CloseLastPage();
             }
         }
     }
