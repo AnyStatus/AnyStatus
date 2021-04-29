@@ -35,23 +35,6 @@ All contributions are welcome and greatly appreciated. Including pull requests, 
 In version 3 of AnyStatus, I have re-written most the code from the ground up to fix some of the core issues that exist in version 2.
 Examples include, how and where the settings are saved, the API, MVVM framework and more. The core monitoring and plugins mechanism has greatly improved but other parts of the code, such as the application and user interface, still require refactorings and improvements.
 
-## Architecture
-
-> TBD
-
-- Vertical architecture
-- Feature based folder structure
-- Application commands pipeline
-- UI and MVVM framework
-- Pluggable widgets framework
-- Pluggable context menues framework
-- Job scheduler
-
-#### MVVM Framework
-
-In this project I have developed an experimental MVVM framework based on MediatR. The main usage of this framework is for showing Windows, Pages, and Context Menus.
-The context menus are fully pluggable and contextual. Future releases of AnyStatus may use a different MVVM framework, or the current framework will grow into a seperate repository. I'd love to hear your opinion about it.
-
 ## Status
 
 |Build|Status|
