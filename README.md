@@ -30,7 +30,7 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 
 All contributions are welcome and greatly appreciated. Including pull requests, feature requests, bug reports, and documentation.
 
-## State of the project
+## State of the Project
 
 In version 3 of AnyStatus, I have re-written most the code from the ground up to fix some of the core issues that exist in version 2.
 Examples include, how and where the settings are saved, the API, MVVM framework and more. The core monitoring and plugins mechanism has greatly improved but other parts of the code, such as the application and user interface, still require refactorings and improvements.
