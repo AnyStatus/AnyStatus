@@ -14,7 +14,7 @@ A remote control for your CI/CD pipelines and more.
 
 Download and install AnyStatus from the [Microsoft Store](https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb). This allows you to always be on the latest version when we release new builds with automatic upgrades.
 
-## Plugins
+## Plugins and Widgets
 
 Some plugins come pre-installed, and are a great starting points for creating your own.
 
@@ -30,7 +30,7 @@ Some plugins come pre-installed, and are a great starting points for creating yo
 
 All contributions are welcome and greatly appreciated. Including pull requests, feature requests, bug reports, and documentation.
 
-## Current state of the code
+## State of the project
 
 In version 3 of AnyStatus, I have re-written most the code from the ground up to fix some of the core issues that exist in version 2.
 Examples include, how and where the settings are saved, the API, MVVM framework and more. The core monitoring and plugins mechanism has greatly improved but other parts of the code, such as the application and user interface, still require refactorings and improvements.
