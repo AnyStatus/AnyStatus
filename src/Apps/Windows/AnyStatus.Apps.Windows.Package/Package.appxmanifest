@@ -10,8 +10,8 @@
 
   <Identity
     Name="12790AnyStatus.AnyStatus"
-    Publisher="CN=Alon Amsalem"
-    Version="3.0.0.0" />
+    Publisher="CN=2374DAEA-FA03-44F5-8064-4D6443D4DBB4"
+    Version="3.1.0.0" />
 
   <Properties>
     <DisplayName>AnyStatus</DisplayName>
