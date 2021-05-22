@@ -15,9 +15,14 @@ variables:
 steps:
 
 - powershell: |
-      [xml]$manifest= get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
-      $manifest.Package.Identity.Version = $Env:BUILD_BUILDNUMBER
+      [xml]$manifest=get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
+      $manifest.Package.Identity.Version=$Env:BUILD_BUILDNUMBER
       $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+
+- powershell: |
+      [xml]$manifest=get-content ".\src\Core\AnyStatus.API\AnyStatus.API.csproj"
+      $manifest.Project.PropertyGroup.PackageVersion=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Core\AnyStatus.API\AnyStatus.API.csproj")
 
 - task: DownloadSecureFile@1
   name: signingCert
@@ -52,6 +57,11 @@ steps:
                   /p:AppxPackageSigningEnabled=true
                   /p:PackageCertificateThumbprint="" 
                   /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/AnyStatus.API.*.nupkg'
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: AnyStatus
