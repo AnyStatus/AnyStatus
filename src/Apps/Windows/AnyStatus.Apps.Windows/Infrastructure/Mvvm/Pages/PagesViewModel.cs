@@ -18,7 +18,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
             _pages.Remove(viewModel);
         }
 
-        internal void Close()
+        internal void CloseLastPage()
         {
             _pages.RemoveAt(_pages.Count - 1);
         }

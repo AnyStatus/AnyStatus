@@ -1,10 +1,9 @@
-﻿using AnyStatus.API.Common;
-using System;
+﻿using System;
 using System.Reflection;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 {
-    public class PropertyViewModelBase : NotifyPropertyChanged, IPropertyViewModel
+    public class PropertyViewModelBase : BaseViewModel, IPropertyViewModel
     {
         private object _value;
 
@@ -33,14 +32,14 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 
             if (_propertyInfo.PropertyType.IsEnum)
             {
-                _propertyInfo.SetValue(_source,
-                    Enum.Parse(_propertyInfo.PropertyType, value.ToString()));
+                _propertyInfo.SetValue(_source, Enum.Parse(_propertyInfo.PropertyType, value.ToString()));
             }
             else
             {
-                _propertyInfo.SetValue(_source,
-                    Convert.ChangeType(value, _propertyInfo.PropertyType));
+                _propertyInfo.SetValue(_source, Convert.ChangeType(value, _propertyInfo.PropertyType));
             }
+
+            OnPropertyChanged(nameof(Value));
         }
     }
 }

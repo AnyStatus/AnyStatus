@@ -18,6 +18,8 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 
         public object ViewModel { get; private set; }
 
+        public Action OnClose { get; internal set; }
+
         public static Page Show<T>(string title)
         {
             return new Page
@@ -27,13 +29,14 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
             };
         }
 
-        public static Page Show<T>(string title, Action<T> initializer)
+        public static Page Show<T>(string title, Action<T> initializer = null, Action onClose = null)
         {
             return new Page<T>
             {
                 Title = title,
                 Type = typeof(T),
-                Initializer = initializer
+                OnClose = onClose,
+                Initializer = initializer,
             };
         }
 
@@ -59,5 +62,5 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
         }
     }
 
-    
+
 }

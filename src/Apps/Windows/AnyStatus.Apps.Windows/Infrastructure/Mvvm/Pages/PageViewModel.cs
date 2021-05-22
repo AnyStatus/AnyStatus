@@ -26,6 +26,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
             get => _content;
             set => Set(ref _content, value);
         }
+        public Action OnClose { get; internal set; }
 
         public void Close()
         {
@@ -38,6 +39,8 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 
             Content = null;
             Title = null;
+
+            OnClose?.Invoke();
         }
     }
 }
