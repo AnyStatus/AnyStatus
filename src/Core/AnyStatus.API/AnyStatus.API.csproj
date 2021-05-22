@@ -1,25 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>Alon Amsalem 2021</Copyright>
+    <PackageId>AnyStatus.API</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>AnyStatus</Authors>
+    <AssemblyTitle>AnyStatus API</AssemblyTitle>
+    <Description>A library for developing plug-ins and extensions for AnyStatus</Description>
+    <PackageTags>AnyStatus SDK API</PackageTags>
+    <RepositoryUrl>https://github.com/AnyStatus/AnyStatus</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/AnyStatus/AnyStatus/blob/main/src/Core/AnyStatus.API/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://www.anystat.us</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/anystatus/api</RepositoryUrl>
-    <PackageTags>anystatus api sdk plugin plugins</PackageTags>
+    <PackageIconUrl>http://www.anystat.us/assets/images/logo_128px.png</PackageIconUrl>
+    <Copyright>Copyright © 2016-2021 Alon Amsalem</Copyright>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <LangVersion>8.0</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Authentication\**" />
-    <EmbeddedResource Remove="Authentication\**" />
-    <None Remove="Authentication\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="mediatr" Version="8.0.0" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
