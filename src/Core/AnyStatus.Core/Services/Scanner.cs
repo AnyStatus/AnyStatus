@@ -17,11 +17,11 @@ namespace AnyStatus.Core.Services
 
         public static IEnumerable<Assembly> GetAssemblies() => _assemblies.Value;
 
-
-        public static IEnumerable<Type> GetTypesOf<T>(bool browsableOnly = true) => from assembly in GetAssemblies()
-                                                                                    from type in assembly.GetTypes()
-                                                                                    where type.IsClass && !type.IsAbstract && typeof(T).IsAssignableFrom(type) && (!browsableOnly || type.IsBrowsable())
-                                                                                    select type;
+        public static IEnumerable<Type> GetTypesOf(Type type, bool browsableOnly = true) => from assembly in GetAssemblies()
+                                                                                            from t in assembly.GetTypes()
+                                                                                            where t.IsClass && !t.IsAbstract && type.IsAssignableFrom(t) && (!browsableOnly || t.IsBrowsable())
+                                                                                            select t;
+        public static IEnumerable<Type> GetTypesOf<T>(bool browsableOnly = true) => GetTypesOf(typeof(T), browsableOnly);
         public static IEnumerable<Category> GetWidgetCategories() => from type in GetTypesOf<IWidget>()
                                                                      let categoryAttribute = type.GetCustomAttribute<CategoryAttribute>()
                                                                      where categoryAttribute != null && !string.IsNullOrEmpty(categoryAttribute.Category)
