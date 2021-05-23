@@ -59,7 +59,11 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
                 {
                     foreach (var property in properties.OfType<DropDownPropertyViewModel>().Where(p => p.Name.Equals(refreshAttribute.Name)))
                     {
+                        var tmp = property.Value;
+
                         property.Load();
+
+                        property.Value = tmp;
                     }
                 });
             }

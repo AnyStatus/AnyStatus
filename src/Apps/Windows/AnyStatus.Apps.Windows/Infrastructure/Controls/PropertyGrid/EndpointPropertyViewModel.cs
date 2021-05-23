@@ -11,10 +11,10 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
     {
         public EndpointPropertyViewModel(IMediator mediator, PropertyInfo propertyInfo, object source, IItemsSource itemsSource, IEnumerable<IPropertyViewModel> properties, bool autoload) : base(propertyInfo, source, itemsSource, properties, autoload)
         {
-            Commands.Add("Endpoints", new Command(_ => mediator.Send(Page.Show<EndpointsViewModel>("Endpoints", onClose: OnEndpointsViewClose))));
+            Commands.Add("Endpoints", new Command(_ => mediator.Send(Page.Show<EndpointsViewModel>("Endpoints", onClose: OnEndpointsViewClosed))));
         }
 
-        private void OnEndpointsViewClose()
+        private void OnEndpointsViewClosed()
         {
             var tmp = Value;
 
