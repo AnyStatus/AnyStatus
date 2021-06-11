@@ -8,7 +8,7 @@ trigger:
     include:
     - src
     exclude:
-    - README.md
+    - '*.md'
 
 pool:
   vmImage: 'windows-latest'
