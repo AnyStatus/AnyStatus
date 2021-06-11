@@ -39,11 +39,13 @@ steps:
 
 - task: NuGetToolInstaller@1
 
+steps:
 - task: UseDotNet@2
-  displayName: Install .NET Core SDK
+  displayName: 'Use .NET Core sdk'
   inputs:
-    packageType: 'sdk'
-    version: '3.1.410'
+    packageType: sdk
+    version: 3.1.402
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: NuGetCommand@2
   inputs:
