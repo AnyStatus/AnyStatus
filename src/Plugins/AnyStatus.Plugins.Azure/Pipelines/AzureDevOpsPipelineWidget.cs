@@ -98,5 +98,14 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
         public string URL { get; set; }
 
         private bool HasBuildId => !string.IsNullOrEmpty(BuildId);
+
+        public void Reset()
+        {
+            Branch = null;
+            BuildId = null;
+            Duration = default;
+            FinishTime = default;
+            BuildNumber = null;
+        }
     }
 }

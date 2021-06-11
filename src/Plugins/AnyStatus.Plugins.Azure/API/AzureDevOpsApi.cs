@@ -1,4 +1,5 @@
-﻿using AnyStatus.Plugins.Azure.API.Contracts;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.Plugins.Azure.API.Contracts;
 using AnyStatus.Plugins.Azure.API.Endpoints;
 using RestSharp;
 using System;
@@ -15,7 +16,7 @@ namespace AnyStatus.Plugins.Azure.API
 
         internal AzureDevOpsApi(IAzureDevOpsEndpoint endpoint)
         {
-            _endpoint = endpoint;
+            _endpoint = endpoint ?? throw new EndpointNotFoundException();
 
             _client = new RestClient(endpoint.Address)
             {
@@ -144,7 +145,7 @@ namespace AnyStatus.Plugins.Azure.API
             return ExecuteAsync<CollectionResponse<ReleaseDefinition>>(request, cancellationToken);
         }
 
-        internal Task<CollectionResponse<Release>> GetReleasesAsync(string organization, string project, string definitionId, int top, CancellationToken cancellationToken = default)
+        internal Task<CollectionResponse<Release>> GetReleasesAsync(string organization, string project, int definitionId, int top, CancellationToken cancellationToken = default)
         {
             var request = new RestRequest(string.Format("{0}/{1}/{2}/_apis/release/releases", _endpoint.ReleaseManagement, Uri.EscapeDataString(organization), Uri.EscapeDataString(project)));
 

@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 namespace AnyStatus.Plugins.Azure.DevOps.Builds
 {
 
-    public class AzureDevOpsPipelineStatusCheck : AsyncStatusCheck<AzureDevOpsPipelineWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
+    public class AzureDevOpsPipelineStatusCheck :
+        AsyncStatusCheck<AzureDevOpsPipelineWidget>,
+        IEndpointHandler<IAzureDevOpsEndpoint>
     {
         private readonly IMapper _mapper;
 
@@ -27,12 +29,8 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
 
             if (build is null)
             {
+                request.Context.Reset();
                 request.Context.Status = Status.Unknown;
-                request.Context.Branch = null;
-                request.Context.BuildId = null;
-                request.Context.Duration = default;
-                request.Context.FinishTime = default;
-                request.Context.BuildNumber = null;
             }
             else
             {
