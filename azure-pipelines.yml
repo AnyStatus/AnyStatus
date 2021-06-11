@@ -32,9 +32,11 @@ steps:
 
 - task: NuGetToolInstaller@1
 
-- task: DotNetCoreInstaller@1
+- task: UseDotNet@2
+  displayName: Install .NET Core SDK
   inputs:
-    version: '3.1.402'
+    packageType: 'sdk'
+    version: '3.1.410'
 
 - task: NuGetCommand@2
   inputs:
