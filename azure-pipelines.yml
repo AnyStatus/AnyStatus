@@ -1,7 +1,14 @@
 name: '3.0$(Rev:.r).0'
 
 trigger:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - src
+    exclude:
+    - README.md
 
 pool:
   vmImage: 'windows-latest'
