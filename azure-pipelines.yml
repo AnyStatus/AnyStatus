@@ -51,6 +51,7 @@ steps:
     projects: '**/*.csproj'
 
 - task: FileTransform@2
+  condition: succeededOrFailed()
   inputs:
     folderPath: '$(System.DefaultWorkingDirectory)'
     jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
