@@ -43,7 +43,7 @@ steps:
   displayName: 'Use .NET Core sdk'
   inputs:
     packageType: sdk
-    version: 3.1.402
+    version: 3.1.x
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -60,8 +60,7 @@ steps:
     platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:RestorePackages=false
-                  /p:AppxBundlePlatforms="x64" 
+    msbuildArgs: '/p:AppxBundlePlatforms="x64" 
                   /p:AppxPackageDir="$(appxPackageDir)" 
                   /p:AppxBundle=Always 
                   /p:UapAppxPackageBuildMode=StoreUpload 
