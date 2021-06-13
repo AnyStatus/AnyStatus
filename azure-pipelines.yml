@@ -57,7 +57,6 @@ steps:
 
 - task: VSBuild@1
   inputs:
-    vsVersion: 16.0
     platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
