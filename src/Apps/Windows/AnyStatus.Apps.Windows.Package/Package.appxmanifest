@@ -3,18 +3,16 @@
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
-  IgnorableNamespaces="uap uap3 desktop rescap">
+  IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="12790AnyStatus.AnyStatus"
-    Publisher="CN=2374DAEA-FA03-44F5-8064-4D6443D4DBB4"
-    Version="3.1.0.0" />
+    Name="6add2901-8e4c-4344-b7c1-bc646f0b1d1d"
+    Publisher="CN=Alon Amsalem"
+    Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>AnyStatus</DisplayName>
+    <DisplayName>AnyStatus.Apps.Windows.Package</DisplayName>
     <PublisherDisplayName>Alon Amsalem</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -33,32 +31,14 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="AnyStatus"
+        DisplayName="AnyStatus.Apps.Windows.Package"
+        Description="AnyStatus.Apps.Windows.Package"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
-        Square44x44Logo="Images\Square44x44Logo.png"  Description="Essential status and performance monitoring for servers, networks, containers, CI/CD pipelines, and more.">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  ShortName="AnyStatus" Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png"/>
+        Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Images\SplashScreen.png" />
-        <uap:LockScreen BadgeLogo="Images\BadgeLogo.png" Notification="badge"/>
       </uap:VisualElements>
-      <Extensions>
-        <desktop:Extension Category="windows.startupTask" 
-                           Executable="AnyStatus.Apps.Windows\AnyStatus.exe" 
-                           EntryPoint="Windows.FullTrustApplication">
-          <desktop:StartupTask
-            TaskId="AnyStatusStartupId"
-            Enabled="true"
-            DisplayName="AnyStatus" />
-        </desktop:Extension>
-        <uap3:Extension
-                Category="windows.appExecutionAlias"
-                Executable="AnyStatus.Apps.Windows\AnyStatus.exe"
-                EntryPoint="Windows.FullTrustApplication">
-            <uap3:AppExecutionAlias>
-                <desktop:ExecutionAlias Alias="AnyStatus.exe" />
-            </uap3:AppExecutionAlias>
-        </uap3:Extension>
-      </Extensions>
     </Application>
   </Applications>
 

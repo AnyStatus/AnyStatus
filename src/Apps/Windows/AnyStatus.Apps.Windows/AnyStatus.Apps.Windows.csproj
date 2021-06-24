@@ -4,29 +4,17 @@
     <UseWPF>true</UseWPF>
     <LangVersion>8.0</LangVersion>
     <OutputType>WinExe</OutputType>
-    <UseWindowsForms>true</UseWindowsForms>
-    <StartupObject>AnyStatus.Apps.Windows.Program</StartupObject>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>AnyCPU;x64;x86</Platforms>
-    <PlatformTarget>x64</PlatformTarget>
-    <!--<Platforms>AnyCPU;x64;x86</Platforms>-->
-    <!--<PlatformTarget>x86</PlatformTarget>-->
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <!--<PlatformTarget>x64</PlatformTarget>-->
-    <!--<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>-->
-    <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
-    <!--<PublishSingleFile>true</PublishSingleFile>-->
     <AssemblyName>AnyStatus</AssemblyName>
-    <DebugType Condition="'$(Configuration)'=='Release'">None</DebugType>
+    <AssemblyName>AnyStatus</AssemblyName>
+    <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>App.ico</ApplicationIcon>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <!--<PublishSingleFile>true</PublishSingleFile>-->
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <StartupObject>AnyStatus.Apps.Windows.Program</StartupObject>
+    <DebugType Condition="'$(Configuration)'=='Release'">None</DebugType>
   </PropertyGroup>
-
-  <!--
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <PlatformTarget>x86</PlatformTarget>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
-  </PropertyGroup>
-  -->
 
   <ItemGroup>
     <TrimmerRootAssembly Include="AnyStatus.Plugins" />
