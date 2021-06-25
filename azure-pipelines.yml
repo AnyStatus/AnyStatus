@@ -43,13 +43,15 @@ steps:
   displayName: 'Use .NET Core sdk'
   inputs:
     packageType: sdk
-    version: 3.1.402
+    version: 3.1.x
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
 
 - task: FileTransform@2
+  condition: succeededOrFailed()
   inputs:
     folderPath: '$(System.DefaultWorkingDirectory)'
     jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
