@@ -7,11 +7,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>AnyStatus.Apps.Windows.Program</StartupObject>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x86;x64</Platforms>
     <PlatformTarget>x64</PlatformTarget>
     <!--<Platforms>AnyCPU;x64;x86</Platforms>-->
     <!--<PlatformTarget>x86</PlatformTarget>-->
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <!--<PlatformTarget>x64</PlatformTarget>-->
     <!--<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>-->
     <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
