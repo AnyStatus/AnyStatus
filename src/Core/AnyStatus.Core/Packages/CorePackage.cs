@@ -1,8 +1,10 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Endpoints;
 using AnyStatus.Core.ContextMenu;
+using AnyStatus.Core.Domain;
 using AnyStatus.Core.Endpoints;
 using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Logging;
 using AnyStatus.Core.Pipeline.Behaviors;
 using AnyStatus.Core.Pipeline.Decorators;
 using AnyStatus.Core.Services;
@@ -10,6 +12,7 @@ using AnyStatus.Core.Settings;
 using AutoMapper;
 using MediatR;
 using MediatR.Pipeline;
+using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
@@ -33,10 +36,21 @@ namespace AnyStatus.Core.Packages
             RegisterMediator(container, Scanner.GetAssemblies().ToList());
 
             RegisterJobScheduler(container);
+
+            RegisterLogger(container);
+        }
+
+        public static void RegisterLogger(Container container)
+        {
+            container.RegisterSingleton<ActivityLogger>();
+            container.RegisterSingleton<ActivityLoggerProvider>();
+            container.Register<ILoggerFactory>(() => new LoggerFactory(new[] { container.GetInstance<ActivityLoggerProvider>() }), Lifestyle.Singleton);
+            container.RegisterConditional(typeof(ILogger), ctx => typeof(Logger<>).MakeGenericType(ctx.Consumer.ImplementationType), Lifestyle.Singleton, _ => true);
         }
 
         private static void RegisterAppServices(Container container)
         {
+            container.RegisterSingleton<IAppContext, Domain.AppContext>();
             container.Register<IScanner, Scanner>(Lifestyle.Singleton);
             container.Register<ITelemetry, AppInsightsTelemetry>(Lifestyle.Singleton);
             container.Register<IEndpointSource, EndpointSource>(Lifestyle.Transient);

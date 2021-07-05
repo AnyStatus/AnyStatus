@@ -5,7 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 
-namespace AnyStatus.Apps.Windows.Features.Activity
+namespace AnyStatus.Core.Logging
 {
     public class ActivityLogger : ILogger
     {
@@ -32,7 +32,7 @@ namespace AnyStatus.Apps.Windows.Features.Activity
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (Messages.Count == _settings.MaxActivity)
+            if (Messages.Count > 0 && Messages.Count == _settings.MaxActivity)
             {
                 _dispatcher.InvokeAsync(() => Messages.RemoveAt(0));
             }
