@@ -32,7 +32,7 @@ namespace AnyStatus.Apps.Windows.Tests
 #else
             const string config = "Release";
 #endif
-            var path = Path.Combine(Directory.GetCurrentDirectory(), $@"..\..\..\..\AnyStatus.Apps.Windows\bin\{config}\netcoreapp3.1\win-x64\AnyStatus.exe");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), $@"..\..\..\..\AnyStatus.Apps.Windows\bin\x64\{config}\netcoreapp3.1\AnyStatus.exe");
 
             if (!File.Exists(path))
             {
