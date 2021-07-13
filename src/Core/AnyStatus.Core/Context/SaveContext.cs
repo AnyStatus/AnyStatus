@@ -17,13 +17,8 @@ namespace AnyStatus.Core.App
 
             public Handler(IMediator mediator) => _mediator = mediator;
 
-            protected override async Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                await Task.WhenAll(
-                    _mediator.Send(new SaveSession.Request()),
-                    _mediator.Send(new SaveUserSettings.Request()))
-                        .ConfigureAwait(false);
-            }
+            protected override Task Handle(Request request, CancellationToken cancellationToken)
+                => Task.WhenAll(_mediator.Send(new SaveSession.Request()), _mediator.Send(new SaveUserSettings.Request()));
         }
     }
 }

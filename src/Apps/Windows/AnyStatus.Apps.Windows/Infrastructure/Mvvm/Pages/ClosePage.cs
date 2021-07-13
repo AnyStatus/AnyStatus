@@ -12,15 +12,9 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
         {
             private readonly PagesViewModel _pagesViewModel;
 
-            public Handler(PagesViewModel pagesViewModel)
-            {
-                _pagesViewModel = pagesViewModel;
-            }
+            public Handler(PagesViewModel pagesViewModel) => _pagesViewModel = pagesViewModel;
 
-            protected override void Handle(Request request)
-            {
-                _pagesViewModel.CloseLastPage();
-            }
+            protected override void Handle(Request request) => _pagesViewModel.CloseLastPage();
         }
     }
 }

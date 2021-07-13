@@ -25,7 +25,7 @@ namespace AnyStatus.Apps.Windows.Features
         {
             protected override void Handle(Request request)
             {
-                Process.Start("explorer.exe", $"\"{request.URL}\"");
+                _ = Process.Start("explorer.exe", $"\"{request.URL}\"");
             }
         }
     }

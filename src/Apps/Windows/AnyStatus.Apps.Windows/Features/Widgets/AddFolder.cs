@@ -2,7 +2,6 @@
 using AnyStatus.API.Widgets;
 using AnyStatus.Core.Domain;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,10 +11,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
     {
         public class Request : IRequest
         {
-            public Request(IWidget parent)
-            {
-                Parent = parent;
-            }
+            public Request(IWidget parent) => Parent = parent;
 
             public IWidget Parent { get; }
         }
@@ -35,10 +31,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
         {
             private readonly IAppContext _context;
 
-            public Handler(IAppContext context)
-            {
-                _context = context;
-            }
+            public Handler(IAppContext context) => _context = context;
 
             protected override void Handle(Request request)
             {

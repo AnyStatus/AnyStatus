@@ -19,10 +19,7 @@ namespace AnyStatus.Apps.Windows.Features.Updater
         {
             private readonly ILogger _logger;
 
-            public Handler(ILogger logger)
-            {
-                _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            }
+            public Handler(ILogger logger) => _logger = logger;
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
             {
@@ -41,12 +38,9 @@ namespace AnyStatus.Apps.Windows.Features.Updater
 
                 var response = await client.ExecuteAsync<VersionResponse>(request, cancellationToken).ConfigureAwait(false);
 
-                if (response.IsSuccessful)
-                {
-                    return response.Data;
-                }
-
-                throw new Exception("An error occurred while checking for updates.", response.ErrorException);
+                return response.IsSuccessful
+                    ? response.Data
+                    : throw new Exception("An error occurred while checking for updates.", response.ErrorException);
             }
         }
     }

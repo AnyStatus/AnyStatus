@@ -11,9 +11,10 @@ namespace AnyStatus.Apps.Windows
         {
             try
             {
-                var container = Bootstrapper.Bootstrap();
-
-                container.GetInstance<IApplication>().RunOrActivate();
+                Bootstrapper
+                    .Bootstrap()
+                    .GetInstance<IApplication>()
+                    .RunOrActivate();
             }
             catch (Exception ex)
             {

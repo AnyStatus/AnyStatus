@@ -37,8 +37,8 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
                 disposable.Dispose();
             }
 
-            Content = null;
             Title = null;
+            Content = null;
 
             OnClose?.Invoke();
         }

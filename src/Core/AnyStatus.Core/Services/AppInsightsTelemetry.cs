@@ -29,16 +29,6 @@ namespace AnyStatus.Core.Services
             _client.Context.Component.Version = GetType().Assembly.GetName().Version.ToString();
         }
 
-        public void Dispose()
-        {
-            _client.Flush();
-        }
-
-        public void TrackView(string name)
-        {
-            _client.TrackPageView(name);
-        }
-
         public void TrackView(string name, TimeSpan duration)
         {
             _client.TrackPageView(new PageViewTelemetry
@@ -50,19 +40,14 @@ namespace AnyStatus.Core.Services
             });
         }
 
-        public void TrackEvent(string name)
-        {
-            _client.TrackEvent(name);
-        }
+        public void Dispose() => _client.Flush();
 
-        public void TrackEvent(string name, IDictionary<string, string> properties)
-        {
-            _client.TrackEvent(name, properties);
-        }
+        public void TrackView(string name) => _client.TrackPageView(name);
 
-        public void TrackException(Exception exception)
-        {
-            _client.TrackException(exception);
-        }
+        public void TrackEvent(string name) => _client.TrackEvent(name);
+
+        public void TrackEvent(string name, IDictionary<string, string> properties) => _client.TrackEvent(name, properties);
+
+        public void TrackException(Exception exception) => _client.TrackException(exception);
     }
 }

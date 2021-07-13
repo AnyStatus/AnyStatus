@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Endpoints;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace AnyStatus.Core.Domain
 {

@@ -1,7 +1,7 @@
-﻿using System;
-using AnyStatus.API.Common;
+﻿using AnyStatus.API.Common;
 using AnyStatus.API.Widgets;
 using MediatR;
+using System;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets
 {
@@ -17,10 +17,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public class Handler : RequestHandler<Request>
         {
-            protected override void Handle(Request request)
-            {
-                request.Context.MoveUp();
-            }
+            protected override void Handle(Request request) => request.Context.MoveUp();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API.Events;
 using AnyStatus.Core.Jobs;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,16 +10,9 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
     {
         private readonly IMediator _mediator;
 
-        public ScheduleAddedWidget(IMediator mediator)
-        {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
+        public ScheduleAddedWidget(IMediator mediator) => _mediator = mediator;
 
-        public async Task Handle(WidgetAddedNotification notification, CancellationToken cancellationToken)
-        {
-            var request = new ScheduleJob.Request(notification.Widget);
-
-            await _mediator.Send(request, cancellationToken).ConfigureAwait(false);
-        }
+        public Task Handle(WidgetAddedNotification notification, CancellationToken cancellationToken)
+            => _mediator.Send(new ScheduleJob.Request(notification.Widget), cancellationToken);
     }
 }

@@ -22,17 +22,17 @@ namespace AnyStatus.Apps.Windows.Features.App
             await OpenSessionAsync(notification.Context.Session);
         }
 
-        private async Task OpenSessionAsync(Session session)
+        private Task OpenSessionAsync(Session session)
         {
             if (string.IsNullOrEmpty(session.FileName) || !File.Exists(session.FileName))
             {
                 session.FileName = null;
                 session.Widget = new Root();
+
+                return Task.CompletedTask;
             }
-            else
-            {
-                await _mediator.Send(new OpenSessionCommand.Request(session.FileName));
-            }
+
+            return _mediator.Send(new OpenSessionCommand.Request(session.FileName));
         }
     }
 }

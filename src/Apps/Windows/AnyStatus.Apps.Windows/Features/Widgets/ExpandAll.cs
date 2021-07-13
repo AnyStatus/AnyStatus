@@ -13,15 +13,9 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
         {
             private readonly IAppContext _context;
 
-            public Handler(IAppContext context)
-            {
-                _context = context;
-            }
+            public Handler(IAppContext context) => _context = context;
 
-            protected override void Handle(Request request)
-            {
-                _context.Session.Widget?.Expand(true);
-            }
+            protected override void Handle(Request request) => _context.Session.Widget?.Expand(includeChildren: true);
         }
     }
 }

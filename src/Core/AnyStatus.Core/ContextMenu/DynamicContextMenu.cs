@@ -21,14 +21,9 @@ namespace AnyStatus.Core.ContextMenu
             }
 
             public static Request Create(object dataContext)
-            {
-                if (dataContext is null)
-                {
-                    return new Request<Unit>(Unit.Value);
-                }
-
-                return (Request)Activator.CreateInstance(typeof(Request<>).MakeGenericType(dataContext.GetType()), dataContext);
-            }
+                => dataContext is null ? 
+                    new Request<Unit>(Unit.Value) : 
+                    (Request)Activator.CreateInstance(typeof(Request<>).MakeGenericType(dataContext.GetType()), dataContext);
         }
 
         public class Request<TDataContext> : Request

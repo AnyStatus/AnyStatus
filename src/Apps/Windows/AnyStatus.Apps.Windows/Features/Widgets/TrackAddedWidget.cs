@@ -12,10 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
     {
         private readonly ITelemetry _telemetry;
 
-        public TrackAddedWidget(ITelemetry telemetry)
-        {
-            _telemetry = telemetry ?? throw new ArgumentNullException(nameof(telemetry));
-        }
+        public TrackAddedWidget(ITelemetry telemetry) => _telemetry = telemetry;
 
         protected override void Handle(WidgetAddedNotification notification)
         {

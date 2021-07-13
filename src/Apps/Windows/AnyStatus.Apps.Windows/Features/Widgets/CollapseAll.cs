@@ -1,6 +1,5 @@
 ﻿using AnyStatus.Core.Domain;
 using MediatR;
-using System;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets
 {
@@ -12,15 +11,9 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
         {
             private readonly IAppContext _context;
 
-            public Handler(IAppContext context)
-            {
-                _context = context ?? throw new ArgumentNullException();
-            }
+            public Handler(IAppContext context) => _context = context;
 
-            protected override void Handle(Request request)
-            {
-                _context.Session.Widget?.Collapse(true);
-            }
+            protected override void Handle(Request request) => _context.Session.Widget?.Collapse(includeChildren: true);
         }
     }
 }

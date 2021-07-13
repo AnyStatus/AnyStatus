@@ -34,9 +34,7 @@ namespace AnyStatus.Apps.Windows.Features
 
                     using var reader = new StreamReader(server);
                     
-                    var command = await reader.ReadLineAsync();
-
-                    if (command == "activate")
+                    if (await reader.ReadLineAsync() == "activate")
                     {
                         _dispatcher.Invoke(() => _mediator.Send(MaterialWindow.Show<AppViewModel>()));
                     }

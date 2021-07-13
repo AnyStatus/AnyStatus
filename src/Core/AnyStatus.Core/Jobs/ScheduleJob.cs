@@ -31,8 +31,8 @@ namespace AnyStatus.Core.Jobs
 
             public Handler(ILogger logger, ISchedulerFactory schedulerFactory)
             {
-                _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-                _schedulerFactory = schedulerFactory ?? throw new ArgumentNullException(nameof(schedulerFactory));
+                _logger = logger;
+                _schedulerFactory = schedulerFactory;
             }
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
@@ -62,7 +62,7 @@ namespace AnyStatus.Core.Jobs
             {
                 var job = JobBuilder.Create<Job>().WithIdentity(widget.Id).Build();
 
-                job.JobDataMap.Put(nameof(IWidget), widget);
+                _ = job.JobDataMap.Put(nameof(IWidget), widget);
 
                 var trigger = TriggerBuilder.Create()
                     .WithIdentity(widget.Id)
@@ -74,9 +74,9 @@ namespace AnyStatus.Core.Jobs
 
                 var test = await scheduler.GetJobDetail(new JobKey(widget.Id));
 
-                await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);
+                _ = await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);
 
-                _logger.LogDebug("Widget '{widget}' is running.", widget.Name);
+                _logger.LogDebug("Widget '{widget}' job is running.", widget.Name);
             }
         }
     }

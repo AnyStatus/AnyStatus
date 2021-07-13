@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API.Dialogs;
-using AnyStatus.API.Services;
 using AnyStatus.Core.Domain;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Settings;
@@ -19,25 +18,22 @@ namespace AnyStatus.Apps.Windows.Features.Menu
             {
             }
 
-            public Request(string fileName)
-            {
-                FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
-            }
+            public Request(string fileName) => FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
 
             public string FileName { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, bool>
         {
-            private readonly IAppContext _context;
             private readonly IMediator _mediator;
+            private readonly IAppContext _context;
             private readonly IDialogService _dialogService;
 
             public Handler(IMediator mediator, IDialogService dialogService, IAppContext context)
             {
-                _context = context ?? throw new ArgumentNullException(nameof(context));
-                _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-                _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+                _context = context;
+                _mediator = mediator;
+                _dialogService = dialogService;
             }
 
             public async Task<bool> Handle(Request request, CancellationToken cancellationToken)
@@ -73,7 +69,6 @@ namespace AnyStatus.Apps.Windows.Features.Menu
 
                 _context.Session.IsDirty = false;
                 _context.Session.FileName = request.FileName;
-
                 _context.Session.Widget = await _mediator.Send(new GetWidget.Request(request.FileName), cancellationToken).ConfigureAwait(false);
 
                 await _mediator.Send(new DeleteAllJobs.Request(), cancellationToken).ConfigureAwait(false);

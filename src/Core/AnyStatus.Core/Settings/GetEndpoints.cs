@@ -23,12 +23,12 @@ namespace AnyStatus.Core.Settings
         public class Handler : RequestHandler<Request, Response>
         {
             private readonly IAppSettings _appSettings;
-            private readonly ContractResolver _resolver;
+            private readonly ContractResolver _contractResolver;
 
-            public Handler(IAppSettings appSettings, ContractResolver resolver)
+            public Handler(IAppSettings appSettings, ContractResolver contractResolver)
             {
                 _appSettings = appSettings;
-                _resolver = resolver;
+                _contractResolver = contractResolver;
             }
 
             protected override Response Handle(Request request)
@@ -49,7 +49,7 @@ namespace AnyStatus.Core.Settings
 
                 response.Endpoints = JsonConvert.DeserializeObject<IEnumerable<IEndpoint>>(json, new JsonSerializerSettings
                 {
-                    ContractResolver = _resolver,
+                    ContractResolver = _contractResolver,
                     TypeNameHandling = TypeNameHandling.All,
                     Converters = new[] { new EndpointConverter() }
                 });

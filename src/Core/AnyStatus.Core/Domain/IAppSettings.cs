@@ -22,6 +22,6 @@ namespace AnyStatus.Core.Domain
 
         IEnumerable<string> Resources { get; }
 
-        public string AppDataPath { get; }
+        string AppDataPath { get; }
     }
 }
