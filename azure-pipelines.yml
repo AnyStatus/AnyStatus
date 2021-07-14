@@ -11,7 +11,7 @@ trigger:
     - '*.md'
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 variables:
   solution: '**/*.sln'
@@ -61,6 +61,12 @@ steps:
     platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
+
+- task: MSBuild@1
+  inputs:
+    solution: src/Apps/Windows/AnyStatus.Apps.Windows.Package/AnyStatus.Apps.Windows.Package.wapproj
+    platform: $(buildPlatform)
+    configuration: $(buildConfiguration)
     msbuildArguments: '/p:AppxBundlePlatforms="x64" 
                   /p:AppxPackageDir="$(appxPackageDir)" 
                   /p:AppxBundle=Always 
@@ -68,6 +74,8 @@ steps:
                   /p:AppxPackageSigningEnabled=true
                   /p:PackageCertificateThumbprint="" 
                   /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+
+  displayName: 'Package the App'
 
 - task: CopyFiles@2
   inputs:
