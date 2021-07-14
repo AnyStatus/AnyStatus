@@ -16,8 +16,6 @@ namespace AnyStatus.Core.Endpoints
         public IEndpoint GetEndpoint(string id) => _context.Endpoints?.FirstOrDefault(endpoint => endpoint.Id.Equals(id));
 
         public T GetEndpoint<T>(string id) where T : IEndpoint
-        {
-            return (T)_context.Endpoints?.FirstOrDefault(endpoint => endpoint.Id.Equals(id) && endpoint is T);
-        }
+            => (T)_context.Endpoints?.FirstOrDefault(endpoint => endpoint.Id.Equals(id) && endpoint is T);
     }
 }

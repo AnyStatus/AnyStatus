@@ -8,28 +8,26 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Behaviors
     {
         private static readonly Dictionary<DependencyObject, TreeViewSelectedItemBehavior> behaviors = new Dictionary<DependencyObject, TreeViewSelectedItemBehavior>();
 
-        public static void SetSelectedItem(DependencyObject obj, object value)
-        {
-            obj.SetValue(SelectedItemProperty, value);
-        }
+        public static void SetSelectedItem(DependencyObject obj, object value) => obj.SetValue(SelectedItemProperty, value);
 
         /// <summary>
         /// Used to control selected item from view-model.
         /// </summary>
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.RegisterAttached("SelectedItem", typeof(object), typeof(TreeViewHelper), new UIPropertyMetadata(null, SelectedItemChanged));
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.RegisterAttached("SelectedItem", typeof(object), typeof(TreeViewHelper), new UIPropertyMetadata(null, SelectedItemChanged));
 
         private static void SelectedItemChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is TreeView)
+            if (obj is not TreeView)
             {
-                if (!behaviors.ContainsKey(obj))
-                {
-                    behaviors.Add(obj, new TreeViewSelectedItemBehavior(obj as TreeView));
-                }
-
-                behaviors[obj].ChangeSelectedItem(e.NewValue);
+                return;
             }
+
+            if (!behaviors.ContainsKey(obj))
+            {
+                behaviors.Add(obj, new TreeViewSelectedItemBehavior(obj as TreeView));
+            }
+
+            behaviors[obj].ChangeSelectedItem(e.NewValue);
         }
 
         private class TreeViewSelectedItemBehavior

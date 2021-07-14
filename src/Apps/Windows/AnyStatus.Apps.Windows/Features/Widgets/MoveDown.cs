@@ -17,10 +17,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public class Handler : RequestHandler<Request>
         {
-            protected override void Handle(Request request)
-            {
-                request.Context.MoveDown();
-            }
+            protected override void Handle(Request request) => request.Context.MoveDown();
         }
     }
 }

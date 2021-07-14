@@ -3,6 +3,8 @@ using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AutoMapper;
 using MediatR;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
@@ -10,15 +12,12 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
     {
         internal class Request : IRequest
         {
-            public Request(IEndpoint endpoint)
-            {
-                Endpoint = endpoint;
-            }
+            public Request(IEndpoint endpoint) => Endpoint = endpoint;
 
             public IEndpoint Endpoint { get; }
         }
 
-        internal class Handler : RequestHandler<Request>
+        internal class Handler : AsyncRequestHandler<Request>
         {
             private readonly IMapper _mapper;
             private readonly IMediator _mediator;
@@ -31,13 +30,13 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
                 _viewModel = viewModel;
             }
 
-            protected override void Handle(Request request)
+            protected override Task Handle(Request request, CancellationToken cancellationToken)
             {
                 var clone = (IEndpoint)Activator.CreateInstance(request.Endpoint.GetType());
 
                 _viewModel.Endpoint = _mapper.Map(request.Endpoint, clone);
 
-                _mediator.Send(Page.Show("Edit Endpoint", _viewModel));
+                return _mediator.Send(Page.Show("Edit Endpoint", _viewModel));
             }
         }
     }

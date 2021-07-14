@@ -14,10 +14,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
     {
         public class Request : IRequest
         {
-            public Request(IWidget widget)
-            {
-                Widget = widget;
-            }
+            public Request(IWidget widget) => Widget = widget;
 
             public IWidget Widget { get; }
         }
@@ -30,9 +27,9 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
             public Handler(IAppContext context, IMediator mediator, IDialogService dialogService)
             {
-                _context = context ?? throw new ArgumentNullException(nameof(context));
-                _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-                _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+                _context = context;
+                _mediator = mediator;
+                _dialogService = dialogService;
             }
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
@@ -46,7 +43,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 request.Widget.Remove();
 
-                await _mediator.Send(new DeleteJob.Request(request.Widget, true), cancellationToken).ConfigureAwait(false);
+                _ = await _mediator.Send(new DeleteJob.Request(request.Widget, true), cancellationToken).ConfigureAwait(false);
 
                 _context.Session.IsDirty = true;
             }

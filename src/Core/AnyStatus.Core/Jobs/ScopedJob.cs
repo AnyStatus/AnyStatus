@@ -12,10 +12,7 @@ namespace AnyStatus.Core.Jobs
     {
         private readonly Container _container;
 
-        public ScopedJob(ILogger logger, IMediator mediator, Container container) : base(logger, mediator)
-        {
-            _container = container;
-        }
+        public ScopedJob(ILogger logger, IMediator mediator, Container container) : base(logger, mediator) => _container = container;
 
         public override async Task Execute(IJobExecutionContext context)
         {

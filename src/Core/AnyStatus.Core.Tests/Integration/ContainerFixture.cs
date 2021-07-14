@@ -22,15 +22,11 @@ namespace AnyStatus.Core.Tests.Integration
 
             Container.RegisterPackages(Scanner.GetAssemblies());
 
-            Container.RegisterSingleton<IAppContext, Domain.AppContext>();
-
             Container.RegisterInstance(Substitute.For<IDialogService>());
 
             Container.RegisterInstance(Substitute.For<INotificationService>());
 
             Container.RegisterInstance<IDispatcher>(new Dispatcher());
-
-            Container.AddDebugLogger();
 
             Container.Options.ResolveUnregisteredConcreteTypes = true;
 

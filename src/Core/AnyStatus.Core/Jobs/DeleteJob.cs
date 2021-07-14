@@ -23,10 +23,7 @@ namespace AnyStatus.Core.Jobs
         {
             private readonly ISchedulerFactory _schedulerFactory;
 
-            public Handler(ISchedulerFactory schedulerFactory)
-            {
-                _schedulerFactory = schedulerFactory ?? throw new ArgumentNullException(nameof(schedulerFactory));
-            }
+            public Handler(ISchedulerFactory schedulerFactory) => _schedulerFactory = schedulerFactory;
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
             {
@@ -39,7 +36,7 @@ namespace AnyStatus.Core.Jobs
             {
                 if (widget is IPollable)
                 {
-                    await scheduler.DeleteJob(new JobKey(widget.Id), cancellationToken).ConfigureAwait(false);
+                    _ = await scheduler.DeleteJob(new JobKey(widget.Id), cancellationToken).ConfigureAwait(false);
                 }
 
                 if (widget.HasChildren)

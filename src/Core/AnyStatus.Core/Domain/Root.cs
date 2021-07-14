@@ -17,7 +17,7 @@ namespace AnyStatus.Core.Domain
 
             if (e.PropertyName.Equals(nameof(Status)) && Status != PreviousStatus)
             {
-                WidgetNotifications.PublishAsync(StatusChangedNotification.Create(this));
+                _ = WidgetNotifications.PublishAsync(StatusChangedNotification.Create(this));
             }
         }
     }

@@ -36,10 +36,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm
         /// Data used by the command. If the command does not require data to be passed, this object can be set to null.
         /// </param>
         /// <returns>true if this command can be executed; otherwise, false.</returns>
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute is null || _canExecute(parameter);
-        }
+        public bool CanExecute(object parameter) => _canExecute is null || _canExecute(parameter);
 
         /// <summary>
         /// Executes the <see cref="Command"/> on the current command target.
@@ -47,9 +44,6 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm
         /// <param name="parameter">
         /// Data used by the command. If the command does not require data to be passed, this object can be set to null.
         /// </param>
-        public void Execute(object parameter)
-        {
-            _execute(parameter);
-        }
+        public void Execute(object parameter) => _execute(parameter);
     }
 }

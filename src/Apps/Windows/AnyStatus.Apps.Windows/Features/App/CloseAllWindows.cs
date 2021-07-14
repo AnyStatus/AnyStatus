@@ -12,15 +12,9 @@ namespace AnyStatus.Apps.Windows.Features.App
         {
             private readonly IDispatcher _dispatcher;
 
-            public Handler(IDispatcher dispatcher)
-            {
-                _dispatcher = dispatcher ?? throw new System.ArgumentNullException(nameof(dispatcher));
-            }
+            public Handler(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
-            protected override void Handle(Request request)
-            {
-                _dispatcher.Invoke(Close);
-            }
+            protected override void Handle(Request request) => _dispatcher.Invoke(Close);
 
             private static void Close()
             {

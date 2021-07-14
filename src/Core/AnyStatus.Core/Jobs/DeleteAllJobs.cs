@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Quartz;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,10 +15,7 @@ namespace AnyStatus.Core.Jobs
         {
             private readonly ISchedulerFactory _schedulerFactory;
 
-            public Handler(ISchedulerFactory schedulerFactory)
-            {
-                _schedulerFactory = schedulerFactory ?? throw new ArgumentNullException(nameof(schedulerFactory));
-            }
+            public Handler(ISchedulerFactory schedulerFactory) => _schedulerFactory = schedulerFactory;
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
             {

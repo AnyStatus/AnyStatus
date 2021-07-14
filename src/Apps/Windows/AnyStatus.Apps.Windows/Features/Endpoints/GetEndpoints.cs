@@ -13,10 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
         internal class Response
         {
-            public Response(ObservableCollection<IEndpoint> endpoints)
-            {
-                Endpoints = endpoints;
-            }
+            public Response(ObservableCollection<IEndpoint> endpoints) => Endpoints = endpoints;
 
             public ObservableCollection<IEndpoint> Endpoints { get; }
         }
@@ -25,15 +22,9 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
         {
             private readonly IAppContext _context;
 
-            public Handler(IAppContext context)
-            {
-                _context = context;
-            }
+            public Handler(IAppContext context) => _context = context;
 
-            protected override Response Handle(Request request)
-            {
-                return new Response(_context.Endpoints);
-            }
+            protected override Response Handle(Request request) => new Response(_context.Endpoints);
         }
     }
 }

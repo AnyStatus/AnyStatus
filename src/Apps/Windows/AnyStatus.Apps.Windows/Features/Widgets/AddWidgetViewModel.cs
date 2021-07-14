@@ -18,10 +18,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
             Commands.Add("Save", new Command(async _ => await mediator.Send(new CreateWidget.Request(Template, Parent)).ConfigureAwait(false), CanAdd));
         }
 
-        private bool CanAdd(object p)
-        {
-            return Category != null && Template != null && Parent != null;
-        }
+        private bool CanAdd(object p) => Category != null && Template != null && Parent != null;
 
         public IEnumerable<Category> Categories => Scanner.GetWidgetCategories();
 

@@ -1,23 +1,19 @@
 ﻿using Newtonsoft.Json.Serialization;
-using SimpleInjector;
 using System;
 
 namespace AnyStatus.Core.Settings
 {
     public class ContractResolver : DefaultContractResolver
     {
-        private readonly Container _container;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ContractResolver(Container container)
+        public ContractResolver(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
+
+        protected override JsonObjectContract CreateObjectContract(Type type)
         {
-            _container = container;
-        }
+            var contract = base.CreateObjectContract(type);
 
-        protected override JsonObjectContract CreateObjectContract(Type objectType)
-        {
-            var contract = base.CreateObjectContract(objectType);
-
-            contract.DefaultCreator = () => _container.GetInstance(objectType);
+            contract.DefaultCreator = () => _serviceProvider.GetService(type);
 
             return contract;
         }

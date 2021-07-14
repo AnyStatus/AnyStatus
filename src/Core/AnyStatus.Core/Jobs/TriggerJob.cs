@@ -14,10 +14,7 @@ namespace AnyStatus.Core.Jobs
     {
         public class Request : IRequest
         {
-            public Request(IWidget widget)
-            {
-                Widget = widget;
-            }
+            public Request(IWidget widget) => Widget = widget;
 
             public IWidget Widget { get; }
         }
@@ -45,18 +42,13 @@ namespace AnyStatus.Core.Jobs
                 _schedulerFactory = schedulerFactory;
             }
 
-            protected override async Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                if (request.Widget.IsEnabled)
-                {
-                    _logger.LogInformation("Refreshing '{widget}'...", request.Widget.Name);
-
-                    await Trigger(request.Widget, cancellationToken).ConfigureAwait(false);
-                }
-            }
+            protected override Task Handle(Request request, CancellationToken cancellationToken)
+                => request.Widget.IsEnabled ? Trigger(request.Widget, cancellationToken) : Task.CompletedTask;
 
             private async Task Trigger(IWidget widget, CancellationToken cancellationToken)
             {
+                _logger.LogDebug("Updating '{widget}'...", widget.Name);
+
                 if (widget is IPollable)
                 {
                     var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);

@@ -19,10 +19,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             {
             }
 
-            public Request(IEndpoint endpoint)
-            {
-                Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
-            }
+            public Request(IEndpoint endpoint) => Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
 
             public IEndpoint Endpoint { get; set; }
         }

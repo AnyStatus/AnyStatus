@@ -21,10 +21,7 @@ namespace AnyStatus.Core.Jobs
         {
             private readonly ISchedulerFactory _schedulerFactory;
 
-            public Handler(ISchedulerFactory schedulerFactory)
-            {
-                _schedulerFactory = schedulerFactory ?? throw new ArgumentNullException(nameof(schedulerFactory));
-            }
+            public Handler(ISchedulerFactory schedulerFactory) => _schedulerFactory = schedulerFactory;
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {

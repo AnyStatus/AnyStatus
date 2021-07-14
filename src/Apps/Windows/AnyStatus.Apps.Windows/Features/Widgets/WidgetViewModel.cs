@@ -10,7 +10,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
     {
         public WidgetViewModel(IAppContext context, IPropertyGridViewModel propertyGridViewModel)
         {
-            Widget = context?.Session?.SelectedWidget ?? throw new InvalidOperationException("Widget not found.");
+            Widget = context?.Session?.SelectedWidget ?? throw new InvalidOperationException("Selected widget not found.");
 
             PropertyGridViewModel = propertyGridViewModel;
 

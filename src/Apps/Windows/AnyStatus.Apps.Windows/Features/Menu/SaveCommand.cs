@@ -17,10 +17,7 @@ namespace AnyStatus.Apps.Windows.Features.Menu
             {
             }
 
-            public Request(bool showDialog)
-            {
-                ShowDialog = showDialog;
-            }
+            public Request(bool showDialog) => ShowDialog = showDialog;
 
             public bool ShowDialog { get; set; }
         }
@@ -33,9 +30,9 @@ namespace AnyStatus.Apps.Windows.Features.Menu
 
             public Handler(IMediator mediator, IDialogService dialogService, IAppContext context)
             {
-                _context = context ?? throw new ArgumentNullException(nameof(context));
-                _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-                _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+                _context = context;
+                _mediator = mediator;
+                _dialogService = dialogService;
             }
 
             public async Task<bool> Handle(Request request, CancellationToken cancellationToken)
