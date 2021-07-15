@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.7.0" />
     <PackageReference Include="zeroconf" Version="3.4.2" />
   </ItemGroup>
