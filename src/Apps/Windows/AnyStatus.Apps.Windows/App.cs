@@ -1,23 +1,21 @@
 ﻿using AnyStatus.Apps.Windows.Features.App;
+using AnyStatus.Core;
 using MediatR;
 using System.Threading;
 using System.Windows;
 
 namespace AnyStatus.Apps.Windows
 {
-    public class App : Application, IApplication
+    public class App : Application, IApp
     {
-        private const string _mutexName = "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}";
-
         private readonly IMediator _mediator;
         private readonly INamedPipeClient _pipeClient;
-        private static readonly Mutex _mutex = new Mutex(true, _mutexName);
+        private static readonly Mutex _mutex = new(initiallyOwned: true, name: "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}");
 
         public App(IMediator mediator, INamedPipeClient pipeClient)
         {
             _mediator = mediator;
             _pipeClient = pipeClient;
-
             ShutdownMode = ShutdownMode.OnExplicitShutdown;
         }
 
@@ -27,7 +25,7 @@ namespace AnyStatus.Apps.Windows
         {
             if (_mutex.WaitOne(millisecondsTimeout: 200, true))
             {
-                Run();
+                _ = Run();
 
                 _mutex.ReleaseMutex();
             }

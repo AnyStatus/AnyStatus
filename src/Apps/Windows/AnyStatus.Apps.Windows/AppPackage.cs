@@ -8,6 +8,7 @@ using AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Apps.Windows.Infrastructure.Services;
+using AnyStatus.Core;
 using MediatR;
 using SimpleInjector;
 using SimpleInjector.Packaging;
@@ -18,7 +19,7 @@ namespace AnyStatus.Apps.Windows
     {
         public void RegisterServices(Container container)
         {
-            container.RegisterSingleton<IApplication, App>();
+            container.RegisterSingleton<IApp, App>();
             container.Register<IDialogService, DialogService>();
             container.RegisterSingleton<IDispatcher, Dispatcher>();
             container.RegisterSingleton<ISystemTray, SystemTray>();

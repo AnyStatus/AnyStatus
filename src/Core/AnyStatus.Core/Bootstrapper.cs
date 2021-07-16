@@ -5,19 +5,19 @@ namespace AnyStatus.Core
 {
     public static class Bootstrapper
     {
-        public static Container Bootstrap()
+        public static IApp Bootstrap()
         {
-            var container = new Container();
+            Container container = new Container();
 
             container.Options.DefaultScopedLifestyle = ScopedLifestyle.Flowing;
 
             container.RegisterPackages(Scanner.GetAssemblies());
-            
+
             container.Options.ResolveUnregisteredConcreteTypes = true;
 
             container.Verify();
 
-            return container;
+            return container.GetInstance<IApp>();
         }
     }
 }
