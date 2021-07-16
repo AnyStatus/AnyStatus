@@ -7,7 +7,14 @@ namespace AnyStatus.Core
     {
         public static IApp Bootstrap()
         {
-            Container container = new Container();
+            var container = CreateContainer();
+
+            return container.GetInstance<IApp>();
+        }
+
+        private static Container CreateContainer()
+        {
+            var container = new Container();
 
             container.Options.DefaultScopedLifestyle = ScopedLifestyle.Flowing;
 
@@ -17,7 +24,7 @@ namespace AnyStatus.Core
 
             container.Verify();
 
-            return container.GetInstance<IApp>();
+            return container;
         }
     }
 }
