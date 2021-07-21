@@ -1,6 +1,6 @@
 ﻿using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
 using AnyStatus.Core.Extensions;
+using AnyStatus.Core.Widgets;
 using MediatR;
 using System;
 using System.Collections.Generic;

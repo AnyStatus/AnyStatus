@@ -1,7 +1,9 @@
 ﻿using AnyStatus.API.Endpoints;
 using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.Endpoints;
+using AnyStatus.Core.Sessions;
 using AnyStatus.Core.Settings;
+using AnyStatus.Core.Widgets;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;

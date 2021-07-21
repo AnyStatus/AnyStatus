@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.App
 {
     public class AppSettings : IAppSettings
     {

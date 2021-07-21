@@ -1,10 +1,9 @@
-﻿using AnyStatus.Apps.Windows.Features.Themes;
-using AnyStatus.Core.App;
+﻿using AnyStatus.Core.App;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Apps.Windows.Features.App
+namespace AnyStatus.Apps.Windows.Features.Themes
 {
     public class SwitchThemeWhenContextLoaded : INotificationHandler<ContextLoaded>
     {

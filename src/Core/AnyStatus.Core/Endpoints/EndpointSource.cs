@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Attributes;
 using AnyStatus.API.Endpoints;
 using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;

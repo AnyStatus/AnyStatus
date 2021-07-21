@@ -1,7 +1,8 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
+using AnyStatus.Core.Widgets;
 using MediatR;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;

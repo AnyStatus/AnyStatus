@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Widgets
 {
     public class WidgetConverter : JsonConverter
     {

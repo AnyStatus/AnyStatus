@@ -1,5 +1,5 @@
 ﻿using AnyStatus.API.Endpoints;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Widgets
 {
     public class Category
     {

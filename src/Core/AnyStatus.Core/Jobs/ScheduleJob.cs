@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Quartz;
@@ -72,7 +71,7 @@ namespace AnyStatus.Core.Jobs
                         .RepeatForever())
                     .Build();
 
-                var test = await scheduler.GetJobDetail(new JobKey(widget.Id));
+                //var test = await scheduler.GetJobDetail(new JobKey(widget.Id));
 
                 _ = await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);
 

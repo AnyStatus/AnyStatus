@@ -1,7 +1,9 @@
 ﻿using AnyStatus.API.Endpoints;
+using AnyStatus.Core.Sessions;
+using AnyStatus.Core.Settings;
 using System.Collections.ObjectModel;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.App
 {
     public interface IAppContext
     {

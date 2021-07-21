@@ -4,6 +4,7 @@ using AnyStatus.Apps.Windows.Features.Launchers;
 using AnyStatus.Apps.Windows.Features.Options;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
+using AnyStatus.Core.Sessions;
 using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.Menu

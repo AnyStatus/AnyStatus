@@ -1,5 +1,4 @@
-﻿using AnyStatus.Core.Domain;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Quartz;
 using SimpleInjector;

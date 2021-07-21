@@ -1,4 +1,4 @@
-﻿namespace AnyStatus.Core.Domain
+﻿namespace AnyStatus.Core.Settings
 {
     public class WindowSettings
     {

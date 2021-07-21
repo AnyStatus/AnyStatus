@@ -1,6 +1,6 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using MediatR;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

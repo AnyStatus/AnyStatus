@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Widgets
 {
     public class Template
     {

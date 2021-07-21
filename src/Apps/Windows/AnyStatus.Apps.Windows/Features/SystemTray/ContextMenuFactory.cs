@@ -1,7 +1,7 @@
 ﻿using AnyStatus.Apps.Windows.Features.Activity;
 using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
 using MediatR;
 using System.Windows.Forms;

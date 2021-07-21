@@ -3,7 +3,7 @@ using AnyStatus.API.Notifications;
 using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using MediatR;
 using Microsoft.Win32;
 using System;

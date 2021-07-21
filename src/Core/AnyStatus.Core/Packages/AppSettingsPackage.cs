@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core.Domain;
+﻿using AnyStatus.Core.App;
 using Newtonsoft.Json;
 using SimpleInjector;
 using SimpleInjector.Packaging;

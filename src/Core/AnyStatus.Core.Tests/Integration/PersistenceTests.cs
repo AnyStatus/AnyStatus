@@ -1,4 +1,4 @@
-using AnyStatus.Core.Settings;
+using AnyStatus.Core.Widgets;
 using AnyStatus.Plugins.Demo;
 using MediatR;
 using System;

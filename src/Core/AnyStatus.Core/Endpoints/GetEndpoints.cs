@@ -1,11 +1,12 @@
 ﻿using AnyStatus.API.Endpoints;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
+using AnyStatus.Core.Serialization;
 using MediatR;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Endpoints
 {
     public class GetEndpoints
     {
@@ -54,7 +55,7 @@ namespace AnyStatus.Core.Settings
                     Converters = new[] { new EndpointConverter() }
                 });
 
-                if (response.Endpoints != null)
+                if (response.Endpoints is not null)
                 {
                     response.Success = true;
                 }

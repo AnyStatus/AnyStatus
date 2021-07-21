@@ -1,10 +1,10 @@
-﻿using AnyStatus.Core.Domain;
+﻿using AnyStatus.Core.App;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Sessions
 {
     public class GetSession
     {

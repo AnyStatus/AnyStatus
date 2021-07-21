@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Endpoints;
 using AnyStatus.API.Services;
-using AnyStatus.Core.Domain;
-using AnyStatus.Core.Settings;
+using AnyStatus.Core.App;
+using AnyStatus.Core.Endpoints;
 using AutoMapper;
 using MediatR;
 using System;

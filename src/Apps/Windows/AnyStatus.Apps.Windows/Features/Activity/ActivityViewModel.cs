@@ -1,5 +1,4 @@
 ﻿using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
-using AnyStatus.Core.Domain;
 using AnyStatus.Core.Logging;
 using System.Collections.ObjectModel;
 

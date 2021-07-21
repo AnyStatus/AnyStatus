@@ -3,7 +3,7 @@ using AnyStatus.Apps.Windows.Features.NamedPipe;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
-using AnyStatus.Core.Services;
+using AnyStatus.Core.Telemetry;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
@@ -41,7 +41,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 var response = await _mediator.Send(new LoadContext.Request(), cancellationToken);
 
-                if (!StartupActivation() || response?.Context?.UserSettings?.StartMinimized is false)
+                if (!StartupActivation() || response.Context.UserSettings.StartMinimized is false)
                 {
                     await _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418));
                 }

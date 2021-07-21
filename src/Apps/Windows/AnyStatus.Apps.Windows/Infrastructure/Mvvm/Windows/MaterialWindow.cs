@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API.Services;
-using AnyStatus.Core.Domain;
-using AnyStatus.Core.Services;
+using AnyStatus.Core.App;
+using AnyStatus.Core.Settings;
+using AnyStatus.Core.Telemetry;
 using MediatR;
 using MediatR.Pipeline;
 using SimpleInjector;
@@ -186,7 +187,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
 
             if (ActiveWindows.ContainsKey(name))
             {
-                ActiveWindows.Remove(name);
+                _ = ActiveWindows.Remove(name);
             }
 
             if (window.Content is IDisposable content)
@@ -219,10 +220,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
     {
         private readonly ITelemetry _telemetry;
 
-        public WindowTelemetry(ITelemetry telemetry)
-        {
-            _telemetry = telemetry;
-        }
+        public WindowTelemetry(ITelemetry telemetry) => _telemetry = telemetry;
 
         public Task Process(MaterialWindow request, Unit response, CancellationToken cancellationToken)
         {

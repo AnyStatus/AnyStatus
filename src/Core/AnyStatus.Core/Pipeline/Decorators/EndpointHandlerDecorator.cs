@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Endpoints;
 using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using MediatR;
 using System;
 using System.Linq;

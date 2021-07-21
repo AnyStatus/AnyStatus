@@ -1,11 +1,12 @@
 ﻿using AnyStatus.API.Widgets;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Widgets;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Apps.Windows.Features.Menu
+namespace AnyStatus.Core.Sessions
 {
     public class NewSessionCommand : IRequest<object>
     {

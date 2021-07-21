@@ -3,10 +3,10 @@ using AnyStatus.API.Events;
 using AnyStatus.API.Widgets;
 using System.ComponentModel;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Widgets
 {
     [Browsable(false)]
-    [Redirect("AnyStatus.Core.Entities.Root, AnyStatus.Core")]
+    [Redirect("AnyStatus.Core.Domain.Root, AnyStatus.Core")]
     public class Root : Widget, IRefreshable, IAddWidget, IAddFolder
     {
         public Root() => Name = "Root";

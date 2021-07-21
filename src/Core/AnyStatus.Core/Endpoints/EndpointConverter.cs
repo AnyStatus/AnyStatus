@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Endpoints
 {
     public class EndpointConverter : JsonConverter
     {

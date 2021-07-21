@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API.Events;
-using AnyStatus.Core.Services;
+using AnyStatus.Core.Telemetry;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;

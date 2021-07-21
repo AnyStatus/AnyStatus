@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Logging
 {
     public class ActivityMessage
     {

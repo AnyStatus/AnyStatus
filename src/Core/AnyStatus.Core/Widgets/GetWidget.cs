@@ -1,12 +1,12 @@
 ﻿using AnyStatus.API.Widgets;
+using AnyStatus.Core.Serialization;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Widgets
 {
     public class GetWidget
     {

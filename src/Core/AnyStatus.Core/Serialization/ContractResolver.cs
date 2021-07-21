@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Serialization
 {
     public class ContractResolver : DefaultContractResolver
     {

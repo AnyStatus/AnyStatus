@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core.Domain;
+﻿using AnyStatus.Core.App;
 using MediatR;
 using Newtonsoft.Json;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Endpoints
 {
     public class SaveEndpoints
     {

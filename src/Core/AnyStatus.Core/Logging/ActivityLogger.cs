@@ -1,5 +1,5 @@
 ﻿using AnyStatus.API.Services;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.ObjectModel;

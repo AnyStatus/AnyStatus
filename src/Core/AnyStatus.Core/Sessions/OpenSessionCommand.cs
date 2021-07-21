@@ -1,14 +1,14 @@
 ﻿using AnyStatus.API.Dialogs;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
-using AnyStatus.Core.Settings;
+using AnyStatus.Core.Widgets;
 using MediatR;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Apps.Windows.Features.Menu
+namespace AnyStatus.Core.Sessions
 {
     public class OpenSessionCommand
     {

@@ -1,6 +1,6 @@
 ﻿using AnyStatus.API.Events;
 using AnyStatus.Apps.Windows.Features.SystemTray;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.Widgets;
 using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets

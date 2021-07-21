@@ -2,7 +2,7 @@
 using AnyStatus.API.Widgets;
 using Newtonsoft.Json;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Sessions
 {
     public class Session : NotifyPropertyChanged
     {

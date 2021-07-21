@@ -1,16 +1,16 @@
-﻿using AnyStatus.Apps.Windows.Features.Menu;
-using AnyStatus.Core;
-using AnyStatus.Core.App;
-using AnyStatus.Core.Domain;
+﻿using AnyStatus.Core.App;
+using AnyStatus.Core.Widgets;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Apps.Windows.Features.App
+namespace AnyStatus.Core.Sessions
 {
     public class OpenSessionWhenContextLoaded : INotificationHandler<ContextLoaded>
     {
+        private readonly ILogger _logger;
         private readonly IMediator _mediator;
 
         public OpenSessionWhenContextLoaded(IMediator mediator) => _mediator = mediator;
@@ -21,7 +21,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
             if (session is null)
             {
-                throw new AnyStatusException("Session not found.");
+                return;
             }
 
             if (string.IsNullOrEmpty(session.FileName) || !File.Exists(session.FileName))

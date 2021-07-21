@@ -3,7 +3,7 @@ using AnyStatus.Apps.Windows.Features.ContextMenu;
 using AnyStatus.Apps.Windows.Features.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
 using MediatR;
 using System.Threading.Tasks;

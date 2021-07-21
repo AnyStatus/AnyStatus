@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Settings
 {
     public class UserSettings
     {
@@ -10,6 +10,7 @@ namespace AnyStatus.Core.Domain
         {
             Theme = "Dark";
             StartMinimized = true;
+            SendAnonymousUsageStatistics = true;
             WindowsSettings = new Dictionary<string, WindowSettings>();
         }
 
@@ -22,5 +23,9 @@ namespace AnyStatus.Core.Domain
         [Order(2)]
         [DisplayName("Start minimized")]
         public bool StartMinimized { get; set; }
+
+        [Order(3)]
+        [DisplayName("Send anonymous usage statistics")]
+        public bool SendAnonymousUsageStatistics { get; set; }
     }
 }

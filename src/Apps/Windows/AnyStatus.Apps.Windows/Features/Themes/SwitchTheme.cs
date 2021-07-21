@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core.Domain;
+﻿using AnyStatus.Core.App;
 using MediatR;
 using ModernWpf;
 using ModernWpf.Controls;

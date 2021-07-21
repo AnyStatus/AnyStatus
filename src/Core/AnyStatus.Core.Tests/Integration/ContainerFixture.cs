@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API.Dialogs;
 using AnyStatus.API.Notifications;
 using AnyStatus.API.Services;
-using AnyStatus.Core.Domain;
 using AnyStatus.Core.Services;
 using NSubstitute;
 using SimpleInjector;

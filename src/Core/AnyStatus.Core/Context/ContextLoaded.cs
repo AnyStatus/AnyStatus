@@ -1,5 +1,4 @@
-﻿using AnyStatus.Core.Domain;
-using MediatR;
+﻿using MediatR;
 
 namespace AnyStatus.Core.App
 {

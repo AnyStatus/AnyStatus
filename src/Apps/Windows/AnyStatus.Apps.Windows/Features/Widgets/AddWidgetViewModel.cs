@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
-using AnyStatus.Core.Domain;
 using AnyStatus.Core.Services;
+using AnyStatus.Core.Widgets;
 using MediatR;
 using System.Collections.Generic;
 

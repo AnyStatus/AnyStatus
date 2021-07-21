@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Dialogs;
 using AnyStatus.API.Endpoints;
-using AnyStatus.Core.Domain;
-using AnyStatus.Core.Settings;
+using AnyStatus.Core.App;
+using AnyStatus.Core.Endpoints;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

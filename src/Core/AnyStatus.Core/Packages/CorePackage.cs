@@ -1,13 +1,14 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Endpoints;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Endpoints;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Logging;
 using AnyStatus.Core.Pipeline.Behaviors;
 using AnyStatus.Core.Pipeline.Decorators;
+using AnyStatus.Core.Serialization;
 using AnyStatus.Core.Services;
-using AnyStatus.Core.Settings;
+using AnyStatus.Core.Telemetry;
 using AutoMapper;
 using MediatR;
 using MediatR.Pipeline;
@@ -49,7 +50,7 @@ namespace AnyStatus.Core.Packages
 
         private static void RegisterAppServices(Container container)
         {
-            container.RegisterSingleton<IAppContext, Domain.AppContext>();
+            container.RegisterSingleton<IAppContext, App.AppContext>();
             container.Register<IScanner, Scanner>(Lifestyle.Singleton);
             container.Register<ITelemetry, AppInsightsTelemetry>(Lifestyle.Singleton);
             container.Register<IEndpointSource, EndpointSource>(Lifestyle.Transient);

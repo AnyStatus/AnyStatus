@@ -3,9 +3,8 @@ using AnyStatus.API.Services;
 using AnyStatus.Apps.Windows.Features.Menu;
 using AnyStatus.Apps.Windows.Features.SystemTray;
 using AnyStatus.Core.App;
-using AnyStatus.Core.Domain;
 using AnyStatus.Core.Jobs;
-using AnyStatus.Core.Services;
+using AnyStatus.Core.Telemetry;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
@@ -94,6 +93,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 _telemetry.TrackEvent("Shutdown");
 
+                //todo: move to notification handlers
                 _ = await _mediator.Send(new SaveContext.Request(), cancellationToken);
                 _ = await _mediator.Send(new StopScheduler.Request(), cancellationToken);
                 _ = await _mediator.Send(new CloseAllWindows.Request(), cancellationToken);

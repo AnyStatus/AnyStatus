@@ -5,7 +5,7 @@ using Quartz;
 using System;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.Domain
+namespace AnyStatus.Core.Jobs
 {
     [DisallowConcurrentExecution]
     public class Job : IJob

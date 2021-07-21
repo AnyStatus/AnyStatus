@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core.Services;
+﻿using AnyStatus.Core.Telemetry;
 using MediatR;
 using MediatR.Pipeline;
 using SimpleInjector;

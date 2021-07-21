@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core.Domain;
+﻿using AnyStatus.Core.App;
 using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets

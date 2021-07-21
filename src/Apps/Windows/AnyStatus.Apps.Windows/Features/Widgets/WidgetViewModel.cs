@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
-using AnyStatus.Core.Domain;
+using AnyStatus.Core.App;
 using System;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets

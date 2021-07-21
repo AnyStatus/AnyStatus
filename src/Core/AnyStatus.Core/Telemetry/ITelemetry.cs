@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AnyStatus.Core.Services
+namespace AnyStatus.Core.Telemetry
 {
     public interface ITelemetry
     {
+        void Enable();
+
+        void Disable();
+
         void TrackView(string name);
 
         void TrackView(string name, TimeSpan duration);
