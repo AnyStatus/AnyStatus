@@ -10,7 +10,7 @@ using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Apps.Windows.Infrastructure.Services;
-using AnyStatus.Core;
+using AnyStatus.Core.App;
 using MediatR;
 using SimpleInjector;
 using SimpleInjector.Packaging;

@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core;
+﻿using AnyStatus.Core.App;
 using System;
 using System.Windows;
 

@@ -1,7 +1,7 @@
 ﻿using AnyStatus.Core.Services;
 using SimpleInjector;
 
-namespace AnyStatus.Core
+namespace AnyStatus.Core.App
 {
     public static class Bootstrapper
     {

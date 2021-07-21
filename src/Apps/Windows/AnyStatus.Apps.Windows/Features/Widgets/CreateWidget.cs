@@ -46,9 +46,8 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public class Handler : RequestHandler<Request>
         {
-            private readonly IAppContext _context;
             private readonly IMediator _mediator;
-            private readonly PagesViewModel _pagesViewModel;
+            private readonly IAppContext _context;
 
             public Handler(IAppContext context, IMediator mediator)
             {

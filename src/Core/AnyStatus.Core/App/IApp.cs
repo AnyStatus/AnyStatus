@@ -1,4 +1,4 @@
-﻿namespace AnyStatus.Core
+﻿namespace AnyStatus.Core.App
 {
     public interface IApp
     {
