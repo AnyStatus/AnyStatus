@@ -2,9 +2,11 @@
 using AnyStatus.API.Notifications;
 using AnyStatus.API.Services;
 using AnyStatus.Apps.Windows.Features.Endpoints;
+using AnyStatus.Apps.Windows.Features.NamedPipe;
 using AnyStatus.Apps.Windows.Features.Notifications;
 using AnyStatus.Apps.Windows.Features.SystemTray;
 using AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Apps.Windows.Infrastructure.Services;
@@ -30,6 +32,7 @@ namespace AnyStatus.Apps.Windows
             container.Register<IEndpointViewModel, EndpointViewModel>();
             container.Register<IEndpointViewModelFactory, EndpointViewModelFactory>();
             container.Register(typeof(IRequestHandler<,>), typeof(PageHandler<>));
+            container.Collection.Append(typeof(IPipelineBehavior<,>), typeof(ContextMenuBehavior<,,>));
         }
     }
 }

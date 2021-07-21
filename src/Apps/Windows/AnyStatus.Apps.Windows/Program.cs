@@ -15,7 +15,7 @@ namespace AnyStatus.Apps.Windows
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show($"An error occurred while starting AnyStatus.\n{ex}", "AnyStatus", MessageBoxButton.OK, MessageBoxImage.Error);
+                _ = MessageBox.Show($"A fatal error occurred while starting AnyStatus.\n{ex}", "AnyStatus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

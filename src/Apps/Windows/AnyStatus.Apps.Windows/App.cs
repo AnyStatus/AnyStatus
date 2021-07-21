@@ -1,4 +1,5 @@
 ﻿using AnyStatus.Apps.Windows.Features.App;
+using AnyStatus.Apps.Windows.Features.NamedPipe;
 using AnyStatus.Core;
 using MediatR;
 using System.Threading;

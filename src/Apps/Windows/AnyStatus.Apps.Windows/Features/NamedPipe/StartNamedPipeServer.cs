@@ -7,7 +7,7 @@ using System.IO.Pipes;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Apps.Windows.Features
+namespace AnyStatus.Apps.Windows.Features.NamedPipe
 {
     public class StartNamedPipeServer
     {

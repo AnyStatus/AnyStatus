@@ -1,4 +1,4 @@
-﻿using AnyStatus.Core.ContextMenu;
+﻿using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using System.Collections.Generic;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu

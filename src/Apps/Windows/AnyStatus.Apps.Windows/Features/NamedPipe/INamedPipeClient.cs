@@ -1,4 +1,4 @@
-﻿namespace AnyStatus.Apps.Windows
+﻿namespace AnyStatus.Apps.Windows.Features.NamedPipe
 {
     public interface INamedPipeClient
     {

@@ -2,7 +2,7 @@
 using AnyStatus.API.Services;
 using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
-using AnyStatus.Core.ContextMenu;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items

@@ -1,5 +1,5 @@
 ﻿//using AnyStatus.API.Widgets;
-//using AnyStatus.Core.ContextMenu;
+//using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 
 //namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 //{

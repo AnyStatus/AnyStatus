@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Endpoints;
-using AnyStatus.Core.ContextMenu;
 using AnyStatus.Core.Domain;
 using AnyStatus.Core.Endpoints;
 using AnyStatus.Core.Jobs;
@@ -84,7 +83,6 @@ namespace AnyStatus.Core.Packages
                 typeof(RequestPreProcessorBehavior<,>),
                 typeof(RequestPostProcessorBehavior<,>),
                 typeof(ValidationBehavior<,>),
-                typeof(DynamicContextMenu.ContextMenuBehavior<,,>),
             });
 
             //Pipeline (Auto)

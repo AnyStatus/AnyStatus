@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API.Events;
+using AnyStatus.Apps.Windows.Features.NamedPipe;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
@@ -40,17 +41,16 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 var response = await _mediator.Send(new LoadContext.Request(), cancellationToken);
 
-                if (!StartupActivation() || !response.Context.UserSettings.StartMinimized)
+                if (!StartupActivation() || response?.Context?.UserSettings?.StartMinimized is false)
                 {
                     await _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418));
                 }
 
-                _ = Task.Run(() =>
-                {
-                    _mediator.Send(new StartScheduler.Request());
-                    _mediator.Send(new StartNamedPipeServer.Request());
-                    _telemetry.TrackEvent("Startup");
-                });
+                await _mediator.Send(new StartScheduler.Request());
+
+                await _mediator.Send(new StartNamedPipeServer.Request());
+
+                _telemetry.TrackEvent("Startup");
             }
 
             private static bool StartupActivation()
@@ -72,7 +72,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
             private void LogUnhandledExceptions()
             {
-                const string message = "An unexpected error occurred. See inner exception.";
+                const string message = "An unexpected error occurred";
 
                 AppDomain.CurrentDomain.UnhandledException += (s, e) => _logger.LogError(e.ExceptionObject as Exception, message);
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace AnyStatus.Core.ContextMenu
+namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
 {
     internal class DefaultContextMenuItem<TDataContext> : ContextMenu<TDataContext>
     {

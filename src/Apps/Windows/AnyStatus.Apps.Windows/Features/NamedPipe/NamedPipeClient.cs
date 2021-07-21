@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.Pipes;
 
-namespace AnyStatus.Apps.Windows
+namespace AnyStatus.Apps.Windows.Features.NamedPipe
 {
     internal class NamedPipeClient : INamedPipeClient
     {

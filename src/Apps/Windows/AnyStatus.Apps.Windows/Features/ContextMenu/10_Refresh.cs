@@ -1,6 +1,6 @@
 ﻿using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
-using AnyStatus.Core.ContextMenu;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using AnyStatus.Core.Jobs;
 using MediatR;
 

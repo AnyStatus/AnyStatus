@@ -24,8 +24,8 @@ namespace AnyStatus.Apps.Windows.Features.App
 
         public class ConfirmAndSaveBeforeShutdown : IRequestPreProcessor<Request>
         {
-            private readonly IAppContext _context;
             private readonly IMediator _mediator;
+            private readonly IAppContext _context;
             private readonly IDialogService _dialogService;
 
             public ConfirmAndSaveBeforeShutdown(IAppContext context, IMediator mediator, IDialogService dialogService)
@@ -37,29 +37,29 @@ namespace AnyStatus.Apps.Windows.Features.App
 
             public async Task Process(Request request, CancellationToken cancellationToken)
             {
-                if (_context.Session.IsDirty)
+                if (_context.Session.IsNotDirty)
                 {
-                    var dialog = new ConfirmationDialog("Would you like to save changes before exiting?", "Save Changes?")
-                    {
-                        Cancellable = true
-                    };
+                    return;
+                }
 
-                    var result = _dialogService.ShowDialog(dialog);
+                var dialog = new ConfirmationDialog("Would you like to save changes before exiting?", "Save Changes?")
+                {
+                    Cancellable = true
+                };
 
-                    switch (result)
-                    {
-                        case DialogResult.Cancel:
-                            request.Cancel = true;
-                            break;
+                switch (_dialogService.ShowDialog(dialog))
+                {
+                    case DialogResult.Cancel:
+                        request.Cancel = true;
+                        break;
 
-                        case DialogResult.Yes:
-                            var saved = await _mediator.Send(new SaveCommand.Request(), cancellationToken).ConfigureAwait(false);
-                            if (!saved) request.Cancel = true;
-                            break;
+                    case DialogResult.Yes:
+                        var saved = await _mediator.Send(new SaveCommand.Request(), cancellationToken);
+                        if (!saved) request.Cancel = true;
+                        break;
 
-                        default:
-                            break;
-                    }
+                    default:
+                        break;
                 }
             }
         }
@@ -85,18 +85,18 @@ namespace AnyStatus.Apps.Windows.Features.App
             {
                 if (request.Cancel)
                 {
-                    _logger.LogDebug("Shutdown has been canceled.");
+                    _logger.LogWarning("Shutdown has been canceled.");
 
                     return;
                 }
 
-                _logger.LogDebug("Shutting down AnyStatus...");
+                _logger.LogInformation("Shutting down AnyStatus...");
 
                 _telemetry.TrackEvent("Shutdown");
 
-                await _mediator.Send(new CloseAllWindows.Request(), cancellationToken).ConfigureAwait(false);
-                await _mediator.Send(new StopScheduler.Request(), cancellationToken).ConfigureAwait(false);
-                await _mediator.Send(new SaveContext.Request(), cancellationToken).ConfigureAwait(false);
+                _ = await _mediator.Send(new SaveContext.Request(), cancellationToken);
+                _ = await _mediator.Send(new StopScheduler.Request(), cancellationToken);
+                _ = await _mediator.Send(new CloseAllWindows.Request(), cancellationToken);
 
                 _sysTray.Dispose();
 

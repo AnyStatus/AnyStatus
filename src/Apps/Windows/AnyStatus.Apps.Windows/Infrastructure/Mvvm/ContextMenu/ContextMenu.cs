@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace AnyStatus.Core.ContextMenu
+namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
 {
     public abstract class ContextMenu<TContext> : IContextMenu
     {

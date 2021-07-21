@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace AnyStatus.Apps.Windows.Features
+namespace AnyStatus.Apps.Windows.Features.Launchers
 {
     public class LaunchURL
     {

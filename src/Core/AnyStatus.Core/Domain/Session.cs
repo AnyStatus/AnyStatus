@@ -19,6 +19,8 @@ namespace AnyStatus.Core.Domain
             set => Set(ref _isDirty, value);
         }
 
+        public bool IsNotDirty => !IsDirty;
+
         [JsonIgnore]
         public IWidget Widget
         {

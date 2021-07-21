@@ -1,5 +1,6 @@
 ﻿using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Features.Endpoints;
+using AnyStatus.Apps.Windows.Features.Launchers;
 using AnyStatus.Apps.Windows.Features.Options;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;

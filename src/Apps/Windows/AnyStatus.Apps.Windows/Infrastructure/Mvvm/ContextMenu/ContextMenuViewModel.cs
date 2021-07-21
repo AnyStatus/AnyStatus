@@ -1,5 +1,5 @@
 ﻿using AnyStatus.API.Common;
-using AnyStatus.Core.ContextMenu;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using System.Collections.Generic;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu
@@ -13,7 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu
             get => _items;
             set => Set(ref _items, value);
         }
-
+        
         public void Clear()
         {
             Items?.Clear();
