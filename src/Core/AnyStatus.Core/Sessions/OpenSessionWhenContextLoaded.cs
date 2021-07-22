@@ -1,7 +1,6 @@
 ﻿using AnyStatus.Core.App;
 using AnyStatus.Core.Widgets;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ namespace AnyStatus.Core.Sessions
 {
     public class OpenSessionWhenContextLoaded : INotificationHandler<ContextLoaded>
     {
-        private readonly ILogger _logger;
         private readonly IMediator _mediator;
 
         public OpenSessionWhenContextLoaded(IMediator mediator) => _mediator = mediator;
