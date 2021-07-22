@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
 {
-    internal class DefaultContextMenuItem<TDataContext> : ContextMenu<TDataContext>
+    internal class DefaultContextMenuItem<TContext> : ContextMenu<TContext>
     {
         public DefaultContextMenuItem()
         {

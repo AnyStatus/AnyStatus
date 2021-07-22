@@ -11,7 +11,8 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
             where TResponse : ICollection<IContextMenu>
     {
         private readonly ContextMenu<TContext>[] _contextMenus;
-        private static readonly IContextMenu Default = new DefaultContextMenuItem<TContext>();
+
+        private static readonly IContextMenu NoActionsAvailable = new DefaultContextMenuItem<object>();
 
         public ContextMenuBehavior(ContextMenu<TContext>[] contextMenus) => _contextMenus = contextMenus;
 
@@ -19,35 +20,34 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
         {
             var response = await next();
 
-            if (_contextMenus.Length == 0)
+            if (_contextMenus.Any())
             {
-                response.Add(Default);
-
-                return response;
-            }
-
-            foreach (var contextMenu in _contextMenus.OrderBy(k => k.Order))
-            {
-                contextMenu.Context = request.Context;
-
-                if (!contextMenu.IsVisible)
+                foreach (var contextMenu in from item in _contextMenus
+                                            where item.IsVisible
+                                            orderby item.Order
+                                            select item)
                 {
-                    continue;
-                }
 
-                if (contextMenu.IsSeparator)
-                {
-                    response.Add(null);
-                }
-                else
-                {
-                    response.Add(contextMenu);
-
-                    if (contextMenu.Break)
+                    if (contextMenu.IsSeparator)
                     {
                         response.Add(null);
                     }
+                    else
+                    {
+                        response.Add(contextMenu);
+
+                        contextMenu.Context = request.Context;
+
+                        if (contextMenu.Break)
+                        {
+                            response.Add(null);
+                        }
+                    }
                 }
+            }
+            else
+            {
+                response.Add(NoActionsAvailable);
             }
 
             return response;
