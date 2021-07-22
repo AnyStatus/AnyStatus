@@ -3,20 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:toolBar="clr-namespace:AnyStatus.Apps.Windows.Features.ToolBar"
+             xmlns:dashboard="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard"
              xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Features.App"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:pages="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=local:AppViewModel, IsDesignTimeCreatable=False}">
-    <ui:NavigationView PaneDisplayMode="Auto">
-        <ui:NavigationView.MenuItems>
-            <ui:NavigationViewItem Content="New" Tag="NewSession"/>
-            <ui:NavigationViewItem Content="Open" Tag="OpenSession"/>
-            <ui:NavigationViewItem Content="Save" Tag="Save"/>
-            <ui:NavigationViewItem Content="Save As" Tag="SaveAs"/>
-            <ui:NavigationViewItem Content="Accounts" Tag="Accounts"/>
-            <ui:NavigationViewItem Content="Help" Tag="Help"/>
-            <ui:NavigationViewItem Content="Exit" Tag="Exit"/>
-        </ui:NavigationView.MenuItems>
-        <ui:Frame Margin="0,0,0,0" x:Name="contentFrame5" />
-    </ui:NavigationView>
+    <Grid>
+        <DockPanel>
+            <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" DockPanel.Dock="Top"/>
+            <Grid>
+                <dashboard:DashboardView DataContext="{Binding DashboardViewModel}"/>
+                <dashboard:MenuView DataContext="{Binding MenuViewModel}"/>
+            </Grid>
+        </DockPanel>
+        <pages:PagesView DataContext="{Binding PagesViewModel}"/>
+    </Grid>
 </UserControl>
