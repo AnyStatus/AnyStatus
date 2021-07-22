@@ -17,7 +17,7 @@ using SimpleInjector.Packaging;
 
 namespace AnyStatus.Apps.Windows
 {
-    internal partial class AppPackage : IPackage
+    internal class AppPackage : IPackage
     {
         public void RegisterServices(Container container)
         {
