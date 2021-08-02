@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\AnyStatus.Core\AnyStatus.Core.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Binance\AnyStatus.Plugins.Binance.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins\AnyStatus.Plugins.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Azure\AnyStatus.Plugins.Azure.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Jenkins\AnyStatus.Plugins.Jenkins.csproj" />
