@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Jenkins.API
 {
-    public class JenkinsApi
+    internal class JenkinsApi
     {
         private readonly IRestClient _client;
         private readonly JenkinsEndpoint _endpoint;
@@ -38,22 +38,22 @@ namespace AnyStatus.Plugins.Jenkins.API
             throw new Exception("An error response received from Jenkins server.", response.ErrorException);
         }
 
-        public async Task<JenkinsViewsResponse> GetJobsAsync(CancellationToken cancellationToken)
+        public Task<JenkinsViewsResponse> GetJobsAsync(CancellationToken cancellationToken)
         {
             var request = new RestRequest("/api/json");
 
             request.AddParameter("tree", "views[name,url,jobs[name,url]]");
 
-            return await ExecuteAsync<JenkinsViewsResponse>(request, cancellationToken).ConfigureAwait(false);
+            return ExecuteAsync<JenkinsViewsResponse>(request, cancellationToken);
         }
 
-        public async Task<JenkinsJob> GetJobAsync(string job, CancellationToken cancellationToken)
+        public Task<JenkinsJob> GetJobAsync(string job, CancellationToken cancellationToken)
         {
             var request = new RestRequest(_endpoint.Address + job + "lastBuild/api/json");
 
             request.AddParameter("tree", "result,building,executor[progress]");
 
-            return await ExecuteAsync<JenkinsJob>(request, cancellationToken).ConfigureAwait(false);
+            return ExecuteAsync<JenkinsJob>(request, cancellationToken);
         }
     }
 }

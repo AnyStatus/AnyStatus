@@ -1,15 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Views\**" />
-    <EmbeddedResource Remove="Views\**" />
-    <None Remove="Views\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\AnyStatus.API\AnyStatus.API.csproj" />
@@ -18,5 +11,5 @@
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
-
+  
 </Project>
