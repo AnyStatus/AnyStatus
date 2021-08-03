@@ -14,7 +14,7 @@
             <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" DockPanel.Dock="Top"/>
             <Grid>
                 <dashboard:DashboardView DataContext="{Binding DashboardViewModel}"/>
-                <dashboard:MenuView DataContext="{Binding MenuViewModel}"/>
+                <dashboard:MenuView DataContext="{Binding MenuViewModel}" HorizontalAlignment="Left"/>
             </Grid>
         </DockPanel>
         <pages:PagesView DataContext="{Binding PagesViewModel}"/>

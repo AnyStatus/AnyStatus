@@ -7,22 +7,18 @@
         mc:Ignorable="d"
         SnapsToDevicePixels="True"
         FontSize="{DynamicResource FontSize}">
-
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" GlassFrameThickness="0" ResizeBorderThickness="5" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-
     <Window.Template>
         <ControlTemplate TargetType="{x:Type Window}">
-            <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                    BorderBrush="{DynamicResource WindowBorderColor}"
-                    BorderThickness="1">
+            <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
                 <DockPanel>
                     <local:TitleBarView DockPanel.Dock="Top"/>
                     <ContentPresenter/>
                 </DockPanel>
-            </Border>
+                <Border BorderBrush="{DynamicResource WindowBorderColor}" BorderThickness="1"/>
+            </Grid>
         </ControlTemplate>
     </Window.Template>
-
 </Window>
