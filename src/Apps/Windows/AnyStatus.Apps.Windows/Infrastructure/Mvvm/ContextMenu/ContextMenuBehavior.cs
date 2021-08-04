@@ -28,21 +28,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
                                                               orderby item.Order
                                                               select item)
                 {
-                    if (contextMenu.IsSeparator)
-                    {
-                        response.Add(null);
-                    }
-                    else
-                    {
-                        response.Add(contextMenu);
-
-                        contextMenu.Context = request.Context;
-
-                        if (contextMenu.Break)
-                        {
-                            response.Add(null);
-                        }
-                    }
+                    AddContextMenuItem(response, contextMenu);
                 }
             }
             else
@@ -51,6 +37,23 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
             }
 
             return response;
+        }
+
+        private static void AddContextMenuItem(TResponse response, ContextMenu<TContext> contextMenu)
+        {
+            if (contextMenu.IsSeparator)
+            {
+                response.Add(null);
+            }
+            else
+            {
+                response.Add(contextMenu);
+
+                if (contextMenu.Break)
+                {
+                    response.Add(null);
+                }
+            }
         }
     }
 }
