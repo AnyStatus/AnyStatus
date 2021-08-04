@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.Help.HelpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Features.Help" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ui:SimpleStackPanel Margin="20">
+        <TextBlock FontWeight="Bold">About</TextBlock>
+        <TextBlock>AnyStatus 3.0.0.0</TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">License</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">3rd Party</Hyperlink></TextBlock>
+        <TextBlock></TextBlock>
+        <TextBlock FontWeight="Bold">Help and Support</TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Documentation</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Feedback</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">GitHub</Hyperlink></TextBlock>
+        <TextBlock></TextBlock>
+        <TextBlock FontWeight="Bold">Social</TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Twitter</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Facebook</Hyperlink></TextBlock>
+        <TextBlock></TextBlock>
+        <TextBlock>© 2017-2022 Alon Amsellem</TextBlock>
+    </ui:SimpleStackPanel>
+</UserControl>

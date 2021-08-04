@@ -4,12 +4,16 @@
                     xmlns:options="clr-namespace:AnyStatus.Apps.Windows.Features.Options"
                     xmlns:app="clr-namespace:AnyStatus.Apps.Windows.Features.App"
                     xmlns:widgets="clr-namespace:AnyStatus.Apps.Windows.Features.Widgets" 
-                    xmlns:endpoints="clr-namespace:AnyStatus.Apps.Windows.Features.Endpoints">
+                    xmlns:endpoints="clr-namespace:AnyStatus.Apps.Windows.Features.Endpoints" xmlns:help="clr-namespace:AnyStatus.Apps.Windows.Features.Help">
 
     <DataTemplate DataType="{x:Type app:AppViewModel}">
         <app:AppView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type help:HelpViewModel}">
+        <help:HelpView/>
+    </DataTemplate>
+    
     <DataTemplate DataType="{x:Type activity:ActivityViewModel}">
         <activity:ActivityView/>
     </DataTemplate>
