@@ -10,12 +10,7 @@ namespace AnyStatus.Apps.Windows.Features.Launchers
         {
             public Request(string url)
             {
-                if (string.IsNullOrEmpty(url))
-                {
-                    throw new ArgumentNullException(nameof(url));
-                }
-
-                URL = url;
+                URL = url ?? throw new ArgumentNullException(nameof(url));
             }
 
             public string URL { get; }
@@ -23,10 +18,7 @@ namespace AnyStatus.Apps.Windows.Features.Launchers
 
         public class Handler : RequestHandler<Request>
         {
-            protected override void Handle(Request request)
-            {
-                _ = Process.Start("explorer.exe", $"\"{request.URL}\"");
-            }
+            protected override void Handle(Request request) => Process.Start("explorer.exe", $"\"{request.URL}\"");
         }
     }
 
