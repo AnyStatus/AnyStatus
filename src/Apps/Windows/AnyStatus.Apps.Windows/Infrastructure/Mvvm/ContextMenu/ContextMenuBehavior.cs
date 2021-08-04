@@ -10,24 +10,24 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu
             where TRequest : DynamicContextMenu.Request<TContext>
             where TResponse : ICollection<IContextMenu>
     {
-        private readonly ContextMenu<TContext>[] _contextMenus;
+        private readonly ContextMenu<TContext>[] _contextMenuItems;
 
         private static readonly IContextMenu NoActionsAvailable = new DefaultContextMenuItem<object>();
 
-        public ContextMenuBehavior(ContextMenu<TContext>[] contextMenus) => _contextMenus = contextMenus;
+        public ContextMenuBehavior(ContextMenu<TContext>[] contextMenus) => _contextMenuItems = contextMenus;
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            var response = await next();
+            TResponse response = await next();
 
-            if (_contextMenus.Any())
+            if (_contextMenuItems.Any())
             {
-                foreach (var contextMenu in from item in _contextMenus
-                                            where item.IsVisible
-                                            orderby item.Order
-                                            select item)
+                foreach (ContextMenu<TContext> contextMenu in from item in _contextMenuItems
+                                                              let ctx = item.Context = request.Context
+                                                              where item.IsVisible
+                                                              orderby item.Order
+                                                              select item)
                 {
-
                     if (contextMenu.IsSeparator)
                     {
                         response.Add(null);
