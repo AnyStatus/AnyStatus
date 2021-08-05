@@ -4,14 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid"
-    xmlns:ui="http://schemas.modernwpf.com/2019">
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters">
     <ItemsControl ItemsSource="{Binding Properties}">
         <ItemsControl.Resources>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
+            <StackPanel x:Key="HeaderTemplate" x:Shared="False"  Orientation="Horizontal">
+                <TextBlock Text="{Binding Header}"/>
+                <TextBlock Text="&#160;&#9432;" ToolTip="{Binding Description}" Visibility="{Binding Description, Converter={StaticResource NullVisibilityConverter}}"/>
+            </StackPanel>
             <!--  text  -->
             <DataTemplate DataType="{x:Type local:TextPropertyViewModel}">
                 <TextBox
                     Margin="7,0,7,12"
-                    ui:ControlHelper.Header="{Binding Header}"
+                    ui:ControlHelper.Header="{StaticResource HeaderTemplate}"
                     IsReadOnly="{Binding IsReadOnly}"
                     Text="{Binding Value}" />
             </DataTemplate>
@@ -20,27 +27,27 @@
                 <CheckBox
                     Margin="7,0,7,12"
                     Content="{Binding Header}"
-                    IsChecked="{Binding Value}" />
-                <!--  TODO: ADD IsReadOnly support  -->
+                    IsChecked="{Binding Value}"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBooleanConverter}}"/>
             </DataTemplate>
             <!--  numeric  -->
             <DataTemplate DataType="{x:Type local:NumericPropertyViewModel}">
                 <TextBox
                     Margin="7,0,7,12"
-                    ui:ControlHelper.Header="{Binding Header}"
+                    Text="{Binding Value}"
                     IsReadOnly="{Binding IsReadOnly}"
-                    Text="{Binding Value}" />
+                    ui:ControlHelper.Header="{StaticResource HeaderTemplate}"/>
             </DataTemplate>
             <!--  drop down  -->
             <DataTemplate DataType="{x:Type local:DropDownPropertyViewModel}">
                 <ComboBox
                     Margin="7,0,7,12"
-                    ui:ControlHelper.Header="{Binding Header}"
                     DisplayMemberPath="Name"
                     ItemsSource="{Binding Items}"
                     SelectedValue="{Binding Value}"
                     SelectedValuePath="Value"
-                    VirtualizingPanel.IsVirtualizing="True">
+                    VirtualizingPanel.IsVirtualizing="True"
+                    ui:ControlHelper.Header="{StaticResource HeaderTemplate}">
                     <behaviors:Interaction.Triggers>
                         <behaviors:EventTrigger EventName="SelectionChanged">
                             <behaviors:InvokeCommandAction Command="{Binding SelectionChanged}" />
@@ -64,11 +71,11 @@
                 <StackPanel>
                     <ComboBox
                         Margin="7,0,7,12"
-                        ui:ControlHelper.Header="{Binding Header}"
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding Items}"
                         SelectedValue="{Binding Value}"
                         SelectedValuePath="Value"
+                        ui:ControlHelper.Header="{StaticResource HeaderTemplate}"
                         VirtualizingPanel.IsVirtualizing="True">
                         <behaviors:Interaction.Triggers>
                             <behaviors:EventTrigger EventName="SelectionChanged">
@@ -87,11 +94,8 @@
                             </Style>
                         </ComboBox.Style>
                     </ComboBox>
-                    <TextBlock
-                        Margin="0,0,12,0"
-                        HorizontalAlignment="Right"
-                        FontSize="12">
-                        <Hyperlink Command="{Binding Commands[Endpoints]}">Manage endpoints</Hyperlink>
+                    <TextBlock Margin="0,0,12,0" HorizontalAlignment="Right" FontSize="12">
+                        <Hyperlink Command="{Binding Commands[Endpoints]}">Endpoints</Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </DataTemplate>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
@@ -14,9 +15,13 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
         {
             _source = source ?? throw new ArgumentNullException(nameof(source));
             _propertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
+
+            Description = _propertyInfo.GetCustomAttribute<DescriptionAttribute>()?.Description;
         }
 
         public string Header { get; set; }
+
+        public string Description { get; set; }
 
         public bool IsReadOnly { get; set; }
 

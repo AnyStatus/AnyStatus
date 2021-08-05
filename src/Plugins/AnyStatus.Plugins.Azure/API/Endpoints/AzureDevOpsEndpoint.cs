@@ -17,6 +17,7 @@ namespace AnyStatus.Plugins.Azure.API.Endpoints
         }
 
         [DisplayName("Personal Access Token")]
+        [Description("The personal access token organization must be \"All accessible organizations\".")]
         public string PersonalAccessToken { get; set; }
 
         [Browsable(false)]
