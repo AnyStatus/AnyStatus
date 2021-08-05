@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:widgets="clr-namespace:AnyStatus.API.Widgets;assembly=AnyStatus.API"
              xmlns:controls="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard.Controls" 
-             xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
+             xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters" xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=widgets:Widget, IsDesignTimeCreatable=False}">
 
@@ -17,30 +17,22 @@
     <DockPanel Style="{DynamicResource WidgetPanel}">
         <controls:ColorStatusIndicator DockPanel.Dock="Left"/>
         <controls:IconStatusIndicator DockPanel.Dock="Left" MinWidth="48"/>
-        <Grid Margin="7,0,0,0" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="0.9*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding BuildNumber}" FontSize="12" FontWeight="Light" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Branch, Converter={StaticResource BranchNameConverter}}" FontSize="12" FontWeight="Light" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding FinishTime, Converter={StaticResource TimeConverter}}" FontSize="12" FontWeight="Light" TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Duration, Converter={StaticResource TimeConverter}}" FontSize="12" FontWeight="Light" TextTrimming="CharacterEllipsis"/>
-        </Grid>
+        <StackPanel Margin="7,0,0,0" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="0,0,11,0"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontWeight" Value="Light"/>
+                        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="{Binding BuildNumber}"/>
+                <TextBlock Text="{Binding Branch, Converter={StaticResource BranchNameConverter}}"/>
+                <TextBlock Text="{Binding FinishTime, Converter={StaticResource TimeConverter}}"/>
+                <TextBlock Text="{Binding Duration, Converter={StaticResource TimeConverter}}"/>
+            </StackPanel>
+        </StackPanel>
     </DockPanel>
-
 </UserControl>
-
-<!--
-<Canvas Grid.Column="0" Grid.Row="1" Width="14" Height="12" VerticalAlignment="Center" ToolTip="{Binding Branch}">
-    <Viewbox Width="14" Height="14">
-        <Path Data="M1792 704q0 58 -19.5 110t-54.5 94t-83 71t-105 39q-11 57 -39.5 105t-70.5 83t-94 54.5t-110 19.5h-384q-32 0 -61 10t-53 28t-42 43.5t-27 55.5q54 13 99.5 42.5t78 70.5t51 92t18.5 106q0 66 -25.5 124.5t-69 102t-101.5 68.5t-124 25t-124.5 -25t-102 -68.5 t-68.5 -102t-25 -124.5q0 -57 19 -109t53 -93.5t81 -70.5t103 -40v-782q-56 -11 -103 -40t-81 -70.5t-53 -93.5t-19 -109q0 -66 25 -124t68.5 -101.5t102 -69t124.5 -25.5t124 25.5t101.5 69t69 101.5t25.5 124q0 57 -19 109t-53 93.5t-81 70.5t-103 40v585q42 -32 91 -49 t101 -17h384q32 0 61 -10t53 -28t42 -43.5t27 -55.5q-54 -13 -99.5 -42t-78 -70.5t-51 -92t-18.5 -106.5q0 -66 25 -124t68.5 -101.5t102 -69t124.5 -25.5t124 25.5t101.5 69t69 101.5t25.5 124zM384 320q0 40 15 75t41 61t61 41t75 15t75 -15t61 -41t41 -61t15 -75t-15 -75 t-41 -61t-61 -41t-75 -15t-75 15t-61 41t-41 61t-15 75zM768 1728q0 -40 -15 -75t-41 -61t-61 -41t-75 -15t-75 15t-61 41t-41 61t-15 75t15 75t41 61t61 41t75 15t75 -15t61 -41t41 -61t15 -75zM1472 896q40 0 75 -15t61 -41t41 -61t15 -75t-15 -75t-41 -61t-61 -41 t-75 -15t-75 15t-61 41t-41 61t-15 75t15 75t41 61t61 41t75 15Z"/>
-    </Viewbox>
-</Canvas>
--->
