@@ -109,14 +109,6 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
 
-            <DataGridTextColumn Header="Thread" Binding="{Binding ThreadId}" Width="58">
-                <DataGridTextColumn.ElementStyle>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Margin" Value="0,0,10,0" />
-                    </Style>
-                </DataGridTextColumn.ElementStyle>
-            </DataGridTextColumn>
-
             <DataGridTemplateColumn Header="Message" Width="*" ClipboardContentBinding="{Binding Converter={StaticResource ClipboardContentConverter}}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate DataType="{x:Type logging:ActivityMessage}">

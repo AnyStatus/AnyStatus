@@ -10,13 +10,9 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=local:AppViewModel, IsDesignTimeCreatable=False}">
     <Grid>
-        <DockPanel>
-            <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" DockPanel.Dock="Top"/>
-            <Grid>
-                <dashboard:DashboardView DataContext="{Binding DashboardViewModel}"/>
-                <dashboard:MenuView DataContext="{Binding MenuViewModel}"/>
-            </Grid>
-        </DockPanel>
+        <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" VerticalAlignment="Top"/>
+        <dashboard:DashboardView DataContext="{Binding DashboardViewModel}"/>
         <pages:PagesView DataContext="{Binding PagesViewModel}"/>
+        <dashboard:MenuView DataContext="{Binding MenuViewModel}" HorizontalAlignment="Left"/>
     </Grid>
 </UserControl>

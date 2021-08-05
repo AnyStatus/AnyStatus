@@ -3,25 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:menu="clr-namespace:AnyStatus.Apps.Windows.Features.Menu"
+             xmlns:menu="clr-namespace:AnyStatus.Apps.Windows.Features.Menu" 
+             xmlns:system="clr-namespace:System;assembly=System.Runtime" xmlns:ui="http://schemas.modernwpf.com/2019"
              d:DataContext="{d:DesignInstance Type=menu:MenuViewModel, IsDesignTimeCreatable=False}"
              AutomationProperties.AutomationId="Menu"
              mc:Ignorable="d"
-             IsEnabled="{Binding IsVisible}">
+             Width="220">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <system:Double x:Key="SlideOffSet">-221</system:Double>
+        <Storyboard x:Key="SlideRight">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="{StaticResource SlideOffSet}" To="0" Duration="0:0:0.3" />
+        </Storyboard>
+        <Storyboard x:Key="SlideLeft">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="0" To="{StaticResource SlideOffSet}" Duration="0:0:0.3" />
+        </Storyboard>
+        <Style TargetType="FrameworkElement" x:Key="SlideAnimation">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsVisible}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource SlideRight}" />
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard Storyboard="{StaticResource SlideLeft}" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-            <Button Command="{Binding Commands[New]}" ToolTip="New session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="NewSessionButton">New</Button>
-            <Button Command="{Binding Commands[Open]}" ToolTip="Open session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OpenSessionButton">Open...</Button>
-            <Button Command="{Binding Commands[Save]}" ToolTip="Save session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionButton">Save</Button>
-            <Button Command="{Binding Commands[SaveAs]}" ToolTip="Save session as.." Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionAsButton">Save As...</Button>
-            <Button Command="{Binding Commands[Endpoints]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ConnectionsButton">Endpoints</Button>
-            <Button Command="{Binding Commands[Options]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OptionsButton">Options</Button>
-            <Button Command="{Binding Commands[Feedback]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="FeedbackButton">Feedback</Button>
-            <Button Command="{Binding Commands[Help]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="HelpButton">Help</Button>
-            <Button Command="{Binding Commands[Exit]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ExitButton">Exit</Button>
-        </StackPanel>
-    </ScrollViewer>
+    <DockPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Style="{StaticResource SlideAnimation}">
+        <DockPanel.RenderTransform>
+            <TranslateTransform X="{StaticResource SlideOffSet}"/>
+        </DockPanel.RenderTransform>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[New]}" ToolTip="New session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="NewSessionButton">New</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[Open]}" ToolTip="Open session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OpenSessionButton">Open...</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[Save]}" ToolTip="Save session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionButton">Save</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[SaveAs]}" ToolTip="Save session as.." Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionAsButton">Save As...</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[Endpoints]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ConnectionsButton">Endpoints</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[Help]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="HelpButton">Help</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding Commands[Exit]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ExitButton">Exit</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding Commands[Settings]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OptionsButton">
+            <StackPanel Orientation="Horizontal">
+                <ui:SymbolIcon Symbol="Setting"/>
+                <TextBlock Margin="10,-1">Settings</TextBlock>
+            </StackPanel>
+        </Button>
+        <Canvas/>
+    </DockPanel>
 </UserControl>
