@@ -96,6 +96,7 @@
                     </ComboBox>
                     <TextBlock Margin="0,0,12,0" HorizontalAlignment="Right" FontSize="12">
                         <Hyperlink Command="{Binding Commands[Endpoints]}">Endpoints</Hyperlink>
+                        <Hyperlink Command="{Binding Commands[Edit]}">Edit</Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </DataTemplate>

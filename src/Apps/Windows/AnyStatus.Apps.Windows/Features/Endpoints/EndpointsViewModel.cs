@@ -1,34 +1,46 @@
 ﻿using AnyStatus.API.Endpoints;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
+using AnyStatus.Core.App;
 using MediatR;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
     internal class EndpointsViewModel : BaseViewModel
     {
         private readonly IMediator _mediator;
+        private readonly IAppContext _context;
         private EndpointTypeDescription _selectedEndpointTypeDescription;
 
-        public EndpointsViewModel(IMediator mediator)
+        public EndpointsViewModel(IMediator mediator, IAppContext context)
         {
+            _context = context;
             _mediator = mediator;
 
-            Initialize();
-        }
-
-        private void Initialize()
-        {
             ConfigureCommands();
 
-            var typesResponse = _mediator.Send(new GetEndpointTypes.Request()).GetAwaiter().GetResult();
+            Endpoints = _context.Endpoints;
 
-            EndpointTypes = typesResponse.Types;
+            _ = LoadEndpointTypesAsync();
+        }
 
-            var endpointsResponse = _mediator.Send(new GetEndpoints.Request()).GetAwaiter().GetResult();
+        private async Task LoadEndpointTypesAsync()
+        {
+            var response = await _mediator.Send(new GetEndpointTypes.Request());
 
-            Endpoints = endpointsResponse.Endpoints;
+            if (response is not null)
+            {
+                EndpointTypes = response.Types;
+            }
+        }
+
+        private void ConfigureCommands()
+        {
+            Commands.Add("Edit", new Command(p => _mediator.Send(new EditEndpoint.Request((IEndpoint)p)), p => p is IEndpoint));
+            Commands.Add("Delete", new Command(p => _mediator.Send(new DeleteEndpoint.Request((IEndpoint)p)), p => p is IEndpoint));
+            Commands.Add("Add", new Command(_ => _mediator.Send(new AddEndpoint.Request { Type = SelectedEndpointTypeDescription.Type }), _ => SelectedEndpointTypeDescription is object));
         }
 
         public Endpoint SelectedEndpoint { get; set; }
@@ -41,15 +53,6 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
         {
             get => _selectedEndpointTypeDescription;
             set => Set(ref _selectedEndpointTypeDescription, value);
-        }
-
-        private void ConfigureCommands()
-        {
-            Commands.Add("Edit", new Command(p => _mediator.Send(new EditEndpoint.Request((IEndpoint)p)), p => p is IEndpoint));
-
-            Commands.Add("Delete", new Command(p => _mediator.Send(new DeleteEndpoint.Request((IEndpoint)p)), p => p is IEndpoint));
-
-            Commands.Add("Add", new Command(_ => _mediator.Send(new AddEndpoint.Request { Type = SelectedEndpointTypeDescription.Type }), _ => SelectedEndpointTypeDescription is object));
         }
     }
 }

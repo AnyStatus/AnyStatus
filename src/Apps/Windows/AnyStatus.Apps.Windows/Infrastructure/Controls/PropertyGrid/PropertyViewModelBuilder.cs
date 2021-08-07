@@ -1,5 +1,6 @@
 ﻿using AnyStatus.API.Attributes;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Extensions;
 using MediatR;
 using System;
@@ -13,10 +14,12 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
     internal class PropertyViewModelBuilder : IPropertyViewModelBuilder
     {
         private readonly IMediator _mediator;
+        private readonly IAppContext _context;
         private readonly IServiceProvider _serviceProvider;
 
-        public PropertyViewModelBuilder(IServiceProvider serviceProvider, IMediator mediator)
+        public PropertyViewModelBuilder(IServiceProvider serviceProvider, IMediator mediator, IAppContext context)
         {
+            _context = context;
             _mediator = mediator;
             _serviceProvider = serviceProvider;
         }
@@ -63,7 +66,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
             {
                 var attribute = propertyInfo.GetCustomAttribute<ItemsSourceAttribute>();
                 return _serviceProvider.GetService(attribute.Type) is IItemsSource itemsSource ?
-                    new EndpointPropertyViewModel(_mediator, propertyInfo, source, itemsSource, properties, attribute.Autoload) :
+                    new EndpointPropertyViewModel(_mediator, _context, propertyInfo, source, itemsSource, properties, attribute.Autoload) :
                     null;
             }
 
