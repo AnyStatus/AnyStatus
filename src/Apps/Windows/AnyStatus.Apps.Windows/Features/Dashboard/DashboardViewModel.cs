@@ -21,7 +21,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard
             Commands.Add("OpenContextMenu", new Command(async ctx => ContextMenuViewModel.Items = await Mediator.Send(DynamicContextMenu.Request.Create(ctx ?? Context.Session.Widget)).ConfigureAwait(false)));
             Commands.Add("CloseContextMenu", new Command(_ => ContextMenuViewModel.Clear()));
             Commands.Add("Delete", new Command(async widget => await Mediator.Send(new DeleteWidget.Request(widget as IWidget))));
-            Commands.Add("Refresh", new Command(_ => Task.Run(async () => await mediator.Send(new TriggerJob.Request(context.Session.Widget)))));
+            Commands.Add("Refresh", new Command(_ => Task.Run(async () => await mediator.Send(new Refresh.Request(context.Session.Widget)))));
             Commands.Add("MoveUp", new Command(w => ((IWidget)w).MoveUp(), w => w is IWidget movable && movable.CanMoveUp()));
             Commands.Add("MoveDown", new Command(w => ((IWidget)w).MoveDown(), w => w is IWidget movable && movable.CanMoveDown()));
         }

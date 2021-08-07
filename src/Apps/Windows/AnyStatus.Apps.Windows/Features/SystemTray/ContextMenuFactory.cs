@@ -27,7 +27,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
                  {
                      new ToolStripMenuItem("Show",null,(s, e) => _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398,minWidth: 398,height: 418,minHeight: 418))),
                      new ToolStripSeparator(),
-                     new ToolStripMenuItem("Refresh",null,(s, e) => _mediator.Send(new TriggerJob.Request(_context.Session.Widget))),
+                     new ToolStripMenuItem("Refresh",null,(s, e) => _mediator.Send(new Refresh.Request(_context.Session.Widget))),
                      new ToolStripMenuItem("Activity",null, (s, e) => _mediator.Send(MaterialWindow.Show<ActivityViewModel>("Activity", 1280, 800))),
                      new ToolStripSeparator(),
                      new ToolStripMenuItem("Exit",null, (s, e) => _mediator.Send(new Shutdown.Request())),

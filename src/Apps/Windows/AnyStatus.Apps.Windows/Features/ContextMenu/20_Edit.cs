@@ -14,7 +14,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 20;
             Name = "Edit";
-            Command = new Command(_ => mediator.Send(Page.Show<WidgetViewModel>("Edit", onClose: () => mediator.Send(new TriggerJob.Request(Context)))));
+            Command = new Command(_ => mediator.Send(Page.Show<WidgetViewModel>("Edit Widget", onClose: () => mediator.Send(new Refresh.Request(Context)))));
         }
     }
 }

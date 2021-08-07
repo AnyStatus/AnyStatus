@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Core.Jobs
 {
-    public class TriggerJob
+    public class Refresh
     {
         public class Request : IRequest
         {
@@ -19,8 +19,7 @@ namespace AnyStatus.Core.Jobs
             public IWidget Widget { get; }
         }
 
-
-        class Validator : IValidator<Request>
+        internal class Validator : IValidator<Request>
         {
             public IEnumerable<ValidationResult> Validate(Request request)
             {
@@ -43,31 +42,33 @@ namespace AnyStatus.Core.Jobs
             }
 
             protected override Task Handle(Request request, CancellationToken cancellationToken)
-                => request.Widget.IsEnabled ? Trigger(request.Widget, cancellationToken) : Task.CompletedTask;
+                => request.Widget.IsEnabled ? TriggerJob(request.Widget, cancellationToken) : Task.CompletedTask;
 
-            private async Task Trigger(IWidget widget, CancellationToken cancellationToken)
+            private async Task TriggerJob(IWidget widget, CancellationToken cancellationToken)
             {
                 _logger.LogDebug("Updating '{widget}'...", widget.Name);
 
-                if (widget is IPollable)
+                if (widget is not IPollable)
                 {
-                    var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
+                    return;
+                }
 
-                    var jobKey = new JobKey(widget.Id);
+                var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
 
-                    var jobExists = await scheduler.CheckExists(jobKey, cancellationToken).ConfigureAwait(false);
+                var jobKey = new JobKey(widget.Id);
 
-                    if (jobExists)
-                    {
-                        await scheduler.TriggerJob(jobKey, cancellationToken).ConfigureAwait(false);
-                    }
+                var jobExists = await scheduler.CheckExists(jobKey, cancellationToken).ConfigureAwait(false);
+
+                if (jobExists)
+                {
+                    await scheduler.TriggerJob(jobKey, cancellationToken).ConfigureAwait(false);
                 }
 
                 if (widget.HasChildren)
                 {
                     foreach (var child in widget)
                     {
-                        await Trigger(child, cancellationToken).ConfigureAwait(false);
+                        await TriggerJob(child, cancellationToken).ConfigureAwait(false);
                     }
                 }
             }
