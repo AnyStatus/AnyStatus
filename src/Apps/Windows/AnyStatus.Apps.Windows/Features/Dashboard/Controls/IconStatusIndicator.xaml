@@ -12,7 +12,7 @@
 
     <Grid>
         <Rectangle Opacity="0.05" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-        <Rectangle Width="24" Height="24" Opacity="1" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">
+        <Rectangle Margin="0,1.5,0,0" Width="25" Height="25" Opacity="1" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">
             <Rectangle.OpacityMask>
                 <VisualBrush Stretch="Fill" Visual="{Binding Status.Metadata.Icon, Converter={StaticResource IconConverter}}" />
             </Rectangle.OpacityMask>
