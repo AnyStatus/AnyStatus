@@ -6,10 +6,14 @@
              xmlns:toolBar="clr-namespace:AnyStatus.Apps.Windows.Features.ToolBar"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=toolBar:ToolBarViewModel, IsDesignTimeCreatable=False}">
-
+    <UserControl.Resources>
+        <Style x:Key="ToolbarButton" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        </Style>
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal" Margin="0,-44,40,0">
         <Button Command="{Binding Commands[ToggleMenu]}" 
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="ToggleMenuButton"
                 ToolTip="Options">
             <Button.Content>
@@ -17,7 +21,7 @@
             </Button.Content>
         </Button>
         <Button Command="{Binding Commands[Refresh]}"
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="RefreshAllButton"
                 ToolTip="Refresh">
             <Button.Content>
@@ -25,7 +29,7 @@
             </Button.Content>
         </Button>
         <Button Command="{Binding Commands[ExpandAll]}"
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="ExpandAllButton"
                 ToolTip="Expand">
             <Button.Content>
@@ -33,7 +37,7 @@
             </Button.Content>
         </Button>
         <Button Command="{Binding Commands[CollapseAll]}"
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="CollapseAllButton"
                 ToolTip="Collapse">
             <Button.Content>
@@ -41,7 +45,7 @@
             </Button.Content>
         </Button>
         <Button Command="{Binding Commands[Activity]}"
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="ShowActivityButton"
                 ToolTip="Activity">
             <Button.Content>
@@ -49,7 +53,7 @@
             </Button.Content>
         </Button>
         <Button Command="{Binding Commands[AddWidget]}"
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="AddWidgetButton"
                 ToolTip="Add Widget">
             <Button.Content>
@@ -57,7 +61,7 @@
             </Button.Content>
         </Button>
         <Button Command="{Binding Commands[AddFolder]}"
-                Style="{StaticResource FlatButtonStyle}"
+                Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="AddFolderButton"
                 ToolTip="Add Folder">
             <Button.Content>

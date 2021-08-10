@@ -3,10 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DockPanel>
         <TextBlock DockPanel.Dock="Left" Margin="10" Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
-        <Button DockPanel.Dock="Right"
-                Click="OnCloseButtonClick"
-                Style="{StaticResource FlatButtonStyle}"
-                ToolTip="Close">
+        <Button DockPanel.Dock="Right" Click="OnCloseButtonClick" ToolTip="Close" Style="{StaticResource FlatButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True">
             <Button.Content>
                 <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource CloseIcon}}" AutomationProperties.AutomationId="CloseButton"/>
             </Button.Content>
