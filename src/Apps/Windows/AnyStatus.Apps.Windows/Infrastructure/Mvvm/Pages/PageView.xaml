@@ -17,7 +17,7 @@
             </Style>
         </DockPanel.Style>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Button Command="{Binding Commands[Close]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="BackButton">
+            <Button Command="{Binding Commands[Close]}" Style="{StaticResource FlatButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" AutomationProperties.AutomationId="BackButton">
                 <Button.Content>
                     <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource BackIcon}}"/>
                 </Button.Content>
