@@ -10,8 +10,6 @@ namespace AnyStatus.API.Widgets
 
         string Name { get; set; }
 
-        string Hint { get; set; }
-
         bool IsEnabled { get; set; }
 
         IWidget Parent { get; set; }
@@ -27,8 +25,6 @@ namespace AnyStatus.API.Widgets
         void Move(int x, int y);
 
         void Expand();
-
-        WidgetNotificationSettings NotificationsSettings { get; set; }
 
         void Reassessment();
     }

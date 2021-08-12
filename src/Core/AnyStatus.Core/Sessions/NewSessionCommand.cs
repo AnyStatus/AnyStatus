@@ -1,5 +1,4 @@
-﻿using AnyStatus.API.Widgets;
-using AnyStatus.Core.App;
+﻿using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Widgets;
 using MediatR;
@@ -32,10 +31,7 @@ namespace AnyStatus.Core.Sessions
                 var session = new Session
                 {
                     IsDirty = true,
-                    Widget = new Root
-                    {
-                        NotificationsSettings = new WidgetNotificationSettings()
-                    }
+                    Widget = new Root()
                 };
 
                 _context.Session = session;

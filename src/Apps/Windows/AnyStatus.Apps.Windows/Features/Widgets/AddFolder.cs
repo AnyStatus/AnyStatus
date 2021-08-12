@@ -37,8 +37,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
             {
                 var folder = new FolderWidget
                 {
-                    Name = "New Folder",
-                    NotificationsSettings = new WidgetNotificationSettings()
+                    Name = "New Folder"
                 };
 
                 request.Parent.Add(folder);

@@ -80,7 +80,6 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 widget.Status = Status.None;
                 widget.Name = request.Template.Name;
-                widget.NotificationsSettings = new WidgetNotificationSettings();
 
                 return widget;
             }

@@ -14,16 +14,6 @@ namespace AnyStatus.API.Widgets
     [JsonObject]
     public abstract class Widget : ObservableCollection<IWidget>, IWidget
     {
-        public Widget()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
-#pragma warning disable IDE0051
-        [JsonProperty] private IList<IWidget> Data => Items;
-        public bool ShouldSerializeData() => IsPersisted;
-#pragma warning restore IDE0051
-
         #region Fields
 
         private string _name;
@@ -33,6 +23,10 @@ namespace AnyStatus.API.Widgets
         private bool _isEnabled = true;
         private Status _status = Status.None;
         private WidgetNotificationSettings _notificationSettings;
+
+#pragma warning disable IDE0051
+        [JsonProperty] private IList<IWidget> Data => Items;
+#pragma warning restore IDE0051
 
         #endregion
 
@@ -47,13 +41,6 @@ namespace AnyStatus.API.Widgets
         {
             get => _name;
             set => Set(ref _name, value);
-        }
-
-        [Browsable(false)]
-        public string Hint
-        {
-            get => _hint;
-            set => Set(ref _hint, value);
         }
 
         [Browsable(false)]
@@ -179,23 +166,13 @@ namespace AnyStatus.API.Widgets
 
         #endregion
 
-        //public IEnumerable<IWidget> Descendants()
-        //{
-        //    var nodes = new Stack<IWidget>(new[] { this });
-        //    while (nodes.Any())
-        //    {
-        //        var widget = nodes.Pop();
-        //        yield return widget;
-        //        foreach (var n in widget)
-        //        {
-        //            nodes.Push(n);
-        //        }
-        //    }
-        //}
+        #region Public Methods
 
         public void Reassessment() => Status = Count > 0 ? this.Aggregate((a, b) => a.Status?.Metadata?.Priority < b.Status?.Metadata?.Priority ? a : b)?.Status : Status.None;
 
         public void Expand() => IsExpanded = true;
+
+        public bool ShouldSerializeData() => IsPersisted;
 
         public virtual object Clone()
         {
@@ -208,9 +185,19 @@ namespace AnyStatus.API.Widgets
 
             properties.ForEach(p => p.SetValue(clone, p.GetValue(this, null), null));
 
-            if (HasChildren) foreach (var child in this) clone.Add((IWidget)child.Clone());
+            clone.Id = Guid.NewGuid().ToString();
+
+            if (HasChildren)
+            {
+                foreach (var child in this)
+                {
+                    clone.Add((IWidget)child.Clone());
+                }
+            }
 
             return clone;
         }
+
+        #endregion
     }
 }

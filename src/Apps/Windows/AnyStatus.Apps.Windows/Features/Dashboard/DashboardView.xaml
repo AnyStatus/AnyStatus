@@ -28,7 +28,6 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="{DynamicResource WidgetBackground}"/>
             <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-            <Setter Property="ToolTip" Value="{Binding Hint}"/>
         </Style>
 
         <Style x:Key="ParentTreeViewItemStyle" TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource TreeViewItemStyle}">

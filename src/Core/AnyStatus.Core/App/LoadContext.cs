@@ -84,10 +84,7 @@ namespace AnyStatus.Core.App
 
                 _context.Session = new Session
                 {
-                    Widget = new Root
-                    {
-                        NotificationsSettings = new WidgetNotificationSettings()
-                    }
+                    Widget = new Root()
                 };
 
                 await _mediator.Send(new SaveSession.Request());

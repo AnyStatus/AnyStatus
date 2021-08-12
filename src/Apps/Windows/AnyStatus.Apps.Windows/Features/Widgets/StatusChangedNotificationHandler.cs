@@ -25,7 +25,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
             _logger.LogDebug(message);
 
-            if (notification.Widget.NotificationsSettings?.IsEnabled == true && notification.Widget.PreviousStatus != Status.None)
+            if (notification.Widget.PreviousStatus != Status.None)
             {
                 _notificationService.Send(new Notification(message, notification.Widget.Name));
             }

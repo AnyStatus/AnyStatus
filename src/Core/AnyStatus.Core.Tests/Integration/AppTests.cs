@@ -34,6 +34,7 @@ namespace AnyStatus.Core.Tests.Integration
         {
             var widget = new DemoHealthCheckWidget
             {
+                Id = Guid.NewGuid().ToString(),
                 Randomize = false,
                 Status = Status.None,
                 Name = "Health Check Test",
@@ -53,11 +54,12 @@ namespace AnyStatus.Core.Tests.Integration
         {
             var widget = new DemoMetricWidget
             {
+                Id = Guid.NewGuid().ToString(),
                 Randomize = false,
                 Status = Status.None,
                 Name = "Metric Test",
             };
-
+            
             var request = new ScheduleJob.Request(widget);
 
             await _mediator.Send(request, CancellationToken.None);
