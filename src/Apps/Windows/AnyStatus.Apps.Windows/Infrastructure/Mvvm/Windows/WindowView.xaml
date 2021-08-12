@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows"
         mc:Ignorable="d"
-        SnapsToDevicePixels="True"
         FontSize="{DynamicResource FontSize}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="40" GlassFrameThickness="0" ResizeBorderThickness="5" CornerRadius="0"/>
