@@ -78,6 +78,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
             {
                 var widget = (IWidget)Activator.CreateInstance(request.Template.Type);
 
+                widget.Id = Guid.NewGuid().ToString();
                 widget.Status = Status.None;
                 widget.Name = request.Template.Name;
 
