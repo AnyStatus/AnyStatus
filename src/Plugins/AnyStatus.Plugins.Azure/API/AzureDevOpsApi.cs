@@ -208,9 +208,9 @@ namespace AnyStatus.Plugins.Azure.API
 
         //Work Items
 
-        internal Task<WorkItemQueryResult> QueryWorkItemsAsync(string query, CancellationToken cancellationToken = default)
+        internal Task<WorkItemQueryResult> QueryWorkItemsAsync(string organization, string project, string query, CancellationToken cancellationToken = default)
         {
-            var request = new RestRequest("_apis/wit/wiql", Method.POST);
+            var request = new RestRequest(string.Format("{0}/{1}/_apis/wit/wiql?api-version=5.0", Uri.EscapeDataString(organization), Uri.EscapeDataString(project)), Method.POST);
 
             request.AddJsonBody(new { query });
 
@@ -224,9 +224,9 @@ namespace AnyStatus.Plugins.Azure.API
             return ExecuteAsync<WorkItemQueryResult>(request, cancellationToken);
         }
 
-        internal Task<CollectionResponse<WorkItem>> GetWorkItemsAsync(List<string> ids, CancellationToken cancellationToken = default)
+        internal Task<CollectionResponse<WorkItem>> GetWorkItemsAsync(string organization, string project, List<string> ids, CancellationToken cancellationToken = default)
         {
-            var request = new RestRequest("_apis/wit/workitemsbatch", Method.POST);
+            var request = new RestRequest(string.Format("{0}/{1}/_apis/wit/workitemsbatch?api-version=5.0", Uri.EscapeDataString(organization), Uri.EscapeDataString(project)), Method.POST);
 
             request.AddJsonBody(new Dictionary<string, object>
             {
@@ -271,6 +271,8 @@ namespace AnyStatus.Plugins.Azure.API
             var request = new RestRequest(string.Format("{0}/{1}/{2}/_apis/git/pullrequests", _endpoint.Address, Uri.EscapeDataString(organization), Uri.EscapeDataString(project)));
 
             request.AddParameter("searchCriteria.status", status);
+            
+            //request.AddParameter("searchCriteria.includeLinks", true); //web link is not included in the response
 
             return ExecuteAsync<CollectionResponse<GitPullRequest>>(request, cancellationToken);
         }

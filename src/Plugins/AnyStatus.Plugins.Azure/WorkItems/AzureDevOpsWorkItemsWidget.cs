@@ -6,14 +6,20 @@ using AnyStatus.Plugins.Azure.API.Sources;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnyStatus.Plugins.Azure.DevOps.PullRequests
+namespace AnyStatus.Plugins.Azure.WorkItems
 {
     [Category("Azure DevOps")]
-    [DisplayName("Azure DevOps Pull Requests")]
-    [Description("View the status of pull requests on Azure DevOps")]
-    public class AzureDevOpsPullRequestsWidget : MetricWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
+    [DisplayName("Azure DevOps Work Items")]
+    [Description("View a list of work items on Azure DevOps.")]
+    public class AzureDevOpsWorkItemsWidget : MetricWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
     {
-        public AzureDevOpsPullRequestsWidget() => IsPersisted = false;
+        public AzureDevOpsWorkItemsWidget() => IsPersisted = false;
+
+        [Required]
+        [Category("Azure DevOps")]
+        [DisplayName("Assigned To")]
+        [Description("Required. The assignee name or macro. Use \"@Me\" to view work item assigned to you.")]
+        public string AssignedTo { get; set; } = "@Me";
 
         [Required]
         [EndpointSource]
