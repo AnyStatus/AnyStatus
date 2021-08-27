@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Azure.Resources
 {
-    public class AzureResourcesStatusCheck : AsyncStatusCheck<AzureResourcesWidget>, IEndpointHandler<AzureOAuthEndpoint>
+    public class AzureResourcesQuery : AsyncStatusCheck<AzureResourcesWidget>, IEndpointHandler<AzureOAuthEndpoint>
     {
         private readonly IDispatcher _dispatcher;
 
-        public AzureResourcesStatusCheck(IDispatcher dispatcher) => _dispatcher = dispatcher;
+        public AzureResourcesQuery(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
         public AzureOAuthEndpoint Endpoint { get; set; }
 
