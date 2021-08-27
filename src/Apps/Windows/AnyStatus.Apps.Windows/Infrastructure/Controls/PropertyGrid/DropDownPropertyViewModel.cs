@@ -17,7 +17,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 
         public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source, IItemsSource itemsSource, IEnumerable<IPropertyViewModel> properties, bool autoload) : this(propertyInfo, source)
         {
-            Load = () => Items = itemsSource.GetItems(source);
+            Load = () => Items = itemsSource.GetItems(source); //todo: handle errors
 
             Cascade(propertyInfo, properties);
 

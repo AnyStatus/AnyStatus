@@ -5,6 +5,8 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
@@ -30,7 +32,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             }
         }
 
-        internal class Handler : RequestHandler<Request>
+        internal class Handler : AsyncRequestHandler<Request>
         {
             private readonly IMediator _mediator;
             private readonly IEndpointViewModelFactory _viewModelFactory;
@@ -41,11 +43,11 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
                 _viewModelFactory = viewModelFactory;
             }
 
-            protected override void Handle(Request request)
+            protected override Task Handle(Request request, CancellationToken cancellationToken)
             {
                 var viewModel = _viewModelFactory.Create(request.Type);
 
-                _mediator.Send(Page.Show("Add Endpoint", viewModel));
+                return _mediator.Send(Page.Show("Add Endpoint", viewModel));
             }
         }
     }

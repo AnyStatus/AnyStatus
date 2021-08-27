@@ -13,6 +13,7 @@ namespace AnyStatus.Plugins.Azure.Resources
 
             Update = (src, widget) =>
             {
+                widget.Id = src.Id;
                 widget.Name = src.Name;
                 widget.Kind = src.Kind;
                 widget.Type = src.Type;
@@ -23,10 +24,11 @@ namespace AnyStatus.Plugins.Azure.Resources
             Add = src => parent.Add(
                 new AzureResourceWidget
                 {
+                    Id = src.Id,
                     Name = src.Name,
-                    ResourceId = src.Id,
                     Kind = src.Kind,
                     Type = src.Type,
+                    ResourceId = src.Id,
                     Location = src.Location,
                     EndpointId = parent.EndpointId
                 });

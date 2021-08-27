@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Quartz;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +13,7 @@ namespace AnyStatus.Core.Jobs
         {
             public Request(IWidget widget, bool includeChildren = false)
             {
-                Widget = widget ?? throw new ArgumentNullException(nameof(widget));
+                Widget = widget;
                 IncludeChildren = includeChildren;
             }
 
@@ -43,7 +42,7 @@ namespace AnyStatus.Core.Jobs
 
             private async Task Schedule(IWidget widget, IScheduler scheduler, bool includeChildren, CancellationToken cancellationToken)
             {
-                if (widget is IPollable)
+                if (!string.IsNullOrEmpty(widget.Id) && widget is IPollable)
                 {
                     await Schedule(widget, scheduler, cancellationToken).ConfigureAwait(false);
                 }
@@ -70,8 +69,6 @@ namespace AnyStatus.Core.Jobs
                         .WithIntervalInSeconds(10)
                         .RepeatForever())
                     .Build();
-
-                //var test = await scheduler.GetJobDetail(new JobKey(widget.Id));
 
                 _ = await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);
 

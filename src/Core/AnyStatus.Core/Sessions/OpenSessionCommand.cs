@@ -40,7 +40,7 @@ namespace AnyStatus.Core.Sessions
             {
                 if (_context.Session is null)
                 {
-                    throw new ApplicationException("No active session is available.");
+                    throw new Exception("Session not found.");
                 }
 
                 if (string.IsNullOrEmpty(request.FileName))

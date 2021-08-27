@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Azure.Resources
 {
-    public class AzureResourcesStatusCheck : AsyncStatusCheck<AzureResourcesWidget>, IEndpointHandler<IAzureEndpoint>
+    public class AzureResourcesStatusCheck : AsyncStatusCheck<AzureResourcesWidget>, IEndpointHandler<AzureOAuthEndpoint>
     {
         private readonly IDispatcher _dispatcher;
 
         public AzureResourcesStatusCheck(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
-        public IAzureEndpoint Endpoint { get; set; }
+        public AzureOAuthEndpoint Endpoint { get; set; }
 
         protected override async Task Handle(StatusRequest<AzureResourcesWidget> request, CancellationToken cancellationToken)
         {
