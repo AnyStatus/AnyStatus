@@ -22,9 +22,10 @@ namespace AnyStatus.Plugins.Azure.WorkItems
         {
             const string workItemsQuery = "SELECT [System.Id] FROM WorkItems " +
                                           "WHERE [System.AssignedTo] = {0} " +
+                                          "AND [System.IterationPath] = '{1}' " +
                                           "AND [State] NOT IN ('Done','Closed','Inactive','Completed')";
 
-            var query = string.Format(workItemsQuery, request.Context.AssignedTo);
+            var query = string.Format(workItemsQuery, request.Context.AssignedTo, request.Context.Iteration);
 
             var api = new AzureDevOpsApi(Endpoint);
 

@@ -276,5 +276,13 @@ namespace AnyStatus.Plugins.Azure.API
 
             return ExecuteAsync<CollectionResponse<GitPullRequest>>(request, cancellationToken);
         }
+    
+        //Iterations
+        internal Task<CollectionResponse<Iteration>> GetIterationsAsync(string organization, string project, CancellationToken cancellationToken = default)
+        {
+            var request = new RestRequest(string.Format("{0}/{1}/{2}/_apis/work/teamsettings/iterations", _endpoint.ReleaseManagement, Uri.EscapeDataString(organization), Uri.EscapeDataString(project)));
+
+            return ExecuteAsync<CollectionResponse<Iteration>>(request, cancellationToken);
+        }
     }
 }

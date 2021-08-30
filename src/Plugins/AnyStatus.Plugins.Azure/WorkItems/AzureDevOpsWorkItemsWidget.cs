@@ -33,7 +33,12 @@ namespace AnyStatus.Plugins.Azure.WorkItems
         public string Account { get; set; }
 
         [Required]
+        [Refresh(nameof(Iteration))]
         [AsyncItemsSource(typeof(AzureDevOpsProjectSource), autoload: false)]
         public string Project { get; set; }
+
+        [Required]
+        [AsyncItemsSource(typeof(AzureDevOpsIterationSource), autoload: false)]
+        public string Iteration { get; set; }
     }
 }
