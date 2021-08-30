@@ -1,8 +1,6 @@
 ﻿using AnyStatus.API.Attributes;
 using AnyStatus.API.Endpoints;
-using AnyStatus.API.Extensions;
 using AnyStatus.Plugins.Azure.API.Endpoints;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,14 +9,9 @@ namespace AnyStatus.Plugins.Azure.API.Sources
 {
     public class AzureDevOpsIterationSource : IAsyncItemsSource
     {
-        private readonly ILogger _logger;
         private readonly IEndpointProvider _endpointProvider;
 
-        public AzureDevOpsIterationSource(ILogger logger, IEndpointProvider endpointProvider)
-        {
-            _logger = logger;
-            _endpointProvider = endpointProvider;
-        }
+        public AzureDevOpsIterationSource(IEndpointProvider endpointProvider) => _endpointProvider = endpointProvider;
 
         public async Task<IEnumerable<NameValueItem>> GetItemsAsync(object source)
         {
