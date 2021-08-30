@@ -10,47 +10,47 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Azure.WorkItems
 {
-    public class AzureDevOpsWorkItemsQuery : AsyncMetricQuery<AzureDevOpsWorkItemsWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
+    public class AzureDevOpsWorkItemsQuery : AsyncStatusCheck<AzureDevOpsWorkItemsWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
     {
+        const string query = "SELECT [System.Id] FROM WorkItems " +
+                             "WHERE [System.AssignedTo] = @Me " +
+                             "AND [System.IterationPath] = {0}";
+
         private readonly IDispatcher _dispatcher;
 
         public AzureDevOpsWorkItemsQuery(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
         public IAzureDevOpsEndpoint Endpoint { get; set; }
 
-        protected override async Task Handle(MetricRequest<AzureDevOpsWorkItemsWidget> request, CancellationToken cancellationToken)
+        protected override async Task Handle(StatusRequest<AzureDevOpsWorkItemsWidget> request, CancellationToken cancellationToken)
         {
-            const string workItemsQuery = "SELECT [System.Id] FROM WorkItems " +
-                                          "WHERE [System.AssignedTo] = {0} " +
-                                          "AND [System.IterationPath] = '{1}' " +
-                                          "AND [State] NOT IN ('Done','Closed','Inactive','Completed')";
-
-            var query = string.Format(workItemsQuery, request.Context.AssignedTo, request.Context.Iteration);
-
             var api = new AzureDevOpsApi(Endpoint);
 
-            var workItemQueryResult = await api.QueryWorkItemsAsync(request.Context.Account, request.Context.Project, query, cancellationToken).ConfigureAwait(false);
+            var wiql = string.Format(query, request.Context.Iteration);
 
-            if (workItemQueryResult.WorkItems.Any())
+            var response = await api.QueryWorkItemsAsync(request.Context.Account, request.Context.Project, wiql, cancellationToken);
+
+            if (response.WorkItems.Any())
             {
-                var ids = workItemQueryResult.WorkItems.Select(w => w.Id).ToList();
+                var ids = response.WorkItems.Select(w => w.Id).ToList();
 
-                var workItems = await api.GetWorkItemsAsync(request.Context.Account, request.Context.Project, ids, cancellationToken).ConfigureAwait(false);
+                var workItems = await api.GetWorkItemsAsync(request.Context.Account, request.Context.Project, ids, cancellationToken);
 
-                _dispatcher.Invoke(() => Sync(request.Context, workItemQueryResult.WorkItems, workItems));
+                _dispatcher.Invoke(() => Sync(request.Context, response.WorkItems, workItems));
             }
             else
             {
-                _dispatcher.Invoke(request.Context.Clear);
+                request.Context.Text = default;
 
-                request.Context.Value = default;
-                request.Context.Status = Status.OK;
+                _dispatcher.Invoke(request.Context.Clear);
             }
+
+            request.Context.Status = Status.OK;
         }
 
-        private static void Sync(MetricWidget parent, IEnumerable<WorkItemReference> references, CollectionResponse<WorkItem> workItemsResponse)
+        private static void Sync(TextLabelWidget parent, IEnumerable<WorkItemReference> references, CollectionResponse<WorkItem> workItemsResponse)
         {
-            parent.Value = workItemsResponse.Count;
+            parent.Text = workItemsResponse.Count.ToString();
 
             foreach (var removedWorkItem in parent.OfType<AzureDevOpsWorkItemWidget>().Where(widget => references.All(reference => reference.Id != widget.WorkItemId)).ToList())
             {
@@ -61,8 +61,6 @@ namespace AnyStatus.Plugins.Azure.WorkItems
             {
                 AddOrUpdateWorkItem(parent, workItem);
             }
-
-            parent.Status = Status.OK;
         }
 
         private static void AddOrUpdateWorkItem(Widget parent, WorkItem workItem)
@@ -76,7 +74,6 @@ namespace AnyStatus.Plugins.Azure.WorkItems
                 parent.Add(workItemWidget);
             }
 
-            workItemWidget.Status = Status.OK;
             workItemWidget.URL = workItem.Links["html"]["href"];
             workItemWidget.Name = workItem.Fields["System.Title"];
             workItemWidget.WorkItemId = workItem.Fields["System.Id"];

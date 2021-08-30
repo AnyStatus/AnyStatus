@@ -31,7 +31,11 @@ namespace AnyStatus.Plugins.Azure.API.Sources
 
             var iterations = await api.GetIterationsAsync(widget.Account, widget.Project);
 
-            return iterations?.Value?.Select(p => new NameValueItem(p.Name, p.Path)).ToList();
+            var items = iterations?.Value?.Select(p => new NameValueItem(p.Name, $"'{p.Path}'")).ToList();
+
+            items.Add(new NameValueItem("Current", "@CurrentIteration"));
+
+            return items;
         }
 
         private bool IsInvalid(IAzureDevOpsWidget widget) => string.IsNullOrEmpty(widget.EndpointId) ||

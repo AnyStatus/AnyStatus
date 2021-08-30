@@ -11,15 +11,9 @@ namespace AnyStatus.Plugins.Azure.WorkItems
     [Category("Azure DevOps")]
     [DisplayName("Azure DevOps Work Items")]
     [Description("View a list of work items on Azure DevOps.")]
-    public class AzureDevOpsWorkItemsWidget : MetricWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
+    public class AzureDevOpsWorkItemsWidget : TextLabelWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
     {
         public AzureDevOpsWorkItemsWidget() => IsPersisted = false;
-
-        [Required]
-        [Category("Azure DevOps")]
-        [DisplayName("Assigned To")]
-        [Description("Required. The assignee name or macro. Use \"@Me\" to view work item assigned to you.")]
-        public string AssignedTo { get; set; } = "@Me";
 
         [Required]
         [EndpointSource]

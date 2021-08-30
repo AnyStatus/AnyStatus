@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Azure.DevOps.PullRequests
 {
-    public class AzureDevOpsPullRequestsQuery : AsyncMetricQuery<AzureDevOpsPullRequestsWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
+    public class AzureDevOpsPullRequestsQuery : AsyncStatusCheck<AzureDevOpsPullRequestsWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
     {
         private readonly IMapper _mapper;
         private readonly IDispatcher _dispatcher;
@@ -22,13 +22,13 @@ namespace AnyStatus.Plugins.Azure.DevOps.PullRequests
 
         public IAzureDevOpsEndpoint Endpoint { get; set; }
 
-        protected async override Task Handle(MetricRequest<AzureDevOpsPullRequestsWidget> request, CancellationToken cancellationToken)
+        protected async override Task Handle(StatusRequest<AzureDevOpsPullRequestsWidget> request, CancellationToken cancellationToken)
         {
             var api = new AzureDevOpsApi(Endpoint);
 
             var pullRequests = await api.GetPullRequestsAsync(request.Context.Account, request.Context.Project).ConfigureAwait(false);
 
-            request.Context.Value = pullRequests.Count;
+            request.Context.Text = pullRequests.Count.ToString();
 
             if (pullRequests is null || pullRequests.Count == 0)
             {
