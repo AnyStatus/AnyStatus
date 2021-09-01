@@ -12,30 +12,21 @@
     <UserControl.Resources>
         <converters:BranchNameConverter x:Key="BranchNameConverter"/>
         <converters:TimeConverter x:Key="TimeConverter"/>
-        <ui:Flyout x:Key="test">
-            Test
-        </ui:Flyout>
     </UserControl.Resources>
     <DockPanel Style="{DynamicResource WidgetPanel}">
+        <DockPanel.ToolTip>
+            <TextBlock>
+                <Run Text="{Binding BuildNumber}" />
+                <Run Text=" " />
+                <Run Text="{Binding Branch, Converter={StaticResource BranchNameConverter}}"/>
+                <Run Text=" " />
+                <Run Text="{Binding FinishTime, Converter={StaticResource TimeConverter}}"/>
+                <Run Text=" " />
+                <Run Text="{Binding Duration, Converter={StaticResource TimeConverter}}"/>
+            </TextBlock>
+        </DockPanel.ToolTip>
         <controls:ColorStatusIndicator DockPanel.Dock="Left"/>
         <controls:IconStatusIndicator DockPanel.Dock="Left"/>
         <TextBlock Text="{Binding Name}" Margin="7,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
-        <!--<StackPanel Margin="7,0,0,0" VerticalAlignment="Center">
-            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Margin" Value="0,0,11,0"/>
-                        <Setter Property="FontSize" Value="12"/>
-                        <Setter Property="FontWeight" Value="Light"/>
-                        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="{Binding BuildNumber}"/>
-                <TextBlock Text="{Binding Branch, Converter={StaticResource BranchNameConverter}}"/>
-                <TextBlock Text="{Binding FinishTime, Converter={StaticResource TimeConverter}}"/>
-                <TextBlock Text="{Binding Duration, Converter={StaticResource TimeConverter}}"/>
-            </StackPanel>
-        </StackPanel>-->
     </DockPanel>
 </UserControl>
