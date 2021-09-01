@@ -10,7 +10,15 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 210;
             Name = "Disable";
-            Command = new Command(_ => Context.IsEnabled = false);
+            Command = new Command(_ =>
+            {
+                Context.IsEnabled = false;
+
+                if (Context is IWidget widget)
+                {
+                    widget.Parent?.Reassessment();
+                }
+            });
         }
 
         public override bool IsVisible => Context != null && Context.IsEnabled;

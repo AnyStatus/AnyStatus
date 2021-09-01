@@ -5,19 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:widgets="clr-namespace:AnyStatus.API.Widgets;assembly=AnyStatus.API"
              xmlns:controls="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard.Controls" 
-             xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters" xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=widgets:Widget, IsDesignTimeCreatable=False}">
-
+             d:DataContext="{d:DesignInstance Type=widgets:StatusWidget, IsDesignTimeCreatable=False}">
     <UserControl.Resources>
         <converters:BranchNameConverter x:Key="BranchNameConverter"/>
         <converters:TimeConverter x:Key="TimeConverter"/>
+        <ui:Flyout x:Key="test">
+            Test
+        </ui:Flyout>
     </UserControl.Resources>
-
     <DockPanel Style="{DynamicResource WidgetPanel}">
         <controls:ColorStatusIndicator DockPanel.Dock="Left"/>
-        <controls:IconStatusIndicator DockPanel.Dock="Left" MinWidth="48"/>
-        <StackPanel Margin="7,0,0,0" VerticalAlignment="Center">
+        <controls:IconStatusIndicator DockPanel.Dock="Left"/>
+        <TextBlock Text="{Binding Name}" Margin="7,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+        <!--<StackPanel Margin="7,0,0,0" VerticalAlignment="Center">
             <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel.Resources>
@@ -33,6 +36,6 @@
                 <TextBlock Text="{Binding FinishTime, Converter={StaticResource TimeConverter}}"/>
                 <TextBlock Text="{Binding Duration, Converter={StaticResource TimeConverter}}"/>
             </StackPanel>
-        </StackPanel>
+        </StackPanel>-->
     </DockPanel>
 </UserControl>

@@ -7,11 +7,9 @@
              xmlns:controls="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard.Controls"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=widgets:Widget, IsDesignTimeCreatable=False}">
-
     <DockPanel Style="{DynamicResource WidgetPanel}">
         <controls:ColorStatusIndicator DockPanel.Dock="Left"/>
-        <controls:IconStatusIndicator DockPanel.Dock="Left" MinWidth="48"/>
-        <TextBlock Margin="7,0,0,0" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <controls:IconStatusIndicator DockPanel.Dock="Left"/>
+        <TextBlock Text="{Binding Name}" Margin="7,0,0,0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
     </DockPanel>
-
 </UserControl>

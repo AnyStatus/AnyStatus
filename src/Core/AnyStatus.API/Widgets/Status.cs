@@ -7,9 +7,9 @@ namespace AnyStatus.API.Widgets
     {
         private StatusDescription _statusMetadata;
 
+        //todo: move to configuration or database
         //todo: review status code changes from version 2.0
         //todo: remove unused statuses
-        //todo: move to configuration or database
         //colors: https://www.materialpalette.com/colors
 
         public static readonly Status Error = new Status(10, 1, "Internal Error", "Red", "ErrorIcon");
@@ -26,7 +26,9 @@ namespace AnyStatus.API.Widgets
         public static readonly Status Stopped = new Status(15, 12, nameof(Stopped), "Gray", "StopIcon");
         public static readonly Status Paused = new Status(16, 13, nameof(Paused), "Gray", "PauseIcon");
         public static readonly Status Unknown = new Status(1, 14, nameof(Unknown), "Gray", "HelpIcon");
-        public static readonly Status None = new Status(0, 15, nameof(None), "Gray", "NoneIcon");
+        public static readonly Status Down = new Status(17, 15, nameof(Paused), "Red", "DownIcon");
+        public static readonly Status Up = new Status(18, 16, nameof(Paused), "LimeGreen", "UpIcon");
+        public static readonly Status None = new Status(0, 17, nameof(None), "Gray", "NoneIcon");
 
         //Material
         //public static readonly Status Error = new Status(10, 1, nameof(Error), "#f44336", "ErrorIcon");

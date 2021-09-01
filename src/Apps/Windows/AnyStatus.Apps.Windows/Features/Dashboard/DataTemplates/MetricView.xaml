@@ -6,24 +6,18 @@
              xmlns:charts="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard.Controls"
              xmlns:widgets="clr-namespace:AnyStatus.API.Widgets;assembly=AnyStatus.API"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=widgets:Metric, IsDesignTimeCreatable=False}">
-
+             d:DataContext="{d:DesignInstance Type=widgets:MetricWidget, IsDesignTimeCreatable=False}">
     <DockPanel Style="{DynamicResource WidgetPanel}">
-
         <charts:ColorStatusIndicator DockPanel.Dock="Left"/>
-
-        <Grid DockPanel.Dock="Left" MinWidth="48">
-            <Rectangle Opacity="0.05" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <TextBlock Margin="7" FontWeight="Normal" FontStretch="Condensed" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0}">
-                        <Binding Path="" />
-                        <Binding Path="Value" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-        </Grid>
-
+        <charts:IconStatusIndicator DockPanel.Dock="Left"/>
+        <TextBlock DockPanel.Dock="Right" Margin="12" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0}">
+                    <Binding Path="" />
+                    <Binding Path="Value" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <charts:Sparkline Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel, AncestorLevel=1}, Path=ActualHeight}"
                           DockPanel.Dock="Right"
                           Size="10"
@@ -31,9 +25,6 @@
                           MaxValue="{Binding MaxValue}" 
                           Values="{Binding Values}"
                           Value="{Binding Value}"/>
-
         <TextBlock Margin="7,0,0,0" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
-
     </DockPanel>
-
 </UserControl>

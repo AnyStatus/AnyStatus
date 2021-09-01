@@ -15,7 +15,7 @@ namespace AnyStatus.Plugins.Binance
 
             request.Context.Text = response.LastPrice.ToString("N5");
 
-            request.Context.Status = Status.OK;
+            request.Context.Status = response.PriceChangePercent == 0 ? Status.None : response.PriceChangePercent > 0 ? Status.Up : Status.Down;
         }
     }
 }
