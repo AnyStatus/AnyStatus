@@ -6,7 +6,6 @@
              xmlns:widgets="clr-namespace:AnyStatus.API.Widgets;assembly=AnyStatus.API"
              xmlns:controls="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard.Controls" 
              xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=widgets:StatusWidget, IsDesignTimeCreatable=False}">
     <UserControl.Resources>
