@@ -1,37 +1,110 @@
+name: '3.0$(Rev:.r).0'
+
 trigger:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - src
+    exclude:
+    - '*.md'
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'x86|x64|ARM'
+  buildPlatform: 'x64'
   buildConfiguration: 'Release'
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
 steps:
+
+- powershell: |
+      [xml]$manifest=get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
+      $manifest.Package.Identity.Version=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+
+- powershell: |
+      [xml]$manifest=get-content ".\src\Core\AnyStatus.API\AnyStatus.API.csproj"
+      $manifest.Project.PropertyGroup.PackageVersion=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Core\AnyStatus.API\AnyStatus.API.csproj")
+
+- task: DownloadSecureFile@1
+  name: signingCert
+  displayName: 'Download CA certificate'
+  inputs:
+    secureFile: 'AnyStatus.Apps.Windows.Package_TemporaryKey.pfx'
+
 - task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 3.1.x'
+  displayName: 'Use .NET Core sdk'
   inputs:
-    version: 3.1.x
+    packageType: sdk
+    version: 3.1.402
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+
+- task: FileTransform@2
+  condition: succeededOrFailed()
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
 
 - task: MSBuild@1
   inputs:
-    solution: PrinterAgent.Package\PrinterAgent.Package.wapproj
-    platform: 'x86'
-    configuration: '$(BuildConfiguration)'
-    msbuildArguments: '/t:restore'
-
-- task: VSBuild@1
-  inputs:
-    platform: 'x86'
+    platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+    msbuildArguments: '/t:restore'
+
+- task: MSBuild@1
+  inputs:
+    solution: src/Apps/Windows/AnyStatus.Apps.Windows.Package/AnyStatus.Apps.Windows.Package.wapproj
+    platform: $(buildPlatform)
+    configuration: $(buildConfiguration)
+    msbuildArguments: '/p:AppxBundlePlatforms="x64" 
+                  /p:AppxPackageDir="$(appxPackageDir)" 
+                  /p:AppxBundle=Always 
+                  /p:UapAppxPackageBuildMode=StoreUpload 
+                  /p:AppxPackageSigningEnabled=true
+                  /p:PackageCertificateThumbprint="" 
+                  /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+
+  displayName: 'Package the App'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/AnyStatus.API.*.nupkg'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: AnyStatus
+
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Start'
+    AgentResolution: '1080p'
+
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\AnyStatus*.Tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    uiTests: true
+    otherConsoleOptions: '/Framework:FrameworkCore10'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Stop'
+  condition: always()
