@@ -61,7 +61,7 @@ steps:
     platform: '$(buildPlatform)'
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
-    msbuildArguments: '/t:restore'
+    msbuildArguments: '/t:restore;build'
 
 - task: MSBuild@1
   inputs:
