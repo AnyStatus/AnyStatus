@@ -25,7 +25,7 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: PrinterAgent.Package\PrinterAgent.Package.wapproj
-    platform: '$(BuildPlatform)'
+    platform: 'x86'
     configuration: '$(BuildConfiguration)'
     msbuildArguments: '/t:restore'
 
