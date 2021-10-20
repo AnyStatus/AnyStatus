@@ -50,6 +50,11 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.sln'
+
 #- task: FileTransform@2
 #  condition: succeededOrFailed()
 #  inputs:
