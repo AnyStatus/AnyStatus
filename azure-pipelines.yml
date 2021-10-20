@@ -63,18 +63,18 @@ steps:
 #    configuration: '$(buildConfiguration)'
 #    msbuildArguments: '/t:restore;build'
 
-#- task: MSBuild@1
-#  inputs:
-#    solution: src/Apps/Windows/AnyStatus.Apps.Windows.Package/AnyStatus.Apps.Windows.Package.wapproj
-#    platform: $(buildPlatform)
-#    configuration: $(buildConfiguration)
-#    msbuildArguments: '/p:AppxBundlePlatforms="x64" 
-#                  /p:AppxPackageDir="$(appxPackageDir)" 
-#                  /p:AppxBundle=Always 
-#                  /p:UapAppxPackageBuildMode=StoreUpload 
-#                  /p:AppxPackageSigningEnabled=false
-#                  /p:PackageCertificateThumbprint="" 
-#                  /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
+- task: MSBuild@1
+  inputs:
+   solution: src/Apps/Windows/AnyStatus.Apps.Windows.Package/AnyStatus.Apps.Windows.Package.wapproj
+   platform: $(buildPlatform)
+   configuration: $(buildConfiguration)
+   msbuildArguments: '/p:AppxBundlePlatforms="x86" 
+                 /p:AppxPackageDir="$(appxPackageDir)" 
+                 /p:AppxBundle=Always 
+                 /p:UapAppxPackageBuildMode=StoreUpload 
+                 /p:AppxPackageSigningEnabled=false
+                 /p:PackageCertificateThumbprint="" 
+                 /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
 
 #  displayName: 'Package the App'
 
@@ -83,8 +83,8 @@ steps:
 #    contents: '**/AnyStatus.API.*.nupkg'
 #    targetFolder: $(Build.ArtifactStagingDirectory)
 
-#- publish: $(Build.ArtifactStagingDirectory)
-#  artifact: AnyStatus
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: AnyStatus
 
 #- task: Windows Application Driver@0
 #  inputs:
