@@ -13,7 +13,7 @@ namespace AnyStatus.Plugins.Binance
         {
             var response = await _binance.GetSymbolPriceAsync(request.Context.Symbol);
 
-            request.Context.Text = response.LastPrice.ToString("N5");
+            request.Context.Text = response.LastPrice.ToString("#,###0.############################");
 
             request.Context.Status = response.PriceChangePercent == 0 ? Status.None : response.PriceChangePercent > 0 ? Status.Up : Status.Down;
         }
