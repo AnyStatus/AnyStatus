@@ -34,3 +34,6 @@ steps:
 #   inputs:
 #     platform: '$(buildPlatform)'
 #     configuration: '$(buildConfiguration)'
+
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: AnyStatus
