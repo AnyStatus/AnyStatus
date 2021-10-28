@@ -24,16 +24,28 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
     
-# - task: VSBuild@1
-#   inputs:
-#     solution: '$(solution)'
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Start'
+    AgentResolution: '1080p'
 
-# - task: VSTest@2
-#   inputs:
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\AnyStatus*.Tests.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    uiTests: true
+    otherConsoleOptions: '/Framework:FrameworkCore10'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Stop'
+  condition: always()
 
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: AnyStatus
