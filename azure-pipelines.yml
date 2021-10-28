@@ -1,4 +1,4 @@
-name: '3.0$(Rev:.r).0'
+name: '3.1$(Rev:.r).0'
 
 trigger:
   branches:
@@ -21,84 +21,43 @@ variables:
 
 steps:
 
-#- powershell: |
-#      [xml]$manifest=get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
-#      $manifest.Package.Identity.Version=$Env:BUILD_BUILDNUMBER
-#      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+# package version
+- powershell: |
+      [xml]$manifest=get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
+      $manifest.Package.Identity.Version=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
 
-#- powershell: |
-#      [xml]$manifest=get-content ".\src\Core\AnyStatus.API\AnyStatus.API.csproj"
-#      $manifest.Project.PropertyGroup.PackageVersion=$Env:BUILD_BUILDNUMBER
-#      $manifest.save(".\src\Core\AnyStatus.API\AnyStatus.API.csproj")
+# API version
+- powershell: |
+      [xml]$manifest=get-content ".\src\Core\AnyStatus.API\AnyStatus.API.csproj"
+      $manifest.Project.PropertyGroup.PackageVersion=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Core\AnyStatus.API\AnyStatus.API.csproj")
 
-#- task: DownloadSecureFile@1
-#  name: signingCert
-#  displayName: 'Download CA certificate'
-#  inputs:
-#    secureFile: 'AnyStatus.Apps.Windows.Package_TemporaryKey.pfx'
+# app settings
+- task: FileTransform@2
+  condition: succeededOrFailed()
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
+
+# restore
 
 - task: NuGetToolInstaller@1
 
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
+- task: NuGetCommand@2
   inputs:
-    packageType: sdk
-    version: 3.1.x
+    restoreSolution: '$(solution)'
 
-- task: DotNetCoreCLI@2
+# build
+
+- task: VSBuild@1
   inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
+    platform: 'x64'
+    solution: '$(solution)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
 
-#- task: FileTransform@2
-#  condition: succeededOrFailed()
-#  inputs:
-#    folderPath: '$(System.DefaultWorkingDirectory)'
-#    jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
-
-- task: MSBuild@1
-  inputs:
-   platform: 'x64'
-   solution: '$(solution)'
-   configuration: '$(buildConfiguration)'
-   msbuildArguments: '/t:build'
-
-- task: MSBuild@1
-  inputs:
-   platform: 'x86'
-   solution: '$(solution)'
-   configuration: '$(buildConfiguration)'
-   msbuildArguments: '/t:build'
-
-- task: MSBuild@1
-  inputs:
-    solution: src/Apps/Windows/AnyStatus.Apps.Windows.Package/AnyStatus.Apps.Windows.Package.wapproj
-    platform: '$(BuildPlatform)'
-    configuration: '$(BuildConfiguration)'
-    msbuildArguments: '/t:restore'
-
-- task: MSBuild@1
-  inputs:
-   solution: src/Apps/Windows/AnyStatus.Apps.Windows.Package/AnyStatus.Apps.Windows.Package.wapproj
-   platform: $(buildPlatform)
-   configuration: $(buildConfiguration)
-   msbuildArguments: '/p:AppxBundlePlatforms="x86|x64" 
-                 /p:AppxPackageDir="$(appxPackageDir)" 
-                 /p:AppxBundle=Always 
-                 /p:UapAppxPackageBuildMode=StoreUpload 
-                 /p:AppxPackageSigningEnabled=false
-                 /p:PackageCertificateThumbprint="" 
-                 /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"'
-
-#  displayName: 'Package the App'
-
-#- task: CopyFiles@2
-#  inputs:
-#    contents: '**/AnyStatus.API.*.nupkg'
-#    targetFolder: $(Build.ArtifactStagingDirectory)
-
-- publish: $(Build.ArtifactStagingDirectory)
-  artifact: AnyStatus
+# test
 
 #- task: Windows Application Driver@0
 #  inputs:
@@ -122,3 +81,8 @@ steps:
 #  inputs:
 #    OperationType: 'Stop'
 #  condition: always()
+
+# publish
+
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: AnyStatus
