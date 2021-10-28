@@ -84,5 +84,10 @@ steps:
 
 # publish
 
+- task: CopyFiles@2
+  inputs:
+    contents: '**/AnyStatus.API.*.nupkg'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: AnyStatus
