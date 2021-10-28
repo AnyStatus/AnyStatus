@@ -14,6 +14,7 @@
     <AssemblyName>AnyStatus</AssemblyName>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <DebugType Condition="'$(Configuration)'=='Release'">None</DebugType>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
