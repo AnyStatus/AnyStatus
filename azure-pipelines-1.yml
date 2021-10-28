@@ -1,5 +1,14 @@
+name: '3.1$(Rev:.r).0'
+
 trigger:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - src
+    exclude:
+    - '*.md'
 
 pool:
   vmImage: 'windows-latest'
@@ -11,11 +20,35 @@ variables:
   appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
 
 steps:
+
+# package version
+- powershell: |
+      [xml]$manifest=get-content ".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest"
+      $manifest.Package.Identity.Version=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Apps\Windows\AnyStatus.Apps.Windows.Package\Package.appxmanifest")
+
+# API version
+- powershell: |
+      [xml]$manifest=get-content ".\src\Core\AnyStatus.API\AnyStatus.API.csproj"
+      $manifest.Project.PropertyGroup.PackageVersion=$Env:BUILD_BUILDNUMBER
+      $manifest.save(".\src\Core\AnyStatus.API\AnyStatus.API.csproj")
+
+# app settings
+- task: FileTransform@2
+  condition: succeededOrFailed()
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    jsonTargetFiles: '.\src\Apps\Windows\AnyStatus.Apps.Windows\appsettings.json'
+
+# restore
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+# build
 
 - task: VSBuild@1
   inputs:
@@ -23,7 +56,9 @@ steps:
     solution: '$(solution)'
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
-    
+
+# test
+
 - task: Windows Application Driver@0
   inputs:
     OperationType: 'Start'
@@ -46,6 +81,8 @@ steps:
   inputs:
     OperationType: 'Stop'
   condition: always()
+
+# publish
 
 - publish: $(Build.ArtifactStagingDirectory)
   artifact: AnyStatus
