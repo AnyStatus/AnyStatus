@@ -3,6 +3,7 @@ using AnyStatus.Core.Services;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,14 +13,26 @@ namespace AnyStatus.Core.Telemetry
     public sealed class AppInsightsTelemetry : ITelemetry, IDisposable
     {
         private TelemetryClient _client;
+        private readonly ILogger _logger;
         private readonly IAppSettings _settings;
 
-        public AppInsightsTelemetry(IAppSettings settings) => _settings = settings;
+        public AppInsightsTelemetry(ILogger logger, IAppSettings settings)
+        {
+            _logger = logger;
+            _settings = settings;
+        }
 
         public void Enable()
         {
             if (_client is not null)
             {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_settings.InstrumentationKey))
+            {
+                _logger.LogDebug("Telemetry instrumentation key not found.");
+
                 return;
             }
 
@@ -30,6 +43,8 @@ namespace AnyStatus.Core.Telemetry
             _client.Context.Session.Id = Guid.NewGuid().ToString();
             _client.Context.Device.OperatingSystem = Environment.OSVersion.ToString();
             _client.Context.Component.Version = GetType().Assembly.GetName().Version.ToString();
+
+            _logger.LogWarning("Telemetry is enabled.");
         }
 
         public void Disable()
@@ -42,6 +57,8 @@ namespace AnyStatus.Core.Telemetry
             _client.Flush();
 
             _client = null;
+
+            _logger.LogDebug("Telemetry is disabled.");
         }
 
         public void Dispose() => _client?.Flush();

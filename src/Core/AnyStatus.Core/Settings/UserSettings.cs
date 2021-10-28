@@ -10,7 +10,7 @@ namespace AnyStatus.Core.Settings
         {
             Theme = "Dark";
             StartMinimized = true;
-            SendAnonymousUsageStatistics = true;
+            SendAnonymousUsageStatistics = false;
             WindowsSettings = new Dictionary<string, WindowSettings>();
         }
 
@@ -26,6 +26,7 @@ namespace AnyStatus.Core.Settings
 
         [Order(3)]
         [DisplayName("Send anonymous usage statistics")]
+        [Description("Help improving AnyStatus by sending anonymous usage statistics")]
         public bool SendAnonymousUsageStatistics { get; set; }
     }
 }
