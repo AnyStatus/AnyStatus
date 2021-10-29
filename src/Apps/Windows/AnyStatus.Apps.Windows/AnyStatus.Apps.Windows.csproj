@@ -7,22 +7,14 @@
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>AnyStatus.Apps.Windows.Program</StartupObject>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Platforms>AnyCPU;x86;x64</Platforms>
+    <Platforms>x86;x64</Platforms>
     <PlatformTarget>$(Platform)</PlatformTarget>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <!--<PublishSingleFile>true</PublishSingleFile>-->
     <AssemblyName>AnyStatus</AssemblyName>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <DebugType Condition="'$(Configuration)'=='Release'">None</DebugType>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Properties\**" />
-    <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Properties\**" />
-    <Page Remove="Properties\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <TrimmerRootAssembly Include="AnyStatus.Plugins" />
@@ -70,15 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Features\Endpoints\OAuthEnpointView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Features\Endpoints\OAuthEnpointView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>
