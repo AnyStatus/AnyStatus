@@ -8,20 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ui:SimpleStackPanel Margin="20">
-        <TextBlock FontWeight="Bold">About</TextBlock>
         <TextBlock>AnyStatus 3.0.0.0</TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">License</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">3rd Party</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/blob/main/LICENSE">License</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/blob/main/3rdParty">3rd Party</Hyperlink></TextBlock>
         <TextBlock></TextBlock>
-        <TextBlock FontWeight="Bold">Help and Support</TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Documentation</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Feedback</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">GitHub</Hyperlink></TextBlock>
+        <TextBlock>Get Help</TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us/docs">Read the docs</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/issues">Report a bug</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us/feedback">Send feedback</Hyperlink></TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus">GitHub</Hyperlink></TextBlock>
         <TextBlock></TextBlock>
-        <TextBlock FontWeight="Bold">Social</TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Twitter</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us">Facebook</Hyperlink></TextBlock>
-        <TextBlock></TextBlock>
-        <TextBlock>© 2017-2022 Alon Amsellem</TextBlock>
+        <TextBlock>Follow</TextBlock>
+        <TextBlock><Hyperlink NavigateUri="https://twitter.com/AnyStatusApp">Twitter</Hyperlink></TextBlock>
     </ui:SimpleStackPanel>
 </UserControl>
