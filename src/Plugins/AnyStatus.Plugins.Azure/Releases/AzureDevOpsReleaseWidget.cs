@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus.Plugins.Azure.Releases
 {
     [Category("Azure DevOps")]
-    [DisplayName("Azure DevOps Release Status")]
+    [DisplayName("Azure DevOps Release")]
     [Description("View the status of releases on Azure DevOps")]
     public class AzureDevOpsReleaseWidget : StatusWidget,
         IAzureDevOpsWidget,

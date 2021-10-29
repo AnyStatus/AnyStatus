@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus.Plugins.Azure.DevOps.Builds
 {
     [Category("Azure DevOps")]
-    [DisplayName("Azure DevOps Pipeline Status")]
+    [DisplayName("Azure DevOps Pipeline")]
     [Description("View the status of pipelines on Azure DevOps")]
     public class AzureDevOpsPipelineWidget : StatusWidget,
         IAzureDevOpsWidget,
