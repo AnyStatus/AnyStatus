@@ -31,16 +31,16 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
                 throw new ArgumentNullException(nameof(source));
             }
 
-            var properties = new List<IPropertyViewModel>();
+            var propertyViewModels = new List<IPropertyViewModel>();
 
-            properties.AddRange(GetProperties(source).Select(property => Build(source, property, properties)).Where(vm => vm != null));
+            propertyViewModels.AddRange(GetProperties(source).Select(property => BuildPropertyViewModel(source, property, propertyViewModels)).Where(vm => vm != null));
 
-            return properties;
+            return propertyViewModels;
         }
 
-        private IPropertyViewModel Build(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
+        private IPropertyViewModel BuildPropertyViewModel(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
         {
-            var property = Create(source, propertyInfo, properties);
+            var property = CreatePropertyViewModel(source, propertyInfo, properties);
 
             if (property is null)
             {
@@ -60,7 +60,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
             return property;
         }
 
-        private IPropertyViewModel Create(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
+        private IPropertyViewModel CreatePropertyViewModel(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
         {
             if (Attribute.IsDefined(propertyInfo, typeof(EndpointSourceAttribute)))
             {
