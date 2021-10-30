@@ -8,12 +8,12 @@ A remote control for your CI/CD pipelines and more.
 
 [AnyStatus](https://www.anystat.us) is a powerful tool that brings together metrics, events, and information from various sources into one simple dashboard. Designed for extensibility, AnyStatus enables you to control and monitor your stack remotely. Including CI/CD pipelines, cloud and on-premise resources, deployment environments, networks, containers, pull requests, work items, and more.
 
-## Installation
-
-### Microsoft Store
+## Download
 
 Download and install AnyStatus from the [Microsoft Store](https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb). This allows you to always be on the latest version when we release new builds with automatic upgrades.
 
+<a href="https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb"><img height="52" src="art/download.png"></img></a>
+  
 ## Plugins and Widgets
 
 Some plugins come pre-installed, and are a great starting points for creating your own.
