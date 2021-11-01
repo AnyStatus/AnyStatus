@@ -11,12 +11,15 @@ namespace AnyStatus.Apps.Windows
         [STAThread]
         private static void Main()
         {
+            var mutexAcquired = false;
             var mutex = new Mutex(initiallyOwned: true, name: "{8F6F0AC4-B9A1-45fd-A8CF-72F04E6BDE8F}");
 
             try
             {
                 if (mutex.WaitOne(millisecondsTimeout: 200, true))
                 {
+                    mutexAcquired = true;
+
                     Bootstrapper.Bootstrap().Run();
                 }
                 else
@@ -26,11 +29,14 @@ namespace AnyStatus.Apps.Windows
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show($"A fatal error occurred while starting AnyStatus.\n{ex}", "AnyStatus", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Oops! An unexpected error occurred.\n" + ex.ToString(), "AnyStatus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                mutex.ReleaseMutex();
+                if (mutexAcquired)
+                {
+                    mutex?.ReleaseMutex();
+                }
             }
         }
     }
