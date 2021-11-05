@@ -20,7 +20,19 @@
                     Margin="7,0,7,12"
                     ui:ControlHelper.Header="{StaticResource HeaderTemplate}"
                     IsReadOnly="{Binding IsReadOnly}"
-                    Text="{Binding Value}" />
+                    Text="{Binding Value}"
+                    AcceptsReturn="{Binding AcceptReturns}"
+                    VerticalScrollBarVisibility="Auto">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Wrap}" Value="True">
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </DataTemplate>
             <!--  boolean  -->
             <DataTemplate DataType="{x:Type local:BooleanPropertyViewModel}">

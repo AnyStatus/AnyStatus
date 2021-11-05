@@ -93,7 +93,14 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
 
             if (propertyInfo.PropertyType == typeof(string))
             {
-                return new TextPropertyViewModel(propertyInfo, source);
+                var vm = new TextPropertyViewModel(propertyInfo, source);
+                var attribute = propertyInfo.GetCustomAttribute<TextAttribute>();
+                if (attribute is not null)
+                {
+                    vm.Wrap = attribute.Wrap;
+                    vm.AcceptReturns = attribute.AcceptReturns;
+                }
+                return vm;
             }
 
             if (propertyInfo.PropertyType == typeof(bool))
