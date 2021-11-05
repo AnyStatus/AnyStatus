@@ -35,7 +35,7 @@ namespace AnyStatus.Plugins.NuGet.API
 
             var packageMetadata = packagesMetadata.FirstOrDefault(m => string.Equals(m.Id, packageId, StringComparison.InvariantCultureIgnoreCase));
 
-            return packageMetadata ?? throw new Exception("NuGet package not found."); ;
+            return packageMetadata ?? throw new Exception("NuGet package not found.");
         }
 
         internal async Task<NuGetResource> GetResourceAsync(string name, CancellationToken cancellationToken)
