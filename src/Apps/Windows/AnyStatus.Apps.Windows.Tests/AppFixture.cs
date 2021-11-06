@@ -27,6 +27,7 @@ namespace AnyStatus.Apps.Windows.Tests
 
         private static string GetAppPath()
         {
+            Console.WriteLine("Current Directory: {0}", Directory.GetCurrentDirectory());
 #if DEBUG
             const string config = "Debug";
 #else
