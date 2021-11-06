@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Azure.WorkItems
 {
-    public class AzureDevOpsWorkItemsQuery : AsyncStatusCheck<AzureDevOpsWorkItemsWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
+    public class AzureDevOpsWorkItemsHandler : AsyncStatusCheck<AzureDevOpsWorkItemsWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
     {
         const string query = "SELECT [System.Id] FROM WorkItems " +
                              "WHERE [System.AssignedTo] = @Me " +
@@ -18,7 +18,7 @@ namespace AnyStatus.Plugins.Azure.WorkItems
 
         private readonly IDispatcher _dispatcher;
 
-        public AzureDevOpsWorkItemsQuery(IDispatcher dispatcher) => _dispatcher = dispatcher;
+        public AzureDevOpsWorkItemsHandler(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
         public IAzureDevOpsEndpoint Endpoint { get; set; }
 

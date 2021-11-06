@@ -1,8 +1,5 @@
-﻿using AnyStatus.API.Attributes;
-using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
-using AnyStatus.Core.App;
+﻿using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Core.Extensions;
-using MediatR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,16 +10,9 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
 {
     internal class PropertyViewModelBuilder : IPropertyViewModelBuilder
     {
-        private readonly IMediator _mediator;
-        private readonly IAppContext _context;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly PropertyViewModelFactory _propertyViewModelFactory;
 
-        public PropertyViewModelBuilder(IServiceProvider serviceProvider, IMediator mediator, IAppContext context)
-        {
-            _context = context;
-            _mediator = mediator;
-            _serviceProvider = serviceProvider;
-        }
+        public PropertyViewModelBuilder(PropertyViewModelFactory propertyViewModelFactory) => _propertyViewModelFactory = propertyViewModelFactory;
 
         public IEnumerable<IPropertyViewModel> Build(object source)
         {
@@ -31,16 +21,16 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
                 throw new ArgumentNullException(nameof(source));
             }
 
-            var propertyViewModels = new List<IPropertyViewModel>();
+            var viewModels = new List<IPropertyViewModel>();
 
-            propertyViewModels.AddRange(GetProperties(source).Select(property => BuildPropertyViewModel(source, property, propertyViewModels)).Where(vm => vm != null));
+            viewModels.AddRange(GetProperties(source).Select(property => Build(source, property, viewModels)).Where(vm => vm is not null));
 
-            return propertyViewModels;
+            return viewModels;
         }
 
-        private IPropertyViewModel BuildPropertyViewModel(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
+        private IPropertyViewModel Build(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
         {
-            var property = CreatePropertyViewModel(source, propertyInfo, properties);
+            var property = _propertyViewModelFactory.Create(source, propertyInfo, properties);
 
             if (property is null)
             {
@@ -49,67 +39,15 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Controls.PropertyGrid
 
             property.Value = propertyInfo.GetValue(source);
 
-            var displayNameAttribute = propertyInfo.GetCustomAttributes<DisplayNameAttribute>().FirstOrDefault();
+            var displayNameAttribute = propertyInfo.GetCustomAttribute<DisplayNameAttribute>();
 
             property.Header = displayNameAttribute is null || string.IsNullOrWhiteSpace(displayNameAttribute.DisplayName) ? propertyInfo.Name : displayNameAttribute.DisplayName;
 
-            var readOnlyAttribute = propertyInfo.GetCustomAttributes<ReadOnlyAttribute>().FirstOrDefault();
-
-            property.IsReadOnly = readOnlyAttribute?.IsReadOnly ?? default;
+            property.IsReadOnly = propertyInfo.GetCustomAttribute<ReadOnlyAttribute>()?.IsReadOnly ?? default;
 
             return property;
         }
 
-        private IPropertyViewModel CreatePropertyViewModel(object source, PropertyInfo propertyInfo, IEnumerable<IPropertyViewModel> properties)
-        {
-            if (Attribute.IsDefined(propertyInfo, typeof(EndpointSourceAttribute)))
-            {
-                var attribute = propertyInfo.GetCustomAttribute<ItemsSourceAttribute>();
-                return _serviceProvider.GetService(attribute.Type) is IItemsSource itemsSource ?
-                    new EndpointPropertyViewModel(_mediator, _context, propertyInfo, source, itemsSource, properties, attribute.Autoload) :
-                    null;
-            }
-
-            if (Attribute.IsDefined(propertyInfo, typeof(ItemsSourceAttribute)))
-            {
-                var attribute = propertyInfo.GetCustomAttribute<ItemsSourceAttribute>();
-                return _serviceProvider.GetService(attribute.Type) is IItemsSource itemsSource ?
-                    new DropDownPropertyViewModel(propertyInfo, source, itemsSource, properties, attribute.Autoload) :
-                    null;
-            }
-
-            if (Attribute.IsDefined(propertyInfo, typeof(AsyncItemsSourceAttribute)))
-            {
-                var attribute = propertyInfo.GetCustomAttribute<AsyncItemsSourceAttribute>();
-                return _serviceProvider.GetService(attribute.Type) is IAsyncItemsSource asyncItemsSource ?
-                    new DropDownPropertyViewModel(propertyInfo, source, asyncItemsSource, properties, attribute.Autoload) :
-                    null;
-            }
-
-            if (propertyInfo.PropertyType.IsEnum)
-            {
-                return new DropDownPropertyViewModel(propertyInfo, source, Enum.GetNames(propertyInfo.PropertyType).Select(i => new NameValueItem(i, i)));
-            }
-
-            if (propertyInfo.PropertyType == typeof(string))
-            {
-                return new TextPropertyViewModel(propertyInfo, source);
-            }
-
-            if (propertyInfo.PropertyType == typeof(bool))
-            {
-                return new BooleanPropertyViewModel(propertyInfo, source);
-            }
-
-            if (propertyInfo.PropertyType.IsNumeric())
-            {
-                return new NumericPropertyViewModel(propertyInfo, source);
-            }
-
-            return null;
-        }
-
-        private static IEnumerable<PropertyInfo> GetProperties(object source)
-            => source.GetType().GetProperties().Where(p => p.CanWrite && p.IsBrowsable()).OrderBy(p => p.Order());
+        private static IEnumerable<PropertyInfo> GetProperties(object source) => source.GetType().GetProperties().Where(p => p.CanWrite && p.IsBrowsable()).OrderBy(p => p.Order());
     }
 }
