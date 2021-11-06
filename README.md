@@ -2,14 +2,16 @@
 
 [AnyStatus](https://www.anystat.us) is a desktop application that brings together Metrics and Events from various sources into one simple dashboard. AnyStatus integrates with Azure DevOps, Jenkins, Docker, Binance, and more. You can also develop your own custom plugins and widgets.
 
-![AnyStatus](https://www.anystat.us/assets/images/screenshots/anystatus-3.0.293-preview.png)
-
 ## Download
 
 Download and install AnyStatus from the [Microsoft Store](https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb). This allows you to always be on the latest version when we release new builds with automatic upgrades.
 
 <a href="https://www.microsoft.com/en-us/p/anystatus/9p044vpk62sb"><img height="52" src="art/download.png"></img></a>
-  
+
+## Screenshots
+
+![AnyStatus](https://www.anystat.us/assets/images/screenshots/anystatus-3.0.293-preview.png)
+
 ## Status
 
 |Build|Status|
