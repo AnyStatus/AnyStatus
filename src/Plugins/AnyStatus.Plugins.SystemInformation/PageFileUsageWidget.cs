@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("Page File Usage")]
     [Description("Shows the percentage of page file usage")]
     public class PageFileUsageWidget : MetricWidget, IPollable, IStandardWidget

@@ -6,7 +6,7 @@ using System.Net;
 namespace AnyStatus.Plugins.HealthChecks
 {
     [DisplayName("HTTP")]
-    [Category("Health Checks")]
+    [Category("Network")]
     [Description("Monitor the health of HTTP servers by sending periodic health checks")]
     public class HttpHealthCheckWidget : StatusWidget, IPollable, IWebPage, IStandardWidget
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("Process CPU Usage")]
     [Description("The CPU usage of a single process")]
     public class ProcessCpuUsageWidget : MetricWidget, IPollable, IStandardWidget

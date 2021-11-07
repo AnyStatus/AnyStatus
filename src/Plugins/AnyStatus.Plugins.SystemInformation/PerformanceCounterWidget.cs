@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("Performance Counter")]
     [Description("The result of a performance counter query")]
     public class PerformanceCounterWidget : MetricWidget, IPollable, IStandardWidget

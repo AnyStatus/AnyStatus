@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus.Plugins.SystemInformation.FileSystem
 {
     [DisplayName(DefaultName)]
-    [Category("System")]
+    [Category("System Information")]
     [Description("Checks whether a file exists")]
     public class FileExistsWidget : StatusWidget, IPollable, IStandardWidget
     {

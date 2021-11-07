@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus.Plugins.HealthChecks
 {
     [DisplayName("Ping")]
-    [Category("Health Checks")]
+    [Category("Network")]
     [Description("Monitor the reachability of a host address by sending periodic health checks")]
     public class PingHealthCheckWidget : StatusWidget, IPollable, IStandardWidget
     {

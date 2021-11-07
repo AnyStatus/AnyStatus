@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("Thread Count")]
     [Description("The number of running CPU threads")]
     public class ThreadCountWidget : MetricWidget, IPollable, IStandardWidget

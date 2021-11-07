@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("CPU Usage")]
     [Description("The total CPU usage (percentage)")]
     public class CpuUsageWidget : MetricWidget, IPollable, IStandardWidget

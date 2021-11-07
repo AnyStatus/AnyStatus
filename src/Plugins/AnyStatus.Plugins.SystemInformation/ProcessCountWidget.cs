@@ -4,7 +4,7 @@ using MediatR;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("Process Count")]
     [Description("The number of total processes")]
     public class ProcessCountWidget : MetricWidget, IPollable, IStandardWidget

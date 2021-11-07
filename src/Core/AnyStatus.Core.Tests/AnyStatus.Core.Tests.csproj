@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Plugins\AnyStatus.Plugins.Demo\AnyStatus.Plugins.Demo.csproj" />
     <ProjectReference Include="..\AnyStatus.Core\AnyStatus.Core.csproj" />
-    <ProjectReference Include="..\..\Plugins\AnyStatus.Plugins\AnyStatus.Plugins.csproj" />
   </ItemGroup>
 
   <ItemGroup>

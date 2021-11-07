@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
-    [Category("System")]
+    [Category("System Information")]
     [DisplayName("RAM Usage")]
     [Description("The total RAM usage (percentage)")]
     public class RamUsageWidget : MetricWidget, IPollable, IStandardWidget

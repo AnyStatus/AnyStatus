@@ -11,7 +11,7 @@ namespace AnyStatus.Plugins.HealthChecks
     }
 
     [DisplayName("Port Check")]
-    [Category("Health Checks")]
+    [Category("Network")]
     [Description("Check the availability of an TCP or UDP endpoint")]
     public class PortHealthCheckWidget : StatusWidget, IPollable, IStandardWidget
     {
