@@ -16,12 +16,12 @@ Download and install AnyStatus from the [Microsoft Store](https://www.microsoft.
 
 |Build|Status|
 |-------|------|
-|GitHub Actions|![example workflow](https://github.com/anystatus/anystatus/actions/workflows/dotnet.yml/badge.svg)|
-|Azure DevOps|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?repoName=AnyStatus%2FAnyStatus&branchName=main)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&repoName=AnyStatus%2FAnyStatus&branchName=main)|
+|GitHub|![example workflow](https://github.com/anystatus/anystatus/actions/workflows/dotnet.yml/badge.svg)|
+|Azure|[![Build Status](https://dev.azure.com/anystatus/AnyStatus/_apis/build/status/AnyStatus?repoName=AnyStatus%2FAnyStatus&branchName=main)](https://dev.azure.com/anystatus/AnyStatus/_build/latest?definitionId=1&repoName=AnyStatus%2FAnyStatus&branchName=main)|
 
 |Release|Status|
 |-------|------|
-|Microsoft Store|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/1/5)|
+|Store|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/1/5)|
 |NuGet|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/2/6)|
 
 ## License
