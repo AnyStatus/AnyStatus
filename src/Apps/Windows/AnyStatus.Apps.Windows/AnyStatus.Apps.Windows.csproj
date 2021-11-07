@@ -36,7 +36,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\AnyStatus.Core\AnyStatus.Core.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.AppVeyor\AnyStatus.Plugins.AppVeyor.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Binance\AnyStatus.Plugins.Binance.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Network\AnyStatus.Plugins.Network.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.TeamCity\AnyStatus.Plugins.TeamCity.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins\AnyStatus.Plugins.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Azure\AnyStatus.Plugins.Azure.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Jenkins\AnyStatus.Plugins.Jenkins.csproj" />
