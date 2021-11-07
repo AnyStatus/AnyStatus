@@ -22,6 +22,7 @@ Download and install AnyStatus from the [Microsoft Store](https://www.microsoft.
 |Release|Status|
 |-------|------|
 |Microsoft Store|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/1/5)|
+|NuGet|![Deployment](https://vsrm.dev.azure.com/anystatus/_apis/public/Release/badge/dca19306-f20b-4442-9d85-cd9c57ec81bf/2/6)|
 
 ## License
 
