@@ -2,7 +2,7 @@
 
 namespace AnyStatus.API.Widgets
 {
-    public abstract class TextLabelWidget : StatusWidget
+    public abstract class TextWidget : StatusWidget
     {
         private string _text;
 

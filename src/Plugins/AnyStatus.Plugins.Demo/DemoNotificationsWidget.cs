@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.Demo
     [Category("Demo")]
     [DisplayName("Notifications Demo")]
     [Description("An example for sending desktop notifications from widgets.")]
-    public class DemoNotificationsWidget : TextLabelWidget, IPollable, IStandardWidget
+    public class DemoNotificationsWidget : TextWidget, IPollable, IStandardWidget
     {
     }
 

@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Widgets;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.API.Widgets;
 using AnyStatus.Plugins.NuGet.API;
 using System.Threading;
 using System.Threading.Tasks;

@@ -12,7 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.DataTemplates
         private static string GetTemplateKey(object widget) => widget switch
         {
             FolderWidget _ => "FolderTemplate",
-            TextLabelWidget _ => "LabelTemplate",
+            TextWidget _ => "LabelTemplate",
             IMetricWidget _ => "MetricTemplate",
             IPipeline _ => "PipelineTemplate",
             _ => "WidgetTemplate"

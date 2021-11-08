@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.Roslyn
     [Category("Roslyn")]
     [DisplayName("Inline Roslyn Text Label")]
     [Description("Run an inline Roslyn script to update the label of a widget")]
-    public class InlineRoslynLabel : TextLabelWidget, IStandardWidget, IPollable
+    public class InlineRoslynLabel : TextWidget, IStandardWidget, IPollable
     {
         public string Script { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Services;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.API.Services;
 using AnyStatus.API.Widgets;
 using Docker.DotNet.Models;
 using System.Collections.Generic;

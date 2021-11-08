@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.NuGet
     [Category("NuGet")]
     [DisplayName("NuGet Package Version")]
     [Description("NuGet package version number")]
-    public class NuGetPackageVersionWidget : TextLabelWidget, IRequireEndpoint<NuGetEndpoint>, IPollable, IStandardWidget
+    public class NuGetPackageVersionWidget : TextWidget, IRequireEndpoint<NuGetEndpoint>, IPollable, IStandardWidget
     {
         [Order(10)]
         [Required]

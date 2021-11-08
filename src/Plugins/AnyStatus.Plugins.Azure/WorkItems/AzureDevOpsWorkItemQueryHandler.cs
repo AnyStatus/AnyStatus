@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Services;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.API.Services;
 using AnyStatus.API.Widgets;
 using AnyStatus.Plugins.Azure.API;
 using AnyStatus.Plugins.Azure.API.Contracts;
@@ -42,7 +43,7 @@ namespace AnyStatus.Plugins.Azure.WorkItems
             request.Context.Status = Status.OK;
         }
 
-        private static void Sync(TextLabelWidget parent, IEnumerable<WorkItemReference> references, CollectionResponse<WorkItem> workItemsResponse)
+        private static void Sync(TextWidget parent, IEnumerable<WorkItemReference> references, CollectionResponse<WorkItem> workItemsResponse)
         {
             parent.Text = workItemsResponse.Count.ToString();
 

@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Widgets;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.API.Widgets;
 using AnyStatus.Plugins.Azure.API;
 using AnyStatus.Plugins.Azure.API.Endpoints;
 using AutoMapper;
@@ -9,9 +10,7 @@ using System.Threading.Tasks;
 namespace AnyStatus.Plugins.Azure.DevOps.Builds
 {
 
-    public class AzureDevOpsPipelineStatusCheck :
-        AsyncStatusCheck<AzureDevOpsPipelineWidget>,
-        IEndpointHandler<IAzureDevOpsEndpoint>
+    public class AzureDevOpsPipelineStatusCheck : AsyncStatusCheck<AzureDevOpsPipelineWidget>, IEndpointHandler<IAzureDevOpsEndpoint>
     {
         private readonly IMapper _mapper;
 

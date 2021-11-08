@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Widgets;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.API.Widgets;
 using Docker.DotNet.Models;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,4 +1,5 @@
-﻿using AnyStatus.API.Widgets;
+﻿using AnyStatus.API.Endpoints;
+using AnyStatus.API.Widgets;
 using AnyStatus.Plugins.Azure.API;
 using AnyStatus.Plugins.Azure.API.Endpoints;
 using System.Threading;
