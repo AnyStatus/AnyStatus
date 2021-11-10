@@ -12,7 +12,7 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
 {
     [Category("Azure DevOps")]
     [DisplayName("Azure DevOps Pipeline")]
-    [Description("View the status of pipelines on Azure DevOps")]
+    [Description("View the status of build pipelines on Azure DevOps")]
     public class AzureDevOpsPipelineWidget : StatusWidget,
         IAzureDevOpsWidget,
         IRequireEndpoint<IAzureDevOpsEndpoint>,

@@ -11,10 +11,7 @@ namespace AnyStatus.Plugins.Jenkins.Jobs
     {
         private readonly IEndpointProvider _endpointsProvider;
 
-        public JenkinsJobsSource(IEndpointProvider endpointsProvider)
-        {
-            _endpointsProvider = endpointsProvider;
-        }
+        public JenkinsJobsSource(IEndpointProvider endpointsProvider) => _endpointsProvider = endpointsProvider;
 
         public async Task<IEnumerable<NameValueItem>> GetItemsAsync(object source)
         {
