@@ -8,5 +8,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\AnyStatus.API\AnyStatus.API.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.12.0" />
+  </ItemGroup>
   
 </Project>

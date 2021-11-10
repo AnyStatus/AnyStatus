@@ -19,7 +19,6 @@ namespace AnyStatus.Plugins.Jenkins.Jobs
 
         [Required]
         [DisplayName("Job")]
-        [Description("Required")]
         [AsyncItemsSource(typeof(JenkinsJobsSource))]
         public string Job { get; set; }
     }

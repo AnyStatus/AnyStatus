@@ -29,7 +29,7 @@ namespace AnyStatus.Plugins.Jenkins.API
         private async Task<T> ExecuteAsync<T>(IRestRequest request, CancellationToken cancellationToken) where T : new()
         {
             var response = await _client.ExecuteAsync<T>(request, cancellationToken).ConfigureAwait(false);
-
+            
             if (response.IsSuccessful && response.ErrorException is null)
             {
                 return response.Data;
@@ -49,7 +49,7 @@ namespace AnyStatus.Plugins.Jenkins.API
 
         public Task<JenkinsJob> GetJobAsync(string job, CancellationToken cancellationToken)
         {
-            var request = new RestRequest(_endpoint.Address + job + "lastBuild/api/json");
+            var request = new RestRequest(_endpoint.Address + job + "lastBuild/api/json");//todo: remove redundant _endpoint.Address
 
             request.AddParameter("tree", "result,building,executor[progress]");
 
