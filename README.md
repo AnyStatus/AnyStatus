@@ -26,4 +26,6 @@ Download and install AnyStatus from the [Microsoft Store](https://www.microsoft.
 
 ## License
 
+Copyright © Alon Amsalem and Contributors. All rights reserved.
+
 AnyStatus is licensed under the [GNU General Public License v3.0](LICENSE)
