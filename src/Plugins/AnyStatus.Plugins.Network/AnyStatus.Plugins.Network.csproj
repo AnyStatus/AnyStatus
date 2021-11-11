@@ -10,8 +10,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="106.12.0" />
-    <PackageReference Include="zeroconf" Version="3.4.2" />
+    <PackageReference Include="RestSharp" Version="106.13.0" />
+    <PackageReference Include="zeroconf" Version="3.5.11" />
   </ItemGroup>
   
 </Project>
