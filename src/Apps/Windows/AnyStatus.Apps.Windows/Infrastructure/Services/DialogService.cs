@@ -1,35 +1,67 @@
 ﻿using AnyStatus.API.Dialogs;
-using AnyStatus.API.Services;
+using ModernWpf.Controls;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Services
 {
     public class DialogService : IDialogService
     {
-        public DialogResult ShowDialog(IDialog dialog)
+        public async Task<DialogResult> ShowDialogAsync(IDialog dialog)
         {
-            return dialog switch
+            var contentDialog = new ContentDialog
             {
-                OpenFileDialog openFileDialog => Show(openFileDialog),
-                SaveFileDialog saveFileDialog => Show(saveFileDialog),
-                _ => Show(dialog)
+                Title = dialog.Title,
+                Content = dialog.Message
+            };
+
+            switch (dialog)
+            {
+                case InfoDialog:
+                    contentDialog.PrimaryButtonText = "Close";
+                    break;
+                case WarningDialog:
+                    contentDialog.PrimaryButtonText = "Close";
+                    break;
+                case ErrorDialog:
+                    contentDialog.PrimaryButtonText = "Close";
+                    break;
+                case ConfirmationDialog c when c.Cancellable:
+                    contentDialog.PrimaryButtonText = "Yes";
+                    contentDialog.SecondaryButtonText = "No";
+                    contentDialog.CloseButtonText = "Cancel";
+                    break;
+                case ConfirmationDialog c when !c.Cancellable:
+                    contentDialog.PrimaryButtonText = "Yes";
+                    contentDialog.SecondaryButtonText = "No";
+                    break;
+            }
+
+            var result = await contentDialog.ShowAsync();
+
+            return result switch
+            {
+                ContentDialogResult.Primary => DialogResult.Yes,
+                ContentDialogResult.Secondary => DialogResult.No,
+                _ => DialogResult.None
             };
         }
 
-        private static DialogResult Show(IDialog dialog)
+        public DialogResult ShowMessageBox(IDialog dialog)
         {
             var icon = MessageBoxImage.None;
             var button = MessageBoxButton.OK;
 
             switch (dialog)
             {
-                case InfoDialog _:
+                case InfoDialog:
                     icon = MessageBoxImage.Information;
                     break;
-                case WarningDialog _:
+                case WarningDialog:
                     icon = MessageBoxImage.Warning;
                     break;
-                case ErrorDialog _:
+                case ErrorDialog:
                     icon = MessageBoxImage.Error;
                     break;
                 case ConfirmationDialog c when c.Cancellable:
@@ -43,7 +75,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
             }
 
             return MessageBox.Show(dialog.Message, dialog.Title, button, icon)
-                switch
+                    switch
             {
                 MessageBoxResult.OK => DialogResult.OK,
                 MessageBoxResult.Cancel => DialogResult.Cancel,
@@ -53,7 +85,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
             };
         }
 
-        private static DialogResult Show(SaveFileDialog saveFileDialog)
+        public DialogResult ShowFileDialog(SaveFileDialog saveFileDialog)
         {
             var win32Dialog = new Microsoft.Win32.SaveFileDialog
             {
@@ -61,20 +93,20 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
                 Filter = saveFileDialog.Filter,
             };
 
-            return Show(saveFileDialog, win32Dialog);
+            return ShowFileDialog(saveFileDialog, win32Dialog);
         }
 
-        private static DialogResult Show(OpenFileDialog openFileDialog)
+        public DialogResult ShowFileDialog(OpenFileDialog openFileDialog)
         {
             var win32Dialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = openFileDialog.Filter
             };
 
-            return Show(openFileDialog, win32Dialog);
+            return ShowFileDialog(openFileDialog, win32Dialog);
         }
 
-        private static DialogResult Show(FileDialog fileDialog, Microsoft.Win32.FileDialog win32Dialog)
+        private static DialogResult ShowFileDialog(FileDialog fileDialog, Microsoft.Win32.FileDialog win32Dialog)
         {
             var result = win32Dialog.ShowDialog();
 

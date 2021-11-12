@@ -34,7 +34,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
 
             if (content is null)
             {
-                throw new Exception("An error occurred while creating window content type: " + request.Type);
+                throw new Exception($"An error occurred while creating window content type '{request.Type}'.");
             }
 
             var name = content.GetType().Name;

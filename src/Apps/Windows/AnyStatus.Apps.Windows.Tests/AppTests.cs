@@ -94,8 +94,10 @@ namespace AnyStatus.Apps.Windows.Tests
             _fixture.Session.FindElementByAccessibilityId("ToggleMenuButton").Click();
 
             _fixture.Session.FindElementByAccessibilityId("ExitButton").Click();
-
-            _fixture.Session.FindElementByName("Save Changes?").FindElementByName("No").Click();
+            
+            _fixture.Session.FindElementByAccessibilityId("ContentDialogSecondaryButton").Click();
+            
+            //_fixture.Session.FindElementByName("Save Changes?").FindElementByName("No").Click();
         }
     }
 }

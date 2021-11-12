@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API.Dialogs;
-using AnyStatus.API.Services;
 using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
@@ -17,9 +16,9 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             {
                 var dialog = new ConfirmationDialog($"Are you sure you want to stop {Context.Name}?");
 
-                if (dialogService.ShowDialog(dialog) is DialogResult.Yes)
+                if (await dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                 {
-                    await mediator.Send(StopRequestFactory.Create(Context)).ConfigureAwait(false);
+                    _ = await mediator.Send(StopRequestFactory.Create(Context)).ConfigureAwait(false);
                 }
             });
         }

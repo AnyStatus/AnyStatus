@@ -5,9 +5,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
 {
     internal class MaterialWindow : IRequest
     {
-        private MaterialWindow()
-        {
-        }
+        private MaterialWindow() { }
 
         public Type Type { get; private set; }
 
