@@ -21,7 +21,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         protected override void Handle(StatusChangedNotification<TWidget> notification)
         {
-            var message = $"Widget '{notification.Widget.Name}' status changed from {notification.Widget.PreviousStatus?.Metadata?.DisplayName} to {notification.Widget.Status?.Metadata?.DisplayName}.";
+            var message = $"Widget '{notification.Widget.Name}' status changed from {notification.Widget.PreviousStatus?.Description?.DisplayName} to {notification.Widget.Status?.Description?.DisplayName}.";
 
             _logger.LogDebug(message);
 

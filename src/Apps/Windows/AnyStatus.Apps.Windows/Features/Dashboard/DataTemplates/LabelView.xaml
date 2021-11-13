@@ -7,12 +7,10 @@
              xmlns:widgets="clr-namespace:AnyStatus.API.Widgets;assembly=AnyStatus.API"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=widgets:TextWidget, IsDesignTimeCreatable=False}">
-
     <DockPanel Style="{DynamicResource WidgetPanel}">
         <charts:ColorStatusIndicator DockPanel.Dock="Left"/>
         <charts:IconStatusIndicator DockPanel.Dock="Left"/>
         <TextBlock Text="{Binding Text}" FontSize="17" DockPanel.Dock="Right" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Margin="7,0,0,0" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
     </DockPanel>
-
 </UserControl>

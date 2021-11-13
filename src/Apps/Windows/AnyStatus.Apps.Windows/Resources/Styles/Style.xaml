@@ -22,7 +22,7 @@
     </Style>
 
     <Style x:Key="WidgetPanel" TargetType="{x:Type DockPanel}">
-        <Setter Property="Height" Value="42" />
+        <!--<Setter Property="Height" Value="42" />-->
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="KeyboardNavigation.DirectionalNavigation" Value="None" />
         <Style.Triggers>

@@ -49,7 +49,7 @@ namespace AnyStatus.Plugins.Roslyn
                 }
                 else
                 {
-                    status = Status.GetAll().FirstOrDefault(k => k.Metadata.DisplayName == strStatus);
+                    status = Status.GetAll().FirstOrDefault(k => k.Description.DisplayName == strStatus);
                 }
             }
 

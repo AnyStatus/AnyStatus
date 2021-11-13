@@ -5,5 +5,5 @@
     <UserControl.Resources>
         <converters:StatusColorConverter x:Key="HexToBrushConverter"/>
     </UserControl.Resources>
-    <Rectangle Width="4" Fill="{Binding Status.Metadata.Color, Converter={StaticResource HexToBrushConverter}}"/>
+    <Rectangle Width="4" Fill="{Binding Status.Description.Color, Converter={StaticResource HexToBrushConverter}}"/>
 </UserControl>
