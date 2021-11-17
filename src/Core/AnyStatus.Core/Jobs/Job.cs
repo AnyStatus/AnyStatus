@@ -27,10 +27,10 @@ namespace AnyStatus.Core.Jobs
                     context.JobDetail.JobDataMap[nameof(IWidget)] is IWidget widget &&
                     widget.IsEnabled)
                 {
-                    var request = widget switch
+                    dynamic request = widget switch
                     {
-                        IMetricWidget _ => MetricRequestFactory.Create((dynamic)widget),
-                        IStatusWidget _ => StatusRequestFactory.Create((dynamic)widget),
+                        IMetricWidget => MetricRequestFactory.Create((dynamic)widget),
+                        IStatusWidget => StatusRequestFactory.Create((dynamic)widget),
                         _ => throw new NotSupportedException($"{widget?.GetType().FullName} is not supported by the job scheduler."),
                     };
 
