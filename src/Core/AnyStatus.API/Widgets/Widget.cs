@@ -17,7 +17,6 @@ namespace AnyStatus.API.Widgets
         #region Fields
 
         private string _name;
-        private string _hint;
         private IWidget _parent;
         private bool _isExpanded;
         private bool _isEnabled = true;
@@ -117,7 +116,7 @@ namespace AnyStatus.API.Widgets
 
             widget.Parent = this;
 
-            WidgetNotifications.PublishAsync(new WidgetAddedNotification(widget));
+            _ = WidgetNotifications.PublishAsync(new WidgetAddedNotification(widget));
 
             Reassessment();
         }
@@ -135,7 +134,7 @@ namespace AnyStatus.API.Widgets
 
             base.RemoveItem(index);
 
-            WidgetNotifications.PublishAsync(new WidgetDeletedNotification(widget));
+            _ = WidgetNotifications.PublishAsync(new WidgetDeletedNotification(widget));
 
             Reassessment();
         }
@@ -152,11 +151,6 @@ namespace AnyStatus.API.Widgets
 
         protected virtual bool Set<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = null)
         {
-            if (Equals(oldValue, newValue))
-            {
-                return false;
-            }
-
             oldValue = newValue;
 
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
