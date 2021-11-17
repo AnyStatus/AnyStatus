@@ -42,26 +42,26 @@ namespace AnyStatus.Core.Jobs
             }
 
             protected override Task Handle(Request request, CancellationToken cancellationToken)
-                => request.Widget.IsEnabled ? TriggerJob(request.Widget, cancellationToken) : Task.CompletedTask;
+            {
+                return request.Widget.IsEnabled ? TriggerJob(request.Widget, cancellationToken) : Task.CompletedTask;
+            }
 
             private async Task TriggerJob(IWidget widget, CancellationToken cancellationToken)
             {
                 _logger.LogDebug("Updating '{widget}'...", widget.Name);
 
-                if (widget is not IPollable)
+                if (widget is IPollable)
                 {
-                    return;
-                }
+                    var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
 
-                var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
+                    var jobKey = new JobKey(widget.Id);
 
-                var jobKey = new JobKey(widget.Id);
+                    var jobExists = await scheduler.CheckExists(jobKey, cancellationToken).ConfigureAwait(false);
 
-                var jobExists = await scheduler.CheckExists(jobKey, cancellationToken).ConfigureAwait(false);
-
-                if (jobExists)
-                {
-                    await scheduler.TriggerJob(jobKey, cancellationToken).ConfigureAwait(false);
+                    if (jobExists)
+                    {
+                        await scheduler.TriggerJob(jobKey, cancellationToken).ConfigureAwait(false);
+                    }
                 }
 
                 if (widget.HasChildren)
