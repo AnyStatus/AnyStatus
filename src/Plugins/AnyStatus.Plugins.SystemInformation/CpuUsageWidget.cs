@@ -11,15 +11,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Description("The total CPU usage (percentage)")]
     public class CpuUsageWidget : MetricWidget, IPollable, IStandardWidget
     {
-        public CpuUsageWidget()
-        {
-            MaxValue = 100;
-        }
-
-        public override string ToString()
-        {
-            return $"{Value}%";
-        }
+        public override string ToString() => $"{Value}%";
     }
 
     public class CpuUsageQuery : AsyncMetricQuery<CpuUsageWidget>
@@ -30,16 +22,15 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 
         protected override async Task Handle(MetricRequest<CpuUsageWidget> request, CancellationToken cancellationToken)
         {
-            using (var counter = new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName))
-            {
-                counter.NextValue();
+            using var counter = new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName);
 
-                await Task.Delay(500, cancellationToken).ConfigureAwait(false);
+            counter.NextValue();
 
-                request.Context.Value = Math.Round(counter.NextValue());
+            await Task.Delay(500, cancellationToken).ConfigureAwait(false);
 
-                request.Context.Status = Status.OK;
-            }
+            request.Context.Value = Math.Round(counter.NextValue());
+
+            request.Context.Status = Status.OK;
         }
     }
 }

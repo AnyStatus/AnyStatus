@@ -15,7 +15,6 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 
         public BatteryWidget()
         {
-            MaxValue = 100;
             Name = "Battery";
             ShowProgress = true;
         }

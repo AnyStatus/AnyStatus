@@ -13,14 +13,10 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     {
         public RamUsageWidget()
         {
-            MaxValue = 100;
             Name = "RAM Usage";
         }
 
-        public override string ToString()
-        {
-            return $"{Value}%";
-        }
+        public override string ToString() => $"{Value}%";
     }
 
     public class RamUsageQuery : RequestHandler<MetricRequest<RamUsageWidget>>
