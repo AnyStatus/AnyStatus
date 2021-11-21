@@ -18,13 +18,7 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <charts:Sparkline Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DockPanel, AncestorLevel=1}, Path=ActualHeight}"
-                          DockPanel.Dock="Right"
-                          Size="10"
-                          Width="100"
-                          MaxValue="{Binding MaxValue}" 
-                          Values="{Binding Values}"
-                          Value="{Binding Value}"/>
+        <charts:Sparkline DockPanel.Dock="Right" Size="10" Width="100" Values="{Binding Values}" MaxValue="{Binding MaxValue}"/>
         <TextBlock Margin="7,0,0,0" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
     </DockPanel>
 </UserControl>

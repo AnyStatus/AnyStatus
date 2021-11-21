@@ -12,7 +12,7 @@ namespace AnyStatus.API.Widgets
     public abstract class MetricWidget : Widget, IMetricWidget
     {
         private double _value;
-        private double _maxValue;
+        private double? _maxValue;
         private ObservableCollection<double> _values = new ObservableCollection<double>();
 
         [JsonIgnore]
@@ -24,14 +24,13 @@ namespace AnyStatus.API.Widgets
             {
                 Set(ref _value, value);
                 
-                // todo: limit by Size
-                Values.Add(value);
+                Values.Add(value); // todo: limit by Size / consider moving to post-processor
             }
         }
 
         [JsonIgnore]
         [Browsable(false)]
-        public double MaxValue
+        public double? MaxValue
         {
             get => _maxValue;
             set => Set(ref _maxValue, value);

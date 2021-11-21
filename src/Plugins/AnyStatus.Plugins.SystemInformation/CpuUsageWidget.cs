@@ -16,10 +16,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
             MaxValue = 100;
         }
 
-        public override string ToString()
-        {
-            return $"{Value}%";
-        }
+        public override string ToString() => Value.ToString("0\\%");
     }
 
     public class CpuUsageQuery : AsyncMetricQuery<CpuUsageWidget>

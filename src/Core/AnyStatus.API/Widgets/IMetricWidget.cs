@@ -6,7 +6,7 @@ namespace AnyStatus.API.Widgets
     {
         double Value { get; set; }
 
-        double MaxValue { get; set; }
+        double? MaxValue { get; set; }
     }
 
     internal interface IMetricQuery<T> : IRequestHandler<MetricRequest<T>> where T : IMetricWidget { }

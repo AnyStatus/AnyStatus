@@ -17,10 +17,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
             Name = "RAM Usage";
         }
 
-        public override string ToString()
-        {
-            return $"{Value}%";
-        }
+        public override string ToString() => Value.ToString("0\\%");
     }
 
     public class RamUsageQuery : RequestHandler<MetricRequest<RamUsageWidget>>

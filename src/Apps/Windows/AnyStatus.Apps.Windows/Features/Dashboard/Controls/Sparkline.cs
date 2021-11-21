@@ -1,34 +1,61 @@
 ﻿using ScottPlot;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-
-//todo: get background from Dependency Property
 
 namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
 {
     public class Sparkline : UserControl
     {
         private double[] _ys;
-
-        private readonly WpfPlot _plotUserControl;
+        private readonly WpfPlot _plot;
 
         public Sparkline()
         {
+            Loaded += OnLoaded;
             Unloaded += OnUnloaded;
+            Content = _plot = Initialize();
+        }
 
-            _plotUserControl = new WpfPlot();
-            _plotUserControl.Configure(recalculateLayoutOnMouseUp: false, enablePanning: false, enableRightClickMenu: false, enableRightClickZoom: false, enableScrollWheelZoom: false);
-            _plotUserControl.plt.Grid(false);
-            _plotUserControl.plt.Frame(false);
-            _plotUserControl.plt.Ticks(false, false);
-            _plotUserControl.plt.Style(figBg: Color.Empty, dataBg: Color.Empty);
+        private WpfPlot Initialize()
+        {
+            WpfPlot plot = new();
 
-            Content = _plotUserControl;
+            plot.Configuration.Pan = false;
+            plot.Configuration.Zoom = false;
+            plot.Configuration.ScrollWheelZoom = false;
+            plot.Configuration.DoubleClickBenchmark = false;
+
+            plot.Plot.Grid(false);
+            plot.Plot.Frameless();
+            plot.Plot.Layout(padding: 7);
+            plot.Plot.Palette = Palette.Dark;
+            plot.Plot.XAxis.Ticks(false, false);
+            plot.Plot.YAxis.Ticks(false, false);
+            plot.Plot.Style(Color.Empty, Color.Empty);
+
+            return plot;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+
+            _ys = new double[Size];
+
+            var signal = _plot.Plot.AddSignal(_ys);
+            signal.Color = Color.Gray;
+            signal.MarkerSize = 0;
+
+            if (MaxValue.HasValue)
+            {
+                _plot.Plot.SetAxisLimits(xMin: 0, xMax: Size, yMin: 0, yMax: MaxValue);
+            }
+
+            Render();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -37,54 +64,27 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
 
             BindingOperations.ClearAllBindings(this);
 
-            _plotUserControl.plt.Clear();
-        }
-
-        private static void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (sender is Sparkline sparkline)
-            {
-                sparkline.Render();
-            }
+            _plot.Plot.Clear();
         }
 
         private void Render()
         {
-            if (_ys is null)
+            if (_ys is null || Values is null)
             {
-                _ys = new double[Size];
-
-                if (Values != null)
-                {
-                    var previousValues = Values.ToArray();
-
-                    if (previousValues.Length > Size)
-                    {
-                        Array.Copy(previousValues, previousValues.Length - Size - 1, _ys, 0, Size);
-                    }
-                    else
-                    {
-                        Array.Copy(previousValues, 0, _ys, Size - previousValues.Length, previousValues.Length);
-                    }
-                }
-
-                var sig = _plotUserControl.plt.PlotSignal(_ys);
-
-                sig.markerSize = 0;
-                sig.penHD = new Pen(Color.Green, 1.7f); //ColorTranslator.FromHtml("#4CAF50")
-            }
-            else
-            {
-                Array.Copy(_ys, 1, _ys, 0, Size - 1); // "scroll" the whole chart to the left
-
-                _ys[^1] = Value; // place the newest data point at the end
+                return;
             }
 
-            _plotUserControl.plt.AxisAuto();
+            for (int i = Values.Count; i > 0 && Values.Count - i < Size; i--)
+            {
+                _ys[^(Values.Count - i + 1)] = Values[i - 1];
+            }
 
-            _plotUserControl.plt.TightenLayout(padding: 6);
+            if (!MaxValue.HasValue)
+            {
+                _plot.Plot.AxisAuto();
+            }
 
-            _plotUserControl.Render(skipIfCurrentlyRendering: true, recalculateLayout: false, lowQuality: false);
+            _plot.Render();
         }
 
         #region Properties
@@ -95,36 +95,43 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
             set => SetValue(SizeProperty, value);
         }
 
-        public double MaxValue
+        public double? MaxValue
         {
-            get => (double)GetValue(MaxValueProperty);
+            get => (double?)GetValue(MaxValueProperty);
             set => SetValue(MaxValueProperty, value);
         }
 
-        public double Value
+        public ObservableCollection<double> Values
         {
-            get => (double)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
-        }
-
-        public IEnumerable<double> Values
-        {
-            get => (IEnumerable<double>)GetValue(ValuesProperty);
+            get => (ObservableCollection<double>)GetValue(ValuesProperty);
             set => SetValue(ValuesProperty, value);
         }
 
         public static readonly DependencyProperty MaxValueProperty =
-            DependencyProperty.Register(nameof(MaxValue), typeof(double), typeof(Sparkline));
+            DependencyProperty.Register(nameof(MaxValue), typeof(double?), typeof(Sparkline));
 
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register(nameof(Size), typeof(int), typeof(Sparkline));
 
         public static readonly DependencyProperty ValuesProperty =
-            DependencyProperty.Register(nameof(Values), typeof(IEnumerable<double>), typeof(Sparkline));
+            DependencyProperty.Register(nameof(Values), typeof(ObservableCollection<double>), typeof(Sparkline),
+                new FrameworkPropertyMetadata(default(ObservableCollection<double>),
+                    new PropertyChangedCallback(OnPropertyChangedCallback)));
 
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(double), typeof(Sparkline),
-                new FrameworkPropertyMetadata(default(double), new PropertyChangedCallback(OnValueChanged)));
+        private static void OnPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue is not null)
+            {
+                ((ObservableCollection<double>)e.OldValue).CollectionChanged -= ((Sparkline)d).CollectionChanged;
+            }
+
+            if (e.NewValue is not null)
+            {
+                ((ObservableCollection<double>)e.NewValue).CollectionChanged += ((Sparkline)d).CollectionChanged;
+            }
+        }
+
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => Application.Current?.Dispatcher.Invoke(Render);
 
         #endregion
     }

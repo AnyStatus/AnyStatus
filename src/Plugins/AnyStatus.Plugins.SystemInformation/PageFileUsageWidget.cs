@@ -20,10 +20,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
         [Description("Optional. Leave blank for local computer.")]
         public string MachineName { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Value}%";
-        }
+        public override string ToString() => Value.ToString("0\\%");
     }
 
     public class PageFileUsageQuery : RequestHandler<MetricRequest<PageFileUsageWidget>>
