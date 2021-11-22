@@ -51,7 +51,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
             signal.MarkerSize = 0;
             signal.Color = Color.Green;
 
-            if (MaxValue.HasValue)
+            if (MaxValue.HasValue || MinValue.HasValue)
             {
                 _plot.Plot.SetAxisLimits(xMin: 0, xMax: Size, yMin: MinValue, yMax: MaxValue);
             }
