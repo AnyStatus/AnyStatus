@@ -6,6 +6,8 @@ namespace AnyStatus.API.Widgets
     {
         double Value { get; set; }
 
+        double? MinValue { get; set; }
+
         double? MaxValue { get; set; }
     }
 

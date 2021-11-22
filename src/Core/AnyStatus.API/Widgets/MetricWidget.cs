@@ -12,6 +12,7 @@ namespace AnyStatus.API.Widgets
     public abstract class MetricWidget : Widget, IMetricWidget
     {
         private double _value;
+        private double? _minValue;
         private double? _maxValue;
         private ObservableCollection<double> _values = new ObservableCollection<double>();
 
@@ -23,9 +24,17 @@ namespace AnyStatus.API.Widgets
             set
             {
                 Set(ref _value, value);
-                
+
                 Values.Add(value); // todo: limit by Size / consider moving to post-processor
             }
+        }
+
+        [JsonIgnore]
+        [Browsable(false)]
+        public double? MinValue
+        {
+            get => _minValue;
+            set => Set(ref _minValue, value);
         }
 
         [JsonIgnore]

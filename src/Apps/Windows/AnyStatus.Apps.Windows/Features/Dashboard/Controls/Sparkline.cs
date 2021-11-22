@@ -11,6 +11,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
     public class Sparkline : UserControl
     {
         private double[] _ys;
+        private bool _autoAxis;
         private readonly WpfPlot _plot;
 
         public Sparkline()
@@ -31,7 +32,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
 
             plot.Plot.Grid(false);
             plot.Plot.Frameless();
-            plot.Plot.Layout(padding: 7);
+            plot.Plot.Layout(padding: 6);
             plot.Plot.Palette = Palette.Dark;
             plot.Plot.XAxis.Ticks(false, false);
             plot.Plot.YAxis.Ticks(false, false);
@@ -47,12 +48,16 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
             _ys = new double[Size];
 
             var signal = _plot.Plot.AddSignal(_ys);
-            signal.Color = Color.Gray;
             signal.MarkerSize = 0;
+            signal.Color = Color.Green;
 
             if (MaxValue.HasValue)
             {
-                _plot.Plot.SetAxisLimits(xMin: 0, xMax: Size, yMin: 0, yMax: MaxValue);
+                _plot.Plot.SetAxisLimits(xMin: 0, xMax: Size, yMin: MinValue, yMax: MaxValue);
+            }
+            else
+            {
+                _autoAxis = true;
             }
 
             Render();
@@ -79,7 +84,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
                 _ys[^(Values.Count - i + 1)] = Values[i - 1];
             }
 
-            if (!MaxValue.HasValue)
+            if (_autoAxis)
             {
                 _plot.Plot.AxisAuto();
             }
@@ -101,6 +106,12 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
             set => SetValue(MaxValueProperty, value);
         }
 
+        public double? MinValue
+        {
+            get => (double?)GetValue(MinValueProperty);
+            set => SetValue(MinValueProperty, value);
+        }
+
         public ObservableCollection<double> Values
         {
             get => (ObservableCollection<double>)GetValue(ValuesProperty);
@@ -109,6 +120,9 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
 
         public static readonly DependencyProperty MaxValueProperty =
             DependencyProperty.Register(nameof(MaxValue), typeof(double?), typeof(Sparkline));
+
+        public static readonly DependencyProperty MinValueProperty =
+            DependencyProperty.Register(nameof(MinValue), typeof(double?), typeof(Sparkline));
 
         public static readonly DependencyProperty SizeProperty =
             DependencyProperty.Register(nameof(Size), typeof(int), typeof(Sparkline));

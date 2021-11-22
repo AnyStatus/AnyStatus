@@ -13,6 +13,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     {
         public ProcessCpuUsageWidget()
         {
+            MinValue = 0;
             MaxValue = 100;
             Name = "CPU Process Usage";
         }

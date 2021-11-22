@@ -13,6 +13,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     {
         public CpuUsageWidget()
         {
+            MinValue = 0;
             MaxValue = 100;
         }
 

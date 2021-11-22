@@ -13,6 +13,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     {
         public RamUsageWidget()
         {
+            MinValue = 0;
             MaxValue = 100;
             Name = "RAM Usage";
         }

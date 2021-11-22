@@ -11,6 +11,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     {
         public PageFileUsageWidget()
         {
+            MinValue = 0;
             MaxValue = 100;
             Name = "Page File Usage";
         }
