@@ -4,7 +4,6 @@
     <UseWPF>true</UseWPF>
     <LangVersion>9.0</LangVersion>
     <OutputType>WinExe</OutputType>
-    <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>AnyStatus.Apps.Windows.Program</StartupObject>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>x86;x64</Platforms>
