@@ -5,11 +5,15 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
 {
     internal class WindowHandler : RequestHandler<MaterialWindow>
     {
+        private const int WM_EXITSIZEMOVE = 0x232;
+
         private static readonly Dictionary<string, Window> ActiveWindows = new Dictionary<string, Window>();
 
         private readonly IAppContext _context;
@@ -54,6 +58,9 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
             var window = (WindowView)_serviceProvider.GetService(typeof(WindowView));
 
             window.Closed += OnWindowClosed;
+            window.MouseDown += OnMouseDown;
+            window.Loaded += OnWindowLoaded;
+
             window.Title = request.Title;
             window.Content = content;
 
@@ -108,10 +115,57 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
             }
         }
 
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            var window = (Window)sender;
+            
+            window.Loaded -= OnWindowLoaded;
+
+            HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(window).Handle);
+
+            source.AddHook(new HwndSourceHook(WndProc));
+        }
+
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == WM_EXITSIZEMOVE)
+            {
+                var hwndSource = HwndSource.FromHwnd(hwnd);
+
+                var window = hwndSource.RootVisual as Window;
+
+                PersistWindowSettings(window);
+            }
+
+            return IntPtr.Zero;
+        }
+
+        private void PersistWindowSettings(Window window)
+        {
+            var name = window.Content.GetType().Name;
+
+            if (_context.UserSettings.WindowsSettings.TryGetValue(name, out var windowSettings))
+            {
+                windowSettings.Top = window.Top;
+                windowSettings.Left = window.Left;
+                windowSettings.Width = window.Width;
+                windowSettings.Height = window.Height;
+            }
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is WindowView window && e.ChangedButton is MouseButton.Left)
+            {
+                window.DragMove();
+            }
+        }
+
         private void OnWindowClosed(object sender, EventArgs e)
         {
             var window = (Window)sender;
 
+            window.MouseDown -= OnMouseDown;
             window.Closed -= OnWindowClosed;
 
             if (window.Content is null)
