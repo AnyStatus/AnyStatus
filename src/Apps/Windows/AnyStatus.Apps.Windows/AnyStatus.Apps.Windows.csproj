@@ -46,6 +46,7 @@
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.NuGet\AnyStatus.Plugins.NuGet.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Docker\AnyStatus.Plugins.Docker.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.SystemInformation\AnyStatus.Plugins.SystemInformation.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.UptimeRobot\AnyStatus.Plugins.UptimeRobot.csproj" />
   </ItemGroup>
 
   <ItemGroup>
