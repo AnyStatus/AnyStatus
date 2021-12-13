@@ -2,6 +2,7 @@
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using MediatR;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Security;
 using System.Threading.Tasks;
@@ -22,16 +23,17 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
         {
             if (string.IsNullOrEmpty(Endpoint?.CallbackURL)) return;
 
-            if (args is NavigatingCancelEventArgs navigation && navigation.Uri.ToString().StartsWith(Endpoint.CallbackURL))
+            if (args is CoreWebView2NavigationStartingEventArgs navigation && navigation.Uri.StartsWith(Endpoint.CallbackURL))
             {
                 navigation.Cancel = true;
 
-                var code = ParseCallback(navigation.Uri);
+                var code = ParseCallback(new Uri(navigation.Uri));
 
                 IBaseRequest request = Endpoint.GrantType switch
                 {
                     OAuthGrantTypes.AuthorizationCode => new GetOAuthAccessToken.Request(Endpoint, code),
                     OAuthGrantTypes.JsonWebToken => new GetJwtAccessToken.Request(Endpoint, code),
+                    OAuthGrantTypes.None => throw new NotImplementedException(),
                     _ => throw new NotSupportedException()
                 };
 
