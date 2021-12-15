@@ -36,17 +36,17 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
 
         [Required]
         [Refresh(nameof(Project))]
-        [AsyncItemsSource(typeof(AzureDevOpsAccountSource))]
+        [AsyncItemsSource(typeof(AzureDevOpsAccountSource), autoload: true)]
         public string Account { get; set; }
 
         [Required]
         [Refresh(nameof(DefinitionId))]
-        [AsyncItemsSource(typeof(AzureDevOpsProjectSource), autoload: false)]
+        [AsyncItemsSource(typeof(AzureDevOpsProjectSource))]
         public string Project { get; set; }
 
         [Required]
         [DisplayName("Pipeline")]
-        [AsyncItemsSource(typeof(AzureDevOpsPipelineSource), autoload: false)]
+        [AsyncItemsSource(typeof(AzureDevOpsPipelineSource))]
         public string DefinitionId { get; set; }
 
         [JsonIgnore]

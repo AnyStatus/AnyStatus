@@ -19,11 +19,11 @@ namespace AnyStatus.Plugins.GitHub.Workflows
 
         [Required]
         [Refresh(nameof(WorkflowId))]
-        [AsyncItemsSource(typeof(GitHubRepositorySource))]
+        [AsyncItemsSource(typeof(GitHubRepositorySource), autoload: true)]
         public string Repository { get; set; }
 
         [Required]
-        [AsyncItemsSource(typeof(GitHubWorkflowSource), autoload: false)]
+        [AsyncItemsSource(typeof(GitHubWorkflowSource))]
         public string WorkflowId { get; set; }
 
         [Description("Optional branch name")]

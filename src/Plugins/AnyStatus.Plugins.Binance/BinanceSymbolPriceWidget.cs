@@ -11,7 +11,7 @@ namespace AnyStatus.Plugins.Binance
     public class BinanceSymbolPriceWidget : TextWidget, IPollable, IStandardWidget
     {
         [Required]
-        [AsyncItemsSource(typeof(BinanceSymbolSource))]
+        [AsyncItemsSource(typeof(BinanceSymbolSource), autoload: true)]
         public string Symbol { get; set; }
     }
 }

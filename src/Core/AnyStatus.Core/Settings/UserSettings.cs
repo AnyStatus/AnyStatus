@@ -17,7 +17,7 @@ namespace AnyStatus.Core.Settings
         public Dictionary<string, WindowSettings> WindowsSettings { get; set; }
 
         [Order(1)]
-        [ItemsSource(typeof(ThemesSource))]
+        [ItemsSource(typeof(ThemesSource), autoload: true)]
         public string Theme { get; set; }
 
         [Order(2)]

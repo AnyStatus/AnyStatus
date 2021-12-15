@@ -22,7 +22,7 @@ namespace AnyStatus.Plugins.Azure.Resources
 
         [Required]
         [DisplayName("Subscription")]
-        [AsyncItemsSource(typeof(AzureSubscriptionSource))]
+        [AsyncItemsSource(typeof(AzureSubscriptionSource), autoload: true)]
         public string SubscriptionId { get; set; }
     }
 }
