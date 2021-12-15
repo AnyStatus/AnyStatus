@@ -24,6 +24,8 @@
             </Button>
             <TextBlock VerticalAlignment="Center" Text="{Binding Title}" Margin="5,0,0,0"/>
         </StackPanel>
-        <ContentControl Content="{Binding Content}"/>
+        <ScrollViewer>
+            <ContentControl Content="{Binding Content}"/>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>
