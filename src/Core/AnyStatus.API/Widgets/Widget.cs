@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace AnyStatus.API.Widgets
@@ -191,6 +192,8 @@ namespace AnyStatus.API.Widgets
 
             return clone;
         }
+
+        public bool IsConfigurable() => this is IConfigurable && GetType().GetProperties().Any(p => p.IsDefined(typeof(RequiredAttribute)) && p.GetValue(this) is null);
 
         #endregion
     }

@@ -66,7 +66,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 _mediator.Send(new ClosePage.Request());
 
-                if (widget is IConfigurable && widget.GetType().GetProperties().Any(p => p.IsDefined(typeof(RequiredAttribute)) && p.GetValue(widget) is null))
+                if (widget.IsConfigurable())
                 {
                     _context.Session.SelectedWidget = widget;
 
