@@ -30,17 +30,19 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Style="{StaticResource SlideAnimation}">
-        <StackPanel.RenderTransform>
-            <TranslateTransform X="{StaticResource SlideOffSet}"/>
-        </StackPanel.RenderTransform>
-        <Button Command="{Binding Commands[New]}" ToolTip="New session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="NewSessionButton">New</Button>
-        <Button Command="{Binding Commands[Open]}" ToolTip="Open session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OpenSessionButton">Open...</Button>
-        <Button Command="{Binding Commands[Save]}" ToolTip="Save session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionButton">Save</Button>
-        <Button Command="{Binding Commands[SaveAs]}" ToolTip="Save session as.." Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionAsButton">Save As...</Button>
-        <Button Command="{Binding Commands[Endpoints]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ConnectionsButton">Endpoints</Button>
-        <Button Command="{Binding Commands[Settings]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OptionsButton">Settings</Button>
-        <Button Command="{Binding Commands[Help]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="HelpButton">Help</Button>
-        <Button Command="{Binding Commands[Exit]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ExitButton">Exit</Button>
-    </StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+        <StackPanel Style="{StaticResource SlideAnimation}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+            <StackPanel.RenderTransform>
+                <TranslateTransform X="{StaticResource SlideOffSet}"/>
+            </StackPanel.RenderTransform>
+            <Button Command="{Binding Commands[New]}" ToolTip="New session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="NewSessionButton">New</Button>
+            <Button Command="{Binding Commands[Open]}" ToolTip="Open session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OpenSessionButton">Open...</Button>
+            <Button Command="{Binding Commands[Save]}" ToolTip="Save session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionButton">Save</Button>
+            <Button Command="{Binding Commands[SaveAs]}" ToolTip="Save session as.." Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionAsButton">Save As...</Button>
+            <Button Command="{Binding Commands[Endpoints]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ConnectionsButton">Endpoints</Button>
+            <Button Command="{Binding Commands[Settings]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OptionsButton">Settings</Button>
+            <Button Command="{Binding Commands[Help]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="HelpButton">Help</Button>
+            <Button Command="{Binding Commands[Exit]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ExitButton">Exit</Button>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
