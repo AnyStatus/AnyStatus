@@ -34,7 +34,7 @@
                                 CommandParameter="{Binding}"
                                 ToolTip="Delete">
                             <Button.Content>
-                                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource TrashIcon}}"/>
+                                <ContentControl Content="{Binding Source={StaticResource TrashIcon}}"/>
                             </Button.Content>
                         </Button>
                         <Button DockPanel.Dock="Right" 
@@ -43,7 +43,7 @@
                                 CommandParameter="{Binding}"
                                 ToolTip="Edit">
                             <Button.Content>
-                                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource PencilIcon}}"/>
+                                <ContentControl Content="{Binding Source={StaticResource PencilIcon}}"/>
                             </Button.Content>
                         </Button>
                         <TextBlock FontSize="{StaticResource FontSize}" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Center"/>
