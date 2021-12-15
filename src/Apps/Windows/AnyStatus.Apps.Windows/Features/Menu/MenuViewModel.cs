@@ -27,7 +27,6 @@ namespace AnyStatus.Apps.Windows.Features.Menu
             Commands.Add("SaveAs", new Command(_ => mediator.Send(new SaveCommand.Request(showDialog: true)).ContinueWith(task => IsVisible = !task.Result)));
             Commands.Add("Settings", new Command(_ => mediator.Send(Page.Show<OptionsViewModel>("Settings")).ContinueWith(task => IsVisible = false)));
             Commands.Add("Endpoints", new Command(_ => mediator.Send(Page.Show<EndpointsViewModel>("Endpoints")).ContinueWith(task => IsVisible = false)));
-            //move to help page: Commands.Add("Feedback", new Command(_ => mediator.Send(new LaunchURL.Request(@"https://www.anystat.us/feedback")).ContinueWith(task => IsVisible = false)));
             Commands.Add("Help", new Command(_ => mediator.Send(Page.Show<HelpViewModel>("Help")).ContinueWith(task => IsVisible = false)));
             Commands.Add("Exit", new Command(_ => mediator.Send(new Shutdown.Request())));
         }

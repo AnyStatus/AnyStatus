@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:menu="clr-namespace:AnyStatus.Apps.Windows.Features.Menu" 
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DataContext="{d:DesignInstance Type=menu:MenuViewModel, IsDesignTimeCreatable=False}"
              AutomationProperties.AutomationId="Menu"
              mc:Ignorable="d"
@@ -30,19 +31,75 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
-        <StackPanel Style="{StaticResource SlideAnimation}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-            <StackPanel.RenderTransform>
-                <TranslateTransform X="{StaticResource SlideOffSet}"/>
-            </StackPanel.RenderTransform>
-            <Button Command="{Binding Commands[New]}" ToolTip="New session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="NewSessionButton">New</Button>
-            <Button Command="{Binding Commands[Open]}" ToolTip="Open session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OpenSessionButton">Open...</Button>
-            <Button Command="{Binding Commands[Save]}" ToolTip="Save session" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionButton">Save</Button>
-            <Button Command="{Binding Commands[SaveAs]}" ToolTip="Save session as.." Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="SaveSessionAsButton">Save As...</Button>
-            <Button Command="{Binding Commands[Endpoints]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ConnectionsButton">Endpoints</Button>
-            <Button Command="{Binding Commands[Settings]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="OptionsButton">Settings</Button>
-            <Button Command="{Binding Commands[Help]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="HelpButton">Help</Button>
-            <Button Command="{Binding Commands[Exit]}" Style="{StaticResource FlatButtonStyle}" AutomationProperties.AutomationId="ExitButton">Exit</Button>
-        </StackPanel>
-    </ScrollViewer>
+    <ListBox Style="{StaticResource SlideAnimation}" 
+             Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+             BorderThickness="0">
+        <ListBox.RenderTransform>
+            <TranslateTransform X="{StaticResource SlideOffSet}"/>
+        </ListBox.RenderTransform>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="NewSessionButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[New]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            New
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="OpenSessionButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[Open]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Open
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="SaveSessionButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[Save]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Save
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="SaveSessionAsButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[SaveAs]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Save As
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="ConnectionsButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[Endpoints]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Endpoints
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="OptionsButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[Settings]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Settings
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="HelpButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[Help]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Help
+        </ListBoxItem>
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="ExitButton">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding Commands[Exit]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Exit
+        </ListBoxItem>
+    </ListBox>
 </UserControl>
