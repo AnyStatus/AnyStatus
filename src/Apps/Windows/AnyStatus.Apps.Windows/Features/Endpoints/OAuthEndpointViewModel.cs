@@ -29,9 +29,9 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             {
                 navigation.Cancel = true;
 
-                var code = ParseCallback(new Uri(navigation.Uri));
+                var code = ParseCallback(navigation.Uri);
 
-                IBaseRequest request = Endpoint.GrantType switch
+                IRequest<AccessTokenResponse> request = Endpoint.GrantType switch
                 {
                     OAuthGrantTypes.AuthorizationCode => new GetOAuthAccessToken.Request(Endpoint, code),
                     OAuthGrantTypes.JsonWebToken => new GetJwtAccessToken.Request(Endpoint, code),
@@ -39,15 +39,16 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
                     _ => throw new NotSupportedException()
                 };
 
-                _ = _mediator.Send(new GetOAuthAccessToken.Request(Endpoint, code))
-                             .ContinueWith(task => Save(task.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                _mediator.Send(request).ContinueWith(task => Save(task.Result), TaskScheduler.FromCurrentSynchronizationContext());
 
-                _ = _mediator.Send(new ClosePage.Request());
+                _mediator.Send(new ClosePage.Request());
             }
         }
 
-        private string ParseCallback(Uri uri)
+        private string ParseCallback(string url)
         {
+            var uri = new Uri(url);
+
             var query = HttpUtility.ParseQueryString(uri.Query);
 
             var error = query.Get("error");
@@ -74,18 +75,18 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             return code;
         }
 
-        private void Save(GetOAuthAccessToken.Response response)
+        private void Save(AccessTokenResponse atr)
         {
-            if (response is null || !response.Success)
+            if (atr is null)
             {
                 return;
             }
 
-            Endpoint.AccessToken = response.AccessToken;
+            Endpoint.AccessToken = atr.AccessToken;
+            
+            Endpoint.RefreshToken = atr.RefreshToken;
 
-            Endpoint.RefreshToken = response.RefreshToken;
-
-            _ = _mediator.Send(new SaveEndpoint.Request(Endpoint));
+            _mediator.Send(new SaveEndpoint.Request(Endpoint));
         }
     }
 }

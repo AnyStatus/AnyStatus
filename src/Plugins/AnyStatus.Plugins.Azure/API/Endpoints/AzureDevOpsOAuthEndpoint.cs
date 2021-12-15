@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace AnyStatus.Plugins.Azure.API.Endpoints
 {
-    [Browsable(false)]
     [DisplayName(DisplayName)]
     public class AzureDevOpsOAuthEndpoint : OAuthEndpoint, IAzureDevOpsEndpoint
     {

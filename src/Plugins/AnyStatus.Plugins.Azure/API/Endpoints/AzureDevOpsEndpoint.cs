@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.Azure.API.Endpoints
     [DisplayName(DefaultName)]
     public class AzureDevOpsEndpoint : Endpoint, IAzureDevOpsEndpoint
     {
-        public const string DefaultName = "Azure DevOps";
+        public const string DefaultName = "Azure DevOps Personal Access Token";
 
         public AzureDevOpsEndpoint()
         {

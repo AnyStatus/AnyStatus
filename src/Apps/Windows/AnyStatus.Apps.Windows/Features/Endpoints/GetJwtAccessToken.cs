@@ -8,7 +8,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
     internal class GetJwtAccessToken
     {
-        public class Request : IRequest<Response>
+        public class Request : IRequest<AccessTokenResponse>
         {
             public Request(OAuthEndpoint endpoint, string code)
             {
@@ -21,20 +21,11 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             public OAuthEndpoint Endpoint { get; }
         }
 
-        public class Response
-        {
-            public bool Success { get; set; }
-
-            public string AccessToken { get; set; }
-
-            public string RefreshToken { get; set; }
-        }
-
-        public class Handler : RequestHandler<Request, Response>
+        public class Handler : RequestHandler<Request, AccessTokenResponse>
         {
             private const string _format = "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion={1}&redirect_uri={2}";
 
-            protected override Response Handle(Request request)
+            protected override AccessTokenResponse Handle(Request request)
             {
                 var body = string.Format(_format, HttpUtility.UrlEncode(request.Endpoint.Secret), HttpUtility.UrlEncode(request.Code), request.Endpoint.CallbackURL);
 
@@ -50,7 +41,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
                 var result = client.Execute<OAuthAuthorizationResponse>(restRequest);
 
-                var response = new Response();
+                var response = new AccessTokenResponse();
 
                 if (result.IsSuccessful)
                 {

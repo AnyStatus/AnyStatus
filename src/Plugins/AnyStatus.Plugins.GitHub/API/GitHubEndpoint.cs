@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using RestSharp.Authenticators;
 using System.ComponentModel;
 
-namespace AnyStatus.Plugins.GitHub
+namespace AnyStatus.Plugins.GitHub.API
 {
     [DisplayName("GitHub")]
     public class GitHubEndpoint : OAuthEndpoint

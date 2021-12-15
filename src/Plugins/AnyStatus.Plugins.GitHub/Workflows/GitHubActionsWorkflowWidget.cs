@@ -1,5 +1,6 @@
 ﻿using AnyStatus.API.Attributes;
 using AnyStatus.API.Widgets;
+using AnyStatus.Plugins.GitHub.API;
 using AnyStatus.Plugins.GitHub.API.Sources;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
