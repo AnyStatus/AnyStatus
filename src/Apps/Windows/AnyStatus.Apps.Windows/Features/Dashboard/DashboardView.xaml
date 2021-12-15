@@ -11,7 +11,6 @@
              xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
              xmlns:b="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Behaviors"
              mc:Ignorable="d">
-
     <UserControl.Resources>
 
         <converters:IconConverter x:Key="IconConverter"/>
@@ -145,7 +144,6 @@
                 <!--<KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding Commands[Copy]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />-->
                 <!--<KeyBinding Key="V" Modifiers="Ctrl" Command="{Binding Commands[Paste]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />-->
                 <!--<KeyBinding Key="F2" Command="{Binding Commands[Rename]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />-->
-                <KeyBinding Key="F5" Command="{Binding Commands[Refresh]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
                 <KeyBinding Key="Delete" Command="{Binding Commands[Delete]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
                 <KeyBinding Key="Up" Modifiers="Alt" Command="{Binding Commands[MoveUp]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
                 <KeyBinding Key="Down" Modifiers="Alt" Command="{Binding Commands[MoveDown]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
