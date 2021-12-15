@@ -6,7 +6,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
     internal class GetOAuthAccessToken
     {
-        public class Request : IRequest<Response>
+        public class Request : IRequest<AccessTokenResponse>
         {
             public Request(OAuthEndpoint endpoint, string code)
             {
@@ -19,33 +19,22 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             public OAuthEndpoint Endpoint { get; }
         }
 
-        public class Response
+        public class Handler : RequestHandler<Request, AccessTokenResponse>
         {
-            public bool Success { get; set; }
-
-            public string AccessToken { get; set; }
-
-            public string RefreshToken { get; set; }
-        }
-
-        public class Handler : RequestHandler<Request, Response>
-        {
-            protected override Response Handle(Request request)
+            protected override AccessTokenResponse Handle(Request request)
             {
                 var client = new RestClient(request.Endpoint.TokenURL);
 
-                var restRequest = new RestRequest(Method.POST);
-
-                restRequest.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                restRequest.AddParameter("code", request.Code);
-                restRequest.AddParameter("grant_type", "authorization_code");
-                restRequest.AddParameter("client_id", request.Endpoint.ClientId);
-                restRequest.AddParameter("redirect_uri", request.Endpoint.CallbackURL);
+                var restRequest = new RestRequest(Method.POST)
+                    .AddHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .AddParameter("code", request.Code)
+                    .AddParameter("client_id", request.Endpoint.ClientId)
+                    .AddParameter("client_secret", request.Endpoint.Secret)
+                    .AddParameter("redirect_uri", request.Endpoint.CallbackURL);
 
                 var result = client.Execute<OAuthAuthorizationResponse>(restRequest);
 
-                var response = new Response();
+                var response = new AccessTokenResponse();
 
                 if (result.IsSuccessful)
                 {

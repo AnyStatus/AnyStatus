@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.modernwpf.com/2019">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,7 +13,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ComboBox HorizontalAlignment="Stretch" Grid.Column="0" Margin="10" DisplayMemberPath="Name" ItemsSource="{Binding EndpointTypes}" SelectedItem="{Binding SelectedEndpointTypeDescription}" ui:ControlHelper.PlaceholderText="Select endpoint..."/>
+            <ComboBox HorizontalAlignment="Stretch" Grid.Column="0" Margin="10" DisplayMemberPath="Name" 
+                      ItemsSource="{Binding EndpointTypes}" 
+                      SelectedItem="{Binding SelectedEndpointTypeDescription}" 
+                      ui:ControlHelper.PlaceholderText="Select endpoint..."/>
             <Button Grid.Column="1" Margin="0,10,10,10" DockPanel.Dock="Right" Command="{Binding Commands[Add]}">Add</Button>
         </Grid>
         <ListBox Grid.Row="2" ItemsSource="{Binding Endpoints}" SelectedItem="{Binding SelectedEndpoint}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">

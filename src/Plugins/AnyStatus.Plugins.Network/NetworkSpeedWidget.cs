@@ -13,7 +13,7 @@ namespace AnyStatus.Plugins.SystemInformation.Network
     {
         [Required]
         [DisplayName("Network Interface")]
-        [ItemsSource(typeof(NetworkInterfacesSource))]
+        [ItemsSource(typeof(NetworkInterfacesSource), autoload: true)]
         public string NetworkInterfaceId { get; set; }
 
         public NetworkSpeedDirection Direction { get; set; }

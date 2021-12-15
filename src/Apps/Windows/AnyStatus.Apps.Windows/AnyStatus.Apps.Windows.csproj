@@ -38,6 +38,7 @@
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.AppVeyor\AnyStatus.Plugins.AppVeyor.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Binance\AnyStatus.Plugins.Binance.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Demo\AnyStatus.Plugins.Demo.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.GitHub\AnyStatus.Plugins.GitHub.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Network\AnyStatus.Plugins.Network.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.TeamCity\AnyStatus.Plugins.TeamCity.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Azure\AnyStatus.Plugins.Azure.csproj" />
@@ -52,6 +53,7 @@
   <ItemGroup>
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1054.31" />
     <PackageReference Include="ModernWpfUI" Version="0.9.4" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />

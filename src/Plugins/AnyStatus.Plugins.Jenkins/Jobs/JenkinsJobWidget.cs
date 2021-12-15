@@ -19,7 +19,7 @@ namespace AnyStatus.Plugins.Jenkins.Jobs
 
         [Required]
         [DisplayName("Job")]
-        [AsyncItemsSource(typeof(JenkinsJobsSource))]
+        [AsyncItemsSource(typeof(JenkinsJobsSource), autoload: true)]
         public string Job { get; set; }
     }
 }
