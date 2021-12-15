@@ -18,13 +18,13 @@ namespace AnyStatus.Plugins.GitHub.Workflows
         public string EndpointId { get; set; }
 
         [Required]
-        [Refresh(nameof(WorkflowId))]
+        [Refresh(nameof(Workflow))]
         [AsyncItemsSource(typeof(GitHubRepositorySource), autoload: true)]
         public string Repository { get; set; }
 
         [Required]
         [AsyncItemsSource(typeof(GitHubWorkflowSource))]
-        public string WorkflowId { get; set; }
+        public string Workflow { get; set; }
 
         [Description("Optional branch name")]
         public string Branch { get; set; }
