@@ -34,14 +34,13 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
             {
                 var client = new RestClient(request.Endpoint.TokenURL);
 
-                var restRequest = new RestRequest(Method.POST);
-
-                restRequest.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                restRequest.AddParameter("code", request.Code);
-                restRequest.AddParameter("grant_type", "authorization_code");
-                restRequest.AddParameter("client_id", request.Endpoint.ClientId);
-                restRequest.AddParameter("redirect_uri", request.Endpoint.CallbackURL);
+                var restRequest = new RestRequest(Method.POST)
+                    .AddHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .AddParameter("code", request.Code)
+                    .AddParameter("grant_type", "authorization_code")
+                    .AddParameter("client_id", request.Endpoint.ClientId)
+                    .AddParameter("client_secret", request.Endpoint.Secret)
+                    .AddParameter("redirect_uri", request.Endpoint.CallbackURL);
 
                 var result = client.Execute<OAuthAuthorizationResponse>(restRequest);
 

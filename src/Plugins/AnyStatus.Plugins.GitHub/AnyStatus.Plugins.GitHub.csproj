@@ -13,8 +13,4 @@
     <PackageReference Include="RestSharp" Version="106.13.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="API\" />
-  </ItemGroup>
-
 </Project>

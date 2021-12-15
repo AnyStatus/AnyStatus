@@ -7,7 +7,6 @@ using System;
 using System.Security;
 using System.Threading.Tasks;
 using System.Web;
-using System.Windows.Navigation;
 
 namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
@@ -21,7 +20,10 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
         public void HandleBrowserNavigation(object sender, EventArgs args)
         {
-            if (string.IsNullOrEmpty(Endpoint?.CallbackURL)) return;
+            if (string.IsNullOrEmpty(Endpoint?.CallbackURL))
+            {
+                return;
+            }
 
             if (args is CoreWebView2NavigationStartingEventArgs navigation && navigation.Uri.StartsWith(Endpoint.CallbackURL))
             {
@@ -37,10 +39,10 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
                     _ => throw new NotSupportedException()
                 };
 
-                _mediator.Send(new GetOAuthAccessToken.Request(Endpoint, code))
-                         .ContinueWith(task => Save(task.Result), TaskScheduler.FromCurrentSynchronizationContext());
+                _ = _mediator.Send(new GetOAuthAccessToken.Request(Endpoint, code))
+                             .ContinueWith(task => Save(task.Result), TaskScheduler.FromCurrentSynchronizationContext());
 
-                _mediator.Send(new ClosePage.Request());
+                _ = _mediator.Send(new ClosePage.Request());
             }
         }
 
@@ -74,13 +76,16 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
         private void Save(GetOAuthAccessToken.Response response)
         {
-            if (response is null || !response.Success) return;
+            if (response is null || !response.Success)
+            {
+                return;
+            }
 
             Endpoint.AccessToken = response.AccessToken;
 
             Endpoint.RefreshToken = response.RefreshToken;
 
-            _mediator.Send(new SaveEndpoint.Request(Endpoint));
+            _ = _mediator.Send(new SaveEndpoint.Request(Endpoint));
         }
     }
 }

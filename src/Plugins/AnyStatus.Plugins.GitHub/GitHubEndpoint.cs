@@ -11,24 +11,25 @@ namespace AnyStatus.Plugins.GitHub
         public GitHubEndpoint()
         {
             Name = "GitHub";
+            Address = "https://api.github.com";
             GrantType = OAuthGrantTypes.AuthorizationCode;
-            ClientId = "e13245dc0d76e568dbe5";
             CallbackURL = "https://anystat.us/oauth/callback";
-            Secret = "46ce6d45e777e61ffd730d70b8d5ba9c6c165d09";
+            ClientId = "e13245dc0d76e568dbe5";
+            Secret = "b491fb955f1c49b3911ab5759267d86cde7db919";
             AuthorizeURL = "https://github.com/login/oauth/authorize";
             TokenURL = "https://github.com/login/oauth/access_token";
-            Scope = "(no scope)";
+            Scope = "read:org";
         }
 
         [JsonIgnore]
         [Browsable(false)]
         public override string AuthorizeURL
         {
-            get => $"{base.AuthorizeURL}?client_id={ClientId}&response_type=Assertion&state={Id}&scope={Scope}&redirect_uri={CallbackURL}";
+            get => $"{base.AuthorizeURL}?client_id={ClientId}&state={Id}&scope={Scope}&allow_signup=false&redirect_uri={CallbackURL}";
             set => base.AuthorizeURL = value;
         }
 
         [Browsable(false)]
-        public IAuthenticator GetAuthenticator() => new JwtAuthenticator(AccessToken);
+        public IAuthenticator GetAuthenticator() => new OAuth2AuthorizationRequestHeaderAuthenticator(AccessToken, "Bearer"); //new JwtAuthenticator(AccessToken);
     }
 }

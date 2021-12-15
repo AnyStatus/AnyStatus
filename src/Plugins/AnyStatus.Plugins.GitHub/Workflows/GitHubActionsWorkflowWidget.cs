@@ -1,0 +1,32 @@
+﻿using AnyStatus.API.Attributes;
+using AnyStatus.API.Widgets;
+using AnyStatus.Plugins.GitHub.API.Sources;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace AnyStatus.Plugins.GitHub.Workflows
+{
+    [Category("GitHub")]
+    [DisplayName("GitHub Actions Workflow Status")]
+    [Description("View the status of a workflow on GitHub by monitoring the latest workflow run.")]
+    public class GitHubActionsWorkflowWidget : StatusWidget, IRequireEndpoint<GitHubEndpoint>, IStandardWidget, IPollable
+    {
+        [Required]
+        [EndpointSource]
+        [DisplayName("Endpoint")]
+        [Refresh(nameof(Repository))]
+        public string EndpointId { get; set; }
+
+        [Required]
+        [Refresh(nameof(WorkflowId))]
+        [AsyncItemsSource(typeof(GitHubRepositorySource))]
+        public string Repository { get; set; }
+
+        [Required]
+        [AsyncItemsSource(typeof(GitHubWorkflowSource), autoload: false)]
+        public string WorkflowId { get; set; }
+
+        [Description("Optional branch name")]
+        public string Branch { get; set; }
+    }
+}
