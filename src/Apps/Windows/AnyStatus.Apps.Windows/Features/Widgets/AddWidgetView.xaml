@@ -6,17 +6,13 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d">
-    
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <ComboBox Grid.Row="0" HorizontalAlignment="Stretch" Margin="10" DisplayMemberPath="Name" ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}"
                   ui:ControlHelper.PlaceholderText="Select category..."/>
-
         <ListBox Grid.Row="1" ItemsSource="{Binding Category.Templates}" SelectedItem="{Binding Template}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
@@ -53,7 +49,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </Grid>
-
 </UserControl>

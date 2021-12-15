@@ -41,7 +41,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
                 _mediator.Send(request).ContinueWith(task => Save(task.Result), TaskScheduler.FromCurrentSynchronizationContext());
 
-                _mediator.Send(new ClosePage.Request());
+                _mediator.Send(Page.Close());
             }
         }
 

@@ -7,8 +7,6 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets
 {
@@ -64,7 +62,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 _context.Session.IsDirty = true;
 
-                _mediator.Send(new ClosePage.Request());
+                _mediator.Send(Page.Close());
 
                 if (widget.IsConfigurable())
                 {

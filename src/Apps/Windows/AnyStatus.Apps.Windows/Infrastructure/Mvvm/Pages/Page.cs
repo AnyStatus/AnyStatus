@@ -20,6 +20,8 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 
         public Action OnClose { get; internal set; }
 
+        public static ClosePage.Request Close() => new ClosePage.Request();
+
         public static Page Show<T>(string title)
         {
             return new Page
@@ -61,6 +63,4 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
             };
         }
     }
-
-
 }

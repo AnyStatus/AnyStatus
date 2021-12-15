@@ -12,9 +12,9 @@ namespace AnyStatus.Apps.Windows.Features.Options
     internal class OptionsViewModel : BaseViewModel
     {
         public OptionsViewModel(
-            IMediator mediator, 
-            IAppContext context, 
-            IPropertyGridViewModel propertyGridViewModel, 
+            IMediator mediator,
+            IAppContext context,
+            IPropertyGridViewModel propertyGridViewModel,
             ITelemetry telemetry)
         {
             PropertyGridViewModel = propertyGridViewModel;
@@ -36,11 +36,11 @@ namespace AnyStatus.Apps.Windows.Features.Options
 
                     _ = await mediator.Send(new SwitchTheme.Request(context.UserSettings.Theme)); //todo: skip if not changed
 
-                    _ = await mediator.Send(new ClosePage.Request());
+                    _ = await mediator.Send(Page.Close());
                 }
             }));
 
-            Commands.Add("Cancel", new Command(_ => mediator.Send(new ClosePage.Request())));
+            Commands.Add("Cancel", new Command(_ => mediator.Send(Page.Close())));
         }
 
         public IPropertyGridViewModel PropertyGridViewModel { get; set; }
