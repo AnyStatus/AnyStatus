@@ -15,7 +15,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public AddWidgetViewModel(IMediator mediator)
         {
-            Commands.Add("Save", new Command(async _ => await mediator.Send(new CreateWidget.Request(Template, Parent)).ConfigureAwait(false), CanAdd));
+            Commands.Add("Save", new Command(async _ => await mediator.Send(new CreateWidget.Request(Template, Parent)), CanAdd));
         }
 
         private bool CanAdd(object p) => Category != null && Template != null && Parent != null;
