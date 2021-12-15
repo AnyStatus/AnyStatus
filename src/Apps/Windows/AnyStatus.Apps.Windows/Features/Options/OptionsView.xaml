@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Features.Options"
              xmlns:propertygrid="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=local:OptionsViewModel, IsDesignTimeCreatable=False}">
-    <ui:SimpleStackPanel Margin="10">
-        <propertygrid:PropertyGridControl DataContext="{Binding PropertyGridViewModel}"/>
-        <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding Commands[Save]}" Style="{DynamicResource AccentButtonStyle}" Margin="7">Save</Button>
-            <Button Command="{Binding Commands[Cancel]}" Margin="7">Cancel</Button>
-        </ui:SimpleStackPanel>
-    </ui:SimpleStackPanel>
+    <ScrollViewer>
+        <StackPanel Margin="10">
+            <propertygrid:PropertyGridControl DataContext="{Binding PropertyGridViewModel}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding Commands[Save]}" Style="{DynamicResource AccentButtonStyle}" Margin="7">Save</Button>
+                <Button Command="{Binding Commands[Cancel]}" Margin="7">Cancel</Button>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -19,7 +19,7 @@
                       ui:ControlHelper.PlaceholderText="Select endpoint..."/>
             <Button Grid.Column="1" Margin="0,10,10,10" DockPanel.Dock="Right" Command="{Binding Commands[Add]}">Add</Button>
         </Grid>
-        <ListBox Grid.Row="2" ItemsSource="{Binding Endpoints}" SelectedItem="{Binding SelectedEndpoint}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox Grid.Row="2" ItemsSource="{Binding Endpoints}" SelectedItem="{Binding SelectedEndpoint}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource DefaultListBoxItemStyle}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

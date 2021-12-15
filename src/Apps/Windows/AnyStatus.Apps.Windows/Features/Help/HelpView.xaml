@@ -3,22 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AnyStatus.Apps.Windows.Features.Help" 
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ui:SimpleStackPanel Margin="20">
-        <TextBlock>AnyStatus 3.0.0.0</TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/blob/main/LICENSE">License</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/blob/main/3rdParty">3rd Party</Hyperlink></TextBlock>
-        <TextBlock></TextBlock>
-        <TextBlock>Get Help</TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us/docs">Read the docs</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/issues">Report a bug</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://www.anystat.us/feedback">Send feedback</Hyperlink></TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus">GitHub</Hyperlink></TextBlock>
-        <TextBlock></TextBlock>
-        <TextBlock>Follow</TextBlock>
-        <TextBlock><Hyperlink NavigateUri="https://twitter.com/AnyStatusApp">Twitter</Hyperlink></TextBlock>
-    </ui:SimpleStackPanel>
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <TextBlock>AnyStatus 3.0.0.0</TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/blob/main/LICENSE">License</Hyperlink></TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/blob/main/3rdParty">3rd Party</Hyperlink></TextBlock>
+            <TextBlock></TextBlock>
+            <TextBlock>Get Help</TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://www.anystat.us/docs">Read the docs</Hyperlink></TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus/issues">Report a bug</Hyperlink></TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://www.anystat.us/feedback">Send feedback</Hyperlink></TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://github.com/AnyStatus/AnyStatus">GitHub</Hyperlink></TextBlock>
+            <TextBlock></TextBlock>
+            <TextBlock>Follow</TextBlock>
+            <TextBlock><Hyperlink NavigateUri="https://twitter.com/AnyStatusApp">Twitter</Hyperlink></TextBlock>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
