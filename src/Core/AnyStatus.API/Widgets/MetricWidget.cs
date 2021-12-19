@@ -77,4 +77,10 @@ namespace AnyStatus.API.Widgets
     {
         protected abstract override Task Handle(MetricRequest<TMetric> request, CancellationToken cancellationToken);
     }
+
+    public abstract class MetricQuery<TMetric> : RequestHandler<MetricRequest<TMetric>>
+        where TMetric : IMetricWidget
+    {
+        protected abstract override void Handle(MetricRequest<TMetric> request);
+    }
 }
