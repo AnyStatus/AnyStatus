@@ -1,6 +1,4 @@
-﻿using AnyStatus.API.Widgets;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AnyStatus.Plugins.Azure.API.Contracts
@@ -19,7 +17,7 @@ namespace AnyStatus.Plugins.Azure.API.Contracts
 
         public string Status { get; set; }
 
-        public Status GetStatus() => Status switch
+        public string GetStatus() => Status switch
         {
             "notStarted" => AnyStatus.API.Widgets.Status.None,
             "inProgress" => PreDeployApprovals != null && PreDeployApprovals.Any(k => k.Status != "approved") ? AnyStatus.API.Widgets.Status.None : AnyStatus.API.Widgets.Status.Running,

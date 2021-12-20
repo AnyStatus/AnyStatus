@@ -1,64 +1,96 @@
-﻿using AnyStatus.API.Common;
-using Newtonsoft.Json;
+﻿using System;
 
 namespace AnyStatus.API.Widgets
 {
-    public sealed class Status : Enumeration<Status, int>
+    [Obsolete]
+    public sealed class Status
     {
-        private StatusDescription _statusDescription;
+        public const string Error = "error";
+        public const string Failed = "failed";
+        public const string Warning = "warning";
+        public const string Invalid = "invalid";
+        public const string Running = "running";
+        public const string Queued = "queued";
+        public const string PartiallySucceeded = "partiallySucceeded";
+        public const string OK = "ok";
+        public const string Rejected = "rejected";
+        public const string Canceled = "canceled";
+        public const string Disabled = "disabled";
+        public const string Stopped = "stopped";
+        public const string Paused = "paused";
+        public const string Unknown = "unknown";
+        public const string Down = "down";
+        public const string Up = "up";
+        public const string None = "none";
 
-        public static readonly Status Error = new Status(10, 1, "Internal Error", "Red", "Material.ShieldRemoveOutline");
-        public static readonly Status Failed = new Status(8, 2, nameof(Failed), "Red", "BootstrapIcons.XCircle");
-        public static readonly Status Warning = new Status(14, 3, nameof(Warning), "Orange", "BootstrapIcons.ExclamationTriangle");
-        public static readonly Status Invalid = new Status(9, 4, nameof(Invalid), "Red", "BootstrapIcons.ShieldSlash");
-        public static readonly Status Running = new Status(11, 5, nameof(Running), "DodgerBlue", "BootstrapIcons.PlayCircle");
-        public static readonly Status Queued = new Status(12, 6, nameof(Queued), "DodgerBlue", "BootstrapIcons.ClockHistory");
-        public static readonly Status PartiallySucceeded = new Status(7, 7, "Partially Succeeded", "Orange", "BootstrapIcons.Check2Circle");
-        public static readonly Status OK = new Status(4, 8, nameof(OK), "LimeGreen", "BootstrapIcons.CheckCircle");
-        public static readonly Status Rejected = new Status(13, 9, nameof(Rejected), "Gray", "Material.Cancel");
-        public static readonly Status Canceled = new Status(3, 10, nameof(Canceled), "Gray", "Material.Cancel");
-        public static readonly Status Disabled = new Status(2, 11, nameof(Disabled), "Gray", "Material.PauseCircleOutline");
-        public static readonly Status Stopped = new Status(15, 12, nameof(Stopped), "Gray", "Material.StopCircleOutline");
-        public static readonly Status Paused = new Status(16, 13, nameof(Paused), "Gray", "Material.PauseCircleOutline");
-        public static readonly Status Unknown = new Status(1, 14, nameof(Unknown), "Gray", "BootstrapIcons.QuestionCircle");
-        public static readonly Status Down = new Status(17, 15, nameof(Paused), "Red", "BootstrapIcons.ArrowDownCircle");
-        public static readonly Status Up = new Status(18, 16, nameof(Paused), "LimeGreen", "BootstrapIcons.ArrowUpCircle");
-        public static readonly Status None = new Status(0, 17, nameof(None), "Gray", "BootstrapIcons.Circle");
-
-        private Status(int value, string name) : base(value)
+        public static string Color(string status) => status switch
         {
-            Description = new StatusDescription
+            Error => "Red",
+            Failed => "Red",
+            Warning => "Orange",
+            Invalid => "Red",
+            Running => "DodgerBlue",
+            Queued => "DodgerBlue",
+            PartiallySucceeded => "Orange",
+            OK => "LimeGreen",
+            Rejected => "Gray",
+            Canceled => "Gray",
+            Disabled => "Gray",
+            Stopped => "Gray",
+            Paused => "Gray",
+            Unknown => "Gray",
+            Down => "Red",
+            Up => "LimeGreen",
+            None => "Gray",
+            _ => null,
+        };
+
+        public static string Icon(string status) => status switch
+        {
+            Error => "Material.ShieldRemoveOutline",
+            Failed => "BootstrapIcons.XCircle",
+            Warning => "BootstrapIcons.ExclamationTriangle",
+            Invalid => "BootstrapIcons.ShieldSlash",
+            Running => "BootstrapIcons.PlayCircle",
+            Queued => "BootstrapIcons.ClockHistory",
+            PartiallySucceeded => "BootstrapIcons.Check2Circle",
+            OK => "BootstrapIcons.CheckCircle",
+            Rejected => "Material.Cancel",
+            Canceled => "Material.Cancel",
+            Disabled => "Material.PauseCircleOutline",
+            Stopped => "Material.StopCircleOutline",
+            Paused => "Material.PauseCircleOutline",
+            Unknown => "BootstrapIcons.QuestionCircle",
+            Down => "BootstrapIcons.ArrowDownCircle",
+            Up => "BootstrapIcons.ArrowUpCircle",
+            None => "BootstrapIcons.Circle",
+            _ => null,
+        };
+
+        public static bool TryParse(int value, out string result)
+        {
+            result = value switch
             {
-                Value = value,
-                DisplayName = name,
+                10 => Error,
+                8 => Failed,
+                14 => Warning,
+                9 => Invalid,
+                11 => Running,
+                12 => Queued,
+                7 => PartiallySucceeded,
+                4 => OK,
+                13 => Rejected,
+                3 => Canceled,
+                2 => Disabled,
+                15 => Stopped,
+                16 => Paused,
+                1 => Unknown,
+                17 => Down,
+                18 => Up,
+                _ => null,
             };
-        }
 
-        private Status(int value, string name, string color) : this(value, name)
-        {
-            Description.Color = color;
-        }
-
-        private Status(int value, string name, string color, string icon) : this(value, name, color)
-        {
-            Description.Icon = icon;
-        }
-
-        private Status(int value, int priority, string name, string color, string icon) : this(value, name, color, icon)
-        {
-            Description.Priority = priority;
-        }
-
-        [JsonIgnore]
-        public StatusDescription Description
-        {
-            get => _statusDescription;
-            set => Set(ref _statusDescription, value);
-        }
-
-        public static implicit operator int(Status status)
-        {
-            return status.Value;
+            return result is not null;
         }
     }
 }

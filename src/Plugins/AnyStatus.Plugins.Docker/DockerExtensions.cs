@@ -6,7 +6,7 @@ namespace AnyStatus.Plugins.Docker
 {
     public static class DockerExtensions
     {
-        public static Status GetStatus(this ContainerListResponse container)
+        public static string GetStatus(this ContainerListResponse container)
         {
             if (container is null)
             {
@@ -26,18 +26,12 @@ namespace AnyStatus.Plugins.Docker
             }
         }
 
-        public static string GetName(this ContainerListResponse container)
-        {
-            if (container is null) throw new ArgumentNullException(nameof(container));
+        public static string GetName(this ContainerListResponse container) => container is null
+                ? throw new ArgumentNullException(nameof(container))
+                : container.Names?.Count > 0 ? container.Names[0].Remove(0, 1) : container.ID;
 
-            return container.Names?.Count > 0 ? container.Names[0].Remove(0, 1) : container.ID;
-        }
-
-        public static string GetName(this ImagesListResponse container)
-        {
-            if (container is null) throw new ArgumentNullException(nameof(container));
-
-            return container.RepoTags?.Count > 0 ? container.RepoTags[0] : container.ID;
-        }
+        public static string GetName(this ImagesListResponse container) => container is null
+                ? throw new ArgumentNullException(nameof(container))
+                : container.RepoTags?.Count > 0 ? container.RepoTags[0] : container.ID;
     }
 }

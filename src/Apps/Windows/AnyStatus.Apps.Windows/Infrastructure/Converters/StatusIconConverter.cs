@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AnyStatus.API.Widgets;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Converters
 {
-    public class IconConverter : IValueConverter
+    public class StatusIconConverter : IValueConverter
     {
         private readonly static Dictionary<string, object> _iconCache = new();
 
@@ -17,22 +18,31 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Converters
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string key)
+            if (value is null)
             {
-                if (_iconCache.ContainsKey(key))
-                {
-                    return _iconCache[key];
-                }
-                else
-                {
-                    var keyParts = key.Split('.');
+                return null;
+            }
 
-                    if (keyParts.Length == 2 && Enum.TryParse(_iconPacks[keyParts[0]], keyParts[1], out object kind))
-                    {
-                        _iconCache.TryAdd(key, kind);
+            var key = Status.Icon(value.ToString());
 
-                        return kind;
-                    }
+            if (string.IsNullOrEmpty(key))
+            {
+                return null;
+            }
+
+            if (_iconCache.ContainsKey(key))
+            {
+                return _iconCache[key];
+            }
+            else
+            {
+                var keyParts = key.Split('.');
+
+                if (keyParts.Length == 2 && Enum.TryParse(_iconPacks[keyParts[0]], keyParts[1], out object kind))
+                {
+                    _iconCache.TryAdd(key, kind);
+
+                    return kind;
                 }
             }
 

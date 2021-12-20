@@ -1,5 +1,4 @@
-﻿using AnyStatus.API.Widgets;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace AnyStatus.Plugins.Jenkins.API.Models
 {
@@ -15,14 +14,14 @@ namespace AnyStatus.Plugins.Jenkins.API.Models
 
         [JsonProperty("building")] public bool IsRunning { get; set; }
 
-        public Status Status => IsRunning ? Status.Running : Result switch
+        public string Status => IsRunning ? AnyStatus.API.Widgets.Status.Running : Result switch
         {
-            "SUCCESS" => Status.OK,
-            "ABORTED" => Status.Canceled,
-            "FAILURE" => Status.Failed,
-            "UNSTABLE" => Status.PartiallySucceeded,
-            "QUEUED" => Status.Queued,
-            _ => Status.Unknown
+            "SUCCESS" => AnyStatus.API.Widgets.Status.OK,
+            "ABORTED" => AnyStatus.API.Widgets.Status.Canceled,
+            "FAILURE" => AnyStatus.API.Widgets.Status.Failed,
+            "UNSTABLE" => AnyStatus.API.Widgets.Status.PartiallySucceeded,
+            "QUEUED" => AnyStatus.API.Widgets.Status.Queued,
+            _ => AnyStatus.API.Widgets.Status.Unknown
         };
     }
 }

@@ -1,13 +1,11 @@
-﻿using AnyStatus.API.Widgets;
-
-namespace AnyStatus.Plugins.UptimeRobot.Models
+﻿namespace AnyStatus.Plugins.UptimeRobot.Models
 {
     internal class UptimeRobotMonitor
     {
         public string Id { get; set; }
         public string FriendlyName { get; set; }
         public byte Status { get; set; }
-        public Status GetStatus() => Status switch
+        public string GetStatus() => Status switch
         {
             0 => AnyStatus.API.Widgets.Status.Paused,  //paused
             1 => AnyStatus.API.Widgets.Status.None,    //not checked

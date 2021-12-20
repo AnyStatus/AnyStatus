@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AnyStatus.API.Widgets;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -11,9 +12,17 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var hex = value as string;
+            if (value is null)
+            {
+                return Brushes.Transparent;
+            }
 
-            if (string.IsNullOrEmpty(hex)) return Brushes.Transparent;
+            var hex = Status.Color(value.ToString());
+
+            if (string.IsNullOrEmpty(hex))
+            {
+                return Brushes.Transparent;
+            }
 
             try
             {

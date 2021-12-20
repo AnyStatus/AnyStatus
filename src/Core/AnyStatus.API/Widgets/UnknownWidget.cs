@@ -8,7 +8,7 @@ namespace AnyStatus.API.Widgets
         public UnknownWidget()
         {
             IsEnabled = false;
-            Status = Status.Unknown;
+            Status = Widgets.Status.Unknown;
         }
 
         [ReadOnly(true)]

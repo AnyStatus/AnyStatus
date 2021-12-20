@@ -6,7 +6,7 @@ namespace AnyStatus.Plugins.AppVeyor.Models
     {
         public AppVeyorBuild Build { get; set; }
 
-        public Status GetBuildStatus() => Build?.Status switch
+        public string GetBuildStatus() => Build?.Status switch
         {
             "success" => Status.OK,
             "failed" => Status.Failed,

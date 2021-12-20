@@ -87,11 +87,11 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
 
         [JsonIgnore]
         [Browsable(false)]
-        public bool CanStart => Status != Status.Error && Status != Status.Queued && Status != Status.Running;
+        public bool CanStart => Status != AnyStatus.API.Widgets.Status.Error && Status != AnyStatus.API.Widgets.Status.Queued && Status != AnyStatus.API.Widgets.Status.Running;
 
         [JsonIgnore]
         [Browsable(false)]
-        public bool CanStop => HasBuildId && (Status == Status.Queued || Status == Status.Running);
+        public bool CanStop => HasBuildId && (Status == AnyStatus.API.Widgets.Status.Queued || Status == AnyStatus.API.Widgets.Status.Running);
 
         [JsonIgnore]
         [Browsable(false)]
