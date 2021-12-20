@@ -156,7 +156,7 @@ namespace AnyStatus.API.Widgets
 
         #region Public Methods
 
-        public void Reassessment() => Status = Widgets.Status.None;//Status = Count > 0 ? this.Where(w => w.IsEnabled).Aggregate((a, b) => a.Status?.Description?.Priority < b.Status?.Description?.Priority ? a : b)?.Status : Status.None;
+        public void Reassessment() => Status = Count > 0 ? this.Where(w => w.IsEnabled).Aggregate((a, b) => Widgets.Status.Priority(a.Status) < Widgets.Status.Priority(b.Status) ? a : b).Status : null;
 
         public void Expand() => IsExpanded = true;
 

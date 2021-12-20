@@ -67,6 +67,28 @@ namespace AnyStatus.API.Widgets
             _ => null,
         };
 
+        public static int Priority(string status) => status switch
+        {
+            Error => 1,
+            Failed => 2,
+            Warning => 3,
+            Invalid => 4,
+            Running => 5,
+            Queued => 6,
+            PartiallySucceeded => 7,
+            OK => 8,
+            Rejected => 9,
+            Canceled => 10,
+            Disabled => 11,
+            Stopped => 12,
+            Paused => 13,
+            Unknown => 14,
+            Down => 15,
+            Up => 16,
+            None => 17,
+            _ => 0,
+        };
+
         public static bool TryParse(int value, out string result)
         {
             result = value switch
