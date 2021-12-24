@@ -1,6 +1,5 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Notifications;
-using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
@@ -14,7 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
     public sealed class SystemTray : NotifyPropertyChanged, ISystemTray
     {
         private bool _disposed;
-        private Status _status = Status.None;
+        private string _status;
         private readonly IMediator _mediator;
         private readonly NotifyIcon _notifier;
         private readonly ContextMenuStrip _contextMenu;
@@ -30,13 +29,13 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
                 Visible = true,
                 Text = "AnyStatus",
                 ContextMenuStrip = _contextMenu,
-                Icon = SystemTrayIcons.Get(Status.OK)
+                Icon = SystemTrayIcons.Get(API.Widgets.Status.OK)
             };
 
             WireEvents();
         }
 
-        public Status Status
+        public string Status
         {
             get => _status;
             set => Set(ref _status, value);

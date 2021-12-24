@@ -18,11 +18,10 @@ namespace AnyStatus.API.Widgets
         #region Fields
 
         private string _name;
+        private string _status;
         private IWidget _parent;
         private bool _isExpanded;
         private bool _isEnabled = true;
-        private Status _status = Status.None;
-        private WidgetNotificationSettings _notificationSettings;
 
 #pragma warning disable IDE0051
         [JsonProperty] private IList<IWidget> Data => Items;
@@ -56,19 +55,21 @@ namespace AnyStatus.API.Widgets
 
         [JsonIgnore]
         [Browsable(false)]
-        public Status Status
+        public string Status
         {
             get => _status;
             set
             {
-                PreviousStatus = _status;
-                Set(ref _status, value);
+                if (Set(ref _status, value))
+                {
+                    PreviousStatus = _status;
+                }
             }
         }
 
         [JsonIgnore]
         [Browsable(false)]
-        public Status PreviousStatus { get; private set; }
+        public string PreviousStatus { get; private set; }
 
         [Browsable(false)]
         public bool IsExpanded
@@ -91,14 +92,6 @@ namespace AnyStatus.API.Widgets
         [JsonIgnore]
         [Browsable(false)]
         public bool IsPersisted { get; set; } = true;
-
-        [Browsable(false)]
-        [DisplayName("Notification Settings")]
-        public WidgetNotificationSettings NotificationsSettings
-        {
-            get => _notificationSettings;
-            set => Set(ref _notificationSettings, value);
-        }
 
         #endregion
 
@@ -163,7 +156,7 @@ namespace AnyStatus.API.Widgets
 
         #region Public Methods
 
-        public void Reassessment() => Status = Count > 0 ? this.Where(w => w.IsEnabled).Aggregate((a, b) => a.Status?.Description?.Priority < b.Status?.Description?.Priority ? a : b)?.Status : Status.None;
+        public void Reassessment() => Status = Count > 0 ? this.Where(w => w.IsEnabled).Aggregate((a, b) => Widgets.Status.Priority(a.Status) < Widgets.Status.Priority(b.Status) ? a : b).Status : null;
 
         public void Expand() => IsExpanded = true;
 

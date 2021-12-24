@@ -1,12 +1,10 @@
-﻿using AnyStatus.API.Widgets;
-
-namespace AnyStatus.Plugins.GitHub.API.Models
+﻿namespace AnyStatus.Plugins.GitHub.API.Models
 {
     internal class GitHubWorkflowRun
     {
         public string Status { get; set; }
         public string Conclusion { get; set; }
-        public Status GetStatus()
+        public string GetStatus()
         {
             return Status switch
             {

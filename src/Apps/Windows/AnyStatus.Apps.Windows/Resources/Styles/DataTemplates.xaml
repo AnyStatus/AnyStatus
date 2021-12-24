@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:activity="clr-namespace:AnyStatus.Apps.Windows.Features.Activity"
-                    xmlns:options="clr-namespace:AnyStatus.Apps.Windows.Features.Options"
+                    xmlns:settings="clr-namespace:AnyStatus.Apps.Windows.Features.Settings"
                     xmlns:app="clr-namespace:AnyStatus.Apps.Windows.Features.App"
                     xmlns:widgets="clr-namespace:AnyStatus.Apps.Windows.Features.Widgets" 
                     xmlns:endpoints="clr-namespace:AnyStatus.Apps.Windows.Features.Endpoints" xmlns:help="clr-namespace:AnyStatus.Apps.Windows.Features.Help">
@@ -18,8 +18,8 @@
         <activity:ActivityView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type options:OptionsViewModel}">
-        <options:OptionsView/>
+    <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+        <settings:SettingsView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type endpoints:EndpointsViewModel}">

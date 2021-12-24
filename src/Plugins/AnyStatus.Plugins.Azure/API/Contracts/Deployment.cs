@@ -19,37 +19,19 @@ namespace AnyStatus.Plugins.Azure.API.Contracts
 
         public Environment ReleaseEnvironment { get; set; }
 
-        public Status State
+        public string State
         {
-            get
+            get => DeploymentStatus switch
             {
-                switch (DeploymentStatus)
-                {
-                    case "all":
-                        return Status.OK;
-
-                    case "failed":
-                        return Status.Failed;
-
-                    case "inProgress":
-                        return Status.Running;
-
-                    case "notDeployed":
-                        return Status.None;
-
-                    case "partiallySucceeded":
-                        return Status.PartiallySucceeded;
-
-                    case "succeeded":
-                        return Status.OK;
-
-                    case "undefined":
-                        return Status.Unknown;
-
-                    default:
-                        return Status.None;
-                }
-            }
+                "all" => Status.OK,
+                "failed" => Status.Failed,
+                "inProgress" => Status.Running,
+                "notDeployed" => Status.None,
+                "partiallySucceeded" => Status.PartiallySucceeded,
+                "succeeded" => Status.OK,
+                "undefined" => Status.Unknown,
+                _ => Status.None,
+            };
         }
     }
 }

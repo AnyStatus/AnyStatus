@@ -2,7 +2,6 @@
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,36 +23,7 @@ namespace AnyStatus.Plugins.Roslyn
 
             var result = await CSharpScript.EvaluateAsync(request.Context.Script, options).ConfigureAwait(false);
 
-            var status = Parse(result);
-
-            request.Context.Status = status;
-        }
-
-        private static Status Parse(object result)
-        {
-            var status = Status.Unknown;
-
-            if (result is Status enumStatus)
-            {
-                status = enumStatus;
-            }
-            else if (result is int numericStatus)
-            {
-                Status.TryParse(numericStatus, out status);
-            }
-            else if (result is string strStatus)
-            {
-                if (int.TryParse(strStatus, out numericStatus))
-                {
-                    Status.TryParse(numericStatus, out status);
-                }
-                else
-                {
-                    status = Status.GetAll().FirstOrDefault(k => k.Description.DisplayName == strStatus);
-                }
-            }
-
-            return status;
+            request.Context.Status = result.ToString();
         }
     }
 }

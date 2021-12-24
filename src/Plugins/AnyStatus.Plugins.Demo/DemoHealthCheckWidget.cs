@@ -28,7 +28,7 @@ namespace AnyStatus.Plugins.Demo
         {
             _logger.LogDebug($"Testing {request.Context.Name}");
 
-            Status status;
+            string status;
 
             if (request.Context.Randomize)
             {

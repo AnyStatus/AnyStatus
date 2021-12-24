@@ -7,11 +7,11 @@ using AnyStatus.Core.Settings;
 using AnyStatus.Core.Telemetry;
 using MediatR;
 
-namespace AnyStatus.Apps.Windows.Features.Options
+namespace AnyStatus.Apps.Windows.Features.Settings
 {
-    internal class OptionsViewModel : BaseViewModel
+    internal class SettingsViewModel : BaseViewModel
     {
-        public OptionsViewModel(
+        public SettingsViewModel(
             IMediator mediator,
             IAppContext context,
             IPropertyGridViewModel propertyGridViewModel,

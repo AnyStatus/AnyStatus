@@ -20,7 +20,7 @@ namespace AnyStatus.Plugins.Demo
         protected override Task Handle(MetricRequest<DemoMetricWidget> request, CancellationToken cancellationToken)
         {
             double value;
-            Status status;
+            string status;
 
             if (request.Context.Randomize)
             {
