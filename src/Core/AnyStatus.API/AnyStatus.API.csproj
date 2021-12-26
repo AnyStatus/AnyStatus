@@ -14,7 +14,7 @@
     <PackageProjectUrl>https://www.anystat.us</PackageProjectUrl>
     <PackageIconUrl>http://www.anystat.us/assets/images/logo_128px.png</PackageIconUrl>
     <Copyright>Copyright © Alon Amsalem</Copyright>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

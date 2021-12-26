@@ -1,24 +1,18 @@
-﻿using AnyStatus.API.Services;
-using AnyStatus.Core.App;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.ObjectModel;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading;
 
 namespace AnyStatus.Core.Logging
 {
     public class ActivityLogger : ILogger
     {
-        private readonly IAppSettings _settings;
-        private readonly IDispatcher _dispatcher;
+        private const int BufferSize = 100;
 
-        public ObservableCollection<ActivityMessage> Messages { get; } = new ObservableCollection<ActivityMessage>();
+        private readonly ReplaySubject<ActivityMessage> _buffer = new(BufferSize);
 
-        public ActivityLogger(IAppSettings settings, IDispatcher dispatcher)
-        {
-            _settings = settings;
-            _dispatcher = dispatcher;
-        }
+        public IObservable<ActivityMessage> Messages => _buffer.AsObservable();
 
         public IDisposable BeginScope<TState>(TState state) => null;
 
@@ -26,21 +20,14 @@ namespace AnyStatus.Core.Logging
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (Messages.Count == _settings.MaxActivity)
-            {
-                _dispatcher.InvokeAsync(() => Messages.RemoveAt(0));
-            }
-
-            var message = new ActivityMessage
+            _buffer.OnNext(new ActivityMessage
             {
                 Time = DateTime.Now,
                 LogLevel = logLevel,
                 Exception = exception,
+                Message = formatter(state, exception),
                 ThreadId = Thread.CurrentThread.ManagedThreadId,
-                Message = formatter(state, exception)
-            };
-
-            _dispatcher.InvokeAsync(() => Messages.Add(message));
+            });
         }
     }
 }

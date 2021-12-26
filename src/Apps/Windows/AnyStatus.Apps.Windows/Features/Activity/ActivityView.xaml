@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
 
-        <CollectionViewSource x:Key="ActivityMessage" Source="{Binding Messages, Mode=OneTime}">
+        <CollectionViewSource x:Key="ActivityMessages" Source="{Binding Messages}">
             <CollectionViewSource.SortDescriptions>
                 <componentModel:SortDescription PropertyName="Time" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
@@ -39,7 +39,7 @@
 
     </UserControl.Resources>
 
-    <DataGrid ItemsSource="{Binding Source={StaticResource ActivityMessage}}"
+    <DataGrid ItemsSource="{Binding Source={StaticResource ActivityMessages}}"
               AutoGenerateColumns="False"
               IsReadOnly="True"
               SelectionMode="Single"

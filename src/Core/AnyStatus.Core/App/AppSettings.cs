@@ -13,7 +13,6 @@ namespace AnyStatus.Core.App
         public string UserSettingsFilePath => Path.Combine(AppDataPath, UserSettingsFileName);
         public string EndpointsFileName { get; set; }
         public string EndpointsFilePath => Path.Combine(AppDataPath, EndpointsFileName);
-        public int MaxActivity { get; set; }
         public IEnumerable<string> Resources { get; set; }
         public string AppDataPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AnyStatus");
     }

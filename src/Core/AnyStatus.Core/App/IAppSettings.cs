@@ -18,8 +18,6 @@ namespace AnyStatus.Core.App
 
         string UserSettingsFilePath { get; }
 
-        int MaxActivity { get; set; }
-
         IEnumerable<string> Resources { get; }
 
         string AppDataPath { get; }

@@ -23,7 +23,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
             }
             else
             {
-                Application.Current.Dispatcher.BeginInvoke(action);
+                _ = Application.Current.Dispatcher.BeginInvoke(action);
             }
         }
 
