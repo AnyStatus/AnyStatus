@@ -42,7 +42,7 @@ namespace AnyStatus.API.Widgets
             Down => "Red",
             Up => "LimeGreen",
             None => "Gray",
-            _ => null,
+            _ => "DarkGray",
         };
 
         public static string Icon(string status) => status switch
@@ -64,7 +64,7 @@ namespace AnyStatus.API.Widgets
             Down => "BootstrapIcons.ArrowDownCircle",
             Up => "BootstrapIcons.ArrowUpCircle",
             None => "BootstrapIcons.Circle",
-            _ => null,
+            _ => "BootstrapIcons.Circle",
         };
 
         public static int Priority(string status) => status switch
@@ -86,7 +86,7 @@ namespace AnyStatus.API.Widgets
             Down => 15,
             Up => 16,
             None => 17,
-            _ => 0,
+            _ => 18,
         };
 
         public static bool TryParse(int value, out string result)
