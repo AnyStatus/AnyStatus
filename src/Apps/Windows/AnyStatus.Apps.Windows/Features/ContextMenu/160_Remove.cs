@@ -1,5 +1,4 @@
 ﻿using AnyStatus.API.Dialogs;
-using AnyStatus.API.Services;
 using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;

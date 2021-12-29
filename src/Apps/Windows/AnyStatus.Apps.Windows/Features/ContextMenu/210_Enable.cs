@@ -1,26 +1,20 @@
 ﻿using AnyStatus.API.Widgets;
+using AnyStatus.Apps.Windows.Features.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
+using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 {
-    public class Enable<T> : ContextMenu<T> where T : class, IEnablable
+    public class Enable<T> : ContextMenu<T> where T : class, IEnablable, IWidget
     {
-        public Enable()
+        public Enable(IMediator mediator)
         {
             Order = 210;
             Name = "Enable";
-            Command = new Command(_ =>
-            {
-                Context.IsEnabled = true;
-                
-                if (Context is IWidget widget)
-                {
-                    widget.Parent?.Reassessment();
-                }
-            });
+            Command = new Command(_ => mediator.Send(new EnableWidget.Request(Context)));
         }
 
-        public override bool IsVisible => Context != null && !Context.IsEnabled;
+        public override bool IsVisible => Context != null && !((IEnablable)Context).IsEnabled;
     }
 }
