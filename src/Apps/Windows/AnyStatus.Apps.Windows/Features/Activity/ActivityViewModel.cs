@@ -11,17 +11,17 @@ namespace AnyStatus.Apps.Windows.Features.Activity
         private readonly IDispatcher _dispatcher;
         private readonly IDisposable _subscription;
 
-        public ActivityViewModel(ActivityLogger logger, IDispatcher dispatcher)
+        public ActivityViewModel(Logger logger, IDispatcher dispatcher)
         {
             _dispatcher = dispatcher;
 
-            _subscription = logger.Messages.Subscribe(k => _dispatcher.Invoke(() => Messages.Add(k)));
+            _subscription = logger.LogEntries.Subscribe(logEntry => _dispatcher.Invoke(() => LogEntries.Add(logEntry)));
 
-            Commands.Add("Clear", new Command(_ => _dispatcher.Invoke(() => Messages.Clear()), _ => Messages.Count > 0));
+            Commands.Add("Clear", new Command(_ => _dispatcher.Invoke(LogEntries.Clear), _ => LogEntries.Count > 0));
         }
 
         public void Dispose() => _subscription.Dispose();
 
-        public ObservableCollection<ActivityMessage> Messages { get; } = new();
+        public ObservableCollection<LogEntry> LogEntries { get; } = new();
     }
 }
