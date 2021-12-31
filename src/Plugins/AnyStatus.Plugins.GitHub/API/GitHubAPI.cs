@@ -1,5 +1,4 @@
-﻿using AnyStatus.API.Endpoints;
-using AnyStatus.Plugins.GitHub.API.Models;
+﻿using AnyStatus.Plugins.GitHub.API.Models;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ namespace AnyStatus.Plugins.GitHub.API
     {
         private readonly IRestClient _client;
 
-        public GitHubAPI(GitHubEndpoint endpoint)
+        internal GitHubAPI(GitHubEndpoint endpoint)
         {
             if (endpoint is null)
             {
@@ -30,7 +29,9 @@ namespace AnyStatus.Plugins.GitHub.API
 
             var response = await _client.ExecuteAsync<T>(request).ConfigureAwait(false);
 
-            return response.IsSuccessful && response.ErrorException is null ? response.Data : throw new Exception("An error response received from GitHub server. Response Status: " + response.StatusCode, response.ErrorException);
+            return response.IsSuccessful && response.ErrorException is null ? 
+                response.Data : 
+                throw new Exception("An error response received from GitHub server. Response Status: " + response.StatusCode, response.ErrorException);
         }
 
         internal Task<List<GitHubRepository>> GetUserRepositoriesAsync()
@@ -52,6 +53,13 @@ namespace AnyStatus.Plugins.GitHub.API
             var request = new RestRequest($"/repos/{repository}/actions/workflows");
 
             return ExecuteAsync<GitHubWorkflowsResponse>(request);
+        }
+
+        internal Task<GitHubPagesBuildStatus> GetPagesAsync(string repository)
+        {
+            var request = new RestRequest($"/repos/{repository}/pages");
+
+            return ExecuteAsync<GitHubPagesBuildStatus>(request);
         }
 
         internal Task<GitHubWorkflowRunsResponse> GetWorkflowRunsAsync(string repository, string workflow, string branch)

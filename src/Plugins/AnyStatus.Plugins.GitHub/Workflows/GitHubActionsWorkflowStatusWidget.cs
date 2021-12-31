@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.GitHub.Workflows
     [Category("GitHub")]
     [DisplayName("GitHub Actions Workflow")]
     [Description("View the status of the latest workflow run on GitHub")]
-    public class GitHubActionsWorkflowWidget : StatusWidget, IRequireEndpoint<GitHubEndpoint>, IStandardWidget, IPollable
+    public class GitHubActionsWorkflowStatusWidget : StatusWidget, IRequireEndpoint<GitHubEndpoint>, IStandardWidget, IPollable
     {
         [Required]
         [EndpointSource]
