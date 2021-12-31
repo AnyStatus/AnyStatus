@@ -42,6 +42,8 @@ namespace AnyStatus.API.Widgets
             Down => "Red",
             Up => "LimeGreen",
             None => "Gray",
+            "open" => "LimeGreen",
+            "closed" => "Purple",
             _ => "DarkGray",
         };
 
@@ -64,6 +66,8 @@ namespace AnyStatus.API.Widgets
             Down => "BootstrapIcons.ArrowDownCircle",
             Up => "BootstrapIcons.ArrowUpCircle",
             None => "BootstrapIcons.Circle",
+            "open" => "BootstrapIcons.Circle",
+            "closed" => "BootstrapIcons.CheckCircle",
             _ => "BootstrapIcons.Circle",
         };
 
@@ -86,7 +90,9 @@ namespace AnyStatus.API.Widgets
             Down => 15,
             Up => 16,
             None => 17,
-            _ => 18,
+            "open" => 18,
+            "closed" => 19,
+            _ => 20,
         };
 
         public static bool TryParse(int value, out string result)

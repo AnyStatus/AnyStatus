@@ -11,7 +11,7 @@ namespace AnyStatus.Plugins.GitHub.API
         public GitHubEndpoint()
         {
             Name = "GitHub";
-            Scope = "read:org";
+            Scope = "read:org%20repo";
             ClientId = "e13245dc0d76e568dbe5";
             Address = "https://api.github.com";
             GrantType = OAuthGrantTypes.AuthorizationCode;

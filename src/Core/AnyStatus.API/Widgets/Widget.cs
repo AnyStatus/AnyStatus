@@ -87,7 +87,7 @@ namespace AnyStatus.API.Widgets
         }
 
         /// <summary>
-        /// Determines whether the widget children are persisted.
+        /// Determines whether child widgets should be persisted between sessions. Default is true.
         /// </summary>
         [JsonIgnore]
         [Browsable(false)]

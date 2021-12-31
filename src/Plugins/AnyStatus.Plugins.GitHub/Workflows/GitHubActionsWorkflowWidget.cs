@@ -8,8 +8,8 @@ using System.ComponentModel.DataAnnotations;
 namespace AnyStatus.Plugins.GitHub.Workflows
 {
     [Category("GitHub")]
-    [DisplayName("GitHub Actions Workflow Status")]
-    [Description("View the status of a workflow on GitHub by monitoring the latest workflow run.")]
+    [DisplayName("GitHub Actions Workflow")]
+    [Description("View the status of the latest workflow run on GitHub")]
     public class GitHubActionsWorkflowWidget : StatusWidget, IRequireEndpoint<GitHubEndpoint>, IStandardWidget, IPollable
     {
         [Required]

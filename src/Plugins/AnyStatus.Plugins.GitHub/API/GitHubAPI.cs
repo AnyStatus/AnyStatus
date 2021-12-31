@@ -15,7 +15,7 @@ namespace AnyStatus.Plugins.GitHub.API
         {
             if (endpoint is null)
             {
-                throw new EndpointNotFoundException();
+                throw new ArgumentNullException(nameof(endpoint));
             }
 
             _client = new RestClient(endpoint.Address)
@@ -33,11 +33,18 @@ namespace AnyStatus.Plugins.GitHub.API
             return response.IsSuccessful && response.ErrorException is null ? response.Data : throw new Exception("An error response received from GitHub server. Response Status: " + response.StatusCode, response.ErrorException);
         }
 
-        internal Task<IEnumerable<GitHubRepository>> GetUserRepositoriesAsync()
+        internal Task<List<GitHubRepository>> GetUserRepositoriesAsync()
         {
             var request = new RestRequest("/user/repos");
 
-            return ExecuteAsync<IEnumerable<GitHubRepository>>(request);
+            return ExecuteAsync<List<GitHubRepository>>(request);
+        }
+
+        internal Task<List<GitHubIssue>> GetIssuesAsync()
+        {
+            var request = new RestRequest("issues");
+
+            return ExecuteAsync<List<GitHubIssue>>(request);
         }
 
         internal Task<GitHubWorkflowsResponse> GetWorkflowsAsync(string repository)
