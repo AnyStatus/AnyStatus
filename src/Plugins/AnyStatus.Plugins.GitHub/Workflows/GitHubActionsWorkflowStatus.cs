@@ -15,7 +15,7 @@ namespace AnyStatus.Plugins.GitHub.Workflows
         {
             var response = await new GitHubAPI(Endpoint).GetWorkflowRunsAsync(request.Context.Repository, request.Context.Workflow, request.Context.Branch);
 
-            request.Context.Status = response?.WorkflowRuns?.FirstOrDefault()?.GetStatus() ?? Status.None;
+            request.Context.Status = response.WorkflowRuns?.FirstOrDefault()?.GetStatus() ?? Status.Unknown;
         }
     }
 }

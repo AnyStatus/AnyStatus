@@ -5,10 +5,8 @@ using System.Linq;
 namespace AnyStatus.API.Common
 {
     /// <summary>
-    /// Synchronize changes between two collections.
+    /// Synchronizes two collections.
     /// </summary>
-    /// <typeparam name="TSource">The source collection (not changed).</typeparam>
-    /// <typeparam name="TDestination">The destination collection.</typeparam>
     public class CollectionSynchronizer<TSource, TDestination>
     {
         public Action<TSource> Add { get; set; }
@@ -17,8 +15,7 @@ namespace AnyStatus.API.Common
         public Func<TSource, TDestination, bool> Compare { get; set; }
 
         /// <summary>
-        /// Synchronize changes from source to destination collection.
-        /// Source collection is not changed.
+        /// Synchronize two collections.
         /// </summary>
         public void Synchronize(ICollection<TSource> sourceItems, ICollection<TDestination> destinationItems)
         {
@@ -32,17 +29,17 @@ namespace AnyStatus.API.Common
                 throw new ArgumentNullException(nameof(destinationItems));
             }
 
-            RemoveItems(sourceItems, destinationItems);
+            Clean(sourceItems, destinationItems);
 
-            AddOrUpdateItems(sourceItems, destinationItems);
+            AddOrUpdate(sourceItems, destinationItems);
         }
 
         /// <summary>
         /// Remove items from destination collection.
         /// </summary>
-        private void RemoveItems(ICollection<TSource> sourceCollection, ICollection<TDestination> destinationCollection)
+        private void Clean(ICollection<TSource> sourceCollection, ICollection<TDestination> destinationCollection)
         {
-            foreach (var destinationItem in destinationCollection.ToArray())
+            foreach (var destinationItem in destinationCollection)
             {
                 var sourceItem = sourceCollection.FirstOrDefault(item => Compare(item, destinationItem));
 
@@ -54,17 +51,13 @@ namespace AnyStatus.API.Common
         }
 
         /// <summary>
-        /// Add or update item in destination collection.
+        /// Add or update items on  destination collection.
         /// </summary>
-        /// <param name="sourceCollection"></param>
-        /// <param name="destinationCollection"></param>
-        private void AddOrUpdateItems(ICollection<TSource> sourceCollection, ICollection<TDestination> destinationCollection)
+        private void AddOrUpdate(ICollection<TSource> sourceCollection, ICollection<TDestination> destinationCollection)
         {
-            var destinationList = destinationCollection.ToList();
-
             foreach (var sourceItem in sourceCollection)
             {
-                var destinationItem = destinationList.FirstOrDefault(item => Compare(sourceItem, item));
+                var destinationItem = destinationCollection.FirstOrDefault(item => Compare(sourceItem, item));
 
                 if (destinationItem is null)
                 {
