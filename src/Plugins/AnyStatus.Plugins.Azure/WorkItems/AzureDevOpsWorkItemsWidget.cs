@@ -13,8 +13,6 @@ namespace AnyStatus.Plugins.Azure.WorkItems
     [Description("View a list of work items on Azure DevOps.")]
     public class AzureDevOpsWorkItemsWidget : TextWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
     {
-        public AzureDevOpsWorkItemsWidget() => IsPersisted = false;
-
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

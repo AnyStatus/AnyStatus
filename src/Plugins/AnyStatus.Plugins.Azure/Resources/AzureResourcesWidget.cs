@@ -12,8 +12,6 @@ namespace AnyStatus.Plugins.Azure.Resources
     [Description("View subscription resources on Azure")]
     public class AzureResourcesWidget : StatusWidget, IStandardWidget, IPollable, IRequireEndpoint<AzureOAuthEndpoint>
     {
-        public AzureResourcesWidget() => IsPersisted = false;
-
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

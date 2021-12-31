@@ -87,11 +87,11 @@ namespace AnyStatus.API.Widgets
         }
 
         /// <summary>
-        /// Determines whether child widgets should be persisted between sessions. Default is true.
+        /// Determines whether child widgets should be persisted between sessions. Default is false.
         /// </summary>
         [JsonIgnore]
         [Browsable(false)]
-        public bool IsPersisted { get; set; } = true;
+        public bool IsPersisted { get; set; }
 
         #endregion
 
