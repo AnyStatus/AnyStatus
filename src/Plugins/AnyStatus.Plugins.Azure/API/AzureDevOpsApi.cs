@@ -105,7 +105,7 @@ namespace AnyStatus.Plugins.Azure.API
             var request = new RestRequest(string.Format("{0}/{1}/_apis/build/builds", Uri.EscapeDataString(organization), Uri.EscapeDataString(project)));
 
             request.AddParameter("$top", top);
-
+            request.AddParameter("queryOrder","queueTimeDescending");
             request.AddParameter("definitions", definitionId);
 
             return ExecuteAsync<CollectionResponse<Build>>(request, cancellationToken);
