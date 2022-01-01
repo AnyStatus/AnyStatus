@@ -1,10 +1,8 @@
 ﻿using AnyStatus.API.Dialogs;
-using AnyStatus.API.Services;
 using AnyStatus.API.Widgets;
 using AnyStatus.Core.App;
 using AnyStatus.Core.Jobs;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,8 +19,8 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public class Handler : AsyncRequestHandler<Request>
         {
-            private readonly IAppContext _context;
             private readonly IMediator _mediator;
+            private readonly IAppContext _context;
             private readonly IDialogService _dialogService;
 
             public Handler(IAppContext context, IMediator mediator, IDialogService dialogService)
@@ -34,9 +32,9 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
             {
-                var dialog = new ConfirmationDialog($"Are you sure you want to delete '{request.Widget.Name}'?", "Delete");
+                var dialog = new ConfirmationDialog($"Are you sure you want to delete {request.Widget.Name}?", "Delete");
 
-                if (_dialogService.ShowDialog(dialog) != DialogResult.Yes)
+                if (await _dialogService.ShowDialogAsync(dialog) != DialogResult.Yes)
                 {
                     return;
                 }

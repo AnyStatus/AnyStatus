@@ -16,9 +16,9 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             {
                 var dialog = new ConfirmationDialog($"Are you sure you want to restart {Context.Name}?");
 
-                if (dialogService.ShowDialog(dialog) is DialogResult.Yes)
+                if (await dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                 {
-                    await mediator.Send(RestartRequestFactory.Create(Context)).ConfigureAwait(false);
+                    _ = await mediator.Send(RestartRequestFactory.Create(Context)).ConfigureAwait(false);
                 }
             });
         }

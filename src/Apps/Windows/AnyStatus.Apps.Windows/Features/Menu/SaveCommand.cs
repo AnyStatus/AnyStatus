@@ -11,9 +11,7 @@ namespace AnyStatus.Apps.Windows.Features.Menu
     {
         public class Request : IRequest<bool>
         {
-            public Request()
-            {
-            }
+            public Request() { }
 
             public Request(bool showDialog) => ShowDialog = showDialog;
 
@@ -39,7 +37,7 @@ namespace AnyStatus.Apps.Windows.Features.Menu
                 {
                     var dialog = new SaveFileDialog("JSON|*.json");
 
-                    if (_dialogService.ShowDialog(dialog) == DialogResult.OK)
+                    if (_dialogService.ShowFileDialog(dialog) == DialogResult.OK)
                     {
                         _context.Session.FileName = dialog.FileName;
                     }
@@ -49,13 +47,13 @@ namespace AnyStatus.Apps.Windows.Features.Menu
                     }
                 }
 
-                var save = new SaveWidget.Request
+                var saveWidgetRequest = new SaveWidget.Request
                 {
                     Widget = _context.Session.Widget,
                     FileName = _context.Session.FileName,
                 };
 
-                if (await _mediator.Send(save, cancellationToken).ConfigureAwait(false))
+                if (await _mediator.Send(saveWidgetRequest, cancellationToken).ConfigureAwait(false))
                 {
                     _context.Session.IsDirty = false;
 

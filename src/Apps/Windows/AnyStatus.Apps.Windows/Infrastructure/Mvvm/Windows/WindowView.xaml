@@ -14,7 +14,9 @@
             <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
                 <DockPanel>
                     <local:TitleBarView x:Name="Toolbar" DockPanel.Dock="Top"/>
-                    <ContentPresenter/>
+                    <AdornerDecorator>
+                        <ContentPresenter/>
+                    </AdornerDecorator>
                 </DockPanel>
                 <Border BorderBrush="{DynamicResource WindowBorderColor}" BorderThickness="1"/>
             </Grid>
