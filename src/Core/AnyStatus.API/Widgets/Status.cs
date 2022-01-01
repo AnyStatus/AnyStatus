@@ -1,88 +1,124 @@
-﻿using AnyStatus.API.Common;
-using Newtonsoft.Json;
+﻿using System;
 
 namespace AnyStatus.API.Widgets
 {
-    public sealed class Status : Enumeration<Status, int>
+    [Obsolete]
+    public sealed class Status
     {
-        private StatusDescription _statusMetadata;
+        public const string Error = "error";
+        public const string Failed = "failed";
+        public const string Warning = "warning";
+        public const string Invalid = "invalid";
+        public const string Running = "running";
+        public const string Queued = "queued";
+        public const string PartiallySucceeded = "partiallySucceeded";
+        public const string OK = "ok";
+        public const string Rejected = "rejected";
+        public const string Canceled = "canceled";
+        public const string Disabled = "disabled";
+        public const string Stopped = "stopped";
+        public const string Paused = "paused";
+        public const string Unknown = "unknown";
+        public const string Down = "down";
+        public const string Up = "up";
+        public const string None = "none";
 
-        //todo: move to configuration or database
-        //todo: review status code changes from version 2.0
-        //todo: remove unused statuses
-        //colors: https://www.materialpalette.com/colors
-
-        public static readonly Status Error = new Status(10, 1, "Internal Error", "Red", "ErrorIcon");
-        public static readonly Status Failed = new Status(8, 2, nameof(Failed), "Red", "FailedIcon");
-        public static readonly Status Warning = new Status(14, 3, nameof(Warning), "Orange", "WarningIcon");
-        public static readonly Status Invalid = new Status(9, 4, nameof(Invalid), "Red", "InvalidIcon");
-        public static readonly Status Running = new Status(11, 5, nameof(Running), "DodgerBlue", "RunIcon");
-        public static readonly Status Queued = new Status(12, 6, nameof(Queued), "DodgerBlue", "QueuedIcon");
-        public static readonly Status PartiallySucceeded = new Status(7, 7, "Partially Succeeded", "Orange", "PartiallySucceededIcon");
-        public static readonly Status OK = new Status(4, 8, nameof(OK), "LimeGreen", "OkIcon");
-        public static readonly Status Rejected = new Status(13, 9, nameof(Rejected), "Gray", "WarningIcon");
-        public static readonly Status Canceled = new Status(3, 10, nameof(Canceled), "Gray", "StopIcon");
-        public static readonly Status Disabled = new Status(2, 11, nameof(Disabled), "Gray", "PauseIcon");
-        public static readonly Status Stopped = new Status(15, 12, nameof(Stopped), "Gray", "StopIcon");
-        public static readonly Status Paused = new Status(16, 13, nameof(Paused), "Gray", "PauseIcon");
-        public static readonly Status Unknown = new Status(1, 14, nameof(Unknown), "Gray", "HelpIcon");
-        public static readonly Status Down = new Status(17, 15, nameof(Paused), "Red", "DownIcon");
-        public static readonly Status Up = new Status(18, 16, nameof(Paused), "LimeGreen", "UpIcon");
-        public static readonly Status None = new Status(0, 17, nameof(None), "Gray", "NoneIcon");
-
-        //Material
-        //public static readonly Status Error = new Status(10, 1, nameof(Error), "#f44336", "ErrorIcon");
-        //public static readonly Status Failed = new Status(8, 2, nameof(Failed), "#f44336", "FailedIcon");
-        //public static readonly Status Warning = new Status(14, 3, nameof(Warning), "#ffc107", "WarningIcon");
-        //public static readonly Status Invalid = new Status(9, 4, nameof(Invalid), "#9e9e9e", "InvalidIcon");
-        //public static readonly Status Running = new Status(11, 5, nameof(Running), "#2196f3", "RunIcon");
-        //public static readonly Status Queued = new Status(12, 6, nameof(Queued), "#3f51b5", "QueuedIcon");
-        //public static readonly Status PartiallySucceeded = new Status(7, 7, "Partially Succeeded", "#ff9800", "PartiallySucceededIcon");
-        //public static readonly Status OK = new Status(4, 8, nameof(OK), "#4caf50", "OkIcon");
-        //public static readonly Status Rejected = new Status(13, 9, nameof(Rejected), "#f44336", "WarningIcon");
-        //public static readonly Status Canceled = new Status(3, 10, nameof(Canceled), "#9e9e9e", "StopIcon");
-        //public static readonly Status Disabled = new Status(2, 11, nameof(Disabled), "#9e9e9e", "PauseIcon");
-        //public static readonly Status Stopped = new Status(15, 12, nameof(Stopped), "#9e9e9e", "StopIcon");
-        //public static readonly Status Paused = new Status(16, 13, nameof(Paused), "#9e9e9e", "PauseIcon");
-        //public static readonly Status Unknown = new Status(1, 14, nameof(Unknown), "#9e9e9e", "HelpIcon");
-        //public static readonly Status None = new Status(0, 15, nameof(None), "#9e9e9e", "NoneIcon");
-
-        private Status(int value, string name) : base(value)
+        public static string Color(string status) => status switch
         {
-            Metadata = new StatusDescription
+            Error => "Red",
+            Failed => "Red",
+            Warning => "Orange",
+            Invalid => "Red",
+            Running => "DodgerBlue",
+            Queued => "DodgerBlue",
+            PartiallySucceeded => "Orange",
+            OK => "LimeGreen",
+            Rejected => "Gray",
+            Canceled => "Gray",
+            Disabled => "Gray",
+            Stopped => "Gray",
+            Paused => "Gray",
+            Unknown => "Gray",
+            Down => "Red",
+            Up => "LimeGreen",
+            None => "Gray",
+            "open" => "LimeGreen",
+            "closed" => "Purple",
+            _ => "DarkGray",
+        };
+
+        public static string Icon(string status) => status switch
+        {
+            Error => "Material.ShieldRemoveOutline",
+            Failed => "BootstrapIcons.XCircle",
+            Warning => "BootstrapIcons.ExclamationTriangle",
+            Invalid => "BootstrapIcons.ShieldSlash",
+            Running => "BootstrapIcons.PlayCircle",
+            Queued => "BootstrapIcons.ClockHistory",
+            PartiallySucceeded => "BootstrapIcons.Check2Circle",
+            OK => "BootstrapIcons.CheckCircle",
+            Rejected => "Material.Cancel",
+            Canceled => "Material.Cancel",
+            Disabled => "Material.PauseCircleOutline",
+            Stopped => "Material.StopCircleOutline",
+            Paused => "Material.PauseCircleOutline",
+            Unknown => "BootstrapIcons.QuestionCircle",
+            Down => "BootstrapIcons.ArrowDownCircle",
+            Up => "BootstrapIcons.ArrowUpCircle",
+            None => "BootstrapIcons.Circle",
+            "open" => "BootstrapIcons.Circle",
+            "closed" => "BootstrapIcons.CheckCircle",
+            _ => "BootstrapIcons.Circle",
+        };
+
+        public static int Priority(string status) => status switch
+        {
+            Error => 1,
+            Failed => 2,
+            Warning => 3,
+            Invalid => 4,
+            Running => 5,
+            Queued => 6,
+            PartiallySucceeded => 7,
+            OK => 8,
+            Rejected => 9,
+            Canceled => 10,
+            Disabled => 11,
+            Stopped => 12,
+            Paused => 13,
+            Unknown => 14,
+            Down => 15,
+            Up => 16,
+            None => 17,
+            "open" => 18,
+            "closed" => 19,
+            _ => 20,
+        };
+
+        public static bool TryParse(int value, out string result)
+        {
+            result = value switch
             {
-                Value = value,
-                Priority = 100,
-                DisplayName = name,
-                Color = "#9e9e9e"
+                10 => Error,
+                8 => Failed,
+                14 => Warning,
+                9 => Invalid,
+                11 => Running,
+                12 => Queued,
+                7 => PartiallySucceeded,
+                4 => OK,
+                13 => Rejected,
+                3 => Canceled,
+                2 => Disabled,
+                15 => Stopped,
+                16 => Paused,
+                1 => Unknown,
+                17 => Down,
+                18 => Up,
+                _ => null,
             };
-        }
 
-        private Status(int value, string name, string color) : this(value, name)
-        {
-            Metadata.Color = color;
-        }
-
-        private Status(int value, string name, string color, string icon) : this(value, name, color)
-        {
-            Metadata.Icon = icon;
-        }
-
-        private Status(int value, int priority, string name, string color, string icon) : this(value, name, color, icon)
-        {
-            Metadata.Priority = priority;
-        }
-
-        [JsonIgnore]
-        public StatusDescription Metadata
-        {
-            get => _statusMetadata;
-            set => Set(ref _statusMetadata, value);
-        }
-
-        public static implicit operator int(Status status)
-        {
-            return status.Value;
+            return result is not null;
         }
     }
 }

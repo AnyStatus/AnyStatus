@@ -10,7 +10,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
     {
         private const string Prefix = "AnyStatus.Apps.Windows.Resources.Icons.Tray.";
 
-        private static readonly Dictionary<Status, Icon> Cache = new Dictionary<Status, Icon>
+        private static readonly Dictionary<string, Icon> Cache = new Dictionary<string, Icon>
         {
             [Status.None] = Load("StatusOK_grey.ico"),
             [Status.OK] = Load("StatusOK.ico"),
@@ -22,7 +22,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
             [Status.Running] = Load("StatusRun.ico"),
         };
 
-        public static Icon Get(Status status) => status != null && Cache.ContainsKey(status) ? Cache[status] : Cache[Status.None];
+        public static Icon Get(string status) => status != null && Cache.ContainsKey(status) ? Cache[status] : Cache[Status.None];
 
         private static Icon Load(string name)
         {

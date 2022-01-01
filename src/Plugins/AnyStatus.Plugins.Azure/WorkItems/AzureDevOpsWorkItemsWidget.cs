@@ -13,8 +13,6 @@ namespace AnyStatus.Plugins.Azure.WorkItems
     [Description("View a list of work items on Azure DevOps.")]
     public class AzureDevOpsWorkItemsWidget : TextWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
     {
-        public AzureDevOpsWorkItemsWidget() => IsPersisted = false;
-
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]
@@ -23,16 +21,16 @@ namespace AnyStatus.Plugins.Azure.WorkItems
 
         [Required]
         [Refresh(nameof(Project))]
-        [AsyncItemsSource(typeof(AzureDevOpsAccountSource))]
+        [AsyncItemsSource(typeof(AzureDevOpsAccountSource), autoload: true)]
         public string Account { get; set; }
 
         [Required]
         [Refresh(nameof(Iteration))]
-        [AsyncItemsSource(typeof(AzureDevOpsProjectSource), autoload: false)]
+        [AsyncItemsSource(typeof(AzureDevOpsProjectSource))]
         public string Project { get; set; }
 
         [Required]
-        [AsyncItemsSource(typeof(AzureDevOpsIterationSource), autoload: false)]
+        [AsyncItemsSource(typeof(AzureDevOpsIterationSource))]
         public string Iteration { get; set; }
     }
 }

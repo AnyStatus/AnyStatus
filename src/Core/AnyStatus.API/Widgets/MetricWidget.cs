@@ -12,7 +12,8 @@ namespace AnyStatus.API.Widgets
     public abstract class MetricWidget : Widget, IMetricWidget
     {
         private double _value;
-        private double _maxValue;
+        private double? _minValue;
+        private double? _maxValue;
         private ObservableCollection<double> _values = new ObservableCollection<double>();
 
         [JsonIgnore]
@@ -23,15 +24,22 @@ namespace AnyStatus.API.Widgets
             set
             {
                 Set(ref _value, value);
-                
-                // todo: limit by Size
-                Values.Add(value);
+
+                Values.Add(value); // todo: limit by Size / consider moving to post-processor
             }
         }
 
         [JsonIgnore]
         [Browsable(false)]
-        public double MaxValue
+        public double? MinValue
+        {
+            get => _minValue;
+            set => Set(ref _minValue, value);
+        }
+
+        [JsonIgnore]
+        [Browsable(false)]
+        public double? MaxValue
         {
             get => _maxValue;
             set => Set(ref _maxValue, value);
@@ -51,6 +59,17 @@ namespace AnyStatus.API.Widgets
         }
     }
 
+    public interface IMetricWidget : IWidget
+    {
+        double Value { get; set; }
+
+        double? MinValue { get; set; }
+
+        double? MaxValue { get; set; }
+    }
+
+    internal interface IMetricQuery<T> : IRequestHandler<MetricRequest<T>> where T : IMetricWidget { }
+
     public class MetricRequest<TMetric> : Request<TMetric> where TMetric : IMetricWidget
     {
         public MetricRequest(TMetric context) : base(context) { }
@@ -68,5 +87,11 @@ namespace AnyStatus.API.Widgets
         where TMetric : IMetricWidget
     {
         protected abstract override Task Handle(MetricRequest<TMetric> request, CancellationToken cancellationToken);
+    }
+
+    public abstract class MetricQuery<TMetric> : RequestHandler<MetricRequest<TMetric>>
+        where TMetric : IMetricWidget
+    {
+        protected abstract override void Handle(MetricRequest<TMetric> request);
     }
 }

@@ -1,9 +1,10 @@
 ﻿<UserControl x:Class="AnyStatus.Apps.Windows.Features.Widgets.WidgetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:propertygrid="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid">
-    <ui:SimpleStackPanel Margin="10">
-        <propertygrid:PropertyGridControl DataContext="{Binding PropertyGridViewModel}"/>
-    </ui:SimpleStackPanel>
+    <ScrollViewer>
+        <StackPanel Margin="10">
+            <propertygrid:PropertyGridControl DataContext="{Binding PropertyGridViewModel}"/>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

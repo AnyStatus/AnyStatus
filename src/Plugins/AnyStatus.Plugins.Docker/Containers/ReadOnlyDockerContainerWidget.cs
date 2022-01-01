@@ -10,8 +10,8 @@ namespace AnyStatus.Plugins.Docker.Containers
 
         public string EndpointId { get; set; }
 
-        public bool CanStart => Status != Status.OK;
+        public bool CanStart => Status != AnyStatus.API.Widgets.Status.OK;
 
-        public bool CanStop => Status == Status.OK;
+        public bool CanStop => Status == AnyStatus.API.Widgets.Status.OK;
     }
 }

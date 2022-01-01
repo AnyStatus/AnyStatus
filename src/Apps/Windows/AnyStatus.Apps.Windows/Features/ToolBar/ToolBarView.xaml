@@ -52,20 +52,20 @@
                 <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource ActivityIcon}}"/>
             </Button.Content>
         </Button>
-        <Button Command="{Binding Commands[AddWidget]}"
-                Style="{StaticResource ToolbarButton}"
-                AutomationProperties.AutomationId="AddWidgetButton"
-                ToolTip="Add Widget">
-            <Button.Content>
-                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource AddWidgetIcon}}"/>
-            </Button.Content>
-        </Button>
         <Button Command="{Binding Commands[AddFolder]}"
                 Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="AddFolderButton"
                 ToolTip="Add Folder">
             <Button.Content>
                 <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource AddFolderIcon}}"/>
+            </Button.Content>
+        </Button>
+        <Button Command="{Binding Commands[AddWidget]}"
+                Style="{StaticResource ToolbarButton}"
+                AutomationProperties.AutomationId="AddWidgetButton"
+                ToolTip="Add Widget">
+            <Button.Content>
+                <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource PlusIcon}}"/>
             </Button.Content>
         </Button>
         <!--

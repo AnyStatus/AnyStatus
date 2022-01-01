@@ -18,7 +18,7 @@ namespace AnyStatus.Plugins.AppVeyor
 
         [Required]
         [DisplayName("Project")]
-        [AsyncItemsSource(typeof(AppVeyorProjectSource))]
+        [AsyncItemsSource(typeof(AppVeyorProjectSource), autoload: true)]
         public string ProjectSlug { get; set; }
 
         [Description("Optional branch name")]

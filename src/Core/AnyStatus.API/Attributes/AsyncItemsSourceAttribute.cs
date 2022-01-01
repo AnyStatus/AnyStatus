@@ -4,7 +4,7 @@ namespace AnyStatus.API.Attributes
 {
     public class AsyncItemsSourceAttribute : Attribute
     {
-        public AsyncItemsSourceAttribute(Type type, bool autoload = true)
+        public AsyncItemsSourceAttribute(Type type, bool autoload = false)
         {
             Type = type;
             Autoload = autoload;

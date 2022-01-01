@@ -7,8 +7,6 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
 
 namespace AnyStatus.Apps.Windows.Features.Widgets
 {
@@ -64,9 +62,9 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 _context.Session.IsDirty = true;
 
-                _mediator.Send(new ClosePage.Request());
+                _mediator.Send(Page.Close());
 
-                if (widget is IConfigurable && widget.GetType().GetProperties().Any(p => p.IsDefined(typeof(RequiredAttribute)) && p.GetValue(widget) is null))
+                if (widget.IsConfigurable())
                 {
                     _context.Session.SelectedWidget = widget;
 
@@ -79,7 +77,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
                 var widget = (IWidget)Activator.CreateInstance(request.Template.Type);
 
                 widget.Id = Guid.NewGuid().ToString();
-                widget.Status = Status.None;
+
                 widget.Name = request.Template.Name;
 
                 return widget;

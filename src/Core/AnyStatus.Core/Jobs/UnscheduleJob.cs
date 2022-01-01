@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Core.Jobs
 {
-    public class DeleteJob
+    public class UnscheduleJob
     {
         public class Request : IRequest
         {

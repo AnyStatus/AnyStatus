@@ -1,20 +1,27 @@
-﻿using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
+﻿using AnyStatus.API.Services;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Core.Logging;
+using System;
 using System.Collections.ObjectModel;
 
 namespace AnyStatus.Apps.Windows.Features.Activity
 {
-    public sealed class ActivityViewModel : BaseViewModel
+    public sealed class ActivityViewModel : BaseViewModel, IDisposable
     {
-        private readonly ActivityLogger _logger;
+        private readonly IDispatcher _dispatcher;
+        private readonly IDisposable _subscription;
 
-        public ActivityViewModel(ActivityLogger logger)
+        public ActivityViewModel(Logger logger, IDispatcher dispatcher)
         {
-            _logger = logger;
+            _dispatcher = dispatcher;
 
-            Commands.Add("Clear", new Command(_ => _logger.Messages.Clear(), _ => _logger.Messages?.Count > 0));
+            _subscription = logger.LogEntries.Subscribe(logEntry => _dispatcher.Invoke(() => LogEntries.Add(logEntry)));
+
+            Commands.Add("Clear", new Command(_ => _dispatcher.Invoke(LogEntries.Clear), _ => LogEntries.Count > 0));
         }
 
-        public ObservableCollection<ActivityMessage> Messages => _logger.Messages;
+        public void Dispose() => _subscription.Dispose();
+
+        public ObservableCollection<LogEntry> LogEntries { get; } = new();
     }
 }

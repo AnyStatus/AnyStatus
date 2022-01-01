@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:IconConverter x:Key="IconConverter"/>
+        <converters:StatusIconConverter x:Key="StatusIconConverter"/>
     </UserControl.Resources>
     <Grid>
         <Rectangle Opacity="0.05" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-        <Rectangle Margin="13,1.5,13,0" Width="16" Height="16" Opacity="1" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">
-            <Rectangle.OpacityMask>
-                <VisualBrush Stretch="Fill" Visual="{Binding Status.Metadata.Icon, Converter={StaticResource IconConverter}}" />
-            </Rectangle.OpacityMask>
-        </Rectangle>
+        <iconPacks:PackIconControl 
+            Margin="10" 
+            Width="24" 
+            Height="24" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Kind="{Binding Status, Converter={StaticResource StatusIconConverter}}"/>
     </Grid>
 </UserControl>

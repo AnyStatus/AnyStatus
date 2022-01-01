@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters">
     <UserControl.Resources>
-        <converters:StatusColorConverter x:Key="HexToBrushConverter"/>
+        <converters:StatusColorConverter x:Key="StatusColorConverter"/>
     </UserControl.Resources>
-    <Rectangle Width="4" Fill="{Binding Status.Metadata.Color, Converter={StaticResource HexToBrushConverter}}"/>
+    <Rectangle Width="5" Fill="{Binding Status, Converter={StaticResource StatusColorConverter}}"/>
 </UserControl>

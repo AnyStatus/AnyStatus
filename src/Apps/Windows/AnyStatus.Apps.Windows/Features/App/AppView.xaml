@@ -9,6 +9,9 @@
              xmlns:pages="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=local:AppViewModel, IsDesignTimeCreatable=False}">
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding Commands[Refresh]}"/>
+    </UserControl.InputBindings>
     <Grid>
         <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" VerticalAlignment="Top"/>
         <dashboard:DashboardView DataContext="{Binding DashboardViewModel}"/>

@@ -11,10 +11,9 @@
              xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
              xmlns:b="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Behaviors"
              mc:Ignorable="d">
-
     <UserControl.Resources>
 
-        <converters:IconConverter x:Key="IconConverter"/>
+        <converters:StatusIconConverter x:Key="IconConverter"/>
         <dataTemplates:WidgetTemplateSelector x:Key="WidgetTemplateSelector"/>
 
         <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
@@ -82,7 +81,7 @@
             <ContextMenu.ItemContainerStyle>
                 <Style TargetType="{x:Type MenuItem}">
                     <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Padding" Value="5,5,15,5"/>
+                    <Setter Property="Padding" Value="15,7"/>
                     <Setter Property="Header" Value="{Binding Name}"/>
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
                     <!--<Setter Property="ItemsSource" Value="{Binding Item}"/>-->
@@ -145,7 +144,6 @@
                 <!--<KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding Commands[Copy]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />-->
                 <!--<KeyBinding Key="V" Modifiers="Ctrl" Command="{Binding Commands[Paste]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />-->
                 <!--<KeyBinding Key="F2" Command="{Binding Commands[Rename]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />-->
-                <KeyBinding Key="F5" Command="{Binding Commands[Refresh]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
                 <KeyBinding Key="Delete" Command="{Binding Commands[Delete]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
                 <KeyBinding Key="Up" Modifiers="Alt" Command="{Binding Commands[MoveUp]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
                 <KeyBinding Key="Down" Modifiers="Alt" Command="{Binding Commands[MoveDown]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />

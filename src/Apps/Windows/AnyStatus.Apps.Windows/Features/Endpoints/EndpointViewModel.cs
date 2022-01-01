@@ -3,7 +3,6 @@ using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using MediatR;
-using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features.Endpoints
 {
@@ -17,11 +16,15 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
             Commands.Add("Save", new Command(async _ =>
             {
-                var success = await Task.Run(async () => await mediator.Send(new SaveEndpoint.Request(Endpoint)));
-                if (success) await mediator.Send(new ClosePage.Request());
+                var success = await mediator.Send(new SaveEndpoint.Request(Endpoint));
+
+                if (success)
+                {
+                    _ = mediator.Send(Page.Close());
+                }
             }));
 
-            Commands.Add("Cancel", new Command(_ => mediator.Send(new ClosePage.Request())));
+            Commands.Add("Cancel", new Command(_ => mediator.Send(Page.Close())));
         }
 
         public IEndpoint Endpoint

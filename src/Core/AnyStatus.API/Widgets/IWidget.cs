@@ -18,14 +18,16 @@ namespace AnyStatus.API.Widgets
 
         bool IsExpanded { get; set; }
 
-        Status Status { get; set; }
+        string Status { get; set; }
 
-        Status PreviousStatus { get; }
+        string PreviousStatus { get; }
 
         void Move(int x, int y);
 
         void Expand();
 
         void Reassessment();
+
+        bool IsConfigurable();
     }
 }

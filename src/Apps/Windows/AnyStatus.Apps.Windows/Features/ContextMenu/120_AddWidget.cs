@@ -12,7 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
     {
         public AddWidget(IMediator mediator, IAppContext context)
         {
-            Order = 110;
+            Order = 120;
             Name = "Add Widget";
             Command = new Command(_ => mediator.Send(Page.Show<AddWidgetViewModel>("Add Widget", vm => vm.Parent = context.Session.SelectedWidget ?? context.Session.Widget)));
         }

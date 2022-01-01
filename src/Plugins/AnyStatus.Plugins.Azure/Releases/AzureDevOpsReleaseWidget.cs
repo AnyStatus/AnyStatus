@@ -27,17 +27,17 @@ namespace AnyStatus.Plugins.Azure.Releases
 
         [Required]
         [Refresh(nameof(Project))]
-        [AsyncItemsSource(typeof(AzureDevOpsAccountSource))]
+        [AsyncItemsSource(typeof(AzureDevOpsAccountSource), autoload: true)]
         public string Account { get; set; }
 
         [Required]
         [Refresh(nameof(DefinitionId))]
-        [AsyncItemsSource(typeof(AzureDevOpsProjectSource), autoload: false)]
+        [AsyncItemsSource(typeof(AzureDevOpsProjectSource))]
         public string Project { get; set; }
 
         [Required]
         [DisplayName("Release")]
-        [AsyncItemsSource(typeof(AzureDevOpsReleaseSource), autoload: false)]
+        [AsyncItemsSource(typeof(AzureDevOpsReleaseSource))]
         public int DefinitionId { get; set; }
 
         [JsonIgnore]

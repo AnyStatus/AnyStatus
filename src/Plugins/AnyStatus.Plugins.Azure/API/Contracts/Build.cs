@@ -14,7 +14,7 @@ namespace AnyStatus.Plugins.Azure.API.Contracts
 
         public string Result { get; set; }
 
-        public Status GetStatus => Status switch
+        public string GetStatus => Status switch
         {
             "notStarted" => AnyStatus.API.Widgets.Status.Queued,
             "inProgress" => AnyStatus.API.Widgets.Status.Running,

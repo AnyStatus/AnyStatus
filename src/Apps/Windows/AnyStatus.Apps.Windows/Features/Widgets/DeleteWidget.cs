@@ -41,7 +41,7 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 request.Widget.Remove();
 
-                _ = await _mediator.Send(new DeleteJob.Request(request.Widget, true), cancellationToken).ConfigureAwait(false);
+                _ = await _mediator.Send(new UnscheduleJob.Request(request.Widget, true), cancellationToken).ConfigureAwait(false);
 
                 _context.Session.IsDirty = true;
             }

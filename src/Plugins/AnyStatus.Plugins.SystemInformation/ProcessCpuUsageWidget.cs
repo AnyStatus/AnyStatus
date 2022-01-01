@@ -13,6 +13,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     {
         public ProcessCpuUsageWidget()
         {
+            MinValue = 0;
             MaxValue = 100;
             Name = "CPU Process Usage";
         }
@@ -28,10 +29,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
         [Description("Usually the file name without extension")]
         public string ProcessName { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Value}%";
-        }
+        public override string ToString() => Value.ToString("0\\%");
     }
 
     public class ProcessCpuUsageQuery : AsyncMetricQuery<ProcessCpuUsageWidget>

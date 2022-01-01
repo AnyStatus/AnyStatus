@@ -9,7 +9,11 @@ namespace AnyStatus.Core.Widgets
     [Redirect("AnyStatus.Core.Domain.Root, AnyStatus.Core")]
     public class Root : Widget, IRefreshable, IAddWidget, IAddFolder
     {
-        public Root() => Name = "Root";
+        public Root()
+        {
+            Name = "Root";
+            IsPersisted = true;
+        }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {

@@ -4,7 +4,6 @@
     <UseWPF>true</UseWPF>
     <LangVersion>9.0</LangVersion>
     <OutputType>WinExe</OutputType>
-    <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>AnyStatus.Apps.Windows.Program</StartupObject>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>x86;x64</Platforms>
@@ -39,6 +38,7 @@
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.AppVeyor\AnyStatus.Plugins.AppVeyor.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Binance\AnyStatus.Plugins.Binance.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Demo\AnyStatus.Plugins.Demo.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.GitHub\AnyStatus.Plugins.GitHub.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Network\AnyStatus.Plugins.Network.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.TeamCity\AnyStatus.Plugins.TeamCity.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Azure\AnyStatus.Plugins.Azure.csproj" />
@@ -47,15 +47,18 @@
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.NuGet\AnyStatus.Plugins.NuGet.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.Docker\AnyStatus.Plugins.Docker.csproj" />
     <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.SystemInformation\AnyStatus.Plugins.SystemInformation.csproj" />
+    <ProjectReference Include="..\..\..\Plugins\AnyStatus.Plugins.UptimeRobot\AnyStatus.Plugins.UptimeRobot.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1054.31" />
     <PackageReference Include="ModernWpfUI" Version="0.9.4" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
     <PackageReference Include="RestSharp" Version="106.13.0" />
-    <PackageReference Include="ScottPlot.WPF" Version="4.0.42" />
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.27" />
     <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.19041.1" />
     <PackageReference Include="Humanizer.Core" Version="2.11.10" />
   </ItemGroup>

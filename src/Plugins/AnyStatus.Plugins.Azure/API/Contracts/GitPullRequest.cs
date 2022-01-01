@@ -1,6 +1,4 @@
-﻿using AnyStatus.API.Widgets;
-
-namespace AnyStatus.Plugins.Azure.API.Contracts
+﻿namespace AnyStatus.Plugins.Azure.API.Contracts
 {
     internal class GitPullRequest
     {
@@ -12,7 +10,7 @@ namespace AnyStatus.Plugins.Azure.API.Contracts
 
         public string MergeStatus { get; set; }
 
-        public Status GetStatus() => MergeStatus switch
+        public string GetStatus() => MergeStatus switch
         {
             "succeeded" => AnyStatus.API.Widgets.Status.OK,
             "queued" => AnyStatus.API.Widgets.Status.Queued,

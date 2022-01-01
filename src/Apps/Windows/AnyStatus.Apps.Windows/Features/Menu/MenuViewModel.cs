@@ -1,7 +1,7 @@
 ﻿using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Features.Endpoints;
 using AnyStatus.Apps.Windows.Features.Help;
-using AnyStatus.Apps.Windows.Features.Options;
+using AnyStatus.Apps.Windows.Features.Settings;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Core.Sessions;
@@ -25,9 +25,8 @@ namespace AnyStatus.Apps.Windows.Features.Menu
             Commands.Add("Open", new Command(_ => mediator.Send(new OpenSessionCommand.Request()).ContinueWith(task => IsVisible = !task.Result)));
             Commands.Add("Save", new Command(_ => mediator.Send(new SaveCommand.Request()).ContinueWith(task => IsVisible = !task.Result)));
             Commands.Add("SaveAs", new Command(_ => mediator.Send(new SaveCommand.Request(showDialog: true)).ContinueWith(task => IsVisible = !task.Result)));
-            Commands.Add("Settings", new Command(_ => mediator.Send(Page.Show<OptionsViewModel>("Settings")).ContinueWith(task => IsVisible = false)));
+            Commands.Add("Settings", new Command(_ => mediator.Send(Page.Show<SettingsViewModel>("Settings")).ContinueWith(task => IsVisible = false)));
             Commands.Add("Endpoints", new Command(_ => mediator.Send(Page.Show<EndpointsViewModel>("Endpoints")).ContinueWith(task => IsVisible = false)));
-            //move to help page: Commands.Add("Feedback", new Command(_ => mediator.Send(new LaunchURL.Request(@"https://www.anystat.us/feedback")).ContinueWith(task => IsVisible = false)));
             Commands.Add("Help", new Command(_ => mediator.Send(Page.Show<HelpViewModel>("Help")).ContinueWith(task => IsVisible = false)));
             Commands.Add("Exit", new Command(_ => mediator.Send(new Shutdown.Request())));
         }

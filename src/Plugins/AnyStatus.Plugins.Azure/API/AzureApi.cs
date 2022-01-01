@@ -49,20 +49,6 @@ namespace AnyStatus.Plugins.Azure.API
             return default;
         }
 
-        private async Task ExecuteAsync(IRestRequest request, CancellationToken cancellationToken)
-        {
-            request.AddParameter("api-version", "2020-05-01");
-
-            //request.AddHeader("X-TFS-FedAuthRedirect", "Suppress");
-
-            var response = await _client.ExecuteAsync(request, request.Method, cancellationToken).ConfigureAwait(false);
-
-            if (!response.IsSuccessful || response.ErrorException != null)
-            {
-                throw new Exception("An error occurred while sending request to Azure DevOps.", response.ErrorException);
-            }
-        }
-
         internal Task<AzureCollectionResponse<Subscription>> GetSubscriptionsAsync(CancellationToken cancellationToken = default) =>
             ExecuteAsync<AzureCollectionResponse<Subscription>>("/subscriptions", cancellationToken);
 

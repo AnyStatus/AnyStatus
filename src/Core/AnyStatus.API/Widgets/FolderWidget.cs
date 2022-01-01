@@ -9,5 +9,6 @@ namespace AnyStatus.API.Widgets
     [Redirect("AnyStatus.API.Widgets.Folder, AnyStatus.API")]
     public class FolderWidget : Widget, IRefreshable, IConfigurable, IDeletable, IAddFolder, IAddWidget, IMovable, ICopyable
     {
+        public FolderWidget() => IsPersisted = true;
     }
 }

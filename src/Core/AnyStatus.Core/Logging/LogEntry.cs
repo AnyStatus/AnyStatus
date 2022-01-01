@@ -3,7 +3,7 @@ using System;
 
 namespace AnyStatus.Core.Logging
 {
-    public class ActivityMessage
+    public class LogEntry
     {
         public DateTime Time { get; set; }
 
@@ -15,6 +15,6 @@ namespace AnyStatus.Core.Logging
 
         public Exception Exception { get; set; }
 
-        public bool HasException => !(Exception is null);
+        public bool HasException => Exception is not null;
     }
 }
