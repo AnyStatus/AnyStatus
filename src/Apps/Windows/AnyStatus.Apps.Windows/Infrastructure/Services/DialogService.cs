@@ -3,11 +3,17 @@ using ModernWpf.Controls;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
+using System.Windows.Controls;
 
 namespace AnyStatus.Apps.Windows.Infrastructure.Services
 {
     public class DialogService : IDialogService
     {
+        private bool _initialized;
+        private Style _closeButtonStyle;
+        private Style _primaryButtonStyle;
+        private Style _secondaryButtonStyle;
+
         public async Task<DialogResult> ShowDialogAsync(IDialog dialog)
         {
             var contentDialog = new ContentDialog
@@ -15,6 +21,8 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
                 Title = dialog.Title,
                 Content = dialog.Message
             };
+
+            SetButtonsAutomationId(contentDialog);
 
             switch (dialog)
             {
@@ -74,8 +82,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
                     break;
             }
 
-            return MessageBox.Show(dialog.Message, dialog.Title, button, icon)
-                    switch
+            return MessageBox.Show(dialog.Message, dialog.Title, button, icon) switch
             {
                 MessageBoxResult.OK => DialogResult.OK,
                 MessageBoxResult.Cancel => DialogResult.Cancel,
@@ -113,6 +120,27 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Services
             fileDialog.FileName = win32Dialog.FileName;
 
             return result != null && result.Value ? DialogResult.OK : DialogResult.Cancel;
+        }
+
+        private void SetButtonsAutomationId(ContentDialog contentDialog)
+        {
+            if (_initialized is false)
+            {
+                _primaryButtonStyle = new Style(typeof(Button), contentDialog.PrimaryButtonStyle);
+                _primaryButtonStyle.Setters.Add(new Setter(AutomationProperties.AutomationIdProperty, "ContentDialogPrimaryButton"));
+
+                _secondaryButtonStyle = new Style(typeof(Button), contentDialog.SecondaryButtonStyle);
+                _secondaryButtonStyle.Setters.Add(new Setter(AutomationProperties.AutomationIdProperty, "ContentDialogSecondaryButton"));
+
+                _closeButtonStyle = new Style(typeof(Button), contentDialog.CloseButtonStyle);
+                _closeButtonStyle.Setters.Add(new Setter(AutomationProperties.AutomationIdProperty, "ContentDialogCloseButton"));
+
+                _initialized = true;
+            }
+
+            contentDialog.CloseButtonStyle = _closeButtonStyle;
+            contentDialog.PrimaryButtonStyle = _primaryButtonStyle;
+            contentDialog.SecondaryButtonStyle = _secondaryButtonStyle;
         }
     }
 }

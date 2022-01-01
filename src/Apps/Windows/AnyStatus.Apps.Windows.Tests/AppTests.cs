@@ -14,90 +14,94 @@ namespace AnyStatus.Apps.Windows.Tests
             _fixture = fixture ?? throw new ArgumentNullException(nameof(fixture));
         }
 
-        [Fact(Skip = "Unable to change view state"), Priority(0)]
-        public void ToggleMenuTest()
-        {
-            var menu = _fixture.Session.FindElementByAccessibilityId("Menu");
-
-            var isEnabled = menu.Enabled;
-
-            var toggleButton = _fixture.Session.FindElementByAccessibilityId("ToggleMenuButton");
-
-            toggleButton.Click();
-
-            Assert.NotEqual(menu.Enabled, isEnabled);
-
-            toggleButton.Click();
-
-            Assert.Equal(menu.Enabled, isEnabled);
-        }
-
         [Fact, Priority(1)]
         public void RefreshAllTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("RefreshAllButton").Click();
+            Click("RefreshAllButton");
         }
 
         [Fact, Priority(2)]
         public void ExpandAllAllTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("ExpandAllButton").Click();
+            Click("ExpandAllButton");
         }
 
         [Fact, Priority(3)]
         public void CollapseAllAllTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("CollapseAllButton").Click();
+            Click("CollapseAllButton");
         }
 
         [Fact, Priority(4)]
         public void AddWidgetTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("AddWidgetButton").Click();
+            Click("AddWidgetButton");
 
-            _fixture.Session.FindElementByAccessibilityId("BackButton").Click();
+            Click("BackButton");
         }
 
         [Fact, Priority(5)]
         public void AddFolderTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("AddFolderButton").Click();
+            Click("AddFolderButton");
         }
 
         [Fact, Priority(6)]
         public void ShowActivityTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("ShowActivityButton").Click();
+            Click("ShowActivityButton");
         }
 
         [Fact, Priority(8)]
         public void NewSessionTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("ToggleMenuButton").Click();
+            ToggleMenu();
 
-            _fixture.Session.FindElementByAccessibilityId("NewSessionButton").Click();
+            Click("NewSessionButton");
         }
 
         [Fact, Priority(9)]
-        public void OptionsTest()
+        public void SettingsTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("ToggleMenuButton").Click();
+            ToggleMenu();
 
-            _fixture.Session.FindElementByAccessibilityId("OptionsButton").Click();
+            Click("SettingsButton");
 
-            _fixture.Session.FindElementByAccessibilityId("BackButton").Click();
+            Click("BackButton");
         }
 
         [Fact, Priority(10)]
+        public void EndpointsTest()
+        {
+            ToggleMenu();
+
+            Click("EndpointsButton");
+
+            Click("BackButton");
+        }
+
+        [Fact, Priority(11)]
+        public void HelpTest()
+        {
+            ToggleMenu();
+
+            Click("HelpButton");
+
+            Click("BackButton");
+        }
+
+        [Fact, Priority(100)]
         public void ExitAppTest()
         {
-            _fixture.Session.FindElementByAccessibilityId("ToggleMenuButton").Click();
+            ToggleMenu();
 
-            _fixture.Session.FindElementByAccessibilityId("ExitButton").Click();
-            
-            _fixture.Session.FindElementByAccessibilityId("ContentDialogSecondaryButton").Click();
-            
-            //_fixture.Session.FindElementByName("Save Changes?").FindElementByName("No").Click();
+            Click("ExitButton");
+
+            Click("ContentDialogSecondaryButton");
         }
+
+        private void ToggleMenu() => Click("ToggleMenuButton");
+
+        private void Click(string accessibilityId) => _fixture.Session.FindElementByAccessibilityId(accessibilityId).Click();
     }
 }
