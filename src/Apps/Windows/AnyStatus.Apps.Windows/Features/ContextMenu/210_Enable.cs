@@ -10,6 +10,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 210;
             Name = "Enable";
+            Icon = "BootstrapIcons.ToggleOn";
             Command = new Command(_ =>
             {
                 Context.IsEnabled = true;

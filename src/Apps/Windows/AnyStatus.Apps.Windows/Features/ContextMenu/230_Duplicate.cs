@@ -12,6 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 230;
             Name = "Duplicate";
+            Icon = "Material.ContentDuplicate";
             Command = new Command(_ => mediator.Send(new DuplicateWidget.Request(Context)));
         }
     }

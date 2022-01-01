@@ -13,6 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 120;
             Name = "Add Folder";
+            Icon = "Material.ShapeRectanglePlus";
             Command = new Command(_ => mediator.Send(new AddFolder.Request(context.Session.SelectedWidget ?? context.Session.Widget)));
         }
     }

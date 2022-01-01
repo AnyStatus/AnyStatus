@@ -12,13 +12,14 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 150;
             Name = "Restart";
+            Icon = "Material.Reload";
             Command = new Command(async _ =>
             {
                 var dialog = new ConfirmationDialog($"Are you sure you want to restart {Context.Name}?");
 
                 if (await dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                 {
-                    _ = await mediator.Send(RestartRequestFactory.Create(Context)).ConfigureAwait(false);
+                    await mediator.Send(RestartRequestFactory.Create(Context));
                 }
             });
         }

@@ -14,6 +14,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             {
                 Order = 200;
                 Name = "Copy";
+                Icon = "Material.ContentCopy";
                 Command = new Command(_ => _clone = (IWidget)Context.Clone());
             }
         }
@@ -24,6 +25,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             {
                 Order = 201;
                 Name = "Paste";
+                Icon = "Material.ContentPaste";
                 Command = new Command(_ =>
                 {
                     Context.Add(_clone);

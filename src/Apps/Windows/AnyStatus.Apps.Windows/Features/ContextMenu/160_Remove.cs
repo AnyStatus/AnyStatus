@@ -12,13 +12,14 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 220;
             Name = "Remove";
+            Icon = "Material.DeleteForeverOutline";
             Command = new Command(async _ =>
             {
                 var dialog = new ConfirmationDialog($"Are you sure you want to remove {Context.Name}?");
 
                 if (await dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                 {
-                    _ = await mediator.Send(RemoveRequestFactory.Create(Context)).ConfigureAwait(false);
+                    await mediator.Send(RemoveRequestFactory.Create(Context));
                 }
             });
         }

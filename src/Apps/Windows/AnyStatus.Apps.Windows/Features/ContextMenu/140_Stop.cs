@@ -12,13 +12,14 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 140;
             Name = "Stop";
+            Icon = "MaterialLight.Stop";
             Command = new Command(async _ =>
             {
                 var dialog = new ConfirmationDialog($"Are you sure you want to stop {Context.Name}?");
 
                 if (await dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                 {
-                    _ = await mediator.Send(StopRequestFactory.Create(Context)).ConfigureAwait(false);
+                    await mediator.Send(StopRequestFactory.Create(Context));
                 }
             });
         }

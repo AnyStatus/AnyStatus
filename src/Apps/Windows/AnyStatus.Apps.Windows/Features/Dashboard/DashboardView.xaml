@@ -13,7 +13,8 @@
              mc:Ignorable="d">
     <UserControl.Resources>
 
-        <converters:StatusIconConverter x:Key="IconConverter"/>
+        <converters:PackIconConverter x:Key="PackIconConverter"/>
+
         <dataTemplates:WidgetTemplateSelector x:Key="WidgetTemplateSelector"/>
 
         <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
@@ -87,7 +88,7 @@
                     <!--<Setter Property="ItemsSource" Value="{Binding Item}"/>-->
                     <Setter Property="Command" Value="{Binding Command}"/>
                     <Setter Property="InputGestureText" Value="{Binding InputGestureText}"/>
-                    <Setter Property="Icon" Value="{Binding Icon, Converter={StaticResource IconConverter}}"/>
+                    <Setter Property="Icon" Value="{Binding Icon, Converter={StaticResource PackIconConverter}}"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding}" Value="{x:Null}">
                             <Setter Property="Template" Value="{StaticResource SeparatorTemplate}"/>

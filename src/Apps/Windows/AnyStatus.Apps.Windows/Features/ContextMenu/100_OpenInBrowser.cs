@@ -12,6 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 100;
             Name = "Open in Browser";
+            Icon = "Material.OpenInApp";
             Command = new Command(async _ => await mediator.Send(new LaunchURL.Request(Context.URL)));
         }
 

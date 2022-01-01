@@ -12,6 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 130;
             Name = "Start";
+            Icon = "MaterialLight.Play";
             Command = new Command(
                 async _ =>
                 {
@@ -19,7 +20,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 
                     if (await dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                     {
-                        _ = await mediator.Send(StartRequestFactory.Create(Context)).ConfigureAwait(false);
+                        await mediator.Send(StartRequestFactory.Create(Context));
                     }
                 });
         }

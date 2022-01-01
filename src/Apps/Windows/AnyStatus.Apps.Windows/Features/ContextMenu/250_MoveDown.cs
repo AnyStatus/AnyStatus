@@ -12,6 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 250;
             Name = "Move Down";
             InputGestureText = "Alt+Down";
+            Icon = "MaterialLight.ArrowDown";
             Command = new Command(_ => Context.MoveDown());
         }
 
