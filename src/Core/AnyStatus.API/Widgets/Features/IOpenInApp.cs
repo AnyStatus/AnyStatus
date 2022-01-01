@@ -1,6 +1,6 @@
 ﻿namespace AnyStatus.API.Widgets
 {
-    public interface IWebPage
+    public interface IOpenInApp
     {
         string URL { get; }
     }

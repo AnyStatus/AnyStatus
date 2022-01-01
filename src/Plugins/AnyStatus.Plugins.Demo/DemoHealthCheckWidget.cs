@@ -11,7 +11,7 @@ namespace AnyStatus.Plugins.Demo
     [Category("Demo")]
     [DisplayName("Health Check Demo")]
     [Description("A demo health check widget with random status")]
-    public class DemoHealthCheckWidget : StatusWidget, IPollable, IWebPage, IStandardWidget
+    public class DemoHealthCheckWidget : StatusWidget, IPollable, IOpenInApp, IStandardWidget
     {
         public bool Randomize { get; set; } = true;
 

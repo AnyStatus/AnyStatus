@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace AnyStatus.Plugins.GitHub.Issues
 {
     [Browsable(false)]
-    public class GitHubIssueWidget : Widget, IWebPage
+    public class GitHubIssueWidget : Widget, IOpenInApp
     {
         public string Number { get; set; }
 
