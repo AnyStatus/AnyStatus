@@ -11,7 +11,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
     {
         public AddFolder(IMediator mediator, IAppContext context)
         {
-            Order = 110;
+            Order = 120;
             Name = "Add Folder";
             Command = new Command(_ => mediator.Send(new AddFolder.Request(context.Session.SelectedWidget ?? context.Session.Widget)));
         }
