@@ -15,7 +15,7 @@
         <Button Command="{Binding Commands[ToggleMenu]}" 
                 Style="{StaticResource ToolbarButton}"
                 AutomationProperties.AutomationId="ToggleMenuButton"
-                ToolTip="Options">
+                ToolTip="Open Navigation">
             <Button.Content>
                 <ContentControl Height="24" Width="24" Content="{Binding Source={StaticResource MenuIcon}}"/>
             </Button.Content>
