@@ -8,7 +8,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard
 {
     public partial class MenuView : UserControl
     {
-        private const int AutoHideDelay = 300;
+        private const int AutoHideDelay = 500;
 
         private MenuViewModel _viewModel;
 
@@ -36,21 +36,18 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard
 
         private void OnParentWindowPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (_viewModel is null || IsMouseOver)
+            if (_viewModel is null || !_viewModel.IsVisible || IsMouseOver)
             {
                 return;
             }
 
-            if (_viewModel.IsVisible)
+            _ = Task.Delay(AutoHideDelay).ContinueWith(_ =>
             {
-                Task.Delay(AutoHideDelay).ContinueWith(t =>
+                if (_viewModel.IsVisible)
                 {
-                    if (_viewModel.IsVisible)
-                    {
-                        _viewModel.IsVisible = false;
-                    }
-                });
-            }
+                    _viewModel.IsVisible = false;
+                }
+            });
         }
     }
 }
