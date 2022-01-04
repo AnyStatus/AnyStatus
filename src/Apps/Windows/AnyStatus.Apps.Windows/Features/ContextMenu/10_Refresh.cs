@@ -13,6 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 10;
             Name = "Refresh";
             InputGestureText = "F5";
+            Icon = "Material.Refresh";
             Command = new Command(_ => mediator.Send(new Refresh.Request(Context)), _ => Context.IsEnabled);
         }
     }

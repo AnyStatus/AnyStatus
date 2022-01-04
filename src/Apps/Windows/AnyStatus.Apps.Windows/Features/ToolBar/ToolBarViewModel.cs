@@ -14,11 +14,9 @@ namespace AnyStatus.Apps.Windows.Features.ToolBar
 {
     public class ToolBarViewModel : BaseViewModel
     {
-        private bool _isVisible;
-
         public ToolBarViewModel(IMediator mediator, IAppContext context)
         {
-            Commands.Add("ToggleMenu", new Command(_ => ToggleVisibility(), _ => MenuViewModel != null));
+            Commands.Add("ToggleMenu", new Command(_ => MenuViewModel.IsVisible = !MenuViewModel.IsVisible));
             Commands.Add("Refresh", new Command(_ => Task.Run(() => mediator.Send(new Refresh.Request(context.Session.Widget)))));
             Commands.Add("ExpandAll", new Command(_ => mediator.Send(new ExpandAll.Request())));
             Commands.Add("CollapseAll", new Command(_ => mediator.Send(new CollapseAll.Request())));
@@ -27,14 +25,6 @@ namespace AnyStatus.Apps.Windows.Features.ToolBar
             Commands.Add("Activity", new Command(_ => mediator.Send(MaterialWindow.Show<ActivityViewModel>(title: "Activity", width: 800, height: 600))));
         }
 
-        private void ToggleVisibility() => MenuViewModel.IsVisible = !MenuViewModel.IsVisible;
-
         public MenuViewModel MenuViewModel { get; set; }
-
-        public bool IsVisible
-        {
-            get => _isVisible;
-            set => Set(ref _isVisible, value);
-        }
     }
 }

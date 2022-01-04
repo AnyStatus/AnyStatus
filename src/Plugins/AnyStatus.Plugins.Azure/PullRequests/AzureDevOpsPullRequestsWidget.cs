@@ -13,8 +13,6 @@ namespace AnyStatus.Plugins.Azure.DevOps.PullRequests
     [Description("View the status of pull requests on Azure DevOps")]
     public class AzureDevOpsPullRequestsWidget : TextWidget, IAzureDevOpsWidget, IRequireEndpoint<IAzureDevOpsEndpoint>, IStandardWidget, IPollable
     {
-        public AzureDevOpsPullRequestsWidget() => IsPersisted = false;
-
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

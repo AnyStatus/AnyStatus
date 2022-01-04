@@ -15,7 +15,7 @@ namespace AnyStatus.Plugins.GitHub.API.Sources
 
         public async Task<IEnumerable<NameValueItem>> GetItemsAsync(object source)
         {
-            var widget = source as GitHubActionsWorkflowWidget;
+            var widget = source as GitHubActionsWorkflowStatusWidget;
 
             var endpoint = _endpointProvider.GetEndpoint<GitHubEndpoint>(widget.EndpointId);
 

@@ -69,7 +69,7 @@
             </i:Interaction.Triggers>
             Save As
         </ListBoxItem>
-        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="ConnectionsButton">
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="EndpointsButton">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                     <i:InvokeCommandAction Command="{Binding Commands[Endpoints]}"/>
@@ -77,7 +77,7 @@
             </i:Interaction.Triggers>
             Endpoints
         </ListBoxItem>
-        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="OptionsButton">
+        <ListBoxItem Focusable="False" AutomationProperties.AutomationId="SettingsButton">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                     <i:InvokeCommandAction Command="{Binding Commands[Settings]}"/>

@@ -17,7 +17,7 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
         IAzureDevOpsWidget,
         IRequireEndpoint<IAzureDevOpsEndpoint>,
         IStandardWidget,
-        IWebPage,
+        IOpenInApp,
         IPollable,
         IPipeline,
         IStartable,

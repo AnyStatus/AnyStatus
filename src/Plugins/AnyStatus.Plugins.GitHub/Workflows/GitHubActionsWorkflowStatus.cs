@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.GitHub.Workflows
 {
-    public class GitHubActionsWorkflowStatus : AsyncStatusCheck<GitHubActionsWorkflowWidget>, IEndpointHandler<GitHubEndpoint>
+    public class GitHubActionsWorkflowStatus : AsyncStatusCheck<GitHubActionsWorkflowStatusWidget>, IEndpointHandler<GitHubEndpoint>
     {
         public GitHubEndpoint Endpoint { get; set; }
 
-        protected override async Task Handle(StatusRequest<GitHubActionsWorkflowWidget> request, CancellationToken cancellationToken)
+        protected override async Task Handle(StatusRequest<GitHubActionsWorkflowStatusWidget> request, CancellationToken cancellationToken)
         {
             var response = await new GitHubAPI(Endpoint).GetWorkflowRunsAsync(request.Context.Repository, request.Context.Workflow, request.Context.Branch);
 
-            request.Context.Status = response?.WorkflowRuns?.FirstOrDefault()?.GetStatus() ?? Status.None;
+            request.Context.Status = response.WorkflowRuns?.FirstOrDefault()?.GetStatus() ?? Status.Unknown;
         }
     }
 }

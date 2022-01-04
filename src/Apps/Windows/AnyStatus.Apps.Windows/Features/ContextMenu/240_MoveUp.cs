@@ -12,6 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 240;
             Name = "Move Up";
             InputGestureText = "Alt+Up";
+            Icon = "MaterialLight.ArrowUp";
             Command = new Command(_ => Context.MoveUp());
         }
 

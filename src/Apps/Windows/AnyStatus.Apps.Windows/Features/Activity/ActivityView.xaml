@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
 
-        <CollectionViewSource x:Key="ActivityMessages" Source="{Binding Messages}">
+        <CollectionViewSource x:Key="LogEntries" Source="{Binding LogEntries}">
             <CollectionViewSource.SortDescriptions>
                 <componentModel:SortDescription PropertyName="Time" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
@@ -39,7 +39,7 @@
 
     </UserControl.Resources>
 
-    <DataGrid ItemsSource="{Binding Source={StaticResource ActivityMessages}}"
+    <DataGrid ItemsSource="{Binding Source={StaticResource LogEntries}}"
               AutoGenerateColumns="False"
               IsReadOnly="True"
               SelectionMode="Single"
@@ -65,11 +65,11 @@
                 </Style.Triggers>
             </Style>
 
-            <DataTemplate x:Key="MessageTemplate" DataType="{x:Type logging:ActivityMessage}">
+            <DataTemplate x:Key="MessageTemplate" DataType="{x:Type logging:LogEntry}">
                 <TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
             </DataTemplate>
 
-            <DataTemplate x:Key="MessageWithExceptionTemplate" DataType="{x:Type logging:ActivityMessage}">
+            <DataTemplate x:Key="MessageWithExceptionTemplate" DataType="{x:Type logging:LogEntry}">
                 <Expander>
                     <Expander.Header>
                         <TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
@@ -111,7 +111,7 @@
 
             <DataGridTemplateColumn Header="Message" Width="*" ClipboardContentBinding="{Binding Converter={StaticResource ClipboardContentConverter}}">
                 <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate DataType="{x:Type logging:ActivityMessage}">
+                    <DataTemplate DataType="{x:Type logging:LogEntry}">
                         <ContentControl Content="{Binding}">
                             <ContentControl.Style>
                                 <Style TargetType="ContentControl">

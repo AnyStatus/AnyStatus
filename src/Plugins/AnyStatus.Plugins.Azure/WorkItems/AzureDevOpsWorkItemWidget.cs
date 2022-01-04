@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace AnyStatus.Plugins.Azure.WorkItems
 {
     [Browsable(false)]
-    public class AzureDevOpsWorkItemWidget : Widget, IWebPage
+    public class AzureDevOpsWorkItemWidget : Widget, IOpenInApp
     {
         [ReadOnly(true)]
         [DisplayName("Work Item Id")]

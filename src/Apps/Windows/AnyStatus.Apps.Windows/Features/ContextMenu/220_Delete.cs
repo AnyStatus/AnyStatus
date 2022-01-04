@@ -13,6 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 220;
             Name = "Delete";
             InputGestureText = "Del";
+            Icon = "Material.DeleteOutline";
             Command = new Command(_ => mediator.Send(new DeleteWidget.Request(Context)));
         }
     }

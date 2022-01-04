@@ -46,17 +46,15 @@ namespace AnyStatus.Apps.Windows.Features.App
                     Cancellable = true
                 };
 
-                switch (_dialogService.ShowDialog(dialog))
+                switch (await _dialogService.ShowDialogAsync(dialog))
                 {
-                    case DialogResult.Cancel:
-                        request.Cancel = true;
-                        break;
-
                     case DialogResult.Yes:
                         var saved = await _mediator.Send(new SaveCommand.Request(), cancellationToken);
                         if (!saved) request.Cancel = true;
                         break;
-
+                    case DialogResult.None:
+                        request.Cancel = true;
+                        break;
                     default:
                         break;
                 }

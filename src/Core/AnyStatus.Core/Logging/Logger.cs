@@ -6,13 +6,13 @@ using System.Threading;
 
 namespace AnyStatus.Core.Logging
 {
-    public class ActivityLogger : ILogger
+    public class Logger : ILogger, IDisposable
     {
         private const int BufferSize = 100;
 
-        private readonly ReplaySubject<ActivityMessage> _buffer = new(BufferSize);
+        private readonly ReplaySubject<LogEntry> _buffer = new(BufferSize);
 
-        public IObservable<ActivityMessage> Messages => _buffer.AsObservable();
+        public IObservable<LogEntry> LogEntries => _buffer.AsObservable();
 
         public IDisposable BeginScope<TState>(TState state) => null;
 
@@ -20,7 +20,7 @@ namespace AnyStatus.Core.Logging
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            _buffer.OnNext(new ActivityMessage
+            _buffer.OnNext(new LogEntry
             {
                 Time = DateTime.Now,
                 LogLevel = logLevel,
@@ -28,6 +28,11 @@ namespace AnyStatus.Core.Logging
                 Message = formatter(state, exception),
                 ThreadId = Thread.CurrentThread.ManagedThreadId,
             });
+        }
+
+        public void Dispose()
+        {
+            _buffer.Dispose();
         }
     }
 }

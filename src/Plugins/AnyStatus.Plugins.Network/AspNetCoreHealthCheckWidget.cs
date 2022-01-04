@@ -11,7 +11,7 @@ namespace AnyStatus.Plugins.HealthChecks
     [Category("Network")]
     [DisplayName("ASP.NET Core Health")]
     [Description("View the health status of ASP.NET Core instance")]
-    public class AspNetCoreHealthCheckWidget : StatusWidget, IPollable, IWebPage, IStandardWidget
+    public class AspNetCoreHealthCheckWidget : StatusWidget, IPollable, IOpenInApp, IStandardWidget
     {
         public string URL { get; }
     }

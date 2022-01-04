@@ -42,9 +42,9 @@ namespace AnyStatus.Core.Packages
 
         public static void RegisterLogger(Container container)
         {
-            container.RegisterSingleton<ActivityLogger>();
-            container.RegisterSingleton<ActivityLoggerProvider>();
-            container.Register<ILoggerFactory>(() => new LoggerFactory(new[] { container.GetInstance<ActivityLoggerProvider>() }), Lifestyle.Singleton);
+            container.RegisterSingleton<Logger>();
+            container.RegisterSingleton<LoggerProvider>();
+            container.Register<ILoggerFactory>(() => new LoggerFactory(new[] { container.GetInstance<LoggerProvider>() }), Lifestyle.Singleton);
             container.RegisterConditional(typeof(ILogger), ctx => typeof(Logger<>).MakeGenericType(ctx.Consumer.ImplementationType), Lifestyle.Singleton, _ => true);
         }
 

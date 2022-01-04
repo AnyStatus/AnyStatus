@@ -6,12 +6,13 @@ using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
 {
-    public class OpenInBrowser<TWidget> : ContextMenu<TWidget> where TWidget : IWebPage
+    public class OpenInBrowser<TWidget> : ContextMenu<TWidget> where TWidget : IOpenInApp
     {
         public OpenInBrowser(IMediator mediator)
         {
             Order = 100;
-            Name = "Open in Browser";
+            Name = "Open in App";
+            Icon = "Material.OpenInApp";
             Command = new Command(async _ => await mediator.Send(new LaunchURL.Request(Context.URL)));
         }
 

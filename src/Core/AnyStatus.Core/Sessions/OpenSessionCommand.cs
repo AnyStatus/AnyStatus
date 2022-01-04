@@ -47,7 +47,7 @@ namespace AnyStatus.Core.Sessions
                 {
                     var dialog = new OpenFileDialog("JSON|*.json");
 
-                    var result = _dialogService.ShowDialog(dialog);
+                    var result = _dialogService.ShowFileDialog(dialog);
 
                     if (result != DialogResult.OK)
                     {
@@ -71,9 +71,9 @@ namespace AnyStatus.Core.Sessions
                 _context.Session.FileName = request.FileName;
                 _context.Session.Widget = await _mediator.Send(new GetWidget.Request(request.FileName), cancellationToken).ConfigureAwait(false);
 
-                await _mediator.Send(new DeleteAllJobs.Request(), cancellationToken).ConfigureAwait(false);
+                _ = await _mediator.Send(new DeleteAllJobs.Request(), cancellationToken).ConfigureAwait(false);
 
-                await _mediator.Send(new ScheduleJob.Request(_context.Session.Widget, true), cancellationToken).ConfigureAwait(false);
+                _ = await _mediator.Send(new ScheduleJob.Request(_context.Session.Widget, true), cancellationToken).ConfigureAwait(false);
 
                 return true;
             }

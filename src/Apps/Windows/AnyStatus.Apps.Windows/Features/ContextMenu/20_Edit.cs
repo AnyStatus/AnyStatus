@@ -14,6 +14,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 20;
             Name = "Edit";
+            Icon = "Material.Pencil";
             Command = new Command(_ => mediator.Send(Page.Show<WidgetViewModel>("Edit Widget", onClose: () => mediator.Send(new Refresh.Request(Context)))));
         }
     }

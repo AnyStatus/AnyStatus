@@ -10,8 +10,6 @@ namespace AnyStatus.Plugins.UptimeRobot
     [Description("View the status of monitors on UptimeRobot")]
     public class UptimeRobotMonitorsWidget : StatusWidget, IRequireEndpoint<UptimeRobotEndpoint>, IStandardWidget, IPollable
     {
-        public UptimeRobotMonitorsWidget() => IsPersisted = false;
-
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

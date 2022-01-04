@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Azure.Releases
         IAzureDevOpsWidget,
         IRequireEndpoint<IAzureDevOpsEndpoint>,
         IStandardWidget,
-        IWebPage,
+        IOpenInApp,
         IPollable
     {
         [Required]

@@ -12,6 +12,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
         {
             Order = 210;
             Name = "Disable";
+            Icon = "BootstrapIcons.ToggleOff";
             Command = new Command(_ => mediator.Send(new DisableWidget.Request(Context)));
         }
 

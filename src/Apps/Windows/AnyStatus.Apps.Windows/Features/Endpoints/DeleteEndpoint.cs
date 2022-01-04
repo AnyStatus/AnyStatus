@@ -30,18 +30,16 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
                 _dialogService = dialogService;
             }
 
-            protected override Task Handle(Request request, CancellationToken cancellationToken)
+            protected override async Task Handle(Request request, CancellationToken cancellationToken)
             {
-                var dialog = new ConfirmationDialog($"Are you sure you want to delete '{request.Endpoint.Name}'?", "Delete");
+                var dialog = new ConfirmationDialog($"Are you sure you want to delete {request.Endpoint.Name}?", "Delete");
 
-                if (_dialogService.ShowDialog(dialog) == DialogResult.Yes)
+                if (await _dialogService.ShowDialogAsync(dialog) is DialogResult.Yes)
                 {
                     _context.Endpoints.Remove(request.Endpoint);
 
-                    return _mediator.Send(new SaveEndpoints.Request());
+                    _ = await _mediator.Send(new SaveEndpoints.Request());
                 }
-
-                return Task.CompletedTask;
             }
         }
     }
