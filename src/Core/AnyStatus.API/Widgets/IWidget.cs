@@ -26,7 +26,7 @@ namespace AnyStatus.API.Widgets
 
         void Expand();
 
-        void Reassessment();
+        void Reassess();
 
         bool IsConfigurable();
     }

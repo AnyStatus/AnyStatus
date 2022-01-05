@@ -16,9 +16,19 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
         {
             protected override void Handle(Request request)
             {
-                request.Widget.IsEnabled = false;
+                Disable(request.Widget);
+            }
 
-                request.Widget.Parent?.Reassessment();
+            private static void Disable(IWidget widget)
+            {
+                widget.Status = Status.None;
+
+                widget.IsEnabled = false;
+
+                foreach (var child in widget)
+                {
+                    Disable(child);
+                }
             }
         }
     }

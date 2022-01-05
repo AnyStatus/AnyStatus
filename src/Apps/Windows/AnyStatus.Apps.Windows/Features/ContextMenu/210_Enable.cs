@@ -13,7 +13,7 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 210;
             Name = "Enable";
             Icon = "BootstrapIcons.ToggleOn";
-            Command = new Command(_ => mediator.Send(new EnableWidget.Request(Context)));
+            Command = new Command(async _ => await mediator.Send(new EnableWidget.Request(Context)));
         }
 
         public override bool IsVisible => Context != null && !((IEnablable)Context).IsEnabled;
