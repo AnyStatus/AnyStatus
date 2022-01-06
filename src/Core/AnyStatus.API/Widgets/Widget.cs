@@ -60,7 +60,7 @@ namespace AnyStatus.API.Widgets
             get => _status;
             set
             {
-                if (Set(ref _status, value))
+                if (IsEnabled && Set(ref _status, value))
                 {
                     PreviousStatus = _status;
                 }
@@ -112,7 +112,7 @@ namespace AnyStatus.API.Widgets
 
             _ = WidgetNotifications.PublishAsync(new WidgetAddedNotification(widget));
 
-            Reassessment();
+            Reassess();
         }
 
         protected override void RemoveItem(int index)
@@ -130,7 +130,7 @@ namespace AnyStatus.API.Widgets
 
             _ = WidgetNotifications.PublishAsync(new WidgetDeletedNotification(widget));
 
-            Reassessment();
+            Reassess();
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -139,7 +139,7 @@ namespace AnyStatus.API.Widgets
 
             if (e.PropertyName.Equals(nameof(Status)) && Status != PreviousStatus && Parent is object)
             {
-                Parent.Reassessment();
+                Parent.Reassess();
             }
         }
 
@@ -156,7 +156,7 @@ namespace AnyStatus.API.Widgets
 
         #region Public Methods
 
-        public void Reassessment() => Status = Count > 0 ? this.Where(w => w.IsEnabled).Aggregate((a, b) => Widgets.Status.Priority(a.Status) < Widgets.Status.Priority(b.Status) ? a : b).Status : null;
+        public void Reassess() => Status = Count > 0 ? this.Aggregate((a, b) => Widgets.Status.Priority(a.Status) < Widgets.Status.Priority(b.Status) ? a : b).Status : Widgets.Status.None;
 
         public void Expand() => IsExpanded = true;
 
