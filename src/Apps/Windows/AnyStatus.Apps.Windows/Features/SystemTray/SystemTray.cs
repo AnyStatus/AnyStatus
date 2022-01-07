@@ -1,11 +1,16 @@
 ﻿using AnyStatus.API.Common;
 using AnyStatus.API.Notifications;
+using AnyStatus.API.Widgets;
 using AnyStatus.Apps.Windows.Features.App;
+using AnyStatus.Apps.Windows.Infrastructure.Converters;
+using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
+using Hardcodet.Wpf.TaskbarNotification;
+using MahApps.Metro.IconPacks;
+using MahApps.Metro.IconPacks.Converter;
 using MediatR;
-using Microsoft.Win32;
-using System;
+using System.Windows.Media.Imaging;
 //using System.Windows.Forms;
 
 namespace AnyStatus.Apps.Windows.Features.SystemTray
@@ -17,10 +22,18 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
         private readonly IMediator _mediator;
         //private readonly NotifyIcon _notifier;
         //private readonly ContextMenuStrip _contextMenu;
+        private readonly TaskbarIcon _taskbarIcon;
 
         public SystemTray(IMediator mediator, IAppContext context)
         {
             _mediator = mediator;
+
+            _taskbarIcon = new TaskbarIcon
+            {
+                ToolTipText = "AnyStatus",
+                LeftClickCommand = new Command(_ => mediator.Send(MaterialWindow.Show<AppViewModel>())),
+                Icon = SystemTrayIcons.Get(Status.OK)
+            };
 
             //_contextMenu = new ContextMenuFactory(mediator, context).Create();
 
@@ -57,6 +70,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
 
         public void ShowStatus(string status)
         {
+            _taskbarIcon.Icon = SystemTrayIcons.Get(status);
         }
 
         public void ShowNotification(Notification notification)
@@ -87,28 +101,9 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
         //    }
         //}
 
-        //private void SetIcon(object sender, EventArgs e) => _notifier.Icon = SystemTrayIcons.Get(Status);
-
         public void Dispose()
         {
-            //    if (_disposed)
-            //    {
-            //        return;
-            //    }
-
-            //    UnWireEvents();
-
-            //    if (_notifier != null)
-            //    {
-            //        _notifier.Icon?.Dispose();
-            //        _notifier.Dispose();
-            //    }
-
-            //    //_contextMenu.Dispose();
-
-            //    _disposed = true;
+            _taskbarIcon.Dispose();
         }
-
-        
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
-//using System.Windows.Forms;
 
 namespace AnyStatus.Apps.Windows.Features.SystemTray
 {
@@ -28,7 +27,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
         {
             try
             {
-                return null;// new Icon(Assembly.GetExecutingAssembly().GetManifestResourceStream(Prefix + name), SystemInformation.SmallIconSize);
+                return new Icon(Assembly.GetExecutingAssembly().GetManifestResourceStream(Prefix + name));
             }
             catch
             {
