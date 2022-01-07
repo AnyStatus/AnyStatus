@@ -11,6 +11,6 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public RootStatusChangedNotificationHandler(ISystemTray sysTray) => _sysTray = sysTray;
 
-        protected override void Handle(StatusChangedNotification<TWidget> notification) => _sysTray.Status = notification?.Widget?.Status;
+        protected override void Handle(StatusChangedNotification<TWidget> notification) => _sysTray.ShowStatus(notification?.Widget?.Status);
     }
 }

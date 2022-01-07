@@ -5,7 +5,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
 {
     public interface ISystemTray : IDisposable
     {
-        string Status { get; set; }
+        void ShowStatus(string status);
 
         void ShowNotification(Notification notification);
     }
