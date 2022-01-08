@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.GitHub.Issues
 {
-    public class GitHubIssuesStatus : AsyncMetricQuery<GitHubIssuesWidget>, IEndpointHandler<GitHubEndpoint>
+    public class GitHubIssuesStatus : AsyncStatusCheck<GitHubIssuesWidget>, IEndpointHandler<GitHubEndpoint>
     {
         private readonly IMapper _mapper;
         private readonly IDispatcher _dispatcher;
@@ -22,7 +22,7 @@ namespace AnyStatus.Plugins.GitHub.Issues
 
         public GitHubEndpoint Endpoint { get; set; }
 
-        protected override async Task Handle(MetricRequest<GitHubIssuesWidget> request, CancellationToken cancellationToken)
+        protected override async Task Handle(StatusRequest<GitHubIssuesWidget> request, CancellationToken cancellationToken)
         {
             var issues = await new GitHubAPI(Endpoint).GetIssuesAsync();
 
@@ -34,7 +34,7 @@ namespace AnyStatus.Plugins.GitHub.Issues
             }
             else
             {
-                request.Context.Value = issues.Count;
+                request.Context.Text = issues.Count.ToString();
 
                 _dispatcher.InvokeAsync(()
                     => new GitHubIssuesSynchronizer(_mapper, request.Context)
