@@ -1,10 +1,7 @@
-﻿using AnyStatus.API.Common;
-using AnyStatus.API.Widgets;
+﻿using AnyStatus.API.Widgets;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Quartz;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,17 +16,6 @@ namespace AnyStatus.Core.Jobs
             public IWidget Widget { get; }
         }
 
-        internal class Validator : IValidator<Request>
-        {
-            public IEnumerable<ValidationResult> Validate(Request request)
-            {
-                if (request.Widget is null)
-                {
-                    yield return new ValidationResult("Widget is null.");
-                }
-            }
-        }
-
         public class Handler : AsyncRequestHandler<Request>
         {
             private readonly ILogger _logger;
@@ -41,26 +27,26 @@ namespace AnyStatus.Core.Jobs
                 _schedulerFactory = schedulerFactory;
             }
 
-            protected override Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                return request.Widget.IsEnabled ? TriggerJob(request.Widget, cancellationToken) : Task.CompletedTask;
-            }
+            protected override Task Handle(Request request, CancellationToken cancellationToken) => TriggerJob(request.Widget, cancellationToken);
 
             private async Task TriggerJob(IWidget widget, CancellationToken cancellationToken)
             {
-                _logger.LogDebug("Updating '{widget}'...", widget.Name);
-
-                if (widget is IPollable)
+                if (widget is null)
                 {
-                    var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
+                    return;
+                }
+
+                _logger.LogInformation("Refreshing '{widget}'...", widget.Name);
+
+                if (widget.IsEnabled && widget is IPollable)
+                {
+                    var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
 
                     var jobKey = new JobKey(widget.Id);
 
-                    var jobExists = await scheduler.CheckExists(jobKey, cancellationToken).ConfigureAwait(false);
-
-                    if (jobExists)
+                    if (await scheduler.CheckExists(jobKey, cancellationToken))
                     {
-                        await scheduler.TriggerJob(jobKey, cancellationToken).ConfigureAwait(false);
+                        await scheduler.TriggerJob(jobKey, cancellationToken);
                     }
                 }
 
@@ -68,7 +54,7 @@ namespace AnyStatus.Core.Jobs
                 {
                     foreach (var child in widget)
                     {
-                        await TriggerJob(child, cancellationToken).ConfigureAwait(false);
+                        await TriggerJob(child, cancellationToken);
                     }
                 }
             }
