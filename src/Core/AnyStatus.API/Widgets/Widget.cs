@@ -87,11 +87,18 @@ namespace AnyStatus.API.Widgets
         }
 
         /// <summary>
-        /// Determines whether child widgets should be persisted between sessions. Default is false.
+        /// When true, child widgets are saved and persisted between sessions. Default is false.
         /// </summary>
         [JsonIgnore]
         [Browsable(false)]
         public bool IsPersisted { get; set; }
+
+        /// <summary>
+        /// When true, status is aggregated by priority. Default is false.
+        /// </summary>
+        [JsonIgnore]
+        [Browsable(false)]
+        public bool IsAggregate { get; set; }
 
         #endregion
 
@@ -156,7 +163,13 @@ namespace AnyStatus.API.Widgets
 
         #region Public Methods
 
-        public void Reassess() => Status = Count > 0 ? this.Aggregate((a, b) => Widgets.Status.Priority(a.Status) < Widgets.Status.Priority(b.Status) ? a : b).Status : Widgets.Status.None;
+        public void Reassess()
+        {
+            if (IsAggregate)
+            {
+                Status = Count > 0 ? this.Aggregate((a, b) => Widgets.Status.Priority(a.Status) < Widgets.Status.Priority(b.Status) ? a : b).Status : Widgets.Status.None;
+            }
+        }
 
         public void Expand() => IsExpanded = true;
 

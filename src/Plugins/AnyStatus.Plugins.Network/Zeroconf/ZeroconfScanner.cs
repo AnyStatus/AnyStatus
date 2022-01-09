@@ -22,6 +22,8 @@ namespace AnyStatus.Plugins.SystemInformation.Network.Zeroconf
             _dispatcher.Invoke(() => 
                 new ZeroconfSynchronizer(request.Context)
                         .Synchronize(hosts.ToList(), request.Context.OfType<ZeroconfDeviceWidget>().ToList()));
+
+            request.Context.Status = Status.OK;
         }
     }
 }

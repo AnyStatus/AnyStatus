@@ -2,6 +2,7 @@
 using AnyStatus.Plugins.Azure.API.Contracts;
 using AnyStatus.Plugins.Azure.DevOps.Builds;
 using AnyStatus.Plugins.Azure.DevOps.PullRequests;
+using AnyStatus.Plugins.Azure.WorkItems;
 
 namespace AnyStatus.Plugins.Azure
 {
@@ -17,6 +18,12 @@ namespace AnyStatus.Plugins.Azure
             CreateMap<GitPullRequest, AzureDevOpsPullRequestWidget>()
                 .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Title))
                 .ForMember(d => d.Status, opt => opt.MapFrom(src => src.GetStatus()));
+
+            CreateMap<WorkItem, AzureDevOpsWorkItemWidget>()
+                .ForMember(d => d.WorkItemId, opt => opt.MapFrom(src => src.Fields["System.Id"]))
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Fields["System.Title"]))
+                .ForMember(d => d.Status, opt => opt.MapFrom(src => src.GetStatus()))
+                .ForMember(d => d.URL, opt => opt.MapFrom(src => src.Links["html"]["href"]));
         }
     }
 }

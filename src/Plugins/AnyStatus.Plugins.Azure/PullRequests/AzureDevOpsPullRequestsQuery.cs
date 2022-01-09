@@ -34,17 +34,15 @@ namespace AnyStatus.Plugins.Azure.DevOps.PullRequests
             if (pullRequests is null || pullRequests.Count == 0)
             {
                 _dispatcher.InvokeAsync(request.Context.Clear);
-
-                request.Context.Status = Status.None;
             }
             else
             {
                 _dispatcher.InvokeAsync(()
                     => new AzureDevOpsPullRequestSynchronizer(_mapper, request.Context)
                             .Synchronize(pullRequests.Value.ToList(), request.Context.OfType<AzureDevOpsPullRequestWidget>().ToList()));
-
-                request.Context.Status = Status.OK;
             }
+
+            request.Context.Status = Status.OK;
         }
     }
 }

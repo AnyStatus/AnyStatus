@@ -10,6 +10,11 @@ namespace AnyStatus.Plugins.Docker.Containers
     [Description("View a list of docker containers")]
     public class DockerContainersWidget : StatusWidget, IStandardWidget, IPollable, IRequireEndpoint<DockerEndpoint>
     {
+        public DockerContainersWidget()
+        {
+            IsAggregate = true;
+        }
+
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Demo
 {
-    [Category("Demo")]
+    [Category("AnyStatus")]
     [DisplayName("Health Check Demo")]
     [Description("A demo health check widget with random status")]
     public class DemoHealthCheckWidget : StatusWidget, IPollable, IOpenInApp, IStandardWidget

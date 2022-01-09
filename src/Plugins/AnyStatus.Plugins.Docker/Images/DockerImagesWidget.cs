@@ -11,6 +11,11 @@ namespace AnyStatus.Plugins.Docker.Images
     [Redirect("AnyStatus.Plugins.Docker.Images.DockerImages")]
     public class DockerImagesWidget : StatusWidget, IStandardWidget, IPollable, IRequireEndpoint<DockerEndpoint>, IInitializable
     {
+        public DockerImagesWidget()
+        {
+            IsAggregate = true;
+        }
+
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

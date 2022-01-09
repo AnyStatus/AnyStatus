@@ -5,14 +5,13 @@ namespace AnyStatus.API.Widgets
     [Obsolete]
     public sealed class Status
     {
+        public const string OK = "ok";
         public const string Error = "error";
         public const string Failed = "failed";
         public const string Warning = "warning";
         public const string Invalid = "invalid";
         public const string Running = "running";
         public const string Queued = "queued";
-        public const string PartiallySucceeded = "partiallySucceeded";
-        public const string OK = "ok";
         public const string Rejected = "rejected";
         public const string Canceled = "canceled";
         public const string Disabled = "disabled";
@@ -22,6 +21,7 @@ namespace AnyStatus.API.Widgets
         public const string Down = "down";
         public const string Up = "up";
         public const string None = "none";
+        public const string PartiallySucceeded = "partiallySucceeded";
 
         public static string Color(string status) => status switch
         {
@@ -42,8 +42,11 @@ namespace AnyStatus.API.Widgets
             Down => "Red",
             Up => "LimeGreen",
             None => "Gray",
-            "open" => "LimeGreen",
-            "closed" => "Purple",
+            "epic" => "Orange",
+            "feature" => "Purple",
+            "pbi" => "DeepSkyBlue",
+            "task" => "Gold",
+            "bug" => "Red",
             _ => "DarkGray",
         };
 
@@ -65,9 +68,12 @@ namespace AnyStatus.API.Widgets
             Unknown => "BootstrapIcons.QuestionCircle",
             Down => "BootstrapIcons.ArrowDownCircle",
             Up => "BootstrapIcons.ArrowUpCircle",
+            "epic" => "Material.Crown",
+            "feature" => "BootstrapIcons.Trophy",
+            "pbi" => "BootstrapIcons.ListUl",
+            "task" => "BootstrapIcons.ClipboardCheck",
+            "bug" => "BootstrapIcons.Bug",
             None => "BootstrapIcons.Circle",
-            "open" => "BootstrapIcons.Circle",
-            "closed" => "BootstrapIcons.CheckCircle",
             _ => "BootstrapIcons.Circle",
         };
 
@@ -89,10 +95,15 @@ namespace AnyStatus.API.Widgets
             Unknown => 14,
             Down => 15,
             Up => 16,
-            None => 17,
-            "open" => 18,
-            "closed" => 19,
-            _ => 20,
+
+            "bug" => 17,
+            "task" => 18,
+            "pbi" => 19,
+            "feature" => 20,
+            "epic" => 21,
+
+            None => 100,
+            _ => 101,
         };
 
         public static bool TryParse(int value, out string result)

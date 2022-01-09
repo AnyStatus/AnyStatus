@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace AnyStatus.Plugins.Demo
 {
-    [Category("Demo")]
+    [Category("AnyStatus")]
     [DisplayName("Notifications Demo")]
     [Description("An example for sending desktop notifications from widgets.")]
     public class DemoNotificationsWidget : TextWidget, IPollable, IStandardWidget

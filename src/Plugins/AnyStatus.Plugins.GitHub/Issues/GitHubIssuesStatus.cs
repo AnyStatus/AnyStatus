@@ -40,6 +40,8 @@ namespace AnyStatus.Plugins.GitHub.Issues
                     => new GitHubIssuesSynchronizer(_mapper, request.Context)
                             .Synchronize(issues, request.Context.OfType<GitHubIssueWidget>().ToList()));
             }
+
+            request.Context.Status = Status.OK;
         }
     }
 }

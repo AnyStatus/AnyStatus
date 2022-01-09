@@ -11,8 +11,9 @@ namespace AnyStatus.Core.Widgets
     {
         public Root()
         {
-            Name = "Root";
+            Name = "All";
             IsPersisted = true;
+            IsAggregate = true;
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)

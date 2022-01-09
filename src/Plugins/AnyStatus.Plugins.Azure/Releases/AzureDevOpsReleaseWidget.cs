@@ -19,6 +19,11 @@ namespace AnyStatus.Plugins.Azure.Releases
         IOpenInApp,
         IPollable
     {
+        public AzureDevOpsReleaseWidget()
+        {
+            IsAggregate = true;
+        }
+
         [Required]
         [EndpointSource]
         [DisplayName("Endpoint")]

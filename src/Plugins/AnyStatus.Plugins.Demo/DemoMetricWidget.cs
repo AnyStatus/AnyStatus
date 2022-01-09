@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AnyStatus.Plugins.Demo
 {
-    [Category("Demo")]
+    [Category("AnyStatus")]
     [DisplayName("Metric Demo")]
     [Description("A demo metric widget with random values")]
     public class DemoMetricWidget : MetricWidget, IPollable, IStandardWidget
