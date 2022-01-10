@@ -10,7 +10,8 @@
     <DockPanel Style="{DynamicResource WidgetPanel}">
         <controls:ColorStatusIndicator DockPanel.Dock="Left"/>
         <controls:IconStatusIndicator DockPanel.Dock="Left"/>
+        <TextBlock Text="{Binding Name}" DockPanel.Dock="Left" Margin="7,0,0,0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
         <TextBlock Text="{Binding Count}" FontSize="17" DockPanel.Dock="Right" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Margin="7,0,0,0" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <controls:Summary HorizontalAlignment="Center"/>
     </DockPanel>
 </UserControl>
