@@ -86,7 +86,7 @@ namespace AnyStatus.API.Tests
         [Fact]
         public void Status_ShouldChange_WhenChildStatusChanged()
         {
-            var parent = new MockWidget
+            var parent = new AggregateMockWidget
             {
                 Status = Status.None
             };

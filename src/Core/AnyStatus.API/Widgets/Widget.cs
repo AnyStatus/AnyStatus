@@ -98,7 +98,7 @@ namespace AnyStatus.API.Widgets
         /// </summary>
         [JsonIgnore]
         [Browsable(false)]
-        public bool IsAggregate { get; set; }
+        public bool IsAggregate { get; protected set; }
 
         #endregion
 
