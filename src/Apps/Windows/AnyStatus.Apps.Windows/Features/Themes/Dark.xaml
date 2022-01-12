@@ -5,8 +5,8 @@
     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource SystemAccentColorDark1}"/>
     <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{StaticResource {x:Static SystemColors.HighlightTextColorKey}}" />
     <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#444" />
-    
-    <SolidColorBrush x:Key="WindowBorderColor" Color="#666666"/>
+
+    <SolidColorBrush x:Key="WindowBorderColor" Color="#202020"/>
     <SolidColorBrush x:Key="WidgetMouseOver" Color="#333333"/>
     <SolidColorBrush x:Key="ButtonMouseOver" Color="#333333"/>
     <SolidColorBrush x:Key="WidgetBackground" Color="#282828"/>
