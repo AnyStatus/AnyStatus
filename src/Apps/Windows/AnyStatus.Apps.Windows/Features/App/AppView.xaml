@@ -11,6 +11,7 @@
              d:DataContext="{d:DesignInstance Type=local:AppViewModel, IsDesignTimeCreatable=False}">
     <UserControl.InputBindings>
         <KeyBinding Key="F5" Command="{Binding Commands[Refresh]}"/>
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding MenuViewModel.Commands[Save]}"/>
     </UserControl.InputBindings>
     <Grid>
         <toolBar:ToolBarView DataContext="{Binding ToolBarViewModel}" VerticalAlignment="Top"/>
