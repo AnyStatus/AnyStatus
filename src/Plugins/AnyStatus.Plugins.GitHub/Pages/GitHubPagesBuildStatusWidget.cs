@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.GitHub.Pages
     [Category("GitHub")]
     [DisplayName("GitHub Pages")]
     [Description("View the current status of a GitHub Pages build")]
-    public class GitHubPagesBuildStatusWidget : StatusWidget, IRequireEndpoint<GitHubEndpoint>, IStandardWidget, IPollable, IOpenInApp
+    public class GitHubPagesBuildStatusWidget : StatusWidget, IRequireEndpoint<GitHubEndpoint>, ICommonWidget, IPollable, IOpenInApp
     {
         [Required]
         [EndpointSource]

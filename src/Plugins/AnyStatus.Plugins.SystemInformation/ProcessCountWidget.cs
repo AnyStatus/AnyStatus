@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("Process Count")]
     [Description("The number of total processes")]
-    public class ProcessCountWidget : MetricWidget, IPollable, IStandardWidget
+    public class ProcessCountWidget : MetricWidget, IPollable, ICommonWidget
     {
         public ProcessCountWidget()
         {

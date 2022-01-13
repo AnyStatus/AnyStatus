@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("Battery")]
     [Description("The total battery power status (percentage)")]
-    public class BatteryWidget : MetricWidget, IStandardWidget, IPollable
+    public class BatteryWidget : MetricWidget, ICommonWidget, IPollable
     {
         public BatteryWidget()
         {

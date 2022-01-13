@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.AppVeyor
     [Category("AppVeyor")]
     [DisplayName("AppVeyor Build Status")]
     [Description("View the status of build pipelines on AppVeyor")]
-    public class AppVeyorBuildWidget : StatusWidget, IStandardWidget, IPollable, IRequireEndpoint<AppVeyorEndpoint>, IOpenInApp
+    public class AppVeyorBuildWidget : StatusWidget, ICommonWidget, IPollable, IRequireEndpoint<AppVeyorEndpoint>, IOpenInApp
     {
         [Required]
         [EndpointSource]

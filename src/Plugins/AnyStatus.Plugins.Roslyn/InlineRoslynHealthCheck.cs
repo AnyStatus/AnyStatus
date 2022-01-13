@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.Roslyn
     [Category("Roslyn")]
     [DisplayName("Inline Roslyn Health Check")]
     [Description("Run an inline Roslyn script. The script output is used to set the status of the widget")]
-    public class InlineRoslynHealthCheck : StatusWidget, IStandardWidget, IPollable
+    public class InlineRoslynHealthCheck : StatusWidget, ICommonWidget, IPollable
     {
         public string Script { get; set; }
     }

@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation
     [Category("System Information")]
     [DisplayName("CPU Temperature")]
     [Description("The current CPU temperature")]
-    public class CpuTemperatureWidget : MetricWidget, IPollable, IStandardWidget
+    public class CpuTemperatureWidget : MetricWidget, IPollable, ICommonWidget
     {
         private string _suffix;
         private TemperatureScale scale;

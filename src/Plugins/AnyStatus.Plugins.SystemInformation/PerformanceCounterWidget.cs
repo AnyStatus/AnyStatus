@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("Performance Counter")]
     [Description("The result of a performance counter query")]
-    public class PerformanceCounterWidget : MetricWidget, IPollable, IStandardWidget
+    public class PerformanceCounterWidget : MetricWidget, IPollable, ICommonWidget
     {
         private const string Category = "Performance Counter";
 

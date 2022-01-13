@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation.FileSystem
     [Category("System Information")]
     [DisplayName(DefaultName)]
     [Description("Checks whether a file system directory exists")]
-    public class DirectoryExistsWidget : StatusWidget, IPollable, IStandardWidget
+    public class DirectoryExistsWidget : StatusWidget, IPollable, ICommonWidget
     {
         const string DefaultName = "Directory Exists";
 

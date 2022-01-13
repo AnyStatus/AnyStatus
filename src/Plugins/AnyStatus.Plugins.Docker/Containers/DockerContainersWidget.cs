@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.Docker.Containers
     [Category("Docker")]
     [DisplayName("Docker Containers")]
     [Description("View a list of docker containers")]
-    public class DockerContainersWidget : StatusWidget, IStandardWidget, IPollable, IRequireEndpoint<DockerEndpoint>
+    public class DockerContainersWidget : StatusWidget, ICommonWidget, IPollable, IRequireEndpoint<DockerEndpoint>
     {
         public DockerContainersWidget()
         {

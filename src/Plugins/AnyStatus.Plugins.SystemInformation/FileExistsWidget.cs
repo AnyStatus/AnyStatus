@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation.FileSystem
     [DisplayName(DefaultName)]
     [Category("System Information")]
     [Description("Checks whether a file exists")]
-    public class FileExistsWidget : StatusWidget, IPollable, IStandardWidget
+    public class FileExistsWidget : StatusWidget, IPollable, ICommonWidget
     {
         const string DefaultName = "File Exists";
 

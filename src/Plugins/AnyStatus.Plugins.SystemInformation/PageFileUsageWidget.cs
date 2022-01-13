@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("Page File Usage")]
     [Description("Shows the percentage of page file usage")]
-    public class PageFileUsageWidget : MetricWidget, IPollable, IStandardWidget
+    public class PageFileUsageWidget : MetricWidget, IPollable, ICommonWidget
     {
         public PageFileUsageWidget()
         {

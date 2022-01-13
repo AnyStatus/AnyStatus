@@ -10,7 +10,7 @@ namespace AnyStatus.Plugins.Demo
     [Category("AnyStatus")]
     [DisplayName("Metric Demo")]
     [Description("A demo metric widget with random values")]
-    public class DemoMetricWidget : MetricWidget, IPollable, IStandardWidget
+    public class DemoMetricWidget : MetricWidget, IPollable, ICommonWidget
     {
         public bool Randomize { get; set; } = true;
     }

@@ -15,7 +15,7 @@ namespace AnyStatus.Plugins.Azure.Releases
     public class AzureDevOpsReleaseWidget : StatusWidget,
         IAzureDevOpsWidget,
         IRequireEndpoint<IAzureDevOpsEndpoint>,
-        IStandardWidget,
+        ICommonWidget,
         IOpenInApp,
         IPollable
     {

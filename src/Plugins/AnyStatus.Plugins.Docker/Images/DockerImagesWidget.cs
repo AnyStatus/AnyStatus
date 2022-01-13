@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.Docker.Images
     [DisplayName("Docker Images")]
     [Description("View a list of docker containers")]
     [Redirect("AnyStatus.Plugins.Docker.Images.DockerImages")]
-    public class DockerImagesWidget : StatusWidget, IStandardWidget, IPollable, IRequireEndpoint<DockerEndpoint>, IInitializable
+    public class DockerImagesWidget : StatusWidget, ICommonWidget, IPollable, IRequireEndpoint<DockerEndpoint>, IInitializable
     {
         public DockerImagesWidget()
         {

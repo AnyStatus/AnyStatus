@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.NuGet
     [Category("NuGet")]
     [DisplayName("NuGet Package Downloads")]
     [Description("NuGet package total downloads")]
-    public class NuGetPackageDownloadsWidget : MetricWidget, IPollable, IStandardWidget, IRequireEndpoint<NuGetEndpoint>
+    public class NuGetPackageDownloadsWidget : MetricWidget, IPollable, ICommonWidget, IRequireEndpoint<NuGetEndpoint>
     {
         [Order(10)]
         [Required]

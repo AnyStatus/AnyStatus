@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("CPU Usage")]
     [Description("The total CPU usage (percentage)")]
-    public class CpuUsageWidget : MetricWidget, IPollable, IStandardWidget
+    public class CpuUsageWidget : MetricWidget, IPollable, ICommonWidget
     {
         public CpuUsageWidget()
         {

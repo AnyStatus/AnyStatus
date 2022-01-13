@@ -7,7 +7,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("Thread Count")]
     [Description("The number of running CPU threads")]
-    public class ThreadCountWidget : MetricWidget, IPollable, IStandardWidget
+    public class ThreadCountWidget : MetricWidget, IPollable, ICommonWidget
     {
         public ThreadCountWidget()
         {

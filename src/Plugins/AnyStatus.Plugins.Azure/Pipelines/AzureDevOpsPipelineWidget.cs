@@ -16,7 +16,7 @@ namespace AnyStatus.Plugins.Azure.DevOps.Builds
     public class AzureDevOpsPipelineWidget : StatusWidget,
         IAzureDevOpsWidget,
         IRequireEndpoint<IAzureDevOpsEndpoint>,
-        IStandardWidget,
+        ICommonWidget,
         IOpenInApp,
         IPollable,
         IPipeline,

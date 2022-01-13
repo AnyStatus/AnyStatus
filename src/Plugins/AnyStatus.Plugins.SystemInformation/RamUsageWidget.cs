@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("RAM Usage")]
     [Description("The total RAM usage (percentage)")]
-    public class RamUsageWidget : MetricWidget, IPollable, IStandardWidget
+    public class RamUsageWidget : MetricWidget, IPollable, ICommonWidget
     {
         public RamUsageWidget()
         {

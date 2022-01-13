@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
     [Category("System Information")]
     [DisplayName("Process CPU Usage")]
     [Description("The CPU usage of a single process")]
-    public class ProcessCpuUsageWidget : MetricWidget, IPollable, IStandardWidget
+    public class ProcessCpuUsageWidget : MetricWidget, IPollable, ICommonWidget
     {
         public ProcessCpuUsageWidget()
         {

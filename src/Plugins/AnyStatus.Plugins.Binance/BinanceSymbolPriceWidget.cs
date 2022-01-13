@@ -8,7 +8,7 @@ namespace AnyStatus.Plugins.Binance
     [Category("Binance")]
     [DisplayName("Binance Symbol Price")]
     [Description("Latest price for a symbol")]
-    public class BinanceSymbolPriceWidget : TextWidget, IPollable, IStandardWidget
+    public class BinanceSymbolPriceWidget : TextWidget, IPollable, ICommonWidget
     {
         [Required]
         [AsyncItemsSource(typeof(BinanceSymbolSource), autoload: true)]

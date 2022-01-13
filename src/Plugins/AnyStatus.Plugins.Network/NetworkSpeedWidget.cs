@@ -9,7 +9,7 @@ namespace AnyStatus.Plugins.SystemInformation.Network
     [Category("Network")]
     [DisplayName("Network Speed")]
     [Description("View the network download or upload speed")]
-    public class NetworkSpeedWidget : MetricWidget, IPollable, IStandardWidget
+    public class NetworkSpeedWidget : MetricWidget, IPollable, ICommonWidget
     {
         [Required]
         [DisplayName("Network Interface")]
