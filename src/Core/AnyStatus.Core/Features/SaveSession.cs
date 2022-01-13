@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.Sessions
+namespace AnyStatus.Core.Features
 {
     public class SaveSession
     {

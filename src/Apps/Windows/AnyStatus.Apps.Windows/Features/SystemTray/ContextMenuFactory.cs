@@ -2,7 +2,7 @@
 using AnyStatus.Apps.Windows.Features.App;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
-using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Features;
 using MediatR;
 using System.Windows.Forms;
 
@@ -10,8 +10,8 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
 {
     public class ContextMenuFactory
     {
-        private readonly IAppContext _context;
         private readonly IMediator _mediator;
+        private readonly IAppContext _context;
 
         public ContextMenuFactory(IMediator mediator, IAppContext context)
         {

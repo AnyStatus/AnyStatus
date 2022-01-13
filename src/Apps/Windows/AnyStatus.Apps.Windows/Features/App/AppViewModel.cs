@@ -4,10 +4,9 @@ using AnyStatus.Apps.Windows.Features.ToolBar;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Core.App;
-using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Features;
 using MediatR;
 using System;
-using System.Threading.Tasks;
 
 namespace AnyStatus.Apps.Windows.Features.App
 {
@@ -15,7 +14,7 @@ namespace AnyStatus.Apps.Windows.Features.App
     {
         public AppViewModel(IMediator mediator, IAppContext context)
         {
-            Commands.Add("Refresh", new Command(p => Task.Run(async () => await mediator.Send(new Refresh.Request(context.Session.Widget)))));
+            Commands.Add("Refresh", new Command(async _ => await mediator.Send(new Refresh.Request(context.Session?.Widget))));
         }
 
         public void Dispose()

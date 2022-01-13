@@ -1,10 +1,11 @@
 ﻿using AnyStatus.API.Widgets;
+using AnyStatus.Core.Jobs;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.Jobs
+namespace AnyStatus.Core.Features
 {
     public class Refresh
     {

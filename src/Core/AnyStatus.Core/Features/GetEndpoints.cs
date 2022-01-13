@@ -1,12 +1,13 @@
 ﻿using AnyStatus.API.Endpoints;
 using AnyStatus.Core.App;
+using AnyStatus.Core.Endpoints;
 using AnyStatus.Core.Serialization;
 using MediatR;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AnyStatus.Core.Endpoints
+namespace AnyStatus.Core.Features
 {
     public class GetEndpoints
     {

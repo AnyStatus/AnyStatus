@@ -1,6 +1,7 @@
 ﻿using AnyStatus.API.Endpoints;
-using AnyStatus.API.Widgets;
+using AnyStatus.Core.App;
 using AnyStatus.Core.Endpoints;
+using AnyStatus.Core.Features;
 using AnyStatus.Core.Sessions;
 using AnyStatus.Core.Settings;
 using AnyStatus.Core.Widgets;
@@ -10,7 +11,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.App
+namespace AnyStatus.Core.Features
 {
     public sealed class LoadContext
     {

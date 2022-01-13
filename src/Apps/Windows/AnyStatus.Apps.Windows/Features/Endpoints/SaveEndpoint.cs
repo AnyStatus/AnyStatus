@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Endpoints;
 using AnyStatus.API.Services;
 using AnyStatus.Core.App;
-using AnyStatus.Core.Endpoints;
+using AnyStatus.Core.Features;
 using AutoMapper;
 using MediatR;
 using System;
@@ -15,11 +15,9 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
     {
         internal class Request : IRequest<bool>
         {
-            public Request()
-            {
-            }
+            public Request() { }
 
-            public Request(IEndpoint endpoint) => Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            public Request(IEndpoint endpoint) => Endpoint = endpoint;
 
             public IEndpoint Endpoint { get; set; }
         }
@@ -41,7 +39,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
             public async Task<bool> Handle(Request request, CancellationToken cancellationToken)
             {
-                if (string.IsNullOrEmpty(request.Endpoint.Id) || !_context.Endpoints.Any(endpoint => endpoint.Id == request.Endpoint.Id))
+                if (string.IsNullOrEmpty(request.Endpoint?.Id) || !_context.Endpoints.Any(endpoint => endpoint.Id == request.Endpoint.Id))
                 {
                     var endpoint = _mapper.Map<Endpoint>(request.Endpoint);
 

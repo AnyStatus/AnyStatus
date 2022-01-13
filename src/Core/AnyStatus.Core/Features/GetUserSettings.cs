@@ -1,10 +1,11 @@
 ﻿using AnyStatus.Core.App;
+using AnyStatus.Core.Settings;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace AnyStatus.Core.Settings
+namespace AnyStatus.Core.Features
 {
     public class GetUserSettings
     {

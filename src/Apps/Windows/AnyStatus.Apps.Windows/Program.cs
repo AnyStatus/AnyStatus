@@ -1,5 +1,5 @@
 ﻿using AnyStatus.Apps.Windows.Features.NamedPipe;
-using AnyStatus.Core.App;
+using AnyStatus.Core;
 using System;
 using System.Threading;
 using System.Windows;

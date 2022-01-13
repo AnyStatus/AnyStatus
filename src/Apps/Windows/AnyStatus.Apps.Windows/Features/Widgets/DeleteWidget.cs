@@ -19,14 +19,14 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
         public class Handler : AsyncRequestHandler<Request>
         {
-            private readonly IMediator _mediator;
             private readonly IAppContext _context;
+            private readonly IJobScheduler _jobScheduler;
             private readonly IDialogService _dialogService;
 
-            public Handler(IAppContext context, IMediator mediator, IDialogService dialogService)
+            public Handler(IAppContext context, IJobScheduler jobScheduler, IDialogService dialogService)
             {
                 _context = context;
-                _mediator = mediator;
+                _jobScheduler = jobScheduler;
                 _dialogService = dialogService;
             }
 
@@ -41,9 +41,25 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 
                 request.Widget.Remove();
 
-                await _mediator.Send(new UnscheduleJob.Request(request.Widget), cancellationToken);
-
                 _context.Session.IsDirty = true;
+
+                await Unschedule(request.Widget, cancellationToken);
+            }
+
+            private async Task Unschedule(IWidget widget, CancellationToken cancellationToken)
+            {
+                if (widget is IPollable)
+                {
+                    await _jobScheduler.DeleteJobAsync(widget.Id, cancellationToken);
+                }
+
+                if (widget.HasChildren)
+                {
+                    foreach (var child in widget)
+                    {
+                        await Unschedule(child, cancellationToken);
+                    }
+                }
             }
         }
     }

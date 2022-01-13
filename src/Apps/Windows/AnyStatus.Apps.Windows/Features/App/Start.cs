@@ -1,7 +1,7 @@
 ﻿using AnyStatus.API.Events;
 using AnyStatus.Apps.Windows.Features.NamedPipe;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
-using AnyStatus.Core.App;
+using AnyStatus.Core.Features;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Telemetry;
 using MediatR;

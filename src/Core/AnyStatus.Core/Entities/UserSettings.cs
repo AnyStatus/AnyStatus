@@ -1,4 +1,5 @@
 ﻿using AnyStatus.API.Attributes;
+using AnyStatus.Core.Themes;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -17,7 +18,7 @@ namespace AnyStatus.Core.Settings
         public Dictionary<string, WindowSettings> WindowsSettings { get; set; }
 
         [Order(1)]
-        [ItemsSource(typeof(ThemesSource), autoload: true)]
+        [ItemsSource(typeof(ThemeSource), autoload: true)]
         public string Theme { get; set; }
 
         [Order(2)]

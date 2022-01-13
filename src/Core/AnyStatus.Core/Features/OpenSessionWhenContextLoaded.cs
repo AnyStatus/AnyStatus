@@ -1,11 +1,12 @@
 ﻿using AnyStatus.Core.App;
+using AnyStatus.Core.Features;
 using AnyStatus.Core.Widgets;
 using MediatR;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.Sessions
+namespace AnyStatus.Core.Features
 {
     public class OpenSessionWhenContextLoaded : INotificationHandler<ContextLoaded>
     {
@@ -22,14 +23,14 @@ namespace AnyStatus.Core.Sessions
                 return;
             }
 
-            if (string.IsNullOrEmpty(session.FileName) || !File.Exists(session.FileName))
+            if (!string.IsNullOrEmpty(session.FileName) && File.Exists(session.FileName))
             {
-                session.FileName = null;
-                session.Widget = new Root();
+                await _mediator.Send(new OpenSession.Request { FileName = session.FileName }, cancellationToken);
             }
             else
             {
-                await _mediator.Send(new OpenSessionCommand.Request(session.FileName), cancellationToken);
+                session.FileName = null;
+                session.Widget = new Root();
             }
         }
     }

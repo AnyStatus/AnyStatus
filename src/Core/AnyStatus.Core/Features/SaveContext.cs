@@ -1,10 +1,10 @@
-﻿using AnyStatus.Core.Sessions;
-using AnyStatus.Core.Settings;
+﻿using AnyStatus.Core.Features;
+using AnyStatus.Core.Sessions;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.App
+namespace AnyStatus.Core.Features
 {
     public sealed class SaveContext
     {
@@ -19,7 +19,9 @@ namespace AnyStatus.Core.App
             public Handler(IMediator mediator) => _mediator = mediator;
 
             protected override Task Handle(Request request, CancellationToken cancellationToken)
-                => Task.WhenAll(_mediator.Send(new SaveSession.Request()), _mediator.Send(new SaveUserSettings.Request()));
+                => Task.WhenAll(
+                    _mediator.Send(new SaveSession.Request()), 
+                    _mediator.Send(new SaveUserSettings.Request()));
         }
     }
 }
