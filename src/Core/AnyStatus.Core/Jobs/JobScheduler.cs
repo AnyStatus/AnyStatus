@@ -41,5 +41,36 @@ namespace AnyStatus.Core.Jobs
 
             await scheduler.Shutdown(cancellationToken);
         }
+
+        public async Task TriggerJobAsync(string id, CancellationToken cancellationToken)
+        {
+            var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
+
+            var jobKey = new JobKey(id);
+
+            if (await scheduler.CheckExists(jobKey, cancellationToken))
+            {
+                await scheduler.TriggerJob(jobKey, cancellationToken);
+            }
+        }
+
+        public async Task ScheduleJobAsync(string id, object data, CancellationToken cancellationToken)
+        {
+            var job = JobBuilder.Create<Job>().WithIdentity(id).Build();
+
+            job.JobDataMap.Put("data", data);
+
+            var trigger = TriggerBuilder.Create()
+                .WithIdentity(id)
+                .StartNow()
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInSeconds(10)
+                    .RepeatForever())
+                .Build();
+
+            var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
+
+            await scheduler.ScheduleJob(job, trigger, cancellationToken);
+        }
     }
 }

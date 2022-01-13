@@ -21,7 +21,7 @@ namespace AnyStatus.Core.Jobs
 
         public virtual async Task Execute(IJobExecutionContext context)
         {
-            if (context.JobDetail.JobDataMap.ContainsKey(nameof(IWidget)) && context.JobDetail.JobDataMap[nameof(IWidget)] is IWidget widget && widget.IsEnabled)
+            if (context.JobDetail.JobDataMap.ContainsKey("data") && context.JobDetail.JobDataMap["data"] is IWidget widget && widget.IsEnabled)
             {
                 await TryExecuteAsync(widget);
             }
@@ -35,14 +35,14 @@ namespace AnyStatus.Core.Jobs
                 {
                     IMetricWidget => MetricRequestFactory.Create((dynamic)widget),
                     IStatusWidget => StatusRequestFactory.Create((dynamic)widget),
-                    _ => throw new NotSupportedException(widget.GetType().FullName + " is not supported by the job scheduler."),
+                    _ => throw new NotSupportedException(widget.GetType().FullName + " is not supported by the job scheduler"),
                 };
 
                 await _mediator.Send(request);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while executing job for widget '{widget}'.", widget.Name);
+                _logger.LogError(ex, "An error occurred while executing job for widget '{widget}'", widget.Name);
             }
         }
     }

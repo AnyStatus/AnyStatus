@@ -1,7 +1,6 @@
 ﻿using AnyStatus.API.Widgets;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Quartz;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,54 +24,32 @@ namespace AnyStatus.Core.Jobs
         public class Handler : AsyncRequestHandler<Request>
         {
             private readonly ILogger _logger;
-            private readonly ISchedulerFactory _schedulerFactory;
+            private readonly IJobScheduler _jobScheduler;
 
-            public Handler(ILogger logger, ISchedulerFactory schedulerFactory)
+            public Handler(ILogger logger, IJobScheduler jobScheduler)
             {
                 _logger = logger;
-                _schedulerFactory = schedulerFactory;
+                _jobScheduler = jobScheduler;
             }
 
-            protected override async Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
+            protected override Task Handle(Request request, CancellationToken cancellationToken) => Schedule(request.Widget, request.IncludeChildren, cancellationToken);
 
-                await Schedule(request.Widget, scheduler, request.IncludeChildren, cancellationToken).ConfigureAwait(false);
-            }
-
-            private async Task Schedule(IWidget widget, IScheduler scheduler, bool includeChildren, CancellationToken cancellationToken)
+            private async Task Schedule(IWidget widget, bool includeChildren, CancellationToken cancellationToken)
             {
-                if (!string.IsNullOrEmpty(widget.Id) && widget is IPollable)
+                if (widget is IPollable)
                 {
-                    await Schedule(widget, scheduler, cancellationToken).ConfigureAwait(false);
+                    await _jobScheduler.ScheduleJobAsync(widget.Id, widget, cancellationToken);
+
+                    _logger.LogDebug("Widget '{widget}' job is running...", widget.Name);
                 }
 
                 if (includeChildren && widget.HasChildren)
                 {
                     foreach (var child in widget)
                     {
-                        await Schedule(child, scheduler, true, cancellationToken).ConfigureAwait(false);
+                        await Schedule(child, true, cancellationToken);
                     }
                 }
-            }
-
-            private async Task Schedule(IWidget widget, IScheduler scheduler, CancellationToken cancellationToken)
-            {
-                var job = JobBuilder.Create<Job>().WithIdentity(widget.Id).Build();
-
-                _ = job.JobDataMap.Put(nameof(IWidget), widget);
-
-                var trigger = TriggerBuilder.Create()
-                    .WithIdentity(widget.Id)
-                    .StartNow()
-                    .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(10)
-                        .RepeatForever())
-                    .Build();
-
-                _ = await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);
-
-                _logger.LogDebug("Widget '{widget}' job is running.", widget.Name);
             }
         }
     }

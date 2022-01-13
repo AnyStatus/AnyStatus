@@ -17,7 +17,7 @@ namespace AnyStatus.Core.Jobs
         {
             using (AsyncScopedLifestyle.BeginScope(_container))
             {
-                await base.Execute(context).ConfigureAwait(false);
+                await base.Execute(context);
             }
         }
     }
