@@ -10,9 +10,7 @@ namespace AnyStatus.Plugins.Quartz
     [Category("AnyStatus")]
     [DisplayName("Total Jobs")]
     [Description("Display the total number of scheduled jobs")]
-    public class TotalJobsWidget : TextWidget, ICommonWidget, IPollable
-    {
-    }
+    public class TotalJobsWidget : TextWidget, ICommonWidget, IPollable { }
 
     public class TotalJobsQuery : AsyncStatusCheck<TotalJobsWidget>
     {
@@ -24,9 +22,9 @@ namespace AnyStatus.Plugins.Quartz
         {
             var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
 
-            var triggerKeys = await scheduler.GetTriggerKeys(GroupMatcher<TriggerKey>.AnyGroup());
+            var keys = await scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
 
-            request.Context.Text = triggerKeys.Count.ToString();
+            request.Context.Text = keys.Count.ToString();
 
             request.Context.Status = Status.OK;
         }
