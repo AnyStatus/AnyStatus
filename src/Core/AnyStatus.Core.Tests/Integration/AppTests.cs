@@ -21,13 +21,13 @@ namespace AnyStatus.Core.Tests.Integration
             _mediator = fixture.Container.GetInstance<IMediator>();
         }
 
-        [Fact, Priority(0)]
-        public async Task StartAppTest()
-        {
-            var request = new StartScheduler.Request();
+        //[Fact, Priority(0)]
+        //public async Task StartAppTest()
+        //{
+        //    var request = new StartJobScheduler.Request();
 
-            await _mediator.Send(request, CancellationToken.None);
-        }
+        //    await _mediator.Send(request, CancellationToken.None);
+        //}
 
         [Fact, Priority(1)]
         public async Task ScheduleHealthCheckJobTest()
@@ -69,12 +69,12 @@ namespace AnyStatus.Core.Tests.Integration
             Assert.Equal(Status.OK, widget.Status);
         }
 
-        [Fact, Priority(3)]
-        public async Task StopAppTest()
-        {
-            var request = new StopScheduler.Request();
+        //[Fact, Priority(3)]
+        //public async Task StopAppTest()
+        //{
+        //    var request = new StopJobScheduler.Request();
 
-            await _mediator.Send(request, CancellationToken.None);
-        }
+        //    await _mediator.Send(request, CancellationToken.None);
+        //}
     }
 }

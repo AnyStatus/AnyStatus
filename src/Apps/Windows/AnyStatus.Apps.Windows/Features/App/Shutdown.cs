@@ -68,14 +68,16 @@ namespace AnyStatus.Apps.Windows.Features.App
             private readonly ISystemTray _sysTray;
             private readonly ITelemetry _telemetry;
             private readonly IDispatcher _dispatcher;
+            private readonly IJobScheduler _jobScheduler;
 
-            public Handler(IMediator mediator, ISystemTray sysTray, IDispatcher dispatcher, ITelemetry telemetry, ILogger logger)
+            public Handler(IMediator mediator, ISystemTray sysTray, IDispatcher dispatcher, ITelemetry telemetry, ILogger logger, IJobScheduler jobScheduler)
             {
                 _logger = logger;
                 _sysTray = sysTray;
                 _mediator = mediator;
                 _telemetry = telemetry;
                 _dispatcher = dispatcher;
+                _jobScheduler = jobScheduler;
             }
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
@@ -90,9 +92,10 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 _sysTray.Dispose();
 
-                await Task.WhenAll( //todo: move to notification handlers
+                //todo: move to notification handlers
+                await Task.WhenAll(
+                    _jobScheduler.StopAsync(cancellationToken),
                     _mediator.Send(new SaveContext.Request(), cancellationToken),
-                    _mediator.Send(new StopScheduler.Request(), cancellationToken),
                     _mediator.Send(new CloseAllWindows.Request(), cancellationToken));
 
                 _telemetry.TrackEvent("Shutdown");

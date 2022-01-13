@@ -25,12 +25,14 @@ namespace AnyStatus.Apps.Windows.Features.App
             private readonly ILogger _logger;
             private readonly IMediator _mediator;
             private readonly ITelemetry _telemetry;
+            private readonly IJobScheduler _jobScheduler;
 
-            public Handler(IMediator mediator, ILogger logger, ITelemetry telemetry)
+            public Handler(IMediator mediator, ILogger logger, ITelemetry telemetry, IJobScheduler jobScheduler)
             {
                 _logger = logger;
                 _mediator = mediator;
                 _telemetry = telemetry;
+                _jobScheduler = jobScheduler;
             }
 
             protected override async Task Handle(Request request, CancellationToken cancellationToken)
@@ -46,7 +48,7 @@ namespace AnyStatus.Apps.Windows.Features.App
                     await _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418));
                 }
 
-                await _mediator.Send(new StartScheduler.Request());
+                await _jobScheduler.StartAsync(cancellationToken);
 
                 await _mediator.Send(new StartNamedPipeServer.Request());
 

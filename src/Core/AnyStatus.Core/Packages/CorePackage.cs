@@ -112,6 +112,7 @@ namespace AnyStatus.Core.Packages
         {
             container.Register<IJob, ScopedJob>();
             container.Register<IJobFactory, JobFactory>(Lifestyle.Singleton);
+            container.Register<IJobScheduler, JobScheduler>(Lifestyle.Singleton);
             container.Register<ISchedulerFactory>(() => new StdSchedulerFactory(), Lifestyle.Singleton);
         }
 
