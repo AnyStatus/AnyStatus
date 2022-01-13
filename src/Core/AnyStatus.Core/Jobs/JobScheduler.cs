@@ -72,5 +72,19 @@ namespace AnyStatus.Core.Jobs
 
             await scheduler.ScheduleJob(job, trigger, cancellationToken);
         }
+
+        public async Task DeleteJobAsync(string id, CancellationToken cancellationToken)
+        {
+            var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
+
+            await scheduler.DeleteJob(new JobKey(id), cancellationToken);
+        }
+
+        public async Task ClearAsync(CancellationToken cancellationToken)
+        {
+            var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
+
+            await scheduler.Clear(cancellationToken);
+        }
     }
 }

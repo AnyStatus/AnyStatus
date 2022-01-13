@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Quartz;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,22 +6,15 @@ namespace AnyStatus.Core.Jobs
 {
     public class DeleteAllJobs
     {
-        public class Request : IRequest
-        {
-        }
+        public class Request : IRequest { }
 
         public class Handler : AsyncRequestHandler<Request>
         {
-            private readonly ISchedulerFactory _schedulerFactory;
+            private readonly IJobScheduler _jobScheduler;
 
-            public Handler(ISchedulerFactory schedulerFactory) => _schedulerFactory = schedulerFactory;
+            public Handler(IJobScheduler jobScheduler) => _jobScheduler = jobScheduler;
 
-            protected override async Task Handle(Request request, CancellationToken cancellationToken)
-            {
-                var scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
-
-                await scheduler.Clear(cancellationToken).ConfigureAwait(false);
-            }
+            protected override Task Handle(Request request, CancellationToken cancellationToken) => _jobScheduler.ClearAsync(cancellationToken);
         }
     }
 }

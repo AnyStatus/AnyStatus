@@ -12,5 +12,9 @@ namespace AnyStatus.Core.Jobs
         Task TriggerJobAsync(string id, CancellationToken cancellation);
 
         Task ScheduleJobAsync(string id, object data, CancellationToken cancellationToken);
+
+        Task DeleteJobAsync(string id, CancellationToken cancellationToken);
+
+        Task ClearAsync(CancellationToken cancellationToken);
     }
 }
