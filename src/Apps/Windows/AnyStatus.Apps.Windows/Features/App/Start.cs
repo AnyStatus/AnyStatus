@@ -40,9 +40,18 @@ namespace AnyStatus.Apps.Windows.Features.App
             private readonly IAppContext _appContext;
             private readonly IAppSettings _appSettings;
             private readonly IJobScheduler _jobScheduler;
+            private readonly INamedPipeServer _namedPipeServer;
             private readonly ContractResolver _contractResolver;
 
-            public Handler(ContractResolver contractResolver, IMediator mediator, IAppSettings appSettings, IAppContext appContext, ILogger logger, ITelemetry telemetry, IJobScheduler jobScheduler)
+            public Handler(
+                ContractResolver contractResolver,
+                IMediator mediator,
+                IAppSettings appSettings,
+                IAppContext appContext,
+                ILogger logger,
+                ITelemetry telemetry,
+                IJobScheduler jobScheduler,
+                INamedPipeServer namedPipeServer)
             {
                 _logger = logger;
                 _mediator = mediator;
@@ -50,6 +59,7 @@ namespace AnyStatus.Apps.Windows.Features.App
                 _appContext = appContext;
                 _appSettings = appSettings;
                 _jobScheduler = jobScheduler;
+                _namedPipeServer = namedPipeServer;
                 _contractResolver = contractResolver;
             }
 
@@ -82,9 +92,9 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 await LoadEndpointsAsync();
 
-                await _jobScheduler.StartAsync(cancellationToken);
+                _ = _jobScheduler.StartAsync(cancellationToken);
 
-                _ = Task.Run(() => _mediator.Send(new StartNamedPipeServer.Request()));
+                _ = _namedPipeServer.StartAsync();
 
                 _telemetry.TrackEvent("Startup");
             }
