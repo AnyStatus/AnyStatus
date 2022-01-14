@@ -67,90 +67,31 @@ namespace AnyStatus.Apps.Windows.Features.App
             {
                 WidgetNotifications.Mediator = _mediator;
 
-                LogUnhandledExceptions();
+                CatchUnhandledExceptions();
 
-                await LoadUserSettingsAsync();
+                await InitUserSettingsAsync();
 
-                await _mediator.Send(new ChangeTheme.Request(_appContext.UserSettings.Theme));
+                await ChangeTheme();
 
                 if (!StartupActivation() || _appContext.UserSettings.StartMinimized is false)
                 {
                     await _mediator.Send(MaterialWindow.Show<AppViewModel>(width: 398, minWidth: 398, height: 418, minHeight: 418));
                 }
 
-                await LoadSessionAsync();
+                await InitSession();
 
-                if (!string.IsNullOrEmpty(_appContext.Session.FileName) && File.Exists(_appContext.Session.FileName))
-                {
-                    await _mediator.Send(new OpenSession.Request { FileName = _appContext.Session.FileName });
-                }
-                else
-                {
-                    _appContext.Session.FileName = null;
-                    _appContext.Session.Widget = new Root();
-                }
+                await InitEndpointsAsync();
 
-                await LoadEndpointsAsync();
+                await _jobScheduler.StartAsync(cancellationToken);
 
-                _ = _jobScheduler.StartAsync(cancellationToken);
-
-                _ = _namedPipeServer.StartAsync();
+                await _namedPipeServer.StartAsync();
 
                 _telemetry.TrackEvent("Startup");
             }
 
-            private static bool StartupActivation()
-            {
-                if (Debugger.IsAttached)
-                {
-                    return false;
-                }
+            private Task<bool> ChangeTheme() => _mediator.Send(new ChangeTheme.Request(_appContext.UserSettings.Theme));
 
-                try
-                {
-                    return AppInstance.GetActivatedEventArgs()?.Kind == ActivationKind.StartupTask;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-
-            private void LogUnhandledExceptions()
-            {
-                const string message = "An unexpected error occurred";
-
-                AppDomain.CurrentDomain.UnhandledException += (s, e) => _logger.LogError(e.ExceptionObject as Exception, message);
-
-                Dispatcher.CurrentDispatcher.UnhandledException += (s, e) =>
-                {
-                    e.Handled = true;
-
-                    _logger.LogError(e.Exception, message);
-                };
-            }
-
-            private async Task LoadUserSettingsAsync()
-            {
-                _logger.LogDebug("User setting file: {path}", _appSettings.UserSettingsFilePath);
-
-                if (File.Exists(_appSettings.UserSettingsFilePath))
-                {
-                    var json = File.ReadAllText(_appSettings.UserSettingsFilePath);
-
-                    _appContext.UserSettings = JsonConvert.DeserializeObject<UserSettings>(json);
-                }
-                else
-                {
-                    _logger.LogInformation("Initializing user settings...");
-
-                    _appContext.UserSettings = new UserSettings();
-
-                    await _mediator.Send(new SaveUserSettings.Request());
-                }
-            }
-
-            private async Task LoadSessionAsync()
+            private async Task InitSession()
             {
                 _logger.LogDebug("Session file: {path}", _appSettings.SessionFilePath);
 
@@ -171,9 +112,70 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                     await _mediator.Send(new SaveSession.Request());
                 }
+
+                if (!string.IsNullOrEmpty(_appContext.Session.FileName) && File.Exists(_appContext.Session.FileName))
+                {
+                    await _mediator.Send(new OpenSession.Request { FileName = _appContext.Session.FileName });
+                }
+                else
+                {
+                    _appContext.Session.FileName = null;
+                    _appContext.Session.Widget = new Root();
+                }
             }
 
-            private async Task LoadEndpointsAsync()
+            private static bool StartupActivation()
+            {
+                if (Debugger.IsAttached)
+                {
+                    return false;
+                }
+
+                try
+                {
+                    return AppInstance.GetActivatedEventArgs()?.Kind == ActivationKind.StartupTask;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            private void CatchUnhandledExceptions()
+            {
+                const string message = "An unexpected error occurred";
+
+                AppDomain.CurrentDomain.UnhandledException += (s, e) => _logger.LogError(e.ExceptionObject as Exception, message);
+
+                Dispatcher.CurrentDispatcher.UnhandledException += (s, e) =>
+                {
+                    e.Handled = true;
+
+                    _logger.LogError(e.Exception, message);
+                };
+            }
+
+            private async Task InitUserSettingsAsync()
+            {
+                _logger.LogDebug("User setting file: {path}", _appSettings.UserSettingsFilePath);
+
+                if (File.Exists(_appSettings.UserSettingsFilePath))
+                {
+                    var json = File.ReadAllText(_appSettings.UserSettingsFilePath);
+
+                    _appContext.UserSettings = JsonConvert.DeserializeObject<UserSettings>(json);
+                }
+                else
+                {
+                    _logger.LogInformation("Initializing user settings...");
+
+                    _appContext.UserSettings = new UserSettings();
+
+                    await _mediator.Send(new SaveUserSettings.Request());
+                }
+            }
+
+            private async Task InitEndpointsAsync()
             {
                 _logger.LogDebug("Session file: {path}", _appSettings.EndpointsFilePath);
 
