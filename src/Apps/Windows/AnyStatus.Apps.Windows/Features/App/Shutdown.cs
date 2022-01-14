@@ -95,7 +95,8 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 await Task.WhenAll(
                     _jobScheduler.StopAsync(cancellationToken),
-                    _mediator.Send(new SaveContext.Request(), cancellationToken),
+                    _mediator.Send(new SaveSession.Request()),
+                    _mediator.Send(new SaveUserSettings.Request()),
                     _mediator.Send(new CloseAllWindows.Request(), cancellationToken));
 
                 _telemetry.TrackEvent("Shutdown");

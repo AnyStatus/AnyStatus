@@ -10,9 +10,7 @@ namespace AnyStatus.Core.Features
 {
     public class SaveSession
     {
-        public class Request : IRequest<bool>
-        {
-        }
+        public class Request : IRequest<bool> { }
 
         public class Handler : IRequestHandler<Request, bool>
         {

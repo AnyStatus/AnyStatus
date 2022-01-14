@@ -100,7 +100,7 @@ namespace AnyStatus.Core.Features
                 {
                     throw new FileNotFoundException(fileName);
                 }
-
+                
                 var json = File.ReadAllText(fileName);
 
                 if (string.IsNullOrWhiteSpace(json))
