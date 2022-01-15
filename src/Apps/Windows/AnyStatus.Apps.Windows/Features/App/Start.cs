@@ -89,7 +89,7 @@ namespace AnyStatus.Apps.Windows.Features.App
                 _telemetry.TrackEvent("Startup");
             }
 
-            private Task<bool> ChangeTheme() => _mediator.Send(new ChangeTheme.Request(_appContext.UserSettings.Theme));
+            private Task ChangeTheme() => _mediator.Send(new ChangeTheme.Request(_appContext.UserSettings.Theme));
 
             private async Task InitSession()
             {
@@ -150,7 +150,6 @@ namespace AnyStatus.Apps.Windows.Features.App
                 Dispatcher.CurrentDispatcher.UnhandledException += (s, e) =>
                 {
                     e.Handled = true;
-
                     _logger.LogError(e.Exception, message);
                 };
             }
@@ -171,7 +170,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                     _appContext.UserSettings = new UserSettings();
 
-                    await _mediator.Send(new SaveUserSettings.Request());
+                    _ = await _mediator.Send(new SaveUserSettings.Request());
                 }
             }
 
@@ -198,7 +197,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                     _appContext.Endpoints = new ObservableCollection<IEndpoint>();
 
-                    await _mediator.Send(new SaveEndpoints.Request());
+                    _ = await _mediator.Send(new SaveEndpoints.Request());
                 }
             }
         }
