@@ -85,7 +85,6 @@ namespace AnyStatus.Apps.Windows.Features.App
                 if (request.Cancel)
                 {
                     _logger.LogWarning("Shutdown has been canceled.");
-
                     return;
                 }
 
@@ -93,15 +92,23 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 _sysTray.Dispose();
 
-                await Task.WhenAll(
-                    _jobScheduler.StopAsync(cancellationToken),
-                    _mediator.Send(new SaveSession.Request()),
-                    _mediator.Send(new SaveUserSettings.Request()),
-                    _mediator.Send(new CloseAllWindows.Request(), cancellationToken));
+                await _jobScheduler.StopAsync(cancellationToken);
+
+                await _mediator.Send(new SaveSession.Request());
+
+                await _mediator.Send(new SaveUserSettings.Request());
 
                 _telemetry.TrackEvent("Shutdown");
 
-                _dispatcher.Invoke(Application.Current.Shutdown);
+                _dispatcher.Invoke(() =>
+                {
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        window.Close();
+                    }
+
+                    Application.Current.Shutdown();
+                });
             }
         }
     }
