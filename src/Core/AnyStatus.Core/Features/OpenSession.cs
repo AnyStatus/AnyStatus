@@ -82,7 +82,7 @@ namespace AnyStatus.Core.Features
                 {
                     await _jobScheduler.ScheduleJobAsync(widget.Id, widget, cancellationToken);
 
-                    _logger.LogDebug("Widget '{widget}' job is running...", widget.Name);
+                    _logger.LogDebug($"Widget '{widget.Name}' job is running...");
                 }
 
                 if (widget.HasChildren)
