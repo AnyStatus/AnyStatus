@@ -84,7 +84,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 await _jobScheduler.StartAsync(cancellationToken);
 
-                await _namedPipeServer.StartAsync();
+                _ = Task.Run(() => _namedPipeServer.StartAsync());
 
                 _telemetry.TrackEvent("Startup");
             }
