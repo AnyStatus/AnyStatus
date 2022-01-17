@@ -176,7 +176,7 @@ namespace AnyStatus.Apps.Windows.Features.App
 
             private async Task InitEndpointsAsync()
             {
-                _logger.LogDebug("Session file: {path}", _appSettings.EndpointsFilePath);
+                _logger.LogDebug($"Session file: {_appSettings.EndpointsFilePath}");
 
                 if (File.Exists(_appSettings.EndpointsFilePath))
                 {

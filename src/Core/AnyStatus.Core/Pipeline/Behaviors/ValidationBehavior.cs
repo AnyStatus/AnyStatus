@@ -16,6 +16,11 @@ namespace AnyStatus.Core.Pipeline.Behaviors
 
         public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
+            if (_validators.Length == 0)
+            {
+                return next();
+            }
+
             var failures = _validators
                  .Select(v => v.Validate(request))
                  .Where(v => v != null)
