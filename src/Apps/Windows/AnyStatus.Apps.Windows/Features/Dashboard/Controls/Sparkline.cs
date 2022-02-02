@@ -145,7 +145,7 @@ namespace AnyStatus.Apps.Windows.Features.Dashboard.Controls
             }
         }
 
-        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => Application.Current?.Dispatcher.Invoke(Render);
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => Application.Current?.Dispatcher.Invoke(() => Render());
 
         #endregion
     }
