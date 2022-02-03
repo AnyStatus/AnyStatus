@@ -1,30 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <PackageId>AnyStatus.API</PackageId>
-    <LangVersion>9.0</LangVersion>
-    <Version>1.0.0</Version>
-    <PackageVersion>1.0.0</PackageVersion>
-    <Authors>AnyStatus</Authors>
-    <AssemblyTitle>AnyStatus API</AssemblyTitle>
-    <Description>A library for developing plug-ins and extensions for AnyStatus</Description>
-    <PackageTags>AnyStatus SDK API</PackageTags>
-    <RepositoryUrl>https://github.com/AnyStatus/AnyStatus</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/AnyStatus/AnyStatus/blob/main/src/Core/AnyStatus.API/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://www.anystat.us</PackageProjectUrl>
-    <PackageIconUrl>http://www.anystat.us/assets/images/logo_128px.png</PackageIconUrl>
-    <Copyright>Copyright © Alon Amsalem</Copyright>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>AnyStatus.API</PackageId>
+		<LangVersion>9.0</LangVersion>
+		<Version>1.0.0</Version>
+		<PackageVersion>1.0.0</PackageVersion>
+		<Authors>AnyStatus</Authors>
+		<AssemblyTitle>AnyStatus API</AssemblyTitle>
+		<Description>A library for developing plug-ins and extensions for AnyStatus</Description>
+		<PackageTags>AnyStatus SDK API</PackageTags>
+		<RepositoryUrl>https://github.com/AnyStatus/AnyStatus</RepositoryUrl>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://www.anystat.us</PackageProjectUrl>
+		<PackageIconUrl>http://www.anystat.us/assets/images/logo_128px.png</PackageIconUrl>
+		<Copyright>Copyright © Alon Amsalem</Copyright>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="mediatr" Version="8.0.0" />
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="mediatr" Version="8.0.0" />
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+	</ItemGroup>
+	
 </Project>
