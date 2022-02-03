@@ -10,6 +10,7 @@
              xmlns:dataTemplates="clr-namespace:AnyStatus.Apps.Windows.Features.Dashboard.DataTemplates"
              xmlns:converters="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Converters"
              xmlns:b="clr-namespace:AnyStatus.Apps.Windows.Infrastructure.Behaviors"
+             xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d">
     <UserControl.Resources>
 
@@ -114,6 +115,19 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="LoadingTextStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Opacity" Value="0.7"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Context.Session}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
 
     <Grid ContextMenu="{StaticResource ContextMenu}"
@@ -128,6 +142,8 @@
                 <behaviors:InvokeCommandAction Command="{Binding Commands[CloseContextMenu]}" CommandParameter="{Binding ElementName=TreeView, Path=SelectedItem}" />
             </behaviors:EventTrigger>
         </behaviors:Interaction.Triggers>
+        
+        <TextBlock Style="{StaticResource LoadingTextStyle}">Loading...</TextBlock>
 
         <TextBlock Style="{StaticResource TextStyle}" TextWrapping="Wrap">Click the add widget button above to create a widget</TextBlock>
 

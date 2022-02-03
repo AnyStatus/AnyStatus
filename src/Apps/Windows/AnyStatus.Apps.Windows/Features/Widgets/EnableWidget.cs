@@ -1,5 +1,5 @@
 ﻿using AnyStatus.API.Widgets;
-using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Features;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AnyStatus.Core.Sessions
+namespace AnyStatus.Core.Features
 {
-    public class SaveSession
+    public class SaveEndpoints
     {
         public class Request : IRequest<bool>
         {
@@ -27,18 +27,22 @@ namespace AnyStatus.Core.Sessions
 
             public async Task<bool> Handle(Request request, CancellationToken cancellationToken)
             {
-                var directory = Path.GetDirectoryName(_appSettings.SessionFilePath);
+                var directory = Path.GetDirectoryName(_appSettings.EndpointsFilePath);
 
                 if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 {
                     Directory.CreateDirectory(directory);
                 }
 
-                var json = JsonConvert.SerializeObject(_context.Session, Formatting.Indented);
+                var json = JsonConvert.SerializeObject(_context.Endpoints, Formatting.Indented, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                });
 
                 var bytes = new UTF8Encoding().GetBytes(json);
 
-                using (var stream = File.Open(_appSettings.SessionFilePath, FileMode.Create))
+                using (var stream = File.Open(_appSettings.EndpointsFilePath, FileMode.Create))
                 {
                     stream.Seek(0, SeekOrigin.End);
 

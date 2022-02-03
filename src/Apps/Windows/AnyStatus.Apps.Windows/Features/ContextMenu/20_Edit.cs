@@ -3,7 +3,7 @@ using AnyStatus.Apps.Windows.Features.Widgets;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.ContextMenu;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
-using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Features;
 using MediatR;
 
 namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
@@ -15,7 +15,9 @@ namespace AnyStatus.Apps.Windows.Features.ContextMenu.Items
             Order = 20;
             Name = "Edit";
             Icon = "Material.Pencil";
-            Command = new Command(_ => mediator.Send(Page.Show<WidgetViewModel>("Edit Widget", onClose: () => mediator.Send(new Refresh.Request(Context)))));
+            Command = new Command(_ =>
+                mediator.Send(Page.Show<WidgetViewModel>("Edit Widget",
+                onClose: () => mediator.Send(new Refresh.Request(Context)))));
         }
     }
 }

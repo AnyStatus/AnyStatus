@@ -1,8 +1,8 @@
 ﻿using AnyStatus.API.Dialogs;
 using AnyStatus.API.Services;
-using AnyStatus.Apps.Windows.Features.Menu;
 using AnyStatus.Apps.Windows.Features.SystemTray;
 using AnyStatus.Core.App;
+using AnyStatus.Core.Features;
 using AnyStatus.Core.Jobs;
 using AnyStatus.Core.Telemetry;
 using MediatR;
@@ -49,7 +49,7 @@ namespace AnyStatus.Apps.Windows.Features.App
                 switch (await _dialogService.ShowDialogAsync(dialog))
                 {
                     case DialogResult.Yes:
-                        var saved = await _mediator.Send(new SaveCommand.Request(), cancellationToken);
+                        var saved = await _mediator.Send(new Save.Request(), cancellationToken);
                         if (!saved) request.Cancel = true;
                         break;
                     case DialogResult.None:
@@ -92,15 +92,23 @@ namespace AnyStatus.Apps.Windows.Features.App
 
                 _sysTray.Dispose();
 
-                //todo: move to notification handlers
-                await Task.WhenAll(
-                    _jobScheduler.StopAsync(cancellationToken),
-                    _mediator.Send(new SaveContext.Request(), cancellationToken),
-                    _mediator.Send(new CloseAllWindows.Request(), cancellationToken));
+                await _jobScheduler.StopAsync(cancellationToken);
+
+                await _mediator.Send(new SaveSession.Request());
+
+                await _mediator.Send(new SaveUserSettings.Request());
 
                 _telemetry.TrackEvent("Shutdown");
 
-                _dispatcher.Invoke(Application.Current.Shutdown);
+                _dispatcher.Invoke(() =>
+                {
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        window.Close();
+                    }
+
+                    Application.Current.Shutdown();
+                });
             }
         }
     }

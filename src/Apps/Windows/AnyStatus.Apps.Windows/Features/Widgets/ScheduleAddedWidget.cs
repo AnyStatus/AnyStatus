@@ -8,11 +8,11 @@ namespace AnyStatus.Apps.Windows.Features.Widgets
 {
     public class ScheduleAddedWidget : INotificationHandler<WidgetAddedNotification>
     {
-        private readonly IMediator _mediator;
+        private readonly IJobScheduler _jobScheduler;
 
-        public ScheduleAddedWidget(IMediator mediator) => _mediator = mediator;
+        public ScheduleAddedWidget(IJobScheduler jobScheduler) => _jobScheduler = jobScheduler;
 
-        public Task Handle(WidgetAddedNotification notification, CancellationToken cancellationToken)
-            => _mediator.Send(new ScheduleJob.Request(notification.Widget), cancellationToken);
+        public Task Handle(WidgetAddedNotification notification, CancellationToken cancellationToken) => 
+            _jobScheduler.ScheduleJobAsync(notification.Widget?.Id, notification.Widget, cancellationToken);
     }
 }

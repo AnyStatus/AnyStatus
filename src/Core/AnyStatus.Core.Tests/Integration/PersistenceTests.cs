@@ -29,31 +29,31 @@ namespace AnyStatus.Core.Tests.Integration
             }
         }
 
-        [Fact]
-        public async Task SaveAndLoadWidgetTest()
-        {
-            var widget = new DemoHealthCheckWidget
-            {
-                Name = "Health Check"
-            };
+        //[Fact]
+        //public async Task SaveAndLoadWidgetTest()
+        //{
+        //    var widget = new DemoHealthCheckWidget
+        //    {
+        //        Name = "Health Check"
+        //    };
 
-            var writeRequest = new SaveWidget.Request
-            {
-                FileName = _tempFileName,
-                Widget = widget
-            };
+        //    var writeRequest = new SaveWidget.Request
+        //    {
+        //        FileName = _tempFileName,
+        //        Widget = widget
+        //    };
 
-            var writeResponse = await _mediator.Send(writeRequest, CancellationToken.None);
+        //    var writeResponse = await _mediator.Send(writeRequest, CancellationToken.None);
 
-            Assert.True(writeResponse);
+        //    Assert.True(writeResponse);
 
-            Assert.True(File.Exists(_tempFileName));
+        //    Assert.True(File.Exists(_tempFileName));
 
-            var readResponse = await _mediator.Send(new GetWidget.Request(_tempFileName), CancellationToken.None);
+        //    var readResponse = await _mediator.Send(new GetWidget.Request(_tempFileName), CancellationToken.None);
 
-            Assert.NotNull(readResponse);
-            Assert.Equal(widget.Id, readResponse.Id);
-            Assert.Equal(widget.Name, readResponse.Name);
-        }
+        //    Assert.NotNull(readResponse);
+        //    Assert.Equal(widget.Id, readResponse.Id);
+        //    Assert.Equal(widget.Name, readResponse.Name);
+        //}
     }
 }

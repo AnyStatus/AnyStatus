@@ -29,45 +29,45 @@ namespace AnyStatus.Core.Tests.Integration
         //    await _mediator.Send(request, CancellationToken.None);
         //}
 
-        [Fact, Priority(1)]
-        public async Task ScheduleHealthCheckJobTest()
-        {
-            var widget = new DemoHealthCheckWidget
-            {
-                Id = Guid.NewGuid().ToString(),
-                Randomize = false,
-                Status = Status.None,
-                Name = "Health Check Test",
-            };
+        //[Fact, Priority(1)]
+        //public async Task ScheduleHealthCheckJobTest()
+        //{
+        //    var widget = new DemoHealthCheckWidget
+        //    {
+        //        Id = Guid.NewGuid().ToString(),
+        //        Randomize = false,
+        //        Status = Status.None,
+        //        Name = "Health Check Test",
+        //    };
 
-            var request = new ScheduleJob.Request(widget);
+        //    var request = new ScheduleJob.Request(widget);
 
-            await _mediator.Send(request, CancellationToken.None);
+        //    await _mediator.Send(request, CancellationToken.None);
 
-            await Task.Delay(1000);
+        //    await Task.Delay(1000);
 
-            Assert.Equal(Status.OK, widget.Status);
-        }
+        //    Assert.Equal(Status.OK, widget.Status);
+        //}
 
-        [Fact, Priority(2)]
-        public async Task ScheduleMetricJobTest()
-        {
-            var widget = new DemoMetricWidget
-            {
-                Id = Guid.NewGuid().ToString(),
-                Randomize = false,
-                Status = Status.None,
-                Name = "Metric Test",
-            };
+        //[Fact, Priority(2)]
+        //public async Task ScheduleMetricJobTest()
+        //{
+        //    var widget = new DemoMetricWidget
+        //    {
+        //        Id = Guid.NewGuid().ToString(),
+        //        Randomize = false,
+        //        Status = Status.None,
+        //        Name = "Metric Test",
+        //    };
             
-            var request = new ScheduleJob.Request(widget);
+        //    var request = new ScheduleJob.Request(widget);
 
-            await _mediator.Send(request, CancellationToken.None);
+        //    await _mediator.Send(request, CancellationToken.None);
 
-            await Task.Delay(1000);
+        //    await Task.Delay(1000);
 
-            Assert.Equal(Status.OK, widget.Status);
-        }
+        //    Assert.Equal(Status.OK, widget.Status);
+        //}
 
         //[Fact, Priority(3)]
         //public async Task StopAppTest()

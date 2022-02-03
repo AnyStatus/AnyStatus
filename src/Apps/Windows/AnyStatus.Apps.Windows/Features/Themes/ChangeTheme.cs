@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace AnyStatus.Apps.Windows.Features.Themes
 {
-    public sealed class SwitchTheme
+    public sealed class ChangeTheme
     {
         public class Request : IRequest<bool>
         {

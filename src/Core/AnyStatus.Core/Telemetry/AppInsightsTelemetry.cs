@@ -1,5 +1,4 @@
 ﻿using AnyStatus.Core.App;
-using AnyStatus.Core.Services;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;

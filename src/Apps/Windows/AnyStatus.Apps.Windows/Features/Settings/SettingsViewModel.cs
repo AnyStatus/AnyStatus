@@ -3,7 +3,7 @@ using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Core.App;
-using AnyStatus.Core.Settings;
+using AnyStatus.Core.Features;
 using AnyStatus.Core.Telemetry;
 using MediatR;
 
@@ -34,9 +34,9 @@ namespace AnyStatus.Apps.Windows.Features.Settings
                         telemetry.Disable();
                     }
 
-                    _ = await mediator.Send(new SwitchTheme.Request(context.UserSettings.Theme)); //todo: skip if not changed
+                    await mediator.Send(new ChangeTheme.Request(context.UserSettings.Theme)); //todo: skip if not changed
 
-                    _ = await mediator.Send(Page.Close());
+                    await mediator.Send(Page.Close());
                 }
             }));
 

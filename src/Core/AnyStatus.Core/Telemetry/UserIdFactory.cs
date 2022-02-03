@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AnyStatus.Core.Services
+namespace AnyStatus.Core.Telemetry
 {
     internal class UserIdFactory
     {

@@ -29,6 +29,7 @@ namespace AnyStatus.Apps.Windows
             container.RegisterSingleton<IDispatcher, Dispatcher>();
             container.RegisterSingleton<ISystemTray, SystemTray>();
             container.RegisterSingleton<INamedPipeClient, NamedPipeClient>();
+            container.RegisterSingleton<INamedPipeServer, NamedPipeServer>();
             container.RegisterSingleton<INotificationService, NotificationService>();
 
             container.Register<IDialogService, DialogService>();

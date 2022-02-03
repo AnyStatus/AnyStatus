@@ -6,7 +6,7 @@ using AnyStatus.Apps.Windows.Infrastructure.Mvvm;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages;
 using AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows;
 using AnyStatus.Core.App;
-using AnyStatus.Core.Jobs;
+using AnyStatus.Core.Features;
 using MediatR;
 using System.Threading.Tasks;
 
