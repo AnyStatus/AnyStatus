@@ -19,7 +19,7 @@ namespace AnyStatus.Core.Endpoints
             {
                 var typeName = token.Value<string>("$type");
 
-                if (typeName is string)
+                if (typeName is not null)
                 {
                     var type = Type.GetType(typeName);
 

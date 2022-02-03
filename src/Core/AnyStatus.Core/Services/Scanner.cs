@@ -13,7 +13,7 @@ namespace AnyStatus.Core.Services
 {
     public class Scanner : IScanner
     {
-        private static readonly Lazy<IEnumerable<Assembly>> _assemblies = new Lazy<IEnumerable<Assembly>>(LoadAssemblies);
+        private static readonly Lazy<IEnumerable<Assembly>> _assemblies = new(LoadAssemblies);
 
         public static IEnumerable<Assembly> GetAssemblies() => _assemblies.Value;
 

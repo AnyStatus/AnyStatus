@@ -20,7 +20,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 
         public Action OnClose { get; internal set; }
 
-        public static ClosePage.Request Close() => new ClosePage.Request();
+        public static ClosePage.Request Close() => new();
 
         public static Page Show<T>(string title)
         {

@@ -23,12 +23,11 @@ namespace AnyStatus.Plugins.HealthChecks
 
             try
             {
-                using (var client = new HttpClient(handler, true))
-                {
-                    var response = await client.GetAsync(request.Context.URL).ConfigureAwait(false);
+                using var client = new HttpClient(handler, true);
 
-                    request.Context.Status = response.StatusCode == request.Context.HttpStatusCode ? Status.OK : Status.Failed;
-                }
+                var response = await client.GetAsync(request.Context.URL).ConfigureAwait(false);
+
+                request.Context.Status = response.StatusCode == request.Context.HttpStatusCode ? Status.OK : Status.Failed;
             }
             catch (AggregateException ae)
             {

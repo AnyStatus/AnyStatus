@@ -6,7 +6,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Behaviors
 {
     internal class TreeViewHelper
     {
-        private static readonly Dictionary<DependencyObject, TreeViewSelectedItemBehavior> behaviors = new Dictionary<DependencyObject, TreeViewSelectedItemBehavior>();
+        private static readonly Dictionary<DependencyObject, TreeViewSelectedItemBehavior> behaviors = new();
 
         public static void SetSelectedItem(DependencyObject obj, object value) => obj.SetValue(SelectedItemProperty, value);
 
@@ -64,7 +64,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Behaviors
             {
                 var item = (TreeViewItem)_view.ItemContainerGenerator.ContainerFromItem(p);
 
-                if (item is object)
+                if (item is not null)
                 {
                     item.IsSelected = true;
                 }

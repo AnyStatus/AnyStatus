@@ -2,7 +2,7 @@
 
 namespace AnyStatus.API.Widgets
 {
-    [Obsolete]
+    
     public sealed class Status
     {
         public const string OK = "ok";
@@ -23,6 +23,7 @@ namespace AnyStatus.API.Widgets
         public const string None = "none";
         public const string PartiallySucceeded = "partiallySucceeded";
 
+        [Obsolete]
         public static string Color(string status) => status switch
         {
             Error => "Red",
@@ -50,6 +51,7 @@ namespace AnyStatus.API.Widgets
             _ => "DarkGray",
         };
 
+        [Obsolete]
         public static string Icon(string status) => status switch
         {
             Error => "Material.ShieldRemoveOutline",
@@ -77,6 +79,7 @@ namespace AnyStatus.API.Widgets
             _ => "BootstrapIcons.Circle",
         };
 
+        [Obsolete]
         public static int Priority(string status) => status switch
         {
             Error => 1,
@@ -106,6 +109,7 @@ namespace AnyStatus.API.Widgets
             _ => 101,
         };
 
+        [Obsolete]
         public static bool TryParse(int value, out string result)
         {
             result = value switch

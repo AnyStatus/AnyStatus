@@ -8,7 +8,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Converters
 {
     public class StatusColorConverter : IValueConverter
     {
-        private readonly BrushConverter _brushConverter = new BrushConverter();
+        private readonly BrushConverter _brushConverter = new();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

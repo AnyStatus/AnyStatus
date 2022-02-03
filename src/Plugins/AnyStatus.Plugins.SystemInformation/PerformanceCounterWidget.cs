@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using AnyStatus.API.Widgets;
+﻿using AnyStatus.API.Widgets;
 using MediatR;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 {
@@ -38,14 +38,13 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
         {
             var widget = request.Context;
 
-            using (var counter = string.IsNullOrWhiteSpace(widget.MachineName)
+            using var counter = string.IsNullOrWhiteSpace(widget.MachineName)
                 ? new System.Diagnostics.PerformanceCounter(widget.CategoryName, widget.CounterName, widget.InstanceName)
-                : new System.Diagnostics.PerformanceCounter(widget.CategoryName, widget.CounterName, widget.InstanceName, widget.MachineName))
-            {
-                widget.Value = (int)counter.NextValue();
+                : new System.Diagnostics.PerformanceCounter(widget.CategoryName, widget.CounterName, widget.InstanceName, widget.MachineName);
 
-                widget.Status = Status.OK;
-            }
+            widget.Value = (int)counter.NextValue();
+
+            widget.Status = Status.OK;
         }
     }
 }

@@ -12,9 +12,9 @@ namespace AnyStatus.Plugins.Docker.Containers
 
         protected override async Task Handle(StartRequest<ReadOnlyDockerContainerWidget> request, CancellationToken cancellationToken)
         {
-            using (var client = Endpoint.GetClient())
-                await client.Containers.StartContainerAsync(request.Context.ContainerId, new ContainerStartParameters(), cancellationToken)
-                    .ConfigureAwait(false);
+            using var client = Endpoint.GetClient();
+
+            await client.Containers.StartContainerAsync(request.Context.ContainerId, new ContainerStartParameters(), cancellationToken);
         }
     }
 }

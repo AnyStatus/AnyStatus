@@ -40,7 +40,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
         {
             Commands.Add("Edit", new Command(p => _mediator.Send(new EditEndpoint.Request((IEndpoint)p)), p => p is IEndpoint));
             Commands.Add("Delete", new Command(p => _mediator.Send(new DeleteEndpoint.Request((IEndpoint)p)), p => p is IEndpoint));
-            Commands.Add("Add", new Command(_ => _mediator.Send(new AddEndpoint.Request { Type = SelectedEndpointTypeDescription.Type }), _ => SelectedEndpointTypeDescription is object));
+            Commands.Add("Add", new Command(_ => _mediator.Send(new AddEndpoint.Request { Type = SelectedEndpointTypeDescription.Type }), _ => SelectedEndpointTypeDescription is not null));
         }
 
         public Endpoint SelectedEndpoint { get; set; }

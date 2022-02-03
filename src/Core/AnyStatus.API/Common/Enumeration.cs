@@ -8,7 +8,7 @@ namespace AnyStatus.API.Common
         where TEnumeration : Enumeration<TEnumeration, TValue>
         where TValue : IComparable
     {
-        private static readonly Lazy<TEnumeration[]> Enumerations = new Lazy<TEnumeration[]>(GetEnumerations);
+        private static readonly Lazy<TEnumeration[]> Enumerations = new(GetEnumerations);
 
         protected Enumeration(TValue value)
         {

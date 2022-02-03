@@ -4,7 +4,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Pages
 {
     public class PagesViewModel : BaseViewModel
     {
-        private readonly static ObservableCollection<PageViewModel> _pages = new ObservableCollection<PageViewModel>();
+        private readonly static ObservableCollection<PageViewModel> _pages = new();
 
         public ObservableCollection<PageViewModel> Pages => _pages;
 

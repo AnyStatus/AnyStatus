@@ -12,19 +12,16 @@ namespace AnyStatus.Core.Telemetry
             {
                 var bytes = Encoding.UTF8.GetBytes(Environment.UserName + Environment.MachineName);
 
-                using (var crypto = new MD5CryptoServiceProvider())
-                {
-                    var hash = crypto.ComputeHash(bytes);
+                using var crypto = new MD5CryptoServiceProvider();
 
-                    return Convert.ToBase64String(hash);
-                }
+                var hash = crypto.ComputeHash(bytes);
+
+                return Convert.ToBase64String(hash);
             }
-#pragma warning disable CA1031 // Do not catch general exception types
             catch
             {
                 return null;
             }
-#pragma warning restore CA1031 // Do not catch general exception types
         }
     }
 }

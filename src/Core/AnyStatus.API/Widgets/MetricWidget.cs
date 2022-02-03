@@ -14,7 +14,7 @@ namespace AnyStatus.API.Widgets
         private double _value;
         private double? _minValue;
         private double? _maxValue;
-        private ObservableCollection<double> _values = new ObservableCollection<double>();
+        private ObservableCollection<double> _values = new();
 
         [JsonIgnore]
         [Browsable(false)]

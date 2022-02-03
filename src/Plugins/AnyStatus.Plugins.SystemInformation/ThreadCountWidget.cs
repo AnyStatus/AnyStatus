@@ -28,13 +28,13 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 
         protected override void Handle(MetricRequest<ThreadCountWidget> request)
         {
-            using (var counter = string.IsNullOrWhiteSpace(request.Context.MachineName)
+            using var counter = string.IsNullOrWhiteSpace(request.Context.MachineName)
                 ? new System.Diagnostics.PerformanceCounter(CategoryName, CounterName)
-                : new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName, request.Context.MachineName))
-            {
-                request.Context.Value = (int)counter.NextValue();
-                request.Context.Status = Status.OK;
-            }
+                : new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, InstanceName, request.Context.MachineName);
+
+            request.Context.Value = (int)counter.NextValue();
+
+            request.Context.Status = Status.OK;
         }
     }
 }

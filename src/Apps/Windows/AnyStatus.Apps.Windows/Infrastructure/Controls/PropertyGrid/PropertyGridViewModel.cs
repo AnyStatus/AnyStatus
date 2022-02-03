@@ -12,7 +12,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
         {
             PropertyChanged += (_, e) =>
             {
-                if (e.PropertyName.Equals(nameof(Target)) && Target is object)
+                if (e.PropertyName.Equals(nameof(Target)) && Target is not null)
                 {
                     Properties = propertyBuilder.Build(Target);
                 }

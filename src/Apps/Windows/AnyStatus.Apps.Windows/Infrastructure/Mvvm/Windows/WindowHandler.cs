@@ -14,7 +14,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Windows
     {
         private const int WM_EXITSIZEMOVE = 0x232;
 
-        private static readonly Dictionary<string, Window> ActiveWindows = new Dictionary<string, Window>();
+        private static readonly Dictionary<string, Window> ActiveWindows = new();
 
         private readonly IAppContext _context;
         private readonly IDispatcher _dispatcher;

@@ -10,7 +10,7 @@ namespace AnyStatus.Apps.Windows.Features.SystemTray
     {
         private const string Prefix = "AnyStatus.Apps.Windows.Resources.Icons.Tray.";
 
-        private static readonly Dictionary<string, Icon> Cache = new Dictionary<string, Icon>
+        private static readonly Dictionary<string, Icon> Cache = new()
         {
             [Status.None] = Load("StatusOK_grey.ico"),
             [Status.OK] = Load("StatusOK.ico"),

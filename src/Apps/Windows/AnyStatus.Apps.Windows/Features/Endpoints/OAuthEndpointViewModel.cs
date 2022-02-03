@@ -53,7 +53,7 @@ namespace AnyStatus.Apps.Windows.Features.Endpoints
 
             var error = query.Get("error");
 
-            if (error is object)
+            if (error is not null)
             {
                 throw new Exception("A remote error occurred while authorizing the token request: " + error);
             }

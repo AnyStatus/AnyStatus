@@ -46,16 +46,15 @@ namespace AnyStatus.Plugins.SystemInformation.OperatingSystem
 
         private static async Task<int> GetCpuUsageAsync(string machineName, string processName)
         {
-            using (var counter = string.IsNullOrWhiteSpace(machineName) ?
+            using var counter = string.IsNullOrWhiteSpace(machineName) ?
                 new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName) :
-                new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName, machineName))
-            {
-                counter.NextValue();
+                new System.Diagnostics.PerformanceCounter(CategoryName, CounterName, processName, machineName);
 
-                await Task.Delay(1000).ConfigureAwait(false);
+            counter.NextValue();
 
-                return (int)counter.NextValue();
-            }
+            await Task.Delay(1000).ConfigureAwait(false);
+
+            return (int)counter.NextValue();
         }
     }
 }
