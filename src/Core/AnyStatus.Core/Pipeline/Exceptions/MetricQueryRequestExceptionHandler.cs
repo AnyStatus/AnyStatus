@@ -10,10 +10,7 @@ namespace AnyStatus.Core.Pipeline.Exceptions
     {
         private readonly IDispatcher _dispatcher;
 
-        public MetricQueryRequestExceptionHandler(IDispatcher dispatcher)
-        {
-            _dispatcher = dispatcher;
-        }
+        public MetricQueryRequestExceptionHandler(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
         protected override void Handle(MetricRequest<T> request, Exception exception, RequestExceptionHandlerState<Unit> state)
         {

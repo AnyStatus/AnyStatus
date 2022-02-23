@@ -19,11 +19,9 @@ namespace AnyStatus.Core.Pipeline.Validation
                 throw new ValidationException("Request cannot be null.");
             }
 
-            var context = new ValidationContext(request, null, null);
-
             var failures = new List<ValidationResult>();
 
-            Validator.TryValidateObject(request, context, failures);
+            Validator.TryValidateObject(request, new ValidationContext(request, null, null), failures);
 
             return failures;
         }

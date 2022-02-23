@@ -10,10 +10,7 @@ namespace AnyStatus.Core.Pipeline.Exceptions
     {
         private readonly IDispatcher _dispatcher;
 
-        public HealthCheckRequestExceptionHandler(IDispatcher dispatcher)
-        {
-            _dispatcher = dispatcher;
-        }
+        public HealthCheckRequestExceptionHandler(IDispatcher dispatcher) => _dispatcher = dispatcher;
 
         protected override void Handle(StatusRequest<T> request, Exception exception, RequestExceptionHandlerState<Unit> state)
         {

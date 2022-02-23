@@ -28,7 +28,7 @@ namespace AnyStatus.Core.Pipeline.Behaviors
                  .Where(v => v != null)
                  .ToList();
 
-            if (failures.Any())
+            if (failures.Count > 0)
             {
                 var sb = new StringBuilder();
 
