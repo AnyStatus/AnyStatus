@@ -17,11 +17,11 @@ namespace AnyStatus.Apps.Windows.Features.ToolBar
         public ToolBarViewModel(IMediator mediator, IAppContext context)
         {
             Commands.Add("ToggleMenu", new Command(_ => MenuViewModel.IsVisible = !MenuViewModel.IsVisible));
-            Commands.Add("Refresh", new Command(_ => Task.Run(() => mediator.Send(new Refresh.Request(context.Session.Widget)))));
+            Commands.Add("Refresh", new Command(_ => Task.Run(() => mediator.Send(new Refresh.Request(context.Session?.Widget)))));
             Commands.Add("ExpandAll", new Command(_ => mediator.Send(new ExpandAll.Request())));
             Commands.Add("CollapseAll", new Command(_ => mediator.Send(new CollapseAll.Request())));
-            Commands.Add("AddWidget", new Command(_ => mediator.Send(Page.Show<AddWidgetViewModel>("Add Widget", vm => vm.Parent = context.Session.SelectedWidget ?? context.Session.Widget)), _ => context.Session.SelectedWidget is null || context.Session.SelectedWidget is IAddWidget));
-            Commands.Add("AddFolder", new Command(_ => mediator.Send(new AddFolder.Request(context.Session.SelectedWidget ?? context.Session.Widget)), _ => context.Session.SelectedWidget is null || context.Session.SelectedWidget is IAddFolder));
+            Commands.Add("AddWidget", new Command(_ => mediator.Send(Page.Show<AddWidgetViewModel>("Add Widget", vm => vm.Parent = context.Session?.SelectedWidget ?? context.Session?.Widget)), _ => context.Session?.SelectedWidget is null || context.Session?.SelectedWidget is IAddWidget));
+            Commands.Add("AddFolder", new Command(_ => mediator.Send(new AddFolder.Request(context.Session?.SelectedWidget ?? context.Session?.Widget)), _ => context.Session?.SelectedWidget is null || context.Session?.SelectedWidget is IAddFolder));
             Commands.Add("Activity", new Command(_ => mediator.Send(MaterialWindow.Show<ActivityViewModel>(title: "Activity", width: 800, height: 600))));
         }
 
