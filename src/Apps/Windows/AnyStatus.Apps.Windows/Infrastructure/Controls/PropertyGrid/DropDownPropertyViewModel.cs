@@ -17,7 +17,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 
         public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source, IItemsSource itemsSource, IEnumerable<IPropertyViewModel> properties, bool autoload) : this(propertyInfo, source)
         {
-            Load = () => Items = itemsSource.GetItems(source); //todo: handle errors
+            Load = () => Items = itemsSource.GetItems(source)?.OrderBy(e => e.Name); //todo: handle errors
 
             Cascade(propertyInfo, properties);
 
@@ -29,7 +29,7 @@ namespace AnyStatus.Apps.Windows.Infrastructure.Mvvm.Controls.PropertyGrid
 
         public DropDownPropertyViewModel(PropertyInfo propertyInfo, object source, IAsyncItemsSource asyncItemsSource, IEnumerable<IPropertyViewModel> properties, bool autoload) : this(propertyInfo, source)
         {
-            Load = async () => Items = await asyncItemsSource.GetItemsAsync(source);
+            Load = async () => Items = (await asyncItemsSource.GetItemsAsync(source))?.OrderBy(e => e.Name);
 
             Cascade(propertyInfo, properties);
 
