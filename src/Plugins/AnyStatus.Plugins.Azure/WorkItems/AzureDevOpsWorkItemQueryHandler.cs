@@ -72,6 +72,26 @@ namespace AnyStatus.Plugins.Azure.WorkItems
             workItemWidget.URL = workItem.Links["html"]["href"];
             workItemWidget.Name = workItem.Fields["System.Title"];
             workItemWidget.WorkItemId = workItem.Fields["System.Id"];
+            workItemWidget.Text = workItem.Fields["System.WorkItemType"];
+            switch (workItemWidget.Text.ToLowerInvariant())
+            {
+               case "bug":
+                  workItemWidget.Status = "bug";
+              break;
+              case "epic":
+                workItemWidget.Status = "epic";
+                break;
+              case "feature":
+                workItemWidget.Status = "feat";
+                break;
+              case "task":
+                workItemWidget.Status = "task";
+                break;
+
+              default:
+                workItemWidget.Status = Status.Unknown;
+                break;
+            }
         }
     }
 }

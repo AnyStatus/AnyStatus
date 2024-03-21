@@ -23,7 +23,8 @@ namespace AnyStatus.Plugins.Azure
                 .ForMember(d => d.WorkItemId, opt => opt.MapFrom(src => src.Fields["System.Id"]))
                 .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Fields["System.Title"]))
                 .ForMember(d => d.Status, opt => opt.MapFrom(src => src.GetStatus()))
-                .ForMember(d => d.URL, opt => opt.MapFrom(src => src.Links["html"]["href"]));
+                .ForMember(d => d.URL, opt => opt.MapFrom(src => src.Links["html"]["href"]))
+                .ForMember(d => d.Text, opt => opt.MapFrom(src => src.Fields["System.WorkItemType"]));
         }
     }
 }
